@@ -1,0 +1,80 @@
+@import "../../../../styles.scss";
+
+.carousel_container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 400px;
+}
+
+:host ::ng-deep {
+    
+    p-carousel.p-element{
+        width: min(100% , 1440px); 
+    }
+    
+    ol,
+    ul {
+        padding: 0;
+    }
+
+    // Arrow icons Container
+    .p-carousel .p-carousel-content .p-carousel-prev,
+    .p-carousel .p-carousel-content .p-carousel-next {
+        // color: red;
+        width: 5%;
+        padding: 0 1rem;
+        background-color: $background;
+
+        @include tablet {
+            padding: 0 2rem;
+        }
+    }
+
+
+    // Arrow icons
+    .carousel-prev-icon {
+        width: 60px;
+        height: 160px;
+        // width: clamp(1.5rem, 1.143rem + 1.786vw, 2rem); TODO: fix clamps for media queries
+        // height: clamp(1.5rem, 1.143rem + 1.786vw, 2rem);
+        color: $primary-main;
+        transition: color 0.3s ease;
+
+        @include tablet {
+            // width: clamp(1.5rem, 1.143rem + 1.786vw, 2rem);
+            // height: clamp(1.5rem, 1.143rem + 1.786vw, 2rem);
+        }
+
+    }
+
+
+    .carousel-prev-icon:hover {
+        color: $primary-l1;
+    }
+    
+
+    //no recuerdo
+    .p-carousel-indicators {
+        margin-top: 0.5rem;
+        display: flex;
+        width: 100%;
+
+        @include tablet {
+            margin-top: 1.5rem;
+        }
+    }
+
+    //// bottom circles 
+    .p-link {
+        border-radius: 50px;
+        width: 8px;
+        margin: 0 0.2rem;
+    }
+
+    // bottom circles selected
+    .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+        background-color: $primary-main;
+    }
+}
+

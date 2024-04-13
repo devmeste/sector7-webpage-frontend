@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -166,6 +169,8 @@ h3.italic{
 h4{
   font: $mobile-h4;
 }
+
+$max_width_container:1440px;
 
 .primary-button{
 

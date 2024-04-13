@@ -39,9 +39,7 @@
     <mat-sidenav-content>
         <!-- Desktop Nav bar -->
         <mat-toolbar class="toolbar" (scroll)="onScroll()" [ngClass]="navbarfixed?'fixed':'no-fixed'">
-            <!-- <div style="color: aliceblue;">{{"toolbar fixed: " + navbarfixed}}</div> -->
             <div class="toolbar_elements">
-
                 <button mat-icon-button class="hamburguer_menu_button" (click)="sidenav.toggle()">
                     <mat-icon>{{ menuOpened ? 'clear' : 'menu' }}</mat-icon>
                 </button>
@@ -72,6 +70,7 @@
             </div>
 
         </mat-toolbar>
+        <div class="height_helper"></div>
         <!-- Content  -->
         <router-outlet></router-outlet>
         <!-- <app-footer></app-footer> -->

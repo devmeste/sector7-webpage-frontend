@@ -7,7 +7,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: $background;
+    max-width: $max_width_container;
+    margin: auto;
 
     figure.logo{
         width: 245px;
@@ -27,11 +28,32 @@
     section.main_banner{
         height: 200px;
         width: 100%;
+        background-color: rgb(46, 46, 46);
+        height: 370px;
         div{
-            height: 370px;
-            width: 90%;
-            background-color: orange;
+            background-color: rgb(255, 166, 0);
             margin: auto;
+            height:100%;
+            width: 90%;
+            font-size: 30px;
+            text-align: center;
+            line-height: 370px;
+        }
+    }
+
+    section.carrousel_section{
+        height: 500px;
+        width: 100%;
+
+        h2{
+            margin-top: 50px;
+        }
+        .carrousel_divider{
+            height: 3px;
+            width: min( 500px, 80%);
+            background-color: linear-gradient(78deg, #ff4d00 9.86%, #ff9900 100%); // TODO: fix this color
+            background-color: linear-gradient(to right, #007bff, #00bfff); // TODO: it doesn't work with this either
+            background-color: #ff4d00;
         }
     }
 }

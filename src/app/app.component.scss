@@ -12,11 +12,12 @@ mat-toolbar {
         height: 100px;
     }
 
+
     .toolbar_elements {
         display: flex;
         justify-content: center;
         align-items: center;
-        max-width: 1440px;
+        max-width: $max_width_container;
         margin: auto;
         width: 100%;
 
@@ -146,6 +147,9 @@ mat-toolbar {
             justify-content: space-between;
             text-align: center;
 
+            @include laptop{
+                margin-left: 0;
+            }
             .mat-icon {
                 flex: 1;
                 height: 100%;
@@ -195,6 +199,7 @@ mat-toolbar {
 
 mat-sidenav-content {
     scroll-behavior: smooth;
+    background-color:$background;
 }
 
 .sidenav {
@@ -289,15 +294,19 @@ ul.side_nav_ul {
     z-index: 9999;
     top: 0;
     transition: all 0.3s linear;
-    height: 50px;
+    height: 75px;
 }
 
 .no-fixed {
-    height: 75px;
-    position: relative;
+    position: fixed;
     z-index: 9999;
     top: 0;
     transition: all 0.3s linear;
+    height: 90px;
+}
+
+.height_helper{
+    height: 100px;        
 }
 
 .sidenav-top-button-fixed {

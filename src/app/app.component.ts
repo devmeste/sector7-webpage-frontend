@@ -45,7 +45,7 @@ export class AppComponent {
 
   // method to determined the change navbar styles (navbar fixed animation and height change)
   @HostListener('window:scroll', ['$event']) onScroll() {
-    if (window.scrollY > 100) {
+    if (window.scrollY > 50) {
       this.navbarfixed = true;
     }
     else {
