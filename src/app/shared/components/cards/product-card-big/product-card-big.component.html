@@ -1,8 +1,16 @@
 <div class="card_container">
-    <img src="{{this.img}}"  alt="{{this.name}}" class="img_card" />
-
+    <div class="img_container">
+        <img src="{{this.img}}"  alt="{{this.name}}" class="img_card" />
+    </div>
     <div class="card_content">
         <h3 class="card_title">{{this.name}}</h3>
-        <h3 class="card_price">{{this.price}}</h3>
+        <div class="card_footer">
+            <h3 class="card_price"> {{this.price | currency }} </h3>
+            <button class="primary_button card_button">
+                Ver Mas +
+            </button>
+        </div>
+
     </div>
+
 </div>

@@ -19,6 +19,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 // fonts and color variables 
 
 $gradient-orange-yellow-1: linear-gradient(78deg, #ff4d00 9.86%, #ff9900 100%); 
+$filter_background_for_products: drop-shadow(0 4px 8px #ff4d00f0); 
+
 
 $warning-50: #fdf5e8; 
 $warning-100: #f8deb8; 
@@ -172,13 +174,13 @@ h4{
 
 $max_width_container:1440px;
 
-.primary-button{
+.primary_button{
 
   color: white;
   
   padding: 8px 10px;
 
-  background-image: linear-gradient(160deg, #51bef3 20%, #1877F2 150%); 
+  background-image: linear-gradient(160deg, $primary-main 20%, $primary-s1 150%); 
   border-radius: 4px;
   box-shadow: 3px, 1px, 4px, rgb(0, 0, 0,0.25);
 
@@ -203,7 +205,7 @@ $max_width_container:1440px;
   
 }
 
-.primary-button:hover{
+.primary_button:hover{
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.283);
-  background-image: linear-gradient(160deg, #2dacec 20%, #046efa 150%); /* Mantén el gradiente original */
+  background-image: linear-gradient(160deg, $primary-main 20%, $primary-l1 150%); /* Mantén el gradiente original */
 }

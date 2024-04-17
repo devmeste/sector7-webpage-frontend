@@ -1,0 +1,42 @@
+<footer>
+    <div class="foter_container">
+        <picture class="logo_container">
+            <a [routerLink]="['/']" routerLinkActive="router-link-active" ><img src="assets/images/logos/Sector7LogoSmall.png" alt="logo"></a>
+        </picture>
+        <div class="footer_info_container">
+            <div class="consult_with_us_container footer_info">
+                <h3>Consultanos</h3>
+                <p>consulta&#64;sector7.com</p>
+                <p>Whatsapp +54 0249 4001122</p>
+                <p>Alem 1126 - Tandil</p>
+                <p>Lunes a Sábado : 9 a 12:30 y 17:00 a 21:00</p>
+            </div>
+    
+            <div class="our_products_container footer_info">
+                <h3>Nuestros Productos</h3>
+                <p [routerLink]="['search/notebooks']">Notebooks</p>
+                <p [routerLink]="['search/video-games-consoles']">Consolas</p>
+                <p [routerLink]="['search/components']">Componentes</p>
+                <p [routerLink]="['search/games']">Juegos</p>
+            </div>
+    
+            <div class="networks_container footer_info">
+                <h3>Seguinos en nuestras redes!</h3>
+                <div class="networks_logos_container">
+                    <a href="https://www.instagram.com/sector7tandil/" target="_blank" title="Instagram">
+                        <picture class="network_logo ">
+                            <img src="assets/images/icons/instagram_icon.svg" alt="instagram logo">
+                        </picture>
+                    </a>
+                    <a href="https://www.facebook.com/Sector7Tandil" target="_blank" title="Facebook">
+                        <picture class="network_logo " >
+                            <img src="assets/images/icons/facebook_icon.svg" alt="facebook logo">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright_divider"></div>
+    <div class="copyright">© 2021 Sector7. Todos los derechos reservados</div>
+</footer>

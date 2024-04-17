@@ -1,0 +1,129 @@
+@import '../../../../styles.scss';
+@import '../../../../media-queries.scss';
+
+footer {
+    width: 100%;
+    background-color: $background;
+    color: $acromatic-200;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-top: 5px solid $primary-main;
+
+    @include tablet {   
+        padding: 1rem;
+    }
+    @include laptop{
+        
+    }
+    
+    h3{
+        color: $primary-main;
+    }
+    
+    .foter_container {
+        width: min(100%, 1440px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+        @include tablet {
+
+            
+        }
+        @include laptop{
+            flex-direction: row;
+            padding: 2rem 0;
+        }
+        @include desktop{
+            padding: 2rem 4rem;
+
+        }
+    }
+
+
+    .logo_container {
+        width: 180px;
+        height: 140px;
+        
+        @include tablet {
+            width: 180px;
+            height: 140px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .footer_info_container{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+
+        .our_products_container{
+        
+            @include laptop{
+                padding-left: 3rem ;
+            }
+            @include desktop{
+                padding-left: 4rem ;
+            }
+    
+        }
+
+        .networks_container {
+            height: 100%;
+           
+            h3 {
+                align-self: start;
+            }
+
+            .network_logo:first-child{
+                // padding-right: clamp(0.5rem, -3.5rem + 13.333vw, 1rem);
+                padding-right: 2rem;
+                @include laptop{
+                }
+            }
+        }
+
+        .footer_info {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            width: 100%;
+            border-top: 1px solid gray;
+            margin-bottom: 3rem;
+            padding-left: 3rem;
+
+            @include laptop{
+                width: 25%;
+                padding-left: 0;
+                border-top: none;
+            }
+
+
+            h3{
+                margin-top: 2rem;
+            }
+        }
+
+    }
+
+    .copyright_divider {
+        margin: 10px 0 30px 0;
+        width: 60%;
+        height: 1px;
+        background-color: $acromatic-200;
+    }
+
+
+
+
+}

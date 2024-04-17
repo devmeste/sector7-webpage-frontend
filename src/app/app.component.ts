@@ -7,25 +7,27 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgClass, NgStyle } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { FooterComponent } from "./shared/components/footer/footer.component";
 
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,  
-    RouterOutlet,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    NgStyle,
-    NgClass,
-    MatMenuModule,
-    MatToolbarModule,
-    RouterLink
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        NgStyle,
+        NgClass,
+        MatMenuModule,
+        MatToolbarModule,
+        RouterLink,
+        FooterComponent
+    ]
 })
 export class AppComponent {
   

@@ -289,12 +289,15 @@ ul.side_nav_ul {
 
 
 
+$height_for_toolbar_fixed : 75px;
+$height_for_toolbar_no_fixed : 90px;
+
 .fixed {
     position: fixed;
     z-index: 9999;
     top: 0;
     transition: all 0.3s linear;
-    height: 75px;
+    height: $height_for_toolbar_fixed;
 }
 
 .no-fixed {
@@ -302,7 +305,7 @@ ul.side_nav_ul {
     z-index: 9999;
     top: 0;
     transition: all 0.3s linear;
-    height: 90px;
+    height: $height_for_toolbar_no_fixed;
 }
 
 .height_helper{
@@ -310,11 +313,11 @@ ul.side_nav_ul {
 }
 
 .sidenav-top-button-fixed {
-    height: 50px;
+    height: $height_for_toolbar_fixed;
     transition: all 0.3s linear;
 }
 
 .sidenav-top-button-no-fixed {
     transition: all 0.3s linear;
-    height: 75px;
+    height: $height_for_toolbar_no_fixed;
 }

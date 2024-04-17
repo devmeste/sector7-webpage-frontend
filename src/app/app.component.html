@@ -44,7 +44,7 @@
                     <mat-icon>{{ menuOpened ? 'clear' : 'menu' }}</mat-icon>
                 </button>
 
-                <a href="" class="anchor_logoS7">
+                <a [routerLink]="['']" class="anchor_logoS7">
                     <div class="logoS7"></div>
                 </a>
 
@@ -73,7 +73,7 @@
         <div class="height_helper"></div>
         <!-- Content  -->
         <router-outlet></router-outlet>
-        <!-- <app-footer></app-footer> -->
+        <app-footer></app-footer>
     </mat-sidenav-content>
 
 

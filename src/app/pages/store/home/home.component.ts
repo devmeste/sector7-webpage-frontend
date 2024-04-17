@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductCarrouselComponent } from "../../shared/components/product-carrousel/product-carrousel.component";
+import { ProductCarrouselComponent } from "../../../shared/components/product-carrousel/product-carrousel.component";
 
 @Component({
     selector: 'app-home',
@@ -9,5 +9,5 @@ import { ProductCarrouselComponent } from "../../shared/components/product-carro
     imports: [ProductCarrouselComponent]
 })
 export class HomeComponent {
-
+    
 }
