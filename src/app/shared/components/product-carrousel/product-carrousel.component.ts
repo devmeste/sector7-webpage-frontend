@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { ProductCardBigComponent } from "../cards/product-card-big/product-card-big.component";
 import { Product } from '../../../core/models/product';
+import { ProductService } from '../../../core/services/product_service/product.service';
 
 
 @Component({
@@ -12,39 +13,17 @@ import { Product } from '../../../core/models/product';
     styleUrl: './product-carrousel.component.scss',
     imports: [CarouselModule, TagModule, ProductCardBigComponent]
 })
-export class ProductCarrouselComponent {
+export class ProductCarrouselComponent implements OnInit {
 
-  products : Product [] = [
-    {id:"1", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 1 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-    
-    {id:"2", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 2 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-    
-    {id:"3", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 3 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-    
-    {id:"4", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 4 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-    
-    {id:"5", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 5 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
+  _productService : ProductService = inject( ProductService );
+  products !: Product [] ;
 
-    {id:"6", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 6 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-
-    {id:"7", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 7 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-
-    {id:"8", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 8 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-
-    {id:"9", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 9 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-    {id:"10", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 9 description', 
-    img: '../../../../assets/images/products/product.png', price: 1000},
-    
-  ];
+  ngOnInit(): void {
+    this._productService.getProducts().subscribe( products => {
+      this.products = products;
+    })
+  }
+  
 
   responsiveOptions: CarouselResponsiveOptions[] = [
     {
@@ -83,5 +62,6 @@ export class ProductCarrouselComponent {
       numScroll: 1
     }
   ];
+
 
 }

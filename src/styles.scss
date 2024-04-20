@@ -79,7 +79,7 @@ $success-600: #22da3f;
 $success-700: #1aaa31;
 $success-800: #148426;
 $success-900: #10651d;
-
+$money : $success-200;
 
 $danger-50: #feece9;
 $danger-100: #fac3bb;
@@ -208,4 +208,42 @@ $max_width_container:1440px;
 .primary_button:hover{
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.283);
   background-image: linear-gradient(160deg, $primary-main 20%, $primary-l1 150%); /* Mantén el gradiente original */
+  cursor: pointer;
 }
+
+.tertiary_button{
+  color:  $primary-main;
+  
+  padding: 8px 10px;
+  background-color: $background;
+
+
+  // background-image: linear-gradient(160deg, $primary-main 20%, $primary-s1 150%); 
+  border-radius: 4px;
+  // box-shadow: 3px, 1px, 4px, rgb(0, 0, 0,0.25);
+
+  font-size: .8rem;
+
+
+  @include tablet{
+      padding: 8px 15px;
+  }
+
+  @include laptop{
+      padding: 10px 22px;
+      font-size: 1rem;
+  }
+
+  @include desktop{
+      padding: 10px 25px;
+      font-size: 1rem;
+  }
+
+  transition: all 0.1s ease; /* Agregar una transición suave */
+  
+}
+
+  .tertiary_button:hover{
+    box-shadow: inset 0 0 0 2px $primary-main; 
+    cursor: pointer;
+  }	

@@ -9,26 +9,34 @@
             </div>
             <nav>
                 <ul class="side_nav_ul">
-                        <li>
-                            <mat-icon class="sidenav-icon">build</mat-icon>
-                            <a (click)="sidenav.toggle()" routerLink="build-your-pc">
-                            Arma tu PC</a></li>
-                        <li> 
-                            <mat-icon class="sidenav-icon">laptop_mac</mat-icon> 
-                            <a (click)="sidenav.toggle()" [routerLink]="['/search' , 'notebooks']">
-                            Notebooks</a></li>
-                        <li> 
-                            <mat-icon class="sidenav-icon">phone_iphone</mat-icon>
-                            <a (click)="sidenav.toggle()" [routerLink]="['/search' , 'consolasCambiar']">
-                            Consolas</a></li>
-                        <li> 
-                            <mat-icon class="sidenav-icon">memory</mat-icon>
-                            <a (click)="sidenav.toggle()" [routerLink]="['/search' , 'components']">
-                            Componentes</a></li>
-                        <li>
-                            <mat-icon class="sidenav-icon">call</mat-icon>
-                            <a (click)="sidenav.toggle()" routerLink="contact">
-                            Contacto</a></li>
+                    <li routerLink="" (click)="sidenav.toggle()">
+                        <mat-icon class="sidenav-icon" >home</mat-icon>
+                        <a>
+                            Inicio</a>
+                    </li>
+                    <li routerLink="build-your-pc" (click)="sidenav.toggle()"> 
+                        <mat-icon class="sidenav-icon">build</mat-icon>
+                        <a >Arma tu PC</a>
+                    </li>
+                    <li  [routerLink]="['/search' , 'notebooks']" (click)="sidenav.toggle()">
+                        <mat-icon class="sidenav-icon">laptop_mac</mat-icon>
+                        <a>Notebooks</a>
+                    </li>
+                    <li  [routerLink]="['/search' , 'consolasCambiar']" (click)="sidenav.toggle()" >
+                        <mat-icon class="sidenav-icon">phone_iphone</mat-icon>
+                        <a >
+                            Consolas</a>
+                    </li>
+                    <li [routerLink]="['/search' , 'components']" (click)="sidenav.toggle()">
+                        <mat-icon class="sidenav-icon">memory</mat-icon>
+                        <a>Componentes</a>
+                    </li>
+                    <li   routerLink="contact" (click)="sidenav.toggle()">
+                        <mat-icon class="sidenav-icon">call</mat-icon>
+                        <a>
+                            Contacto
+                        </a>
+                    </li>
                 </ul>
             </nav>
 
@@ -60,7 +68,7 @@
                 </nav>
 
                 <div class="desktop_icons">
-                    <mat-icon >search</mat-icon>
+                    <mat-icon>search</mat-icon>
                     <a routerLink="cart"><mat-icon>shopping_cart</mat-icon></a>
                     <mat-icon>
                         <div class="user_photo"><img src="assets/images/utils/user_empty.png" alt="user photo"></div>

@@ -1,4 +1,66 @@
-<p>product-details works!</p>
-@if(id){
-    <p>el id es: {{this.id}}</p>
-}
+<main class="product_details_container">
+    <p class="breadcrumb" [routerLink]="['/']" routerLinkActive="router-link-active"> volver | home>products</p>
+    <div class="mobile_display">
+        <h3 class="product_name">
+            {{product?.name}}
+        </h3>
+
+        <div class="imgs_carousel_container">
+            <p-carousel [value]="product?.imgs || []" [circular]="true" [responsiveOptions]="responsiveOptions">
+                <ng-template let-photo pTemplate="item">
+                    <div class="main_img_container">
+                        <img src="{{photo}}" alt="product image">
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+
+        <p class="product_price"> {{product?.price | currency}}</p>
+        <div class="stock_available_container">
+            <p class="stock_available">stock disponible</p>
+            <p class="stock_available_quantity">cantidad: <span class="quantity_number">{{product?.stock}}</span> <span
+                    class="stock_available_quantity_text">(+50 disponibles)</span></p>
+        </div>
+        <div class="add_to_cart_button_container">
+            <button class="primary_button add_to_cart_button">Agrega al carrito</button>
+            <button class="tertiary_button ">Agrega a favoritos</button>
+        </div>
+    </div>
+
+    <div class="desktop_display">
+        <picture class="desktop_img_container">
+            <div class="side_imgs_container">
+                @for (img of product?.imgs?.slice(0, 5); track $index) {
+                    @if (img != this.mainImage()) {
+                    <div class="side_img_div_container" (click)="changeMainImage(img)">
+                        <img [src]="img" alt="Imagen del producto">
+                    </div>
+                }
+
+                }
+            </div>
+            <div class="main_img_container">
+                <img src={{this.mainImage()}} alt="imagen del producto">
+            </div>
+            <div class="desktop_side_details_container">
+                <h2>
+                    {{product?.name}}
+                </h2>
+                <p>procesadores > Procedadores AMD</p>
+
+                <h2 class="product_price">{{product?.price | currency}}</h2>
+
+                <div class="reasons_to_buy_div"><mat-icon >check</mat-icon> Stock disponble</div>
+                <div class="reasons_to_buy_div"><mat-icon >local_shipping</mat-icon> Envio a todo el pais</div>
+                <div class="reasons_to_buy_div"><mat-icon >shield</mat-icon>Garantia Oficial</div>
+
+                <div class="add_to_cart_button_container">
+                    <button class="primary_button add_to_cart_button">Agrega al carrito</button>
+                    <button class="tertiary_button ">Agrega a favoritos</button>
+                </div>
+            </div>
+        </picture>
+    </div>
+
+
+</main>

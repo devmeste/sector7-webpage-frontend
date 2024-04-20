@@ -2,6 +2,7 @@ export interface Product{
     id: string;
     name: string;
     description: string;
-    img: string;
+    imgs: string[];
     price: number;
+    stock: number;
 }

@@ -2,9 +2,10 @@
     <p-carousel [value]="products" [circular]="true" [autoplayInterval]=5000 [responsiveOptions]="responsiveOptions">
         <ng-template let-product pTemplate="item">
             <app-product-card-big 
+                id="{{product.id}}"
                 name="{{product.name}}" 
                 description="{{product.description}}" 
-                img="{{product.img}}"
+                img="{{product.imgs[0]}}"
                 [price]="product.price">
             </app-product-card-big>
         </ng-template>
