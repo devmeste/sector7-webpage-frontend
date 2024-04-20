@@ -158,6 +158,12 @@
 }
 
 
+.desktop_display{
+    display: none;
+    @include laptop{
+        display: flex;
+    }
+}
 .desktop_img_container{
     display: flex;
 
