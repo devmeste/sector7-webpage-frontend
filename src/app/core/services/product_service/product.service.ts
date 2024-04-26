@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../../models/product';
+import { IProduct } from '../../models/product';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,7 @@ export class ProductService {
 
 
 
-  products : Product [] = [
+  products : IProduct [] = [
     {id:"1", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 1 description', 
     imgs: ['../../../../assets/images/products/product-detail-1.png', '../../../../assets/images/products/product-detail-2.png', 
     '../../../../assets/images/products/product-detail-3.png',  '../../../../assets/images/products/product-detail-4.png', 
@@ -44,21 +44,21 @@ export class ProductService {
     
   ];
 
-  private products$: BehaviorSubject<Product []> = new BehaviorSubject<Product []>(this.products);
+  private products$: BehaviorSubject<IProduct []> = new BehaviorSubject<IProduct []>(this.products);
 
 
   constructor() { }
 
-  public getProducts(): Observable<Product []> {
+  public getProducts(): Observable<IProduct []> {
     return this.products$.asObservable();
   }
 
-  public addProduct (p : Product) {
+  public addProduct (p : IProduct) {
     this.products.push(p);
     this.products$.next(this.products);
   }
 
-  public getProductById(id: string): Product | undefined {
+  public getProductById(id: string): IProduct | undefined {
     return this.products.find(product => product.id === id);
   }
 

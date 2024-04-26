@@ -1,17 +1,18 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Product } from '../../../core/models/product';
+import { IProduct } from '../../../core/models/product';
 import { ProductService } from '../../../core/services/product_service/product.service';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { MatIconModule } from '@angular/material/icon';
+import { FeaturesTableComponent } from "./features-table/features-table.component";
 
 @Component({
-  selector: 'app-product-details',
-  standalone: true,
-  imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule],
-  templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.scss'
+    selector: 'app-product-details',
+    standalone: true,
+    templateUrl: './product-details.component.html',
+    styleUrl: './product-details.component.scss',
+    imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent]
 })
 export class ProductDetailsComponent implements OnInit {
 
@@ -19,7 +20,7 @@ export class ProductDetailsComponent implements OnInit {
   private _productService = inject(ProductService);
 
   id !: string;
-  product !: Product | undefined;
+  product !: IProduct | undefined;
   mainImage = signal<string>('');
   responsiveOptions: CarouselResponsiveOptions[] = [
     {

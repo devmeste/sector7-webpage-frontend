@@ -1,0 +1,15 @@
+<div class="features_component_container">
+    <h2 class="features_title"> Características del producto </h2>
+    <div class="features_divider"></div>
+
+    <table class="features_table">
+        <tbody>
+            @for (ft of features; track $index) {
+            <tr class="features_row">
+                <td class="features_name">{{ft.name}}</td>
+                <td class="features_value">{{ft.value}}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

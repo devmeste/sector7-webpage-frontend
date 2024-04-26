@@ -25,6 +25,7 @@
             <button class="primary_button add_to_cart_button">Agrega al carrito</button>
             <button class="tertiary_button ">Agrega a favoritos</button>
         </div>
+        <app-features-table></app-features-table>
     </div>
 
     <div class="desktop_display">
@@ -42,7 +43,7 @@
             <div class="main_img_container">
                 <img src={{this.mainImage()}} alt="imagen del producto">
             </div>
-            <div class="desktop_side_details_container">
+            <div class="main_details_container">
                 <h2>
                     {{product?.name}}
                 </h2>
@@ -60,6 +61,10 @@
                 </div>
             </div>
         </picture>
+        <app-features-table></app-features-table>
+        <h2>
+            Productos que te pueden interesar
+        </h2>
     </div>
 
 

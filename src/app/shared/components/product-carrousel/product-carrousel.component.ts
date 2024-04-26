@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { ProductCardBigComponent } from "../cards/product-card-big/product-card-big.component";
-import { Product } from '../../../core/models/product';
+import { IProduct } from '../../../core/models/product';
 import { ProductService } from '../../../core/services/product_service/product.service';
 
 
@@ -16,7 +16,7 @@ import { ProductService } from '../../../core/services/product_service/product.s
 export class ProductCarrouselComponent implements OnInit {
 
   _productService : ProductService = inject( ProductService );
-  products !: Product [] ;
+  products !: IProduct [] ;
 
   ngOnInit(): void {
     this._productService.getProducts().subscribe( products => {
