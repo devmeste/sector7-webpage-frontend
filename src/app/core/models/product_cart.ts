@@ -2,7 +2,7 @@ export interface IProduct_Cart {
     id: string;
     name: string;
     // description: string;
-    imgs: string[];
+    img: string;
     price: number;
     stock: number;
     quantityRequested: number;

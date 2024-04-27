@@ -1,31 +1,54 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { CartService } from '../../../core/services/cart_service/cart-service.service';
-import { IProduct } from '../../../core/models/product';
+import { IProduct_Cart } from '../../../core/models/product_cart';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe, MatIcon, RouterLink],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })
 export class ShoppingCartComponent implements OnInit {
+  shipping!: boolean ;
+  shippingValue !: number;
+  totalPrice !: number;
 
-  products !: IProduct[];
+  products !: IProduct_Cart[];
   _cartService: CartService = inject(CartService);
 
+  constructor() {
+      this.shipping = true; //TODO: handle the this envio
+      this.shippingValue = 0; //TODO: handle the this envio
+      this._cartService.getCartTotal().subscribe(total => {
+        this.totalPrice = total;
+      })
+   }
+
   ngOnInit(): void {
-    this.products = this._cartService.getAllProducts();
+    this._cartService.getAllProducts().subscribe(products => {
+      this.products = products;
+    })
   }
 
-  deleteProduct(product: IProduct): void {
-    this._cartService.deleteProduct(product);
-    this.products = this._cartService.getAllProducts();
+  deleteProduct(id: string): void {
+    this._cartService.deleteProduct(id);
   }
 
-  // updateProductQuantity(product: IProduct_Cart, quantity: number): void {
-  //   this._cartService.updateProductQuantity(product, quantity);
-  //   this.products = this._cartService.getAllProducts();
-  // }
+  removeQuantity(p: IProduct_Cart) {
+    if(p.quantityRequested>0) {
+      this._cartService.updateProductQuantitySimple(p, "decrease");
+    };
+  }
+  addQuantity(p: IProduct_Cart) {
+    this._cartService.updateProductQuantitySimple(p, "increase");
+  }
+  updateProductQuantity(product: IProduct_Cart, quantity: number): void {
+    this._cartService.updateProductQuantity(product, quantity);
+  }
+
 
 }

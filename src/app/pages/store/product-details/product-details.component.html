@@ -7,11 +7,11 @@
 
         <div class="imgs_carousel_container">
             <p-carousel [value]="product?.imgs || []" [circular]="true" [responsiveOptions]="responsiveOptions">
-                <ng-template let-photo pTemplate="item">
-                    <div class="main_img_container">
-                        <img src="{{photo}}" alt="product image">
-                    </div>
-                </ng-template>
+                    <ng-template let-photo pTemplate="item">
+                        <div class="main_img_container">
+                            <img src="{{photo}}" alt="product image">
+                        </div>
+                    </ng-template>
             </p-carousel>
         </div>
 
@@ -22,9 +22,12 @@
                     class="stock_available_quantity_text">(+50 disponibles)</span></p>
         </div>
         <div class="add_to_cart_button_container">
-            <button class="primary_button add_to_cart_button">Agrega al carrito</button>
-            <button class="tertiary_button ">Agrega a favoritos</button>
+            @if(product !== undefined){
+                <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agrega al carrito</button>
+                <button class="tertiary_button ">Agrega a favoritos</button>
+            }
         </div>
+
         <app-features-table></app-features-table>
     </div>
 
@@ -55,12 +58,16 @@
                 <div class="reasons_to_buy_div"><mat-icon >local_shipping</mat-icon> Envio a todo el pais</div>
                 <div class="reasons_to_buy_div"><mat-icon >shield</mat-icon>Garantia Oficial</div>
 
-                <div class="add_to_cart_button_container">
-                    <button class="primary_button add_to_cart_button">Agrega al carrito</button>
-                    <button class="tertiary_button ">Agrega a favoritos</button>
-                </div>
+                @if(product){
+                    <div class="add_to_cart_button_container">
+                        <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agrega al carrito</button>
+                        <!-- TODO: Modal para avisar que fue crado un producto -->
+                        <button class="tertiary_button ">Agrega a favoritos</button>
+                    </div>
+                }
             </div>
         </picture>
+
         <app-features-table></app-features-table>
         <h2>
             Productos que te pueden interesar

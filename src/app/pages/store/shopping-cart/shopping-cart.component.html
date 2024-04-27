@@ -1,1 +1,57 @@
-<p style="color: white;">shopping-cart works!</p>
+<main class="shopping_cart_container">
+    <div class="cards_container">
+        @for (product of products; track $index) {
+        <div class="shopping_cart_item_container">
+            <picture class="product_image">
+                <img src={{product.img}} alt="producto: {{product.name}}">
+            </picture>
+            <div class="side_text_container">
+                <div class="shopping_cart_item_name">
+                    <p>{{product.name}}</p>
+                </div>
+                <button (click)="deleteProduct(product.id)" class="delete_button">Eliminar</button>
+                <div class="shopping_cart_item_quantity_container">
+                    <button (click)="removeQuantity(product)" class="quantity_button quantity_button_left">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+    
+                    <div class="quantity_number"> {{product.quantityRequested}} </div>
+                    <button (click)="addQuantity(product)" class="quantity_button quantity_button_right ">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <p class="shopping_cart_item_price">{{product.price | currency}}</p>
+            </div>
+        </div>
+        }
+        @empty {
+        <div class="empty_cart_message_container">
+            <div class="empty_cart_message">
+                <p>No hay productos en el carrito</p>
+                <button class="primary_button" routerLink="/store">Quiero Elegir</button>
+            </div>
+        </div>
+        }
+    </div>
+
+    @if (products.length > 0) {
+        <div class="cart_summary_container">
+            <h3>Resumen de compra</h3>
+            <div class="divider"></div>
+            <div class="cart_summary_item">
+                <p class="total_products_in_cart ">Total de productos: ({{products.length}})</p>
+                <p>{{this.totalPrice | currency}}</p>
+            </div>
+            @if(shipping){
+                <div class="shipping_container cart_summary_item">
+                    <p>Envío: </p>
+                    <p class="shipping_price"> {{shippingValue | currency}}</p>
+                </div>
+            }
+            <div class="cart_summary_item cart_final_price">
+                <p class="total_price ">Total: </p>
+                <p class="total_price ">{{ (totalPrice + shippingValue) | currency }}</p>
+            </div>
+        </div>
+    }
+</main>

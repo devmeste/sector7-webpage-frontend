@@ -12,7 +12,9 @@
     p-carousel.p-element{
         width: min(100% , 1440px); 
     }
-    
+    .p-carousel-container{
+        height: fit-content;
+    }
     ol,
     ul {
         padding: 0;

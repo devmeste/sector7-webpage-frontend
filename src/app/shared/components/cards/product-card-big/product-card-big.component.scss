@@ -34,8 +34,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
-    height: 50px;
+    height: fit-content;
     padding: 10px;
 
     @include tablet{
@@ -45,7 +46,9 @@
         
     .card_button{
         display: inline;
-
+        @media screen and (max-width: 328px){
+            margin: auto;
+        }
         @include tablet{
             // display: none;
             

@@ -6,6 +6,8 @@ import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { MatIconModule } from '@angular/material/icon';
 import { FeaturesTableComponent } from "./features-table/features-table.component";
+import { CartService } from '../../../core/services/cart_service/cart-service.service';
+import { IProduct_Cart } from '../../../core/models/product_cart';
 
 @Component({
     selector: 'app-product-details',
@@ -18,6 +20,8 @@ export class ProductDetailsComponent implements OnInit {
 
   private _router: ActivatedRoute = inject(ActivatedRoute);
   private _productService = inject(ProductService);
+  private _cartService = inject(CartService);
+  cantidad !: number ;
 
   id !: string;
   product !: IProduct | undefined;
@@ -39,16 +43,34 @@ export class ProductDetailsComponent implements OnInit {
     this.product = this._productService.getProductById(this.id);
 
     if (this.product === undefined) {
-      //FIXME: mostrar modal de error y luego redirigir al home, dado que pueden haber ingresado cualquier id en la url
+      //TODO: mostrar modal de error y luego redirigir al home, dado que pueden haber ingresado cualquier id en la url
     }
     else {
       this.mainImage.set(this.product.imgs[0]);
     }
-  }
 
+    this._cartService.getCartQuantity().subscribe(quantity =>{
+      this.cantidad = quantity
+    })
+    }
+  
  
   changeMainImage(img: string) {
     this.mainImage.set(img);
   }
 
+
+  addToCart(product: IProduct) {
+
+    const productToAdd : IProduct_Cart = {
+      id: product.id,
+      name: product.name,
+      img: product.imgs[0],
+      price: product.price,
+      stock: product.stock,
+      quantityRequested: 0
+    }
+    
+    this._cartService.addToCart(productToAdd);
+  }
 }

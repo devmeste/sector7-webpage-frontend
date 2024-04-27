@@ -7,8 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ProductService {
 
-
-
   products : IProduct [] = [
     {id:"1", name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler', description: 'Product 1 description', 
     imgs: ['../../../../assets/images/products/product-detail-1.png', '../../../../assets/images/products/product-detail-2.png', 
