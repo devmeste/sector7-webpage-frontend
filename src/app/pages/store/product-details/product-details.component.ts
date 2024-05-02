@@ -8,13 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { FeaturesTableComponent } from "./features-table/features-table.component";
 import { CartService } from '../../../core/services/cart_service/cart-service.service';
 import { IProduct_Cart } from '../../../core/models/product_cart';
+import { FooterComponent } from "../../../shared/components/footer/footer.component";
 
 @Component({
     selector: 'app-product-details',
     standalone: true,
     templateUrl: './product-details.component.html',
     styleUrl: './product-details.component.scss',
-    imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent]
+    imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent]
 })
 export class ProductDetailsComponent implements OnInit {
 

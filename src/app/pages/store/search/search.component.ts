@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FooterComponent } from "../../../shared/components/footer/footer.component";
 
 @Component({
-  selector: 'app-search',
-  standalone: true,
-  imports: [],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.scss'
+    selector: 'app-search',
+    standalone: true,
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.scss',
+    imports: [FooterComponent]
 })
 export class SearchComponent {
 

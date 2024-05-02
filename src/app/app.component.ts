@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,9 +7,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgClass, NgStyle } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { FooterComponent } from "./shared/components/footer/footer.component";
-
-
+import {MatBadgeModule} from '@angular/material/badge';
+import { CartService } from './core/services/cart_service/cart-service.service';
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -25,8 +24,8 @@ import { FooterComponent } from "./shared/components/footer/footer.component";
         NgClass,
         MatMenuModule,
         MatToolbarModule,
+        MatBadgeModule,
         RouterLink,
-        FooterComponent
     ]
 })
 export class AppComponent {
@@ -34,7 +33,8 @@ export class AppComponent {
   menuOpened: boolean = false;
   screenWidth: number;
   navbarfixed: boolean = false;
-  
+  totalProductsInCart: number =9;
+  _cartService : CartService = inject(CartService);
 
   constructor() {
     // set screenWidth on page load
@@ -43,6 +43,10 @@ export class AppComponent {
     window.addEventListener('resize', this.handleResize);
     // Llamamos a handleResize para establecer el estado inicial
     this.handleResize();
+
+    this._cartService.getCartQuantity().subscribe(total=>{
+      this.totalProductsInCart=total;
+    })
   }
 
   // method to determined the change navbar styles (navbar fixed animation and height change)

@@ -69,7 +69,7 @@
 
                 <div class="desktop_icons">
                     <mat-icon>search</mat-icon>
-                    <a routerLink="cart"><mat-icon>shopping_cart</mat-icon></a>
+                    <a routerLink="cart"><mat-icon matBadge="{{totalProductsInCart}}" matBadgeSize="medium" matBadgeColor="warn" >shopping_cart</mat-icon></a>
                     <mat-icon>
                         <div class="user_photo"><img src="assets/images/utils/user_empty.png" alt="user photo"></div>
                     </mat-icon>
@@ -81,7 +81,7 @@
         <div class="height_helper"></div>
         <!-- Content  -->
         <router-outlet></router-outlet>
-        <app-footer></app-footer>
+
     </mat-sidenav-content>
 
 
