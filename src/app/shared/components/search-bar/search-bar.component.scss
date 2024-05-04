@@ -1,0 +1,29 @@
+@import '../../../../media-queries';
+@import '../../../../styles';
+
+// Use this clases to make the component reusable
+.place_header{
+    // width: 100px;
+    // height: 100px;
+}
+// .place_body{
+
+// }
+
+.search_bar_container{
+    background-color: green;
+    // height: 200px;
+    // width: 200px;
+}
+
+.fixed {
+    height: $height_for_toolbar_fixed;
+    width: 200px;
+}
+
+.no-fixed {
+
+    height: $height_for_toolbar_no_fixed;
+    width: 200px;
+}
+

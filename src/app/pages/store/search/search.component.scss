@@ -1,0 +1,90 @@
+@import '../../../../styles';
+@import '../../../../media-queries';
+
+.search_main_container{
+    max-width: 1440px;
+    margin :auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat( 5 auto);
+    padding: 0 5%;
+
+    @include desktop{
+        padding: 0 3%;
+    }
+
+    .search_bar_container{
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        // background-color: aqua;
+        height: 50px;
+        // border: 2px solid gray;
+    }
+
+    .breadcrumb_container{
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        h3{
+            font-weight: 600;
+        }
+    }
+    .search_title_container{
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        height: 100px;
+
+        h2{
+            margin-bottom: 0.5rem;
+        }
+        .title_divider{
+            width: 50%;
+            height: 1px;
+            background-color: gray;
+        }
+            
+    }
+    .product_features_filters_container{
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        
+        height: fit-content;
+        background-color: transparent;
+        color: black;
+        padding: 0 2rem;
+        .product_features_filters_content{
+            background-color: $Gray_85;
+            padding: 1rem 2rem;
+            border-radius: 7px;
+
+        }
+        .feature_title{
+            color: black;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .each_feature_container{
+            margin-bottom: 2rem;
+        }
+        p{
+            color: black;
+            font-weight: 500;
+        }
+    }
+    .search_results_container{
+        grid-column-start: 4;
+        grid-column-end: 13;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        // background-color: yellow;
+        
+    }
+}
+

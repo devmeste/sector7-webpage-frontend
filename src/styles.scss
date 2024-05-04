@@ -14,6 +14,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 0;
   border: 0;
   font-size: 100%;
+  color: white;
 }
 
 // fonts and color variables 
@@ -21,6 +22,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 $gradient-orange-yellow-1: linear-gradient(78deg, #ff4d00 9.86%, #ff9900 100%); 
 $filter_background_for_products: drop-shadow(0 4px 8px #ff4d00f0); 
 
+$Gray_20:#404040;
+$Gray_55:#757575;
+$Gray_85:#d9d9d9;
 
 $warning-50: #fdf5e8; 
 $warning-100: #f8deb8; 
@@ -103,6 +107,7 @@ $info-700: #1a6eaa;
 $info-800: #145584;
 $info-900: #104165;
 
+$shadow_1_3 : 1px 3px 10px 4px rgba($primary_main, 0.50);
 
 // Buttons
 // $btn-shadow : 1px, 3px,4px,rgb(0, 0, 0, 0.25);
@@ -172,7 +177,11 @@ h4{
   font: $mobile-h4;
 }
 
+// Sizes
 $max_width_container:1440px;
+$height_for_toolbar_fixed : 75px;
+$height_for_toolbar_no_fixed : 90px;
+
 
 .primary_button{
 
@@ -217,10 +226,7 @@ $max_width_container:1440px;
   padding: 8px 10px;
   background-color: $background;
 
-
-  // background-image: linear-gradient(160deg, $primary-main 20%, $primary-s1 150%); 
   border-radius: 4px;
-  // box-shadow: 3px, 1px, 4px, rgb(0, 0, 0,0.25);
 
   font-size: .8rem;
 
@@ -247,3 +253,11 @@ $max_width_container:1440px;
     box-shadow: inset 0 0 0 2px $primary-main; 
     cursor: pointer;
   }	
+
+  .show{
+    display: flex;
+  }
+
+  .hide{
+    display: none !important;
+  }

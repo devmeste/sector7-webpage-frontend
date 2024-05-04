@@ -5,6 +5,7 @@ export const STORE_ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('./home/home.component').then(r => r.HomeComponent),
+        // loadComponent: () =>import("./search/search.component").then(c => c.SearchComponent)
     },
     {
         path: 'build-your-pc',

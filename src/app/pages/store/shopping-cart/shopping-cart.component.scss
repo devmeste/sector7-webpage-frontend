@@ -6,9 +6,9 @@ main.shopping_cart_container {
     position: relative;
     max-width: 1440px;
     margin: auto;
-    height: auto;
+    min-height: 100vh;
     padding-top: 1rem;
-
+    
     @include laptop {
         display: flex;
 
@@ -168,6 +168,7 @@ main.shopping_cart_container {
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
 
     .empty_cart_message {
@@ -180,10 +181,11 @@ main.shopping_cart_container {
         border-radius: 8px;
         background-color: rgb(33, 33, 33);
         border: 2px solid $primary-main;
+        box-shadow: $shadow_1_3;
     }
 
 
-    .cart_summary_container {
+    .cart_summary_container{
         position: absolute;
         bottom: 0;
         width: 100%;
@@ -215,11 +217,12 @@ main.shopping_cart_container {
 
 
         .cart_summary_item {
+            color: black;
             display: flex;
             width: 80%;
             justify-content: space-between;
             margin-bottom: 1rem;
-        }
+            }
 
         .cart_final_price {
             font-weight: 600;

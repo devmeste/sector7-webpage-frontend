@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import {  Component, ElementRef, HostListener, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,34 +7,45 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgClass, NgStyle } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 import { CartService } from './core/services/cart_service/cart-service.service';
+import { SearchBarComponent } from "./shared/components/search-bar/search-bar.component";
+import { FormsModule } from '@angular/forms';
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
-    imports: [
-        CommonModule,
-        RouterOutlet,
-        MatIconModule,
-        MatButtonModule,
-        MatSidenavModule,
-        NgStyle,
-        NgClass,
-        MatMenuModule,
-        MatToolbarModule,
-        MatBadgeModule,
-        RouterLink,
-    ]
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    NgStyle,
+    NgClass,
+    MatMenuModule,
+    MatToolbarModule,
+    MatBadgeModule,
+    RouterLink,
+    SearchBarComponent,
+    FormsModule
+  ]
 })
 export class AppComponent {
-  
+
+
   menuOpened: boolean = false;
+  searchBarOpened: boolean = false;
   screenWidth: number;
   navbarfixed: boolean = false;
-  totalProductsInCart: number =9;
-  _cartService : CartService = inject(CartService);
+  totalProductsInCart: number = 9;
+  _cartService: CartService = inject(CartService);
+  serchBarClicked: boolean = false;
+  @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('searchInput', { static: false }) searchInputRef!: ElementRef;
+  searchBarInputText: string = '';
+
 
   constructor() {
     // set screenWidth on page load
@@ -44,10 +55,12 @@ export class AppComponent {
     // Llamamos a handleResize para establecer el estado inicial
     this.handleResize();
 
-    this._cartService.getCartQuantity().subscribe(total=>{
-      this.totalProductsInCart=total;
+    this._cartService.getCartQuantity().subscribe(total => {
+      this.totalProductsInCart = total;
     })
+
   }
+
 
   // method to determined the change navbar styles (navbar fixed animation and height change)
   @HostListener('window:scroll', ['$event']) onScroll() {
@@ -74,4 +87,23 @@ export class AppComponent {
   closeMenu() {
     this.menuOpened = false;
   }
+
+
+  // Search bar
+  toggleSearchBar() {
+    this.searchBarOpened = !this.searchBarOpened;
+    console.log(this.searchInputRef.nativeElement);
+    if (this.searchBarOpened) {
+      setTimeout(() => {
+        this.searchInputRef.nativeElement.click();
+        this.searchInputRef.nativeElement.focus();
+      });
+    }
+    else{
+      this.searchBarInputText = '';
+    }
+  }
+
+
+  
 }

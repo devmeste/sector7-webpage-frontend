@@ -1,0 +1,10 @@
+<div class="wide_product_card_container">
+    <div class="wide_product_card_image_container">
+        <img src="{{this.img}}" alt="{{this.name + ' image'}}">
+    </div>
+    <div class="wide_product_card_text_container">
+        <h4>{{this.name}}</h4>
+        <p class="price">{{this.price | currency}}</p>
+        <button class="primary_button" (click)="navigateToProduct(id)" >Ver Mas</button>
+    </div>
+</div>
