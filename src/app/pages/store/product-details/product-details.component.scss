@@ -12,6 +12,7 @@
     background-color: $background;
     color: white;
     padding: 0 5%;
+
     @include tablet{
         padding: 0 10%;
     }
@@ -19,12 +20,11 @@
         padding:0 5%;
     }
 
-    .breadcrumb{
-        color: $acromatic-100;
+    .app-breadcrumb {
         width: 100%;
-        text-align: start;
-        cursor: pointer;
     }
+
+    
 
 
     .mobile_display{
@@ -92,73 +92,77 @@
             object-fit: contain;
         }
     }
+
+    
 }
 
 :host ::ng-deep {
+    .product_details_container{
+        p-carousel.p-element {
+            width: min(100%, 1440px);
+        }
     
-    p-carousel.p-element {
-        width: min(100%, 1440px);
-    }
-
-    .p-carousel-container{
-        height: 300px ;
-    }
-
-    ol,
-    ul {
-        padding: 0;
-    }
-
-    // Arrow icons Container
-    .p-carousel .p-carousel-content .p-carousel-prev,
-    .p-carousel .p-carousel-content .p-carousel-next {
-        width: 5%;
-        padding: 0 1rem;
-        background-color: $background;
-
-        @include tablet {
-            padding: 0 2rem;
+        .p-carousel-container{
+            min-height: 300px ;
+        }
+    
+        ol,
+        ul {
+            padding: 0;
+        }
+    
+        // Arrow icons Container
+        .p-carousel .p-carousel-content .p-carousel-prev,
+        .p-carousel .p-carousel-content .p-carousel-next {
+            width: 5%;
+            padding: 0 1rem;
+            background-color: $background;
+    
+            @include tablet {
+                padding: 0 2rem;
+            }
+        }
+    
+    
+        // Arrow icons
+        .carousel-prev-icon {
+            width: 60px;
+            height: 160px;
+            color: $primary-main;
+            transition: color 0.3s ease;
+    
+        }
+    
+    
+        .carousel-prev-icon:hover {
+            color: $primary-l1;
+        }
+    
+    
+        //no recuerdo
+        .p-carousel-indicators {
+            margin-top: 0.5rem;
+            display: flex;
+            width: 100%;
+    
+            @include tablet {
+                margin-top: 1.5rem;
+            }
+        }
+    
+        //// bottom circles 
+        .p-link {
+            border-radius: 50px;
+            width: 8px;
+            margin: 0 0.2rem;
+        }
+    
+        // bottom circles selected
+        .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+            background-color: $primary-main;
         }
     }
-
-
-    // Arrow icons
-    .carousel-prev-icon {
-        width: 60px;
-        height: 160px;
-        color: $primary-main;
-        transition: color 0.3s ease;
-
-    }
-
-
-    .carousel-prev-icon:hover {
-        color: $primary-l1;
-    }
-
-
-    //no recuerdo
-    .p-carousel-indicators {
-        margin-top: 0.5rem;
-        display: flex;
-        width: 100%;
-
-        @include tablet {
-            margin-top: 1.5rem;
-        }
-    }
-
-    //// bottom circles 
-    .p-link {
-        border-radius: 50px;
-        width: 8px;
-        margin: 0 0.2rem;
-    }
-
-    // bottom circles selected
-    .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
-        background-color: $primary-main;
-    }
+    
 
 }
 
@@ -216,6 +220,10 @@
         grid-row-start: 0;
         grid-row-end: 1;
         // background-color: red;
+        
+        @media screen and (min-width : 500px) {
+            height: 400px;
+        }
 
         @include desktop{
             grid-column: 3 / span 5;
@@ -233,6 +241,10 @@
         grid-column-end: 13;
         grid-row-start: 1;
         grid-row-end: 2;
+
+        h2{
+            margin-top: 2rem;
+        }
         
 
         @include desktop{
@@ -254,4 +266,37 @@
 
         }
     }
+}
+
+
+.similar_products_section_background{
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgb(25, 25, 25) 0%, transparent 100%);
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+.similar_products_section_container{
+    max-width: 1440px;
+    margin: auto;
+
+    
+    .similar_products_section_elements{
+        width: 100%;
+        
+        @media screen and (min-width:380px) {
+            padding: 0 10%;
+        
+        }
+
+        
+        .similar_products_section_title{
+            text-align: center;
+            margin-bottom: 1rem;
+            color: $primary-main;
+        }
+    }
+
+    
+
 }

@@ -10,28 +10,37 @@
             <nav>
                 <ul class="side_nav_ul">
                     <li routerLink="" (click)="sidenav.toggle()">
-                        <mat-icon class="sidenav-icon" >home</mat-icon>
+                        <mat-icon class="sidenav-icon">home</mat-icon>
                         <a>
-                            Inicio</a>
+                            Inicio
+                        </a>
                     </li>
-                    <li routerLink="build-your-pc" (click)="sidenav.toggle()"> 
+                    <li routerLink="build-your-pc" (click)="sidenav.toggle()">
                         <mat-icon class="sidenav-icon">build</mat-icon>
-                        <a >Arma tu PC</a>
-                    </li>
-                    <li  [routerLink]="['/search' , 'notebooks']" (click)="sidenav.toggle()">
-                        <mat-icon class="sidenav-icon">laptop_mac</mat-icon>
-                        <a>Notebooks</a>
-                    </li>
-                    <li  [routerLink]="['/search' , 'consolasCambiar']" (click)="sidenav.toggle()" >
-                        <mat-icon class="sidenav-icon">phone_iphone</mat-icon>
-                        <a >
-                            Consolas</a>
+                        <a>Arma tu PC</a>
                     </li>
                     <li [routerLink]="['/search' , 'components']" (click)="sidenav.toggle()">
                         <mat-icon class="sidenav-icon">memory</mat-icon>
-                        <a>Componentes</a>
+                        <a>Productos</a>
                     </li>
-                    <li   routerLink="contact" (click)="sidenav.toggle()">
+                    <li [routerLink]="['/search' , 'notebooks']" (click)="sidenav.toggle()">
+                        <mat-icon class="sidenav-icon">laptop_mac</mat-icon>
+                        <a>Notebooks</a>
+                    </li>
+                    <li [routerLink]="['/search' , 'consoles']" (click)="sidenav.toggle()">
+                        <mat-icon class="sidenav-icon">sports_esports</mat-icon>
+                        <a>
+                            Consolas
+                        </a>
+                    </li>
+                    <li [routerLink]="['/search' , 'promos']" (click)="sidenav.toggle()">
+                        <mat-icon class="sidenav-icon">add_shopping_cart</mat-icon>
+                        <a>
+                            Promos
+                        </a>
+                    </li>
+                    
+                    <li routerLink="contact" (click)="sidenav.toggle()">
                         <mat-icon class="sidenav-icon">call</mat-icon>
                         <a>
                             Contacto
@@ -46,9 +55,9 @@
     <!-- Content  -->
     <mat-sidenav-content>
         <!-- Desktop Nav bar -->
-        <mat-toolbar class="toolbar" (scroll)="onScroll()" [ngClass]="navbarfixed?'fixed':'no-fixed'">
-            <div class="toolbar_elements">
-                
+        <mat-toolbar class="toolbar" (scroll)="onScroll()" [ngClass]="{'fixed': navbarfixed, 'no-fixed': !navbarfixed, 'searchBarOpenendInMobile': searchBarOpened}">
+            <div class="toolbar_elements" [ngClass]="{'searchBarOpenendInMobile': searchBarOpened}">
+
                 <button mat-icon-button class="hamburguer_menu_button" (click)="sidenav.toggle()">
                     <mat-icon>{{ menuOpened ? 'clear' : 'menu' }}</mat-icon>
                 </button>
@@ -56,51 +65,73 @@
                 <a [routerLink]="['']" class="anchor_logoS7">
                     <div class="logoS7"></div>
                 </a>
-                
-                    <nav class="desktop_nav" [ngClass]="searchBarOpened ? 'hide' : 'show'">
 
-                        <ul class="custom-ul">
-                            <li class="custom-li"><a [routerLink]="['/']">Inicio</a></li>
-                            <li class="custom-li"><a [routerLink]="['/search']">Productos</a></li>
-                            <li class="custom-li"><a [routerLink]="['/search' , 'consolasCambiar']">Consolas</a></li>
-                            <li class="custom-li"><a [routerLink]="['/search' , 'notebooks']">Notebooks</a></li>
-                            <li class="custom-li"><a routerLink="build-your-pc">Arma tu pc</a></li>
-                            <li class="custom-li"><a [routerLink]="['/search' , 'promos']">Promos</a></li>
-                        </ul>
-                    </nav>
-                     <!-- <app-search-bar place="place_header" [height]=200 [width]=200 [classForSpace]="navbarfixed?'fixed':'no-fixed'" class="algo"></app-search-bar>                         -->
-                    <div class="search_bar_container_desktop " 
-                    [ngClass]="searchBarOpened ? 'show' : 'hide'"
-                    (click)="serchBarClicked=true" 
-                    >
-                        <div class="search_bar" [ngClass]="serchBarClicked ? 'searchBarClicked':''">
+                <nav class="desktop_nav" [ngClass]="searchBarOpened ? 'hide' : 'show'">
+
+                    <ul class="custom-ul">
+                        <li class="custom-li"><a [routerLink]="['/']">Inicio</a></li>
+                        <li class="custom-li"><a routerLink="build-your-pc">Arma tu pc</a></li>
+                        <li class="custom-li"><a [routerLink]="['/search']">Productos</a></li>
+                        <li class="custom-li"><a [routerLink]="['/search' , 'notebooks']">Notebooks</a></li>
+                        <li class="custom-li"><a [routerLink]="['/search' , 'consolasCambiar']">Consolas</a></li>
+                        <li class="custom-li"><a [routerLink]="['/search' , 'promos']">Promos</a></li>
+                    </ul>
+                </nav>
+                @if(searchBarOpened){
+                    <div class="search_bar_container_desktop search_bar_container " 
+                        (click)="searchBarClicked=true" (keydown.escape)="closeSearchBar()">
+                        <div class="search_bar" [ngClass]="searchBarClicked ? 'searchBarClicked':''">
                             <button class="search_icon_inside_bar_button search_icon">
-                                <mat-icon mat-icon-button >search</mat-icon>
+                                <mat-icon mat-icon-button>search</mat-icon>
                             </button>
-                            <input type="text" #searchInput [(ngModel)]="searchBarInputText">
+                            <input type="text" #searchInputDesktop [(ngModel)]="searchBarInputText" (blur)="handleInputBlur()">
                             <button class="search_icon_inside_bar_button close_icon">
-                                <mat-icon   (click)="toggleSearchBar();serchBarClicked=false" >close</mat-icon>
+                                <mat-icon (click)="closeSearchBar()">close</mat-icon>
                             </button>
                         </div>
                     </div>
+                }
 
-                <div class="desktop_icons">
+                <div class="corner_navbar_icons_container">
                     @if(!searchBarOpened){
-                        <mat-icon (click)="toggleSearchBar()" >search</mat-icon>
+                    <mat-icon class="corner_navbar_icon" (click)="toggleSearchBar()">
+                        search
+                    </mat-icon>
                     }
-                    <a routerLink="cart"><mat-icon matBadge="{{totalProductsInCart}}" matBadgeSize="medium" matBadgeColor="warn" >shopping_cart</mat-icon></a>
-                    <mat-icon>
+                    <div class="corner_navbar_icon">
+                        <mat-icon matBadge="{{totalProductsInCart}}" matBadgeSize="small"
+                                matBadgeColor="warn" routerLink="cart">
+                                shopping_cart
+                        </mat-icon>
+                    </div>
+                    <mat-icon class="corner_navbar_icon">
                         <div class="user_photo"><img src="assets/images/utils/user_empty.png" alt="user photo"></div>
                     </mat-icon>
                 </div>
 
-            </div>
-            <div class="search_bar_container_mobile">
                 
             </div>
-
+            @if (searchBarOpened) {
+                <div class="search_bar_container_mobile search_bar_container" 
+                        (keydown.escape)="closeSearchBar()"
+                        (click)="searchBarClicked=true"
+                        >
+                        <div class="search_bar" [ngClass]="searchBarClicked ? 'searchBarClicked':''">
+                            <button class="search_icon_inside_bar_button search_icon">
+                                <mat-icon mat-icon-button>search</mat-icon>
+                            </button>
+                            <input  type="text" #searchInputMobile 
+                                [(ngModel)]="searchBarInputText" 
+                                (blur)="handleInputBlur()"
+                                >
+                            <button class="search_icon_inside_bar_button close_icon">
+                                <mat-icon (click)="closeSearchBar()">close</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+            }
         </mat-toolbar>
-        <div class="height_helper"></div>
+        <div class="height_helper"></div> 
         <!-- Content  -->
         <router-outlet></router-outlet>
 

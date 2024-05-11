@@ -1,0 +1,60 @@
+@import '../../../../../styles.scss';
+
+.bk_card_container {
+    max-width: 220px;
+    height: 300px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        transform: scale(1.05);
+        filter: $filter_background_for_products;
+    }
+
+    .bk_card_image {
+        height: 50%;
+        width: 100%;
+        background-color: $Gray_20;
+        border-bottom: 2px solid transparent;        
+        border-image: $gradient-orange-yellow-1;
+        border-image-slice: 1;
+        
+
+        img{
+            filter: $filter_background_for_products;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .bk_card_text {
+        height: 50%;
+        width: 100%;
+        background-color: $Gray_10;
+        border-top: inset 2px solid $primary-main;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+
+        .bk_card_price{
+            color: $success-600;
+            align-self: flex-start;
+            padding: 0 1rem;
+        }
+
+        .bk_card_product_name{
+            color: white;
+            padding: 0 1rem;
+            margin-bottom: 1rem ;
+        }
+    }
+
+}

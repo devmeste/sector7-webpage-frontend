@@ -1,4 +1,4 @@
-import {  Component, ElementRef, HostListener, ViewChild, inject } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, QueryList, ViewChild, ViewChildren, inject, viewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     MatBadgeModule,
     RouterLink,
     SearchBarComponent,
-    FormsModule
+    FormsModule,
   ]
 })
 export class AppComponent {
@@ -41,9 +41,13 @@ export class AppComponent {
   navbarfixed: boolean = false;
   totalProductsInCart: number = 9;
   _cartService: CartService = inject(CartService);
-  serchBarClicked: boolean = false;
-  @ViewChild('searchInput') searchInput!: ElementRef;
-  @ViewChild('searchInput', { static: false }) searchInputRef!: ElementRef;
+  searchBarClicked: boolean = false;
+  mobileBreackPoint: number = 480;
+  @ViewChild('searchInputDesktop', { static: false }) searchInputDesktop!: ElementRef;
+  @ViewChild('searchInputMobile', { static: false }) searchInputMobile!: ElementRef;
+
+  // @ViewChildren('searchInput') searchInputRefGroup!: QueryList<ElementRef>;
+
   searchBarInputText: string = '';
 
 
@@ -60,6 +64,7 @@ export class AppComponent {
     })
 
   }
+
 
 
   // method to determined the change navbar styles (navbar fixed animation and height change)
@@ -89,21 +94,69 @@ export class AppComponent {
   }
 
 
+
+
+
   // Search bar
   toggleSearchBar() {
     this.searchBarOpened = !this.searchBarOpened;
-    console.log(this.searchInputRef.nativeElement);
     if (this.searchBarOpened) {
-      setTimeout(() => {
-        this.searchInputRef.nativeElement.click();
-        this.searchInputRef.nativeElement.focus();
-      });
+      this.clickOnInputSearchBar();
+      // QUEDABAN 11 MINUTOS DE LA 2DA MEDIA HORA, QUEDA 1 HORA Y 11 MINUTOS
+
+      // setTimeout(() => {
+      //   if (this.searchInputRefGroup.length > 0) {
+      //     console.log(this.searchInputRefGroup.forEach((searchInputRef: ElementRef) => {
+      //       searchInputRef.nativeElement.click();
+      //       searchInputRef.nativeElement.focus();
+      //     }
+      //     )
+      //     );
+      //   }
+      // });
     }
-    else{
-      this.searchBarInputText = '';
+    else {
+      this.closeSearchBar();
     }
   }
 
+  ngAfterViewInit() {
+    // this.clickOnInputSearchBar();
+  }
 
-  
+  clickOnInputSearchBar() {
+    setTimeout(() => {
+      if (this.screenWidth <= this.mobileBreackPoint) {
+        if (this.searchInputMobile != undefined) {
+          console.log("HOLAA");
+          console.log("searchBarClicked vale: " + this.searchBarClicked);
+          console.log(this.searchInputMobile.nativeElement);
+          this.searchInputMobile.nativeElement.click();
+          this.searchInputMobile.nativeElement.focus();
+          console.log(this.searchInputMobile);
+        }
+        else {
+          console.log("es undefined");
+        }
+      }
+      else {
+        if (this.searchInputDesktop != undefined) {
+          this.searchInputDesktop.nativeElement.click();
+          this.searchInputDesktop.nativeElement.focus();
+        }
+      }
+    },
+    );
+  }
+
+  closeSearchBar() {
+    this.searchBarOpened = false;
+    this.searchBarInputText = '';
+
+  }
+
+  handleInputBlur() {
+    this.searchBarClicked = false;
+  }
+
 }

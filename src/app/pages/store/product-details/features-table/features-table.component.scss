@@ -2,11 +2,15 @@
 @import '../../../../../styles';
 
 .features_component_container{
+
+
     @include tablet{
         margin-bottom: 6rem;
+
     }
     @include desktop{
         padding-left: 3rem;
+        margin-top : 4rem ; 
     }
 }
 .features_title {

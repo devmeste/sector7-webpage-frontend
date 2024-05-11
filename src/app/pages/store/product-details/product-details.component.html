@@ -1,5 +1,5 @@
 <main class="product_details_container">
-    <p class="breadcrumb" [routerLink]="['/']" routerLinkActive="router-link-active"> volver | home>products</p>
+    <app-breadcrumb class="app-breadcrumb" text="home > products"></app-breadcrumb>
     <div class="mobile_display">
         <h3 class="product_name">
             {{product?.name}}
@@ -31,7 +31,7 @@
         <app-features-table></app-features-table>
     </div>
 
-    <div class="desktop_display">
+    <div class="desktop_display" >
         <picture class="desktop_img_container">
             <div class="side_imgs_container">
                 @for (img of product?.imgs?.slice(0, 5); track $index) {
@@ -40,7 +40,6 @@
                         <img [src]="img" alt="Imagen del producto">
                     </div>
                 }
-
                 }
             </div>
             <div class="main_img_container">
@@ -69,11 +68,19 @@
         </picture>
 
         <app-features-table></app-features-table>
-        <h2>
-            Productos que te pueden interesar
-        </h2>
+        
     </div>
-
+    
 
 </main>
+<section class="similar_products_section_background">
+    <div class="similar_products_section_container">
+        <div class="similar_products_section_elements">
+            <h2 class="similar_products_section_title">
+                Productos que te pueden interesar
+            </h2>
+            <app-bk-carousel></app-bk-carousel>
+        </div>
+    </div>
+</section>
 <app-footer></app-footer>

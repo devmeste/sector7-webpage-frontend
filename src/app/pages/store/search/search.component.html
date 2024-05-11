@@ -1,32 +1,46 @@
 <main class="search_main_container">
-    <div class="search_bar_container">
-        SearchBar 
+    <div class="search_bar_container ">
+        <div class="search_bar" 
+        [ngClass]=" serchBarClicked ? 'searchBarClicked':''"
+        (click)="serchBarClicked=true"
+        >
+            <button class="search_icon_inside_bar_button search_icon">
+                <mat-icon mat-icon-button>search</mat-icon>
+            </button>
+            <input type="text" #searchInput 
+            [(ngModel)]="searchBarInputText"
+            (blur)="handleInputBlur()">
+            
+            <button class="search_icon_inside_bar_button close_icon">
+                <mat-icon (click)="closeSearchBar()">close</mat-icon>
+            </button>
+        </div>
     </div>
-    <div class="breadcrumb_container">
-        <h3>Componentes > Notebooks > Amd</h3>
-    </div>
+    <app-breadcrumb class="app-breadcrumb" text="Componentes > Notebooks > Amd"></app-breadcrumb>
+
     <div class="search_title_container">
-        <h2 >Resultados de la busqueda</h2>
+        <h2>Resultados de la busqueda</h2>
         <div class="title_divider"></div>
     </div>
     <aside class="product_features_filters_container">
         <div class="product_features_filters_content">
             @for (feature of features; track $index) {
-                <div class="each_feature_container">
-                    <h4 class="feature_title">{{feature.title}}</h4>
-                    @for (filter of feature.filters; track $index) {
-                        <p>{{filter}}</p>
-                    }
-                </div>
+            <div class="each_feature_container">
+                <h4 class="feature_title">{{feature.title}}</h4>
+                @for (filter of feature.filters; track $index) {
+                <p>{{filter}}</p>
+                }
+            </div>
             }
         </div>
     </aside>
 
     <section class="search_results_container">
         @for (product of products; track $index) {
-            <app-wide-product-card id="{{product.id}}" name="{{product.name}}" img="{{product.imgs[0]}}" [price]="product.price"></app-wide-product-card>
+        <app-wide-product-card id="{{product.id}}" name="{{product.name}}" img="{{product.imgs[0]}}"
+            [price]="product.price"></app-wide-product-card>
         }
     </section>
-    
+
 </main>
 <app-footer></app-footer>

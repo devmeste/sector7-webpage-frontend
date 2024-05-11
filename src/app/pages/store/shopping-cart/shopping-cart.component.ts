@@ -31,11 +31,13 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     this._cartService.getAllProducts().subscribe(products => {
       this.products = products;
+      
     })
   }
 
   deleteProduct(id: string): void {
     this._cartService.deleteProduct(id);
+
   }
 
   removeQuantity(p: IProduct_Cart) {

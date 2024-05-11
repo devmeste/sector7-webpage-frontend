@@ -14,7 +14,7 @@ export class CartService {
 
   constructor() { 
     const p : IProduct_Cart = {
-      id: '2323',
+      id: '0',
       name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler',
       img: '../../../../assets/images/products/product-detail-1.png',
       price: 2000,
@@ -22,7 +22,7 @@ export class CartService {
       quantityRequested: 1
     }
     const p2 : IProduct_Cart = {
-      id: '2323',
+      id: '1',
       name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler',
       img: '../../../../assets/images/products/silla.png',
       price: 2000,
@@ -30,7 +30,7 @@ export class CartService {
       quantityRequested: 1
     }
     const p3 : IProduct_Cart = {
-      id: '2323',
+      id: '2',
       name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler',
       img: '../../../../assets/images/products/auriculares.png',
       price: 2000,
@@ -38,7 +38,7 @@ export class CartService {
       quantityRequested: 1
     }
     const p4 : IProduct_Cart = {
-      id: '2323',
+      id: '3',
       name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler',
       img: '../../../../assets/images/products/product-detail-1.png',
       price: 2000,

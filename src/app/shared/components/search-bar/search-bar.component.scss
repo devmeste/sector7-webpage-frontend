@@ -12,18 +12,14 @@
 
 .search_bar_container{
     background-color: green;
-    // height: 200px;
-    // width: 200px;
+    height: inherit;
 }
 
 .fixed {
     height: $height_for_toolbar_fixed;
-    width: 200px;
 }
 
 .no-fixed {
-
     height: $height_for_toolbar_no_fixed;
-    width: 200px;
 }
 

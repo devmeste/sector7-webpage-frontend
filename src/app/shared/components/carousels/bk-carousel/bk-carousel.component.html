@@ -1,0 +1,12 @@
+<div class="bk_carousel_container">
+    <p-carousel [value]="products" [circular]="true" [autoplayInterval]=5000 [responsiveOptions]="responsiveOptions">
+        <ng-template let-product pTemplate="item">
+            <app-bk-card
+                id="{{product.id}}"
+                name="{{product.name}}" 
+                img="{{product.imgs[0]}}"
+                [price]="product.price">
+            </app-bk-card>
+        </ng-template>
+    </p-carousel>
+</div>

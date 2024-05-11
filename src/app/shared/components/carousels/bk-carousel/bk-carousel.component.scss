@@ -1,0 +1,105 @@
+@import '../../../../../styles.scss';
+
+.bk_carousel_container {
+    // always change this class for each carousel
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+:host ::ng-deep {
+
+    .bk_carousel_container {
+
+        p-carousel.p-element {
+            width: min(100%, 1440px);
+        }
+
+        .p-carousel-container {
+            height: fit-content;
+        }
+
+        ol,
+        ul {
+            padding: 0;
+        }
+
+        // Arrow icons Container
+        .p-carousel .p-carousel-content .p-carousel-prev,
+        .p-carousel .p-carousel-content .p-carousel-next {
+            // color: red;
+            // width: 5%;
+            // padding: 0 1rem;
+            background-color: $Gray_20;
+
+            @include tablet {
+                padding: 1.8rem 1.8rem;
+            }
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+
+            &:hover {
+                filter: brightness(120%);
+            }
+        }
+
+        // modify the icon of both buttons in the carousel
+        .p-carousel-next .carousel-prev-icon{ 
+            width: 30px;
+            height: 30px;
+            background-image: url('../../../../../assets/images/icons/Right_Arrow.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .p-carousel-prev .carousel-prev-icon{
+            width: 30px;
+            height: 30px;
+            background-image: url('../../../../../assets/images/icons/Left_Arrow.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        // Arrow icons
+        .carousel-prev-icon {
+            path{
+                fill: none; // remove the default svg path of PrimeNG
+            }
+        }
+
+
+        .carousel-prev-icon:hover {
+            // filter: brightness(150%);
+        }
+
+
+        //no recuerdo
+        .p-carousel-indicators {
+            margin-top: 0.5rem;
+            display: flex;
+            width: 100%;
+
+            @include tablet {
+                margin-top: 1.5rem;
+            }
+        }
+
+        //// bottom circles 
+        .p-link {
+            border-radius: 50px;
+            width: 8px;
+            margin: 0 0.2rem;
+        }
+
+        // bottom circles selected
+        .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+            background-color: $primary-main;
+        }
+    }
+
+}

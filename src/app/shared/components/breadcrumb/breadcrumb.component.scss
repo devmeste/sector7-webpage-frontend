@@ -1,0 +1,23 @@
+@import '../../../../styles.scss';
+@import '../../../../media-queries.scss';
+
+.breadcrumb{
+    color: $acromatic-100;
+    width: 100%;
+    text-align: start;
+    cursor: pointer;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    .breadcrumb_return{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.5rem;
+
+        &:hover{
+            color: white;
+        }
+    }
+}

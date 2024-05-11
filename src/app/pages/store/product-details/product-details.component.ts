@@ -9,13 +9,15 @@ import { FeaturesTableComponent } from "./features-table/features-table.componen
 import { CartService } from '../../../core/services/cart_service/cart-service.service';
 import { IProduct_Cart } from '../../../core/models/product_cart';
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
+import { BkCarouselComponent } from "../../../shared/components/carousels/bk-carousel/bk-carousel.component";
+import { BreadcrumbComponent } from "../../../shared/components/breadcrumb/breadcrumb.component";
 
 @Component({
     selector: 'app-product-details',
     standalone: true,
     templateUrl: './product-details.component.html',
     styleUrl: './product-details.component.scss',
-    imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent]
+    imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent]
 })
 export class ProductDetailsComponent implements OnInit {
 
