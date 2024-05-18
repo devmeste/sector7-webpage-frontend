@@ -1,0 +1,11 @@
+input.input_text{
+    margin-bottom: 1rem;
+    border-radius: 32px;
+    height: 2rem;
+    // width: 80%; // change it each time, depends on the size of the input
+    padding-left: 1rem;
+    
+    &:focus {
+        outline-color: $primary-main;
+    }
+}
