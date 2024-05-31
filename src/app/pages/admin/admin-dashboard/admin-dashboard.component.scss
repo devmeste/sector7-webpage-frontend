@@ -1,0 +1,25 @@
+@import '../../../../styles.scss';
+@import '../../../../media-queries';
+
+.admin_dashboard_main{
+    color: white;
+
+
+    .sidenav_dashboard{
+        width: 270px;
+    }
+
+    .see_dashboard_options_button , .close_sidenav_button{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: x-large;
+
+        @include laptop{
+            display: none;
+        }
+    }
+}
+

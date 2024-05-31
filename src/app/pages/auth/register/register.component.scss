@@ -1,0 +1,77 @@
+@import '../../../../styles.scss';
+@import '../../../../_media-queries.scss';
+
+
+
+
+.main_register {
+    color: white;
+    background-color: $gray_10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 700px;
+
+    @include desktop{
+        padding: 3rem 0;
+    }
+
+    .register_form_container {
+        background-color: $background;
+        border-radius: 10px;
+
+        width: 90%;
+
+        @include tablet {
+            width: 60%;
+        }
+        @include laptop {
+            width: 450px;
+        }
+
+        .register_form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            
+            .register_logo_container {
+                width: 60px;
+                height: 60px;
+    
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+
+            $width_for_input_and_text_error : 60%;
+
+            input:focus {
+                // outline: none;
+                outline: 2px solid $primary-main;
+            }
+            .input_text_style{
+                width: $width_for_input_and_text_error;
+                border-radius: 15px;
+                height: 2rem;
+                margin-top: 1rem;    
+                padding-left: 1rem;
+            }
+            
+            .text_error{
+                margin-top: 0.5rem;
+                text-align: start;
+                width: $width_for_input_and_text_error;
+            }
+
+            .primary_button{
+                margin: 2rem 0;
+                border-radius: 25px;
+            }
+        }
+
+    }
+}

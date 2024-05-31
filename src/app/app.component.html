@@ -39,7 +39,7 @@
                             Promos
                         </a>
                     </li>
-                    
+
                     <li routerLink="contact" (click)="sidenav.toggle()">
                         <mat-icon class="sidenav-icon">call</mat-icon>
                         <a>
@@ -55,7 +55,8 @@
     <!-- Content  -->
     <mat-sidenav-content>
         <!-- Desktop Nav bar -->
-        <mat-toolbar class="toolbar" (scroll)="onScroll()" [ngClass]="{'fixed': navbarfixed, 'no-fixed': !navbarfixed, 'searchBarOpenendInMobile': searchBarOpened}">
+        <mat-toolbar class="toolbar" (scroll)="onScroll()"
+            [ngClass]="{'fixed': navbarfixed, 'no-fixed': !navbarfixed, 'searchBarOpenendInMobile': searchBarOpened}">
             <div class="toolbar_elements" [ngClass]="{'searchBarOpenendInMobile': searchBarOpened}">
 
                 <button mat-icon-button class="hamburguer_menu_button" (click)="sidenav.toggle()">
@@ -78,18 +79,19 @@
                     </ul>
                 </nav>
                 @if(searchBarOpened){
-                    <div class="search_bar_container_desktop search_bar_container " 
-                        (click)="searchBarClicked=true" (keydown.escape)="closeSearchBar()">
-                        <div class="search_bar" [ngClass]="searchBarClicked ? 'searchBarClicked':''">
-                            <button class="search_icon_inside_bar_button search_icon">
-                                <mat-icon mat-icon-button>search</mat-icon>
-                            </button>
-                            <input type="text" #searchInputDesktop [(ngModel)]="searchBarInputText" (blur)="handleInputBlur()">
-                            <button class="search_icon_inside_bar_button close_icon">
-                                <mat-icon (click)="closeSearchBar()">close</mat-icon>
-                            </button>
-                        </div>
+                <div class="search_bar_container_desktop search_bar_container " (click)="searchBarClicked=true"
+                    (keydown.escape)="closeSearchBar()">
+                    <div class="search_bar" [ngClass]="searchBarClicked ? 'searchBarClicked':''">
+                        <button class="search_icon_inside_bar_button search_icon">
+                            <mat-icon mat-icon-button>search</mat-icon>
+                        </button>
+                        <input type="text" #searchInputDesktop [(ngModel)]="searchBarInputText"
+                            (blur)="handleInputBlur()">
+                        <button class="search_icon_inside_bar_button close_icon">
+                            <mat-icon (click)="closeSearchBar()">close</mat-icon>
+                        </button>
                     </div>
+                </div>
                 }
 
                 <div class="corner_navbar_icons_container">
@@ -99,39 +101,51 @@
                     </mat-icon>
                     }
                     <div class="corner_navbar_icon">
-                        <mat-icon matBadge="{{totalProductsInCart}}" matBadgeSize="small"
-                                matBadgeColor="warn" routerLink="cart">
-                                shopping_cart
+                        <mat-icon matBadge="{{totalProductsInCart}}" matBadgeSize="small" matBadgeColor="warn"
+                            routerLink="cart">
+                            shopping_cart
                         </mat-icon>
                     </div>
-                    <mat-icon class="corner_navbar_icon">
-                        <div class="user_photo" [routerLink]="['/auth']"><img src="assets/images/utils/user_empty.png" alt="user photo"></div>
-                    </mat-icon>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" class="corner_navbar_icon" >
+                        <div class="user_photo">
+                            @if(userMadeLogin){
+                                <img src="assets/images/temporales/Avatar.svg" alt="user photo">
+                            }
+                            @else{
+                                <img src="assets/images/utils/user_empty.png" alt="user photo" >
+                            }
+                        </div>
+                    </button>
+
+                    <mat-menu #menu="matMenu" class="account_panel_menu">
+                        @if(userMadeLogin){
+                            <app-header-panel-logged-in-user class="account_panel"></app-header-panel-logged-in-user>
+                        }
+                        @else if(!userMadeLogin){
+                        <app-header-panel-general class="account_panel"
+                            ></app-header-panel-general>
+                        }
+                    </mat-menu>
                 </div>
 
-                
+
             </div>
             @if (searchBarOpened) {
-                <div class="search_bar_container_mobile search_bar_container" 
-                        (keydown.escape)="closeSearchBar()"
-                        (click)="searchBarClicked=true"
-                        >
-                        <div class="search_bar" [ngClass]="searchBarClicked ? 'searchBarClicked':''">
-                            <button class="search_icon_inside_bar_button search_icon">
-                                <mat-icon mat-icon-button>search</mat-icon>
-                            </button>
-                            <input  type="text" #searchInputMobile 
-                                [(ngModel)]="searchBarInputText" 
-                                (blur)="handleInputBlur()"
-                                >
-                            <button class="search_icon_inside_bar_button close_icon">
-                                <mat-icon (click)="closeSearchBar()">close</mat-icon>
-                            </button>
-                        </div>
-                    </div>
+            <div class="search_bar_container_mobile search_bar_container" (keydown.escape)="closeSearchBar()"
+                (click)="searchBarClicked=true">
+                <div class="search_bar" [ngClass]="searchBarClicked ? 'searchBarClicked':''">
+                    <button class="search_icon_inside_bar_button search_icon">
+                        <mat-icon mat-icon-button>search</mat-icon>
+                    </button>
+                    <input type="text" #searchInputMobile [(ngModel)]="searchBarInputText" (blur)="handleInputBlur()">
+                    <button class="search_icon_inside_bar_button close_icon">
+                        <mat-icon (click)="closeSearchBar()">close</mat-icon>
+                    </button>
+                </div>
+            </div>
             }
         </mat-toolbar>
-        <div class="height_helper"></div> 
+        <div class="height_helper"></div>
         <!-- Content  -->
         <router-outlet></router-outlet>
 

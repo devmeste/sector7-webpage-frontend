@@ -11,6 +11,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { CartService } from './core/services/cart_service/cart-service.service';
 import { SearchBarComponent } from "./shared/components/search-bar/search-bar.component";
 import { FormsModule } from '@angular/forms';
+import { AuthService } from './core/services/auth_service/auth.service';
+import { HeaderPanelLoggedInUserComponent } from "./shared/components/header/header-panel-logged-in-user/header-panel-logged-in-user.component";
+import { HeaderPanelGeneralComponent } from "./shared/components/header/header-panel-general/header-panel-general.component";
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -30,9 +33,12 @@ import { FormsModule } from '@angular/forms';
     RouterLink,
     SearchBarComponent,
     FormsModule,
+    HeaderPanelLoggedInUserComponent,
+    HeaderPanelGeneralComponent
   ]
 })
 export class AppComponent {
+
 
 
   menuOpened: boolean = false;
@@ -43,17 +49,19 @@ export class AppComponent {
   _cartService: CartService = inject(CartService);
   searchBarClicked: boolean = false;
   mobileBreackPoint: number = 480;
+  // showUserPanel: boolean = false;
+
   @ViewChild('searchInputDesktop', { static: false }) searchInputDesktop!: ElementRef;
   @ViewChild('searchInputMobile', { static: false }) searchInputMobile!: ElementRef;
 
-  // @ViewChildren('searchInput') searchInputRefGroup!: QueryList<ElementRef>;
-
   searchBarInputText: string = '';
-
+  userMadeLogin: boolean = false;
+  _authService: AuthService = inject(AuthService);
 
   constructor() {
     // set screenWidth on page load
     this.screenWidth = window.innerWidth;
+
     // Agregamos un listener de redimensionamiento
     window.addEventListener('resize', this.handleResize);
     // Llamamos a handleResize para establecer el estado inicial
@@ -65,6 +73,12 @@ export class AppComponent {
 
   }
 
+  ngOnInit(): void {
+    this._authService.isLoggedIn().subscribe(isLoggedIn => {
+      this.userMadeLogin = isLoggedIn;
+    })
+
+  }
 
 
   // method to determined the change navbar styles (navbar fixed animation and height change)
@@ -93,50 +107,25 @@ export class AppComponent {
     this.menuOpened = false;
   }
 
-
-
-
-
   // Search bar
   toggleSearchBar() {
     this.searchBarOpened = !this.searchBarOpened;
     if (this.searchBarOpened) {
       this.clickOnInputSearchBar();
-      // QUEDABAN 11 MINUTOS DE LA 2DA MEDIA HORA, QUEDA 1 HORA Y 11 MINUTOS
-
-      // setTimeout(() => {
-      //   if (this.searchInputRefGroup.length > 0) {
-      //     console.log(this.searchInputRefGroup.forEach((searchInputRef: ElementRef) => {
-      //       searchInputRef.nativeElement.click();
-      //       searchInputRef.nativeElement.focus();
-      //     }
-      //     )
-      //     );
-      //   }
-      // });
     }
     else {
       this.closeSearchBar();
     }
   }
 
-  ngAfterViewInit() {
-    // this.clickOnInputSearchBar();
-  }
-
   clickOnInputSearchBar() {
     setTimeout(() => {
       if (this.screenWidth <= this.mobileBreackPoint) {
         if (this.searchInputMobile != undefined) {
-          console.log("HOLAA");
-          console.log("searchBarClicked vale: " + this.searchBarClicked);
-          console.log(this.searchInputMobile.nativeElement);
           this.searchInputMobile.nativeElement.click();
           this.searchInputMobile.nativeElement.focus();
-          console.log(this.searchInputMobile);
         }
         else {
-          console.log("es undefined");
         }
       }
       else {
@@ -158,5 +147,13 @@ export class AppComponent {
   handleInputBlur() {
     this.searchBarClicked = false;
   }
+
+
+  // toggleUserPanel() {
+  // this.showUserPanel = !this.showUserPanel;
+  // console.log(this.showUserPanel);
+  // }
+
+
 
 }

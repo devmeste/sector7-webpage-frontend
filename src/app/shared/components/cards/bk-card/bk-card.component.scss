@@ -19,7 +19,7 @@
     .bk_card_image {
         height: 50%;
         width: 100%;
-        background-color: $Gray_20;
+        background-color: $gray_20;
         border-bottom: 2px solid transparent;        
         border-image: $gradient-orange-yellow-1;
         border-image-slice: 1;
@@ -36,7 +36,7 @@
     .bk_card_text {
         height: 50%;
         width: 100%;
-        background-color: $Gray_10;
+        background-color: $gray_10;
         border-top: inset 2px solid $primary-main;
         display: flex;
         flex-direction: column;

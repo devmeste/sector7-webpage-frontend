@@ -2,14 +2,14 @@
 @import '../styles.scss';
 @import './shared/styles/search_bar.scss';
 
-mat-toolbar {
+mat-toolbar.toolbar {
     background-color: $background;
     border-bottom: 5px solid $primary-main;
     // height is set in .fixed and .no-fixed
     display: flex;
     flex-direction: column;
 
-    
+
     .toolbar_elements {
         display: flex;
         justify-content: center;
@@ -17,6 +17,7 @@ mat-toolbar {
         max-width: $max_width_container;
         margin: auto;
         width: 100%;
+        position : relative;
 
         @include laptop {
             justify-content: space-between;
@@ -142,13 +143,12 @@ mat-toolbar {
             align-items: center;
             justify-content: space-between;
             text-align: center;
-
             @include laptop {
                 margin-left: 0;
             }
 
             .corner_navbar_icon {
-                width: 45px;
+                width: 46px;
                 height: 100%;
                 display: flex;
                 justify-content: center;
@@ -345,33 +345,35 @@ ul.side_nav_ul {
 .search_bar_container_mobile {
     display: block;
     width: 100%;
-    animation : custom-fade-in 0.7s forwards;
-    
+    animation: custom-fade-in 0.7s forwards;
+
     @include tablet {
         display: none;
     }
 }
 
 @keyframes custom-fade-in {
-    0%{
+    0% {
         opacity: 0;
     }
-    100%{
+
+    100% {
         opacity: 1;
     }
 }
 
-@keyframes custom-fade-out{
-    0%{
+@keyframes custom-fade-out {
+    0% {
         opacity: 1;
     }
-    100%{
+
+    100% {
         opacity: 0;
     }
 }
 
-.fixed.searchBarOpenendInMobile , 
-.no-fixed.searchBarOpenendInMobile{
+.fixed.searchBarOpenendInMobile,
+.no-fixed.searchBarOpenendInMobile {
     @media screen and (max-width: 481px) {
         height: calc($height_for_toolbar_no_fixed + 30px);
     }
@@ -387,10 +389,26 @@ mat-toolbar {
 }
 
 
+
+
+::ng-deep {
+    #mat-menu-panel-0.mat-mdc-menu-panel.account_panel_menu {
+    padding: 0px !important;
+    max-width: 300px !important;
+    background-color: transparent !important;
+  } 
+
+  button.mat-mdc-icon-button.mat-mdc-button-base{
+      padding: 0;
+  }
+  
+}
+
+
 .show {
     display: flex;
 }
 
-.hide{
+.hide {
     display: none;
 }
