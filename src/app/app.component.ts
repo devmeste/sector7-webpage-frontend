@@ -39,8 +39,6 @@ import { HeaderPanelGeneralComponent } from "./shared/components/header/header-p
 })
 export class AppComponent {
 
-
-
   menuOpened: boolean = false;
   searchBarOpened: boolean = false;
   screenWidth: number;
@@ -147,13 +145,6 @@ export class AppComponent {
   handleInputBlur() {
     this.searchBarClicked = false;
   }
-
-
-  // toggleUserPanel() {
-  // this.showUserPanel = !this.showUserPanel;
-  // console.log(this.showUserPanel);
-  // }
-
 
 
 }

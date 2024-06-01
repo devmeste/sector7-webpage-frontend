@@ -67,7 +67,6 @@ export class CartService {
       this.$cartQuantity.next(this.cart.length);
       this.$cartTotal.next(this.calculateTotal());
     }
-    console.log(this.cart);
   }
 
   public getAllProducts(): Observable<IProduct_Cart[]> {

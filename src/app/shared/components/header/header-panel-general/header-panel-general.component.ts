@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
 })
 export class HeaderPanelGeneralComponent {
 
-  @Output() closePanel = new EventEmitter<void>();
+  // @Output() closePanel = new EventEmitter<void>();
   
 
   _router: Router = inject(Router);
   goToLoginPage() {
     this._router.navigate(['/auth']);
-    this.closePanel.emit();
+    // this.closePanel.emit();
   }
 
 }

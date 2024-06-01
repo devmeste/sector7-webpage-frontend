@@ -9,8 +9,10 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  // localhost:8001/auth/admin/login
 
-  baseUrl: string = 'http://localhost:8080/auth';
+  baseUrl: string = 'http://localhost:8001/auth';
+
   private isLoggedInSubject: BehaviorSubject<boolean>;
 
   private _router: Router = inject(Router);
@@ -20,21 +22,23 @@ export class AuthService {
     const token = localStorage.getItem('token');
     this.isLoggedInSubject = new BehaviorSubject<boolean>(!!token);
 
-   }
+  }
 
-  login(username: string, password: string): Observable<ITokenDto> { 
-
-    const url = `${this.baseUrl}/login`;
+  login(username: string, password: string, specialCase?: string): Observable<ITokenDto> {
+    let url;
+    if (specialCase) {
+      url = `${this.baseUrl + '/'}${specialCase + '/'}login`;
+    } else {
+      url = `${this.baseUrl + '/'}login`;
+    }
 
     const body = { username, password };
-    
+
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    
-    const response = this._http.post<ITokenDto>(url, body, { headers: headers });
 
     return this._http.post<ITokenDto>(url, body, { headers: headers }).pipe(
       tap((response: ITokenDto) => {
-        console.log("response en auth service: "+response);
+        console.log(response);
         if (response && response.token) {
           this.isLoggedInSubject.next(true);
         }
@@ -52,13 +56,13 @@ export class AuthService {
     // localStorage.removeItem('tokenRefresh'); 
     this.isLoggedInSubject.next(false);
     this._router.navigate(['/'])
-    ;
+      ;
   }
 
   isLoggedIn(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
   }
-  
+
 
 
 

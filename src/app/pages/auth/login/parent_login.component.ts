@@ -2,10 +2,11 @@ import { Injectable } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../../../core/services/auth_service/auth.service";
+import { ITokenDto } from "../../../core/models/ITokenDto";
 
 
 @Injectable()
-export class ParentLoginComponent {
+export abstract class ParentLoginComponent {
 
   LoginForm: FormGroup;
   requestHasError: boolean = false;
@@ -18,15 +19,14 @@ export class ParentLoginComponent {
     });
   }
 
-  login(diferentPath ?: string) {
+  login(specialCase ?: string) {
     const { username, password } = this.LoginForm.value;
-
-    this.auth_service.login(username, password).subscribe({
+    
+    this.auth_service.login(username, password , specialCase).subscribe({
       next: (response) => {
         this.requestHasError = false;
         const token = response.token;
-        localStorage.setItem('token', token);
-        this.router.navigate([`${diferentPath}`]);
+        this.saveTokenAndRedirect(token);
       },
       error: () => this.requestHasError = true,
       complete: () => {
@@ -34,4 +34,7 @@ export class ParentLoginComponent {
       },
     });
   }
+
+  abstract saveTokenAndRedirect(token: string): void;
+
 }

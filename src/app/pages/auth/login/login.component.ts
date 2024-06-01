@@ -3,6 +3,7 @@ import { AuthService } from '../../../core/services/auth_service/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ParentLoginComponent } from './parent_login.component';
+import { ITokenDto } from '../../../core/models/ITokenDto';
 
 
 
@@ -19,4 +20,10 @@ export class LoginComponent extends ParentLoginComponent {
     super(router, auth_service);
   }
   
+   override saveTokenAndRedirect(token:string): void {
+    localStorage.setItem('token', token);
+    this.router.navigate([`/`]);
+  }
+
+ 
 }

@@ -22,12 +22,7 @@ export class SearchBarComponent {
     if (this.searchContainer) {
       if(this.classForSpace){
         this.searchContainer.nativeElement.classList.add(this.classForSpace);
-        console.log(this.searchContainer.nativeElement.classList);
       }
-      alert("cargo!");
-    }
-    else {
-      alert("no cargo!");
     }
   }
 }

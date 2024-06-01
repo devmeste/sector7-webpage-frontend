@@ -1,0 +1,28 @@
+<main class="login_main_container">
+    <section class="logo_section">
+        <picture class="compressed_logo">
+            <img src="../../../../assets/images/logos/Sector7LogoSmall_without_background.png" alt="Sector 7 Logo">
+        </picture>
+        <picture class="full_logo">
+            <img src="../../../../assets/images/logos/Sector7LogoLarge.png" alt="Sector 7 Large Logo ">
+        </picture>
+    </section>
+    
+    <section class="form_section">
+        <h2>Iniciar Sesion</h2>
+        <form class="login_form" (ngSubmit)="login('admin')" [formGroup]="LoginForm">
+            <input type="text" formControlName="username"  placeholder="Nombre de usuario" class="input_text">
+            <input type="password" formControlName="password"  placeholder="Contraseña" class="input_text">
+            @if (requestHasError) {
+                <small class="text-danger" >Usuario o contraseña incorrectos</small>
+            }
+            <input type="submit" class="primary_button" value="Iniciar Sesión">
+        </form>
+    
+        <h3 class="question_for_account">
+            ¿No tienes una cuenta?
+        </h3>
+        <button class="primary_button" [routerLink]="['register']" >¡Regístrate!</button>
+    </section>
+    
+</main>
