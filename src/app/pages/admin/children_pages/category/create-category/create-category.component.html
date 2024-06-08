@@ -1,0 +1,63 @@
+<section id="create_category_container">
+    <h2>Crear una nueva categoría</h2>
+
+    <section class="form_container">
+        <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
+
+            <div class="custom-input">
+                <label class="form-label">Nombre de la categoría</label>
+                <input type="text" formControlName="name" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('name', 'required') }">
+            </div>
+            @if( hasErrors('name', 'required') ){ <app-input-danger-text
+                text="El nombre de la categoría es requerido"></app-input-danger-text>
+            }
+
+            <div class="custom-input row input_is_component_container">
+                <label class="form-label is_component_checkbox_label ">Es un Componente: </label>
+                <input type="checkbox" formControlName="component" class="form-control is_component_checkbox">
+            </div>
+
+            <div class="custom-input">
+                <label class="form-label">Campos: </label>
+                <div class="add_field_button_container">
+                    <input #inputField type="text" formControlName="fields" required class="form-control"
+                       [ngClass]="{ 'is-invalid': hasErrors('fields', 'required')  && fields.length == 0 }" (keydown.Enter)="insertNewField($event)">
+                       <button class="add_field_button" (click)="insertNewField($event)">+</button>
+                </div>
+            </div>
+            
+            @if( hasErrors('fields', 'required')  && fields.length == 0){ <app-input-danger-text
+                text="Al menos 1 campo es necesario" ></app-input-danger-text>
+            }
+
+            @if(fields.length > 0){
+                <div class="fields_container">
+                    @for(field of fields;track $index){ 
+                        <div class="field_card">
+                            <small class="field_name">{{field.name}}</small>
+                            <button class="delete_field_button" (click)="deleteField($index)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                    }
+                </div>
+            
+            }
+
+
+
+            <!-- @if (success_message) {
+                <app-custom-modal custom_message='{{"home.contact.send_to_modal.success" | translate}}' (click)="closeModal()" ></app-custom-modal>
+            }
+            @if (there_was_an_error) {
+                <app-custom-modal custom_message='{{"home.contact.send_to_modal.error" | translate}}' (click)="closeModal()" ></app-custom-modal>
+            }
+             -->
+            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}" [disabled]="disabledFormButton()"
+                type="submit">Enviar</button>
+        </form>
+    </section>
+
+
+</section>

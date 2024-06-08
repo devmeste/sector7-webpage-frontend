@@ -1,0 +1,62 @@
+@import '../../../../media-queries';
+@import '../../../../styles.scss';
+
+.admin_side_panel_content {
+    
+    color: white;
+    height: 100%;
+
+    mat-panel-title {
+        color: white;
+        font: $mobile-normal;
+    }
+
+    .category_toggle{
+        color: white;
+        background-color: $gray_10;
+    }
+    
+    .mat-expansion-panel{
+        border-radius: 10px 10px 0 0;
+    }
+
+
+    .mat-expansion-panel-body {
+        background-color: $gray_15;
+    }
+
+    .options_list {
+
+        li {
+            padding: 1rem 0rem 1rem 2rem;
+
+            &:hover {
+    
+                cursor: pointer;
+                color: $primary-main;
+                background-color: $gray_20;
+    
+            }
+        }
+
+    }
+}
+
+::ng-deep {
+    .admin_side_panel_content {
+
+        
+        .mat-expansion-indicator::after {
+            border-color: white; // color of the arrow in the mat-expansion-panel-header
+        }
+    
+        .mat-expansion-panel-body {
+            background-color: $gray_15;
+            padding: 0 !important;
+    
+
+        }
+
+    }
+    
+}

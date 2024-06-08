@@ -1,0 +1,18 @@
+@import 'styles.scss';
+
+@import './_media-queries.scss';
+
+.warning_text_container {
+    display: flex;
+    justify-content: space-between;
+    background-color: $danger_50;
+    border-radius: 3px;
+    padding: 3px 10px;
+    color: #dc3545;
+    margin-top: 5px;
+    margin-bottom: 1rem;
+
+    mat-icon{
+      height: fit-content;
+    }
+}

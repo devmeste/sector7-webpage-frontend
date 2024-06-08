@@ -54,6 +54,7 @@ export class AppComponent {
 
   searchBarInputText: string = '';
   userMadeLogin: boolean = false;
+  adminMadeLogin: boolean = false;
   _authService: AuthService = inject(AuthService);
 
   constructor() {
@@ -74,6 +75,11 @@ export class AppComponent {
   ngOnInit(): void {
     this._authService.isLoggedIn().subscribe(isLoggedIn => {
       this.userMadeLogin = isLoggedIn;
+      
+    })
+
+    this._authService.isAdminLoggedIn$().subscribe(isAdminLoggedIn => {
+      this.adminMadeLogin = isAdminLoggedIn;
     })
 
   }

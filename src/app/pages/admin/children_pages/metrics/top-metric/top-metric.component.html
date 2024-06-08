@@ -1,0 +1,15 @@
+<section class="top_metric_container">
+    <mat-icon 
+    [ngStyle]="{'color': color}" 
+    class="top_metric_icon">{{icon}}</mat-icon>
+    <div class="text_container">
+        <small class="top_metric_text">{{text}}</small>
+        @if(currency){
+            <p  class="top_metric_value">  {{ value | currency}}</p>
+        }
+        @else{
+            <p  class="top_metric_value">  {{ value }}</p>
+        }
+        
+    </div>
+</section>

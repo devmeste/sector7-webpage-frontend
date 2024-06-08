@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { adminGuard } from './core/guards/admin-guard.guard';
 
 export const routes: Routes = [
     {
@@ -11,7 +12,8 @@ export const routes: Routes = [
     },
     {
         path: 'admin-dashboard', 
-        loadChildren : ()=> import('./pages/admin/admin.routes').then(r=>r.ADMIN_ROUTES)
+        loadChildren : ()=> import('./pages/admin/admin.routes').then(r=>r.ADMIN_ROUTES),
+        canActivate: [adminGuard]
     },
     {
         path: '**', 

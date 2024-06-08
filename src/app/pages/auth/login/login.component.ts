@@ -16,6 +16,8 @@ import { ITokenDto } from '../../../core/models/ITokenDto';
 })
 export class LoginComponent extends ParentLoginComponent {
 
+
+
   constructor(router:Router , auth_service : AuthService){
     super(router, auth_service);
   }
@@ -25,5 +27,8 @@ export class LoginComponent extends ParentLoginComponent {
     this.router.navigate([`/`]);
   }
 
- 
+  override getSpecialPath(): string {
+    return '';
+  }
+  
 }

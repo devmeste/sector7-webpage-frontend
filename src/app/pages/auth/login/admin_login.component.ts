@@ -10,11 +10,14 @@ import { ParentLoginComponent } from './parent_login.component';
     selector: 'app-admin-login',
     standalone: true,
     imports: [ReactiveFormsModule, RouterLink],
-    templateUrl: './admin-login.component.html',
+    templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
 
 export class AdminLoginComponent extends ParentLoginComponent {
+    override getSpecialPath(): string {
+        return 'admin';
+    }
 
     constructor(router: Router, auth_service: AuthService) {
         super(router, auth_service);

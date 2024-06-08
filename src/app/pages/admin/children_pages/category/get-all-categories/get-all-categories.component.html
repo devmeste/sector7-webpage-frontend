@@ -1,0 +1,49 @@
+<section class="admin_panel_table_main_container">
+    
+    <h2 class="title"> Categorias </h2>
+    <h4 class="subtitle">Lista de todas las categorias de Sector 7</h4>
+
+    @if(categories$ && categories$.length > 0){    
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        Nombre
+                    </td>
+                    <td>
+                        Componente
+                    </td>
+                    <td>
+                        Acciones
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @for(category of categories$ ; track category.id){
+                <tr>
+                    <td>
+                        {{category.name}}
+                    </td>
+                    <td>
+                        {{category.component}}
+                    </td>
+                    <td class="actions_buttons_container">
+                        <button class="actions_button update_button">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button class="actions_button delete_button" (click)="deleteCategory(category.id)" >
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+        </mat-paginator>
+    }
+    @else {
+        <app-input-danger-text text="No hay categorias"></app-input-danger-text>
+    }
+</section>

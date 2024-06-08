@@ -2,14 +2,21 @@
 @import '../../../../media-queries';
 
 .admin_dashboard_main{
-    color: white;
 
+    padding-top: 3rem;
+    background-color: $background_alternative;
+    min-height: 100vh;
+    max-width: 1440px;
+    margin: auto;
+    
 
-    .sidenav_dashboard{
+    .side_panel_mobile_container{
         width: 270px;
+        min-height: 100vh;
+        background-color: aqua;
     }
 
-    .see_dashboard_options_button , .close_sidenav_button{
+    .see_dashboard_options_button_mobile , .close_sidenav_button{
         padding: 0;
         margin: 0;
         display: flex;
@@ -20,6 +27,53 @@
         @include laptop{
             display: none;
         }
+    }
+
+    .dashboard_content{
+        display: flex;
+        background-color: $background_alternative   ;
+        min-height: 100vh;
+
+        .metrics_container{
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            
+            .top_metric_outside_class{
+                height: 85px;
+                flex: 1;
+            }
+        }
+    }
+
+
+    // this both are the wrappers for the side admin-side-panel component 
+    .side_panel_menu_container_mobile{
+        display: none;
+    }
+
+    .side_panel_menu_container_desktop{
+        border-radius: 10px 10px 0 0 ; // border-radius to the side panel
+        width: 270px;
+        margin: 0 2rem;
+        background-color: $gray_10;
+        @include laptop{
+            width: 300px;
+        }
+    }
+
+    .admin_dashboard_content{
+        flex: 1 ;
+        margin-right: 2rem;
+    }
+
+
+}
+
+::ng-deep{
+    .mat-expansion-panel:not([class*=mat-elevation-z]) {
+        box-shadow: none !important;
+
     }
 }
 

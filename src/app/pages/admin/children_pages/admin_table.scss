@@ -1,0 +1,194 @@
+
+@import 'styles.scss';
+@import '_media-queries.scss';
+
+
+.admin_panel_table_main_container{
+    width: 100%;
+    margin-right: 1rem;
+    background-color: $gray_15;
+    border-radius: 10px;    
+    padding: 0 2rem 2rem 2rem;
+    color: white;
+
+    h2.title{
+        padding: 2rem 0 0rem 0;
+    }
+
+    h4.subtitle{
+        margin-bottom: 2rem;
+    }
+
+    th{
+        background-color: $gray_20;
+        color: white;
+    }
+
+
+
+    .actions_buttons_container2{
+        height: 100%;
+    }
+    .actions_buttons_container{
+        display: flex;
+        gap: 0.5rem;
+        // background-color: aqua;
+        justify-content: center;
+        align-items: center;
+        height:3rem;
+        margin: auto;
+    }
+    .actions_button{
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        cursor: pointer;
+
+
+    }
+    .actions_button.delete_button{
+        background-color: red;
+        color: white;
+        &:hover{
+            background-color: rgb(192, 0, 0);
+        }
+    }
+    .actions_button.update_button{
+        background-color: green;
+        color: white;
+        &:hover{
+            background-color: rgb(1, 78, 1);
+        }
+    }
+
+    mat-icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    // Table
+
+    table{
+        width: 100%;
+        border-spacing: 0; 
+        overflow: hidden; 
+        border: none;
+    }
+    
+
+
+    th, td {
+        border: 1px solid $gray_60; 
+        border-collapse: collapse; 
+        overflow: hidden; 
+    }
+
+    thead tr{
+        background-color: $gray_20;
+    }   
+
+    tr:nth-child(even) {
+        background-color: $gray_55;
+    }
+
+    tr:nth-child(odd) {
+        
+        background-color: $gray_30;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    // Border Radius for table
+    $table_border : 8px;
+    thead tr td:first-child {
+        border-top-left-radius: $table_border;
+    }
+
+    thead tr td:last-child {
+        border-top-right-radius: $table_border;
+    }
+    
+    tbody tr:last-child td:first-child{
+        border-bottom-left-radius: $table_border;
+    }
+
+    tbody tr:last-child td:last-child{
+        border-bottom-right-radius: $table_border;
+    }
+
+
+    .mat-mdc-paginator{
+        margin-top: 2rem;
+        background-color: $gray_30; ;
+        color: white;
+    }
+
+
+
+}
+
+::ng-deep {
+
+    // paginator arrows (next and previous)
+    .mat-mdc-paginator-icon{
+        fill: white !important;
+    }
+
+    // paginator arrow
+   .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow {
+       color: white; 
+   }
+    // paginator arrow when is focus
+   .mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
+       color: $gray_60 !important;
+   }
+
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+        border-color: white !important;
+    }
+    
+    // paginator number
+    .mat-mdc-select-value-text {
+        color: white !important; 
+    }
+
+    .mat-mdc-option .mdc-list-item .ng-tns-c1771602899-32 .ng-star-inserted{
+        background-color: red;
+    }
+
+    div.mat-mdc-select-panel .mat-mdc-option {
+        background-color: $gray_20;
+        color: white !important;
+    }
+
+    // Quantity number hover
+    .mat-mdc-select-panel-above div.mat-mdc-select-panel {
+        background-color: $gray_20 !important; 
+    }
+
+    // Quantity number *Selected*
+    .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
+        background-color: $gray_10 !important;
+    }
+    
+    .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+        color: rgb(255, 255, 255) !important;
+    }
+
+    .mat-mdc-select-panel-above div.mat-mdc-select-panel {
+        background-color: $gray_30 !important;
+    }
+
+    //Container of select,
+    div.mat-mdc-select-panel {
+        padding: 0 !important;
+    }
+} 

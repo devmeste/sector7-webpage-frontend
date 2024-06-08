@@ -108,7 +108,7 @@
                     </div>
                     <button mat-icon-button [matMenuTriggerFor]="menu" class="corner_navbar_icon" >
                         <div class="user_photo">
-                            @if(userMadeLogin){
+                            @if(userMadeLogin || adminMadeLogin){
                                 <img src="assets/images/temporales/Avatar.svg" alt="user photo">
                             }
                             @else{
@@ -118,7 +118,7 @@
                     </button>
 
                     <mat-menu #menu="matMenu" class="account_panel_menu">
-                        @if(userMadeLogin){
+                        @if(userMadeLogin || adminMadeLogin){
                             <app-header-panel-logged-in-user class="account_panel"></app-header-panel-logged-in-user>
                         }
                         @else if(!userMadeLogin){

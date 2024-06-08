@@ -1,0 +1,104 @@
+<section class="admin_side_panel_content">
+    <mat-accordion>
+        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header   >
+                <mat-panel-title >
+                    Categorias
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="options_list">
+                <li [routerLink]="['category']">Ver Categorias</li>
+                <li [routerLink]="['category/new']">Crear Categoria</li>
+            </ul>
+        </mat-expansion-panel>
+
+
+        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Productos
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="options_list">
+                <li [routerLink]="['products/new']">Crear Producto</li>
+                <li [routerLink]="['products']">Ver Todos</li>
+            </ul>
+        </mat-expansion-panel>
+
+        <!-- Users -->
+        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Usuarios
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="options_list">
+                <!-- <li>Crear Producto</li>
+                <li>Ver Todos</li> -->
+            </ul>
+        </mat-expansion-panel>
+
+
+        <!-- Views -->
+        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Vistas
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="options_list">
+                <!-- <li>Crear Producto</li>
+                <li>Ver Todos</li> -->
+            </ul>
+        </mat-expansion-panel>
+
+
+        
+        <!-- Usd -->
+        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Usd
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="options_list">
+                <li [routerLink]="['usd']">Ver Todos</li>
+                <li [routerLink]="['usd/new']">Nuevo Precio USD</li>
+            </ul>
+        </mat-expansion-panel>
+
+
+        
+        <!-- Billing -->
+        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Facturacion
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="options_list">
+                <!-- <li>Crear Producto</li>
+                <li>Ver Todos</li> -->
+            </ul>
+        </mat-expansion-panel>
+
+
+        <!--  -->
+        
+        <!-- Reports -->
+        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Estadisticas
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="options_list">
+                <!-- <li>Crear Producto</li>
+                <li>Ver Todos</li> -->
+            </ul>
+        </mat-expansion-panel>
+
+
+        
+    </mat-accordion>
+</section>

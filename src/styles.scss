@@ -3,6 +3,7 @@
 @import "primeng/resources/primeng.css";
 
 $background: #000;
+$background_alternative: #12181e;
 
 html, body { 
   height: 100%;
@@ -25,10 +26,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 $gradient-orange-yellow-1: linear-gradient(78deg, #ff4d00 9.86%, #ff9900 100%); 
 $filter_background_for_products: drop-shadow(0 4px 8px #ff4d00f0); 
 
+$gray_5:#0d0d0d;
 $gray_10:#292929;
+$gray_15:#383838;
 $gray_20:#404040;
 $gray_30:#616161;
 $gray_55:#757575;
+$gray_60:#9e9e9e;
 $gray_85:#d9d9d9;
 
 $warning-50: #fdf5e8; 
@@ -118,9 +122,32 @@ $shadow_1_3 : 1px 3px 10px 4px rgba($primary_main, 0.50);
   color: $danger-400;
 }
 
-// Buttons
-// $btn-shadow : 1px, 3px,4px,rgb(0, 0, 0, 0.25);
 
+h1{
+  font: $mobile-h1;
+}
+h2{
+  font: $mobile-h2;
+}
+h3{
+  font: $mobile-h3;
+}
+h4{
+  font: $mobile-h4;
+}
+
+small{
+  font: $mobile-small-text;
+}
+
+p{
+  font: $mobile-normal;
+}
+
+li{
+  font: $mobile-normal;
+  list-style-type: none; 
+}
 
 a {
   text-decoration: none;
@@ -193,6 +220,12 @@ small{
   font: $mobile-small-text;
 }
 
+mat-icon{
+  height: fit-content;
+  width: fit-content;
+}
+
+
 // Sizes
 $max_width_container:1440px;
 // $height_for_toolbar_fixed : 75px;
@@ -229,15 +262,21 @@ $height_helper : $height_for_toolbar_no_fixed;
       font-size: 1rem;
   }
 
-  transition: background-color 0.3s ease; /* Agregar una transición suave */
+  transition: background-color 0.3s ease; 
   
 }
 
 .primary_button:hover{
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.283);
-  background-image: linear-gradient(160deg, $primary-main 20%, $primary-l1 150%); /* Mantén el gradiente original */
+  background-image: linear-gradient(160deg, $primary-main 20%, $primary-l1 150%); 
   cursor: pointer;
 }
+
+.primary_button_disabled{
+    opacity: 0.6;
+    pointer-events: none; 
+  }
+
 
 .tertiary_button{
   color:  $primary-main;
@@ -264,7 +303,7 @@ $height_helper : $height_for_toolbar_no_fixed;
       font-size: 1rem;
   }
 
-  transition: all 0.1s ease; /* Agregar una transición suave */
+  transition: all 0.1s ease; 
   
 }
 

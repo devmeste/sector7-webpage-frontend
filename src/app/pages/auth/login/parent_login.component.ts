@@ -19,21 +19,24 @@ export abstract class ParentLoginComponent {
     });
   }
 
-  login(specialCase ?: string) {
+  login() {
     const { username, password } = this.LoginForm.value;
-    
-    this.auth_service.login(username, password , specialCase).subscribe({
+    const specialPath = this.getSpecialPath();
+    this.auth_service.login(username, password , specialPath).subscribe({
       next: (response) => {
         this.requestHasError = false;
-        const token = response.token;
-        this.saveTokenAndRedirect(token);
+        this.saveTokenAndRedirect(response.token);
       },
-      error: () => this.requestHasError = true,
+      error: (e) => {
+        this.requestHasError = true;
+      },
       complete: () => {
         console.info('complete');
       },
     });
   }
+
+  abstract getSpecialPath () :string ;
 
   abstract saveTokenAndRedirect(token: string): void;
 

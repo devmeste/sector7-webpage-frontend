@@ -1,22 +1,47 @@
 <main class="admin_dashboard_main">
-    <mat-drawer-container>
-        <mat-drawer #drawer mode="over">
-          <div class="sidenav_dashboard"></div>
 
-            <button class="close_sidenav_button primary_button" (click)="drawer.toggle()">
-                <mat-icon fontIcon="close"></mat-icon>
-            </button>
+  <!-- Container of all  -->
+  <mat-drawer-container>
+    <!-- mat-drawer is the side panel   -->
+    <mat-drawer #drawer mode="over" class="side_panel_mobile_container">
 
-        </mat-drawer>
-        
-        <div class="">
-          
-          <div style="background-color: red; width: 100%;height: 100vh;">
-            <button class="see_dashboard_options_button primary_button" type="button" mat-button (click)="drawer.toggle()">
+      <button class="close_sidenav_button primary_button" (click)="drawer.toggle()">
+        <mat-icon fontIcon="close"></mat-icon>
+      </button>
+
+      <!-- Sidenav Panel Mobile menu -->
+      <div class="side_panel_menu_container_mobile">
+        <app-admin-side-panel></app-admin-side-panel>
+      </div>
+    </mat-drawer>
+
+    <!--  -->
+    <section class="dashboard_content">
+
+      <div class="side_panel_menu_container_desktop">
+        <app-admin-side-panel></app-admin-side-panel>
+      </div>
+
+      <section class="admin_dashboard_content">
+        <div class="metrics_container">
+          @for( metric of metrics ; track $index){
+            <app-top-metric class="top_metric_outside_class" [text]="metric.text" [value]="metric.value" [icon]="metric.icon" [color]="metric.color" [currency]="metric.currency"></app-top-metric>
+
+          }
+        </div>
+        <router-outlet></router-outlet>
+      </section>
+      
+      <!-- <div style="background-color: rgb(255, 158, 158); width: 100%;height: 100vh;">
+            <button class="see_dashboard_options_button_mobile primary_button" type="button" mat-button (click)="drawer.toggle()">
                 <mat-icon fontIcon="more_vert"></mat-icon>
             </button>
-          </div>
-        </div>
-      
-      </mat-drawer-container>
+          </div> -->
+    </section>
+
+  </mat-drawer-container> 
+
+
+
+
 </main>
