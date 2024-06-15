@@ -47,13 +47,13 @@
 
 
 
-            <!-- @if (success_message) {
-                <app-custom-modal custom_message='{{"home.contact.send_to_modal.success" | translate}}' (click)="closeModal()" ></app-custom-modal>
+            @if (this.categoryCreatedSuccessfully) {
+                <app-message-pop-up  custom_message='Categoría Creada Exitosamente' (close)="closeModal('categoryCreatedSuccessfully')" > </app-message-pop-up>
             }
-            @if (there_was_an_error) {
-                <app-custom-modal custom_message='{{"home.contact.send_to_modal.error" | translate}}' (click)="closeModal()" ></app-custom-modal>
+            @if (this.categoryCreationFailed) {
+                <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('categoryCreationFailed')" > </app-message-pop-up>
             }
-             -->
+            
             <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}" [disabled]="disabledFormButton()"
                 type="submit">Enviar</button>
         </form>

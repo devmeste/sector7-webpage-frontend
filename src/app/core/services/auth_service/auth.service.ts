@@ -28,7 +28,7 @@ export class AuthService {
 
     this.isLoggedInSubject = new BehaviorSubject<boolean>(!!token);
     this.isAdminLoggedInSubject = new BehaviorSubject<boolean>(!!admin_token);   
-
+    
   }
 
   login(username: string, password: string, specialCase?: string): Observable<ITokenDto> {
@@ -42,7 +42,6 @@ export class AuthService {
       url = `${this.baseUrl + '/'}login`;
     }
 
-    console.log(url);
     const body = { username, password };
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -53,11 +52,9 @@ export class AuthService {
         if (response && response.token && specialCase == 'admin') {
           this.isAdminLoggedInSubject.next(true);
         }
-
         else if (response && response.token) { 
           this.isLoggedInSubject.next(true);
         }
-
         else {
           this.isLoggedInSubject.next(false);
           this.isAdminLoggedInSubject.next(false);

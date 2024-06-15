@@ -46,4 +46,11 @@
     @else {
         <app-input-danger-text text="No hay categorias"></app-input-danger-text>
     }
+
+    @if (categoryDeletedSuccessfully) {
+        <app-message-pop-up  custom_message='Categoría eliminada exitosamente' (close)="closeModal('categoryDeletedSuccessfully')" > </app-message-pop-up>
+    }
+    @if (categoryDeletionFailed) {
+        <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('categoryDeletionFailed')" > </app-message-pop-up>
+    }
 </section>

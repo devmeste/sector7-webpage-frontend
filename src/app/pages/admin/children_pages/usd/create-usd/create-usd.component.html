@@ -1,1 +1,29 @@
-<p>create-usd works!</p>
+<section id="create_usd_container">
+    <h2>Crear una nueva categoría</h2>
+
+    <section class="form_container">
+        <form (ngSubmit)="send()" [formGroup]="form" class="form">
+
+            <div class="custom-input">
+                <label class="form-label">Nuevo Valor (USD)</label>
+                <input type="number" min="0" formControlName="price" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('price', 'required') }">
+            </div>
+            @if( hasErrors('price', 'required') ){ <app-input-danger-text
+                text="El precio es requerido"></app-input-danger-text>
+            }
+
+            <!-- @if (success_message) {
+                <app-custom-modal custom_message='{{"home.contact.send_to_modal.success" | translate}}' (click)="closeModal()" ></app-custom-modal>
+            }
+            @if (there_was_an_error) {
+                <app-custom-modal custom_message='{{"home.contact.send_to_modal.error" | translate}}' (click)="closeModal()" ></app-custom-modal>
+            }
+             -->
+            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}" [disabled]="disabledFormButton()"
+                type="submit">Enviar</button>
+        </form>
+    </section>
+
+
+</section>

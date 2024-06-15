@@ -1,1 +1,188 @@
-<p>create-product works!</p>
+<section id="create_category_container">
+    <h2>Crear un nuevo Producto</h2>
+
+    <section class="form_container">
+        <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
+
+            <!-- ID -->
+            <div class="custom-input">
+                <label class="form-label">Codigo o Identificador: </label>
+                <input type="text" formControlName="id" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('id', 'required') }">
+            </div>
+            @if( hasErrors('id', 'required') ){ <app-input-danger-text
+                text="El id del producto es requerido"></app-input-danger-text>
+            }
+
+            <!-- Marca -->
+            <div class="custom-input">
+                <label class="form-label">Marca: </label>
+                <input type="text" formControlName="brand" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('brand', 'required') }">
+            </div>
+            @if( hasErrors('brand', 'required') ){ <app-input-danger-text
+                text="La marca del producto es requerida"></app-input-danger-text>
+            }
+
+
+
+            <!-- Modelo -->
+            <div class="custom-input">
+                <label class="form-label">Modelo: </label>
+                <input type="text" formControlName="model" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('model', 'required') }">
+            </div>
+            @if( hasErrors('model', 'required') ){ <app-input-danger-text
+                text="El modelo del producto es requerida"></app-input-danger-text>
+            }
+
+
+            <!-- Precio -->
+            <div class="custom-input">
+                <label class="form-label">Precio: </label>
+                <input type="number" formControlName="price" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('price', 'required') }">
+            </div>
+            @if( hasErrors('price', 'required') ){ <app-input-danger-text
+                text="El precio del producto es requerida"></app-input-danger-text>
+            }
+
+
+            <!-- Actual Stock -->
+            <div class="custom-input">
+                <label class="form-label">Stock Real: </label>
+                <input type="number" formControlName="actualStock" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('actualStock', 'required') }">
+            </div>
+            @if( hasErrors('actualStock', 'required') ){ <app-input-danger-text
+                text="El stock del producto es requerida"></app-input-danger-text>
+            }
+
+
+            <!-- Stock Visual -->
+            <div class="custom-input">
+                <label class="form-label">Stock Visual: </label>
+                <input type="number" formControlName="viewStock" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('viewStock', 'required') }">
+            </div>
+            @if( hasErrors('viewStock', 'required') ){ <app-input-danger-text
+                text="El viewStock del producto es requerida"></app-input-danger-text>
+            }
+
+            <!-- Nombre -->
+            <div class="custom-input">
+                <label class="form-label">Nombre: </label>
+                <input type="text" formControlName="title" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('title', 'required') }">
+            </div>
+            @if( hasErrors('title', 'required') ){ <app-input-danger-text
+                text="El nombre del producto es requerida"></app-input-danger-text>
+            }
+
+
+            <!-- Descipcion -->
+            <div class="custom-input">
+                <label class="form-label">Descripcion: </label>
+                <textarea name="description" formControlName="description" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors('title', 'required') }">
+                </textarea>
+
+            </div>
+            @if( hasErrors('title', 'required') ){ <app-input-danger-text
+                text="El nombre del producto es requerida"></app-input-danger-text>
+            }
+
+            <!-- Habilitado -->
+            <div class="custom-input row input_checkbox_container">
+                <label class="form-label checkbox_label ">Esta Habilitado: </label>
+                <input type="checkbox" formControlName="isEnabled" class="form-control checkbox">
+            </div>
+
+
+            <!-- Fotos -->
+            <div class="custom-input">
+                <label class="form-label">Fotos: </label>
+
+            </div>
+
+
+            <label>Categoria:</label>
+            <select name="categoryId" (change)="onCategoryChange($event)" class="custom-select">
+                <option value=""> </option>
+                @for (category of categories$; track category.id) {
+                <option value="{{category.id}}"> {{category.name}} </option>
+                }
+            </select>
+
+
+            <label class="form-label">Campos: </label>
+
+            <div formArrayName="fieldsArray">
+                <div *ngFor="let formControl of fieldsArray.controls; let i = index" [formGroupName]="i">
+                    <div class="custom-input">
+                        <label class="form-label">{{formControl.value.fieldName}}</label>
+                        <div class="add_field_button_container">
+                            <input formControlName="value" type="text" class="form-control" placeholder=" ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- @for (field of fields$; track $index) {
+                <div class="custom-input">
+                    <label class="form-label">{{field}}</label>
+                    <div class="add_field_button_container">
+                        <input #inputField type="text" class="form-control">
+                    </div>
+                </div>
+            } -->
+
+
+            <!-- @if( hasErrors('fields', 'required') ){ <app-input-danger-text
+                text="Al menos 1 campo es necesario" ></app-input-danger-text>
+            } -->
+
+            <!-- @if(fields.length > 0){
+                <div class="fields_container">
+                    @for(field of fields;track $index){ 
+                        <div class="field_card">
+                            <small class="field_name">{{field.name}}</small>
+                            <button class="delete_field_button" (click)="deleteField($index)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                    }
+                </div>
+            
+            } -->
+
+
+
+             @if (productWasCreatedSuccessfully) {
+                <app-message-pop-up  custom_message='Producto Creado Exitosamente' (close)="closeModal('productWasCreatedSuccessfully')" > </app-message-pop-up>
+            }
+            @if (productHasError) {
+                <!-- <app-message-pop-up  custom_message='Ocurrio un error, intentelo nuevamente' (close)="closeModal('productHasError')" > </app-message-pop-up> -->
+                <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('productHasError')" > </app-message-pop-up>
+            }
+            
+            <!-- @if (there_was_an_error) {
+                <app-custom-modal custom_message='{{"home.contact.send_to_modal.error" | translate}}' (click)="closeModal()" ></app-custom-modal>
+            } -->
+
+            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}"
+                [disabled]="disabledFormButton()" type="submit">Enviar</button>
+
+            <!-- <button (click)="send()"> Enviar</button> -->
+            <!-- <button>Enviar</button> -->
+        </form>
+    </section>
+
+
+</section>

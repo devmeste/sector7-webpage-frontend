@@ -7,20 +7,24 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { Usd } from 'app/core/models/Usd';
 import { CustomDatePipePipe } from "../../../../../core/pipes/custom-date-pipe.pipe";
+import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 
 @Component({
-    selector: 'app-get-all-usd',
-    standalone: true,
-    templateUrl: './get-all-usd.component.html',
-    styleUrls: ['./get-all-usd.component.scss', "../../admin_table.scss"],
-    imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipePipe]
+  selector: 'app-get-all-usd',
+  standalone: true,
+  templateUrl: './get-all-usd.component.html',
+  styleUrls: ['./get-all-usd.component.scss', "../../admin_table.scss"],
+  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipePipe, MessagePopUpComponent]
 })
 
 export class GetAllUsdComponent {
 
+
   _adminService: AdminService = inject(AdminService);
 
   usd$!: Usd[];
+
+  showSuccessDeleteMessage: boolean = false;
 
   ngOnInit(): void {
     this._adminService.getAllUsd().subscribe(u => {
@@ -29,8 +33,25 @@ export class GetAllUsdComponent {
   }
 
   deleteUsd(id: string) {
-    this._adminService.deleteUsd(id).subscribe(()=>{
-      window.location.reload();
+    this._adminService.deleteUsd(id).subscribe(() => {
+      this.showSuccessDeleteMessage = true;
+      this.loadAllUsd(); // reload the list of elements after deletion
+
     })
+  }
+
+
+  loadAllUsd() {
+    this._adminService.getAllUsd().subscribe(u => {
+      this.usd$ = u;
+    });
+  }
+
+  closeModal(option: string) {
+    switch (option) {
+      case "successfulDeletion" : this.showSuccessDeleteMessage = false;
+      break;
+    }
+    
   }
 }

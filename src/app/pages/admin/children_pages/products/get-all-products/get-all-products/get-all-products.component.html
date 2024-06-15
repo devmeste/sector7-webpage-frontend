@@ -53,4 +53,12 @@
     @else {
         <app-input-danger-text text="No hay productos"></app-input-danger-text>
     }
+
+    @if (productDeletedSuccessfully) {
+        <app-message-pop-up  custom_message='Producto Creado Exitosamente' (close)="closeModal('productDeletedSuccessfully')" > </app-message-pop-up>
+    }
+    @if (productDeletionFailed) {
+        <!-- <app-message-pop-up  custom_message='Ocurrio un error, intentelo nuevamente' (close)="closeModal('productHasError')" > </app-message-pop-up> -->
+        <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('productDeletionFailed')" > </app-message-pop-up>
+    }
 </section>

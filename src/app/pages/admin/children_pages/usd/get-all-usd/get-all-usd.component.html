@@ -1,7 +1,7 @@
 <section class="admin_panel_table_main_container">
 
-    <h2 class="title"> Productos </h2>
-    <h4 class="subtitle">Lista de todosas los productos de Sector 7</h4>
+    <h2 class="title"> Precios (USD) </h2>
+    <h4 class="subtitle">Lista de todos los registros de USD </h4>
 
     @if(usd$ && usd$.length > 0){
         <table>
@@ -43,8 +43,12 @@
     
         <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
         </mat-paginator>
+
+        @if(showSuccessDeleteMessage){
+            <app-message-pop-up  custom_message='Borrado Exitoso' (close)="closeModal('successfulDeletion')" > </app-message-pop-up>
+        }
     }
     @else {
-        <app-input-danger-text text="No hay productos"></app-input-danger-text>
+        <app-input-danger-text text="No hay registros de precios para mostrar"></app-input-danger-text>
     }
 </section>
