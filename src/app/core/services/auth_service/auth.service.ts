@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, firstValueFrom, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, firstValueFrom, map, of, tap, throwError } from 'rxjs';
 import { ITokenDto } from '../../models/ITokenDto';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+
 
   // localhost:8001/auth/admin/login
 
@@ -90,4 +91,12 @@ export class AuthService {
     return this.isAdminLoggedInSubject.getValue();
   }
 
+  verifyToken(token: string) : Observable<ITokenDto> {
+    return this._http.post<ITokenDto>(this.baseUrl +'/account/validate', {token : token})
+    // .pipe(
+    //   map(response => {
+    //     return response.token;
+    //   }),
+    // );;
+  }
 }

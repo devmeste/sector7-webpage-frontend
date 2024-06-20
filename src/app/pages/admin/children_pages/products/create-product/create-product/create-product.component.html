@@ -164,11 +164,10 @@
 
 
 
-             @if (productWasCreatedSuccessfully) {
+            @if (productWasCreatedSuccessfully) {
                 <app-message-pop-up  custom_message='Producto Creado Exitosamente' (close)="closeModal('productWasCreatedSuccessfully')" > </app-message-pop-up>
             }
             @if (productHasError) {
-                <!-- <app-message-pop-up  custom_message='Ocurrio un error, intentelo nuevamente' (close)="closeModal('productHasError')" > </app-message-pop-up> -->
                 <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('productHasError')" > </app-message-pop-up>
             }
             

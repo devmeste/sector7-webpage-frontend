@@ -65,13 +65,29 @@
             width: 300px;
             margin-bottom: 3rem;
 
-            input.input_text{
+            input.input_text {
                 width: 80%;
             }
 
             input.primary_button{
                 width: 9rem;
             }
+
+            .password_input_container{
+                position: relative;
+                width: 100%;
+            }
+            .password_visibility_button{
+                position: absolute;
+                right: 15%; 
+                top: 10px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                color: black;
+            }
+            
         }
 
         input.primary_button , button.primary_button{

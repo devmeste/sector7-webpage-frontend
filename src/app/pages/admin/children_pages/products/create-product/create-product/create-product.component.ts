@@ -122,15 +122,15 @@ export class CreateProductComponent implements OnInit {
 
     console.log(this.form.get("price")?.value);
 
-    this._adminService.createProduct(newProduct).subscribe(product => {
-      this.productWasCreatedSuccessfully = true;
-    },
-      error => {  
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.productHasError = true;
-      });
+    this._adminService.createProduct(newProduct).subscribe({
+      next:(v) => this.productWasCreatedSuccessfully = true,
+      error:(error)=>{
+          this.errorMessage = error.error.message;
+          this.productHasError = true;
+        }
+    });
   }
+
 
 
   closeModal(option: string) {

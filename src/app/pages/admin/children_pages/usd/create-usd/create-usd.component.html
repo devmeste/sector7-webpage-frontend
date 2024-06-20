@@ -13,15 +13,19 @@
                 text="El precio es requerido"></app-input-danger-text>
             }
 
-            <!-- @if (success_message) {
-                <app-custom-modal custom_message='{{"home.contact.send_to_modal.success" | translate}}' (click)="closeModal()" ></app-custom-modal>
+
+            @if (elementWasCreatedSuccessfully) {
+            <app-message-pop-up custom_message='Precio Creado Exitosamente'
+                (close)="closeModal('elementWasCreatedSuccessfully')"> </app-message-pop-up>
             }
-            @if (there_was_an_error) {
-                <app-custom-modal custom_message='{{"home.contact.send_to_modal.error" | translate}}' (click)="closeModal()" ></app-custom-modal>
+            @if (thereWasAnErrorWhenCreateElement) {
+            <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('thereWasAnErrorWhenCreateElement')">
+            </app-message-pop-up>
             }
-             -->
-            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}" [disabled]="disabledFormButton()"
-                type="submit">Enviar</button>
+
+
+            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}"
+                [disabled]="disabledFormButton()" type="submit">Enviar</button>
         </form>
     </section>
 

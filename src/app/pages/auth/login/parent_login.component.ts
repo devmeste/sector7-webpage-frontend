@@ -9,7 +9,8 @@ import { ITokenDto } from "../../../core/models/ITokenDto";
 export abstract class ParentLoginComponent {
 
   LoginForm: FormGroup;
-  requestHasError: boolean = false;
+  requestHasError: boolean = false;    
+  passwordVisible: string = 'password';
   
   constructor(protected router:Router, protected auth_service: AuthService) {
 
@@ -39,5 +40,13 @@ export abstract class ParentLoginComponent {
   abstract getSpecialPath () :string ;
 
   abstract saveTokenAndRedirect(token: string): void;
+
+  changePasswordVisibility() {
+    if (this.passwordVisible === 'password') {
+        this.passwordVisible = 'text';
+    } else {
+        this.passwordVisible = 'password';
+    }
+}
 
 }

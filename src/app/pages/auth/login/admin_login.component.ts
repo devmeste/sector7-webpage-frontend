@@ -3,18 +3,22 @@ import { AuthService } from '../../../core/services/auth_service/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ParentLoginComponent } from './parent_login.component';
+import { MatIcon } from '@angular/material/icon';
 
 
 
 @Component({
     selector: 'app-admin-login',
     standalone: true,
-    imports: [ReactiveFormsModule, RouterLink],
+    imports: [ReactiveFormsModule, RouterLink, MatIcon],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
 
 export class AdminLoginComponent extends ParentLoginComponent {
+
+
+
     override getSpecialPath(): string {
         return 'admin';
     }
@@ -29,5 +33,7 @@ export class AdminLoginComponent extends ParentLoginComponent {
         localStorage.setItem('admin_token', token);
         this.router.navigate([`/admin-dashboard`]);
     }
+
+
 }
 
