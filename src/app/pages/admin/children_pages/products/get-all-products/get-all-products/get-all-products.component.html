@@ -31,14 +31,14 @@
                         {{product.price | currency}}
                     </td>
                     <td>
-                        {{product.stock}}
+                        {{product.viewStock}}
                     </td>
                     
                     <td class="actions_buttons_container">
-                        <button class="actions_button update_button">
+                        <button type="button" class="actions_button update_button" (click)="showUpdatePopUpMethod(product.id , product.price)">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button class="actions_button delete_button" (click)="deleteProduct(product.id)" >
+                        <button type="button" class="actions_button delete_button" (click)="deleteProduct(product.id)" >
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>
@@ -47,8 +47,9 @@
             </tbody>
         </table>
     
-        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+        <mat-paginator #paginator [length]="products$.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
         </mat-paginator>
+
     }
     @else {
         <app-input-danger-text text="No hay productos"></app-input-danger-text>
@@ -58,7 +59,10 @@
         <app-message-pop-up  custom_message='Producto Eliminado Exitosamente' (close)="closeModal('productDeletedSuccessfully')" > </app-message-pop-up>
     }
     @if (productDeletionFailed) {
-        <!-- <app-message-pop-up  custom_message='Ocurrio un error, intentelo nuevamente' (close)="closeModal('productHasError')" > </app-message-pop-up> -->
         <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('productDeletionFailed')" > </app-message-pop-up>
     }
 </section>
+
+@if(this.showUpdatePopUp){
+    <app-products-update-pop-up [product_id]="this.update_id" [product_USD_price]="this.product_USD_price" (close)="closeModal('showUpdatePopUp')"></app-products-update-pop-up>
+}

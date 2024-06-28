@@ -9,10 +9,10 @@ import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/m
   selector: 'app-create-usd',
   standalone: true,
   templateUrl: './create-usd.component.html',
-  styleUrls: ['./create-usd.component.scss', '../../admin_form.scss'],
+  styleUrls: ['./create-usd.component.scss', '../../../../../shared/styles/admin_form.scss'],
   imports: [NgClass, InputDangerTextComponent, ReactiveFormsModule, MessagePopUpComponent]
 })
-export class CreateUsdComponent {
+export class CreateUsdComponent { 
 
   _adminService = inject(AdminService);
   showSuccessModal: boolean = false;

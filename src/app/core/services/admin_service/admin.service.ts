@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
-import ICategory from '../../models/ICategory';
+import { ICategory, BKICategory } from '../../models/ICategory';
 import Field from 'app/core/models/Field';
 import { ProductResponse } from 'app/core/models/ProductResponse';
 import { Usd } from 'app/core/models/Usd';
@@ -14,13 +14,6 @@ import BKProduct from 'app/core/models/BKProduct';
 })
 
 export class AdminService {
-
-
-
-
-
-
-
 
 
     baseUrl: string = 'http://localhost:8001/';
@@ -37,14 +30,12 @@ export class AdminService {
         return this._httpClient.get<ICategory[]>(this.baseUrl + 'categories');
     };
 
-    getCategoryById(categoryId: string): Observable<ICategory> {
-        return this._httpClient.get<ICategory>(this.baseUrl + 'categories/' + categoryId).pipe(
-            tap(console.log)
-        );
+    getCategoryById(categoryId: string): Observable<BKICategory> {
+        return this._httpClient.get<BKICategory>(this.baseUrl + 'categories/' + categoryId);
     }
 
 
-    createCategory(name: string, component: boolean, fields: Field[]){
+    createCategory(name: string, component: boolean, fields: Field[]) {
 
         let array_with_just_string_names: string[] = [];
         fields.forEach(field => array_with_just_string_names.push(field.name));
@@ -59,6 +50,29 @@ export class AdminService {
         return this._httpClient.post(this.baseUrl + 'categories', body);
     }
 
+    updateCategoryName(category_id: string, name: string): Observable<BKICategory> {
+
+        return this._httpClient.patch<BKICategory>(this.baseUrl + 'categories/' + category_id, { name });
+    }
+
+
+    // updateCategory(id: string, name: string, component: boolean, fields: Field[]): Observable <ICategory>{
+
+    //     let array_with_just_string_names: string[] = fields.map(element=>{
+    //         return element.name;
+    //     });
+
+    //     console.log(array_with_just_string_names);
+
+    //     let body = {
+    //         name,
+    //         component,
+    //         fields: array_with_just_string_names
+    //     }
+
+    //     return this._httpClient.put<ICategory>(this.baseUrl + 'categories', body);
+    // }
+
     deleteCategory(id: string) {
         console.log(id);
         return this._httpClient.delete(this.baseUrl + 'categories/' + id, {
@@ -72,10 +86,23 @@ export class AdminService {
     getAllProducts(): Observable<ProductResponse> {
         return this._httpClient.get<ProductResponse>(this.baseUrl + 'products');
     }
+    getAllProductsForAdmin(): Observable<ProductResponse> {
+        return this._httpClient.get<ProductResponse>(this.baseUrl + 'products/actual');
+    }
+
+
+    getProductById(id: string): Observable<BKProduct> {
+        console.log(id);
+        return this._httpClient.get<BKProduct>(this.baseUrl + 'products/' + id);
+    }
+
 
     createProduct(product: any): Observable<BKProduct> {
-
         return this._httpClient.post<any>(this.baseUrl + 'products', product);
+    }
+
+    updateProduct(p: any) {
+        return this._httpClient.put<any>(this.baseUrl+ 'products/' + p.id , p);
     }
 
     deleteProduct(id: string): Observable<boolean> {

@@ -6,13 +6,14 @@ import {
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-message-pop-up',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle],
   templateUrl: './message-pop-up.component.html',
-  styleUrl: './message-pop-up.component.scss'
+  styleUrls: ['./message-pop-up.component.scss', '../../../styles/pop-up-styles.scss']
 })
 export class MessagePopUpComponent {
 
@@ -21,13 +22,13 @@ export class MessagePopUpComponent {
   @Input({ required: true }) custom_message !: string;
 
   constructor() { }
-  
-  ngOnInit() { 
-    
+
+  ngOnInit() {
+
   }
 
   closeModal() {
-      this.close.emit();
+    this.close.emit();
   }
 
   getMessageLines(): string[] {

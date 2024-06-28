@@ -28,7 +28,7 @@
                         {{category.component}}
                     </td>
                     <td class="actions_buttons_container">
-                        <button class="actions_button update_button">
+                        <button type="button" (click)="updateCategory(category.id)" class="actions_button update_button">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button class="actions_button delete_button" (click)="deleteCategory(category.id)" >
@@ -52,5 +52,9 @@
     }
     @if (categoryDeletionFailed) {
         <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('categoryDeletionFailed')" > </app-message-pop-up>
+    }
+
+    @if(this.showUpdatePopUp){
+        <app-categories-update-pop-up [category_id]="this.update_id" (close)="closeModal('showUpdatePopUp')"></app-categories-update-pop-up>
     }
 </section>

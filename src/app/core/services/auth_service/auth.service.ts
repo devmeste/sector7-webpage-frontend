@@ -40,7 +40,7 @@ export class AuthService {
     if (specialCase) {
       url = `${this.baseUrl + '/'}${specialCase + '/'}login`;
     } else {
-      url = `${this.baseUrl + '/'}login`;
+      url = `${this.baseUrl + '/account/'}login`;
     }
 
     const body = { username, password };
@@ -92,11 +92,10 @@ export class AuthService {
   }
 
   verifyToken(token: string) : Observable<ITokenDto> {
-    return this._http.post<ITokenDto>(this.baseUrl +'/account/validate', {token : token})
-    // .pipe(
-    //   map(response => {
-    //     return response.token;
-    //   }),
-    // );;
+    return this._http.post<ITokenDto>(
+      this.baseUrl +'/account/validate', 
+      {token : token}, 
+      {headers: new HttpHeaders({ 'skip': 'true' })}  
+    )
   }
 }

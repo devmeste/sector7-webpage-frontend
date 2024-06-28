@@ -4,10 +4,12 @@ export default interface BKProduct {
     brand:        string;
     model:        string;
     price:        number;
-    stock:        number;
+    actualStock:    number;
+    viewStock:    number;
     title:        string;
     description:  string;
     isEnabled:      boolean;
+    isApproved: boolean;
     creationDate?: Date;
     photos?:       string[];
     fieldsJSON:   string;

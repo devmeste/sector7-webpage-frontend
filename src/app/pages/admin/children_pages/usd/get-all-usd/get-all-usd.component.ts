@@ -13,7 +13,7 @@ import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/m
   selector: 'app-get-all-usd',
   standalone: true,
   templateUrl: './get-all-usd.component.html',
-  styleUrls: ['./get-all-usd.component.scss', "../../admin_table.scss"],
+  styleUrls: ['./get-all-usd.component.scss', "../../../../../shared/styles/admin_table.scss"],
   imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipePipe, MessagePopUpComponent]
 })
 

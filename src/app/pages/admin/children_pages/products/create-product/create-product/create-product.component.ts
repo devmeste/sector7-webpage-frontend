@@ -6,7 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { InputDangerTextComponent } from '@shared/components/inputs/input-danger-text/input-danger-text.component';
 import BKProduct from 'app/core/models/BKProduct';
 import IField from 'app/core/models/Field';
-import ICategory from 'app/core/models/ICategory';
+import {ICategory} from 'app/core/models/ICategory';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { BehaviorSubject } from 'rxjs';
 import { MessagePopUpComponent } from "../../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
@@ -14,12 +14,12 @@ import { MessagePopUpComponent } from "../../../../../../shared/components/pop_u
   selector: 'app-create-product',
   standalone: true,
   templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.scss', '../../../admin_form.scss'],
+  styleUrls: ['./create-product.component.scss', '../../../../../../shared/styles/admin_form.scss'],
   imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent]
 })
 export class CreateProductComponent implements OnInit {
 
-
+  
   categories$ !: ICategory[];
   productWasCreatedSuccessfully = false;
   productHasError = false;
@@ -31,8 +31,6 @@ export class CreateProductComponent implements OnInit {
       this.categories$ = c;
     });
   }
-
-
 
   private formBuilder = inject(FormBuilder);
   private _adminService = inject(AdminService);
@@ -117,10 +115,10 @@ export class CreateProductComponent implements OnInit {
       title: this.form.get("title")?.value,
       description: this.form.get("description")?.value,
       isEnabled: this.form.get("isEnabled")?.value,
+      isApproved: true, // TODO: if Admin create this product, it will be approved automatically ? 
       fieldsJSON: fieldsJSON
     }
 
-    console.log(this.form.get("price")?.value);
 
     this._adminService.createProduct(newProduct).subscribe({
       next:(v) => this.productWasCreatedSuccessfully = true,

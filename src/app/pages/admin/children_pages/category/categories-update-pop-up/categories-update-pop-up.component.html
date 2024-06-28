@@ -1,0 +1,78 @@
+<div class="overlay">
+    @if(this.category$){
+
+        <ng-container >
+            <div class="modal_container category_update_pop_up">
+                <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+                <div class="modal_info">
+    
+                    <!-- Form -->
+                    <section class="form_container">
+                        <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
+                    
+                            <div class="custom-input">
+                                <label class="form-label">Nombre de la categoría</label>
+                                <input type="text" formControlName="name" required class="form-control"
+                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'name', 'required') }">
+                            </div>
+                            @if(hasErrors(this.form,'name', 'required') ){ <app-input-danger-text
+                                text="El nombre de la categoría es requerido"></app-input-danger-text>
+                            }
+                    
+                            <div class="custom-input row input_is_component_container">
+                                <label class="form-label is_component_checkbox_label ">Es un Componente: </label>
+                                <input type="checkbox" formControlName="component" class="form-control is_component_checkbox">
+                            </div>
+                    
+                            <div class="custom-input">
+                                <label class="form-label">Campos: </label>
+                                <div class="add_field_button_container">
+                                    <input #inputField type="text" formControlName="fields" class="form-control"
+                                       [ngClass]="{ 'is-invalid': fields.length == 0 }" (keydown.Enter)="insertNewField($event)">
+                                       <button class="add_field_button" (click)="insertNewField($event)">+</button>
+                                </div>
+                            </div>
+                            
+                            @if(fields.length == 0){ <app-input-danger-text
+                                text="Al menos 1 campo es necesario" ></app-input-danger-text>
+                            }
+                    
+                            @if(fields.length > 0){
+                                <div class="fields_container">
+                                    @for(field of fields;track $index){ 
+                                        <div class="field_card">
+                                            <small class="field_name">{{field.name}}</small>
+                                            <button type="button" class="delete_field_button" (click)="deleteField($index)">
+                                                <mat-icon>close</mat-icon>
+                                            </button>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                    
+                    
+                    
+                            @if (this.categoryUpdatedSuccessfully) {
+                                <app-message-pop-up  custom_message='Categoría Actualizada Exitosamente' (close)="closePopUpMessage('categoryUpdatedSuccessfully')" > </app-message-pop-up>
+                            }
+                            @if (this.categoryUpdateFailed) {
+                                <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closePopUpMessage('categoryUpdateFailed')" > </app-message-pop-up>
+                            }
+                            
+                            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}" [disabled]="disabledFormButton()"
+                                type="submit" >Enviar
+                            </button>
+                        </form>
+                    </section>
+                </div>
+                <!-- <button class="primary_button" (click)="closeUpdateModal()"> CERRAR </button> -->
+            </div>
+    
+        </ng-container>
+    }@else {
+        <div>
+            <app-input-danger-text text="Categoría no encontrada"></app-input-danger-text>
+        </div>
+    }
+    
+</div>
