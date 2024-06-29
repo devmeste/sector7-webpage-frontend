@@ -22,6 +22,10 @@ export const ADMIN_ROUTES: Routes = [
                 loadComponent:()=>import('./children_pages/products/create-product/create-product/create-product.component').then(c=>c.CreateProductComponent)
             },
             {
+                path: 'products/enable',
+                loadComponent:()=>import('./children_pages/products/enable-products/enable-products.component').then(c=>c.EnableProductsComponent)
+            },
+            {
                 path: 'usd',
                 loadComponent: ()=>import('./children_pages/usd/get-all-usd/get-all-usd.component').then(r => r.GetAllUsdComponent)
             },

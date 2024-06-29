@@ -1,0 +1,73 @@
+<section class="enable_products_container admin_panel_table_main_container">
+
+    <div class="enable_choice_container" >
+        <div class="disable_choice choice_element" [ngClass]="{'selected': selectedOption === 'disabled'}"
+        (click)="changeProductsState('disabled')">
+            Deshabilitados
+        </div>
+        <div class="enable_choice choice_element" [ngClass]="{'selected': selectedOption === 'enabled'}"
+            (click)="changeProductsState('enabled')">
+            Habilitados
+        </div>
+    </div>
+
+    <!-- Search bar de productos ....  -->
+
+
+
+    <h2 class="title"> Productos {{selectedOption}} </h2>
+    <h4 class="subtitle"> Lista de los productos {{selectedOption}} de Sector 7</h4>
+
+    @if(products$ && products$.length > 0){
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        Nombre
+                    </td>
+                    <td>
+                        precio
+                    </td>
+                    <td>
+                        stock
+                    </td>
+                    <td>
+                         habilitar / Dehabilitar
+                    </td>
+                    <td>
+                        Ver
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @for(product of products$ ; track product.id){
+                <tr>
+                    <td>
+                        {{product.title}}
+                    </td>
+                    <td>
+                        {{product.price | currency}}
+                    </td>
+                    <td>
+                        {{product.viewStock}}
+                    </td>
+                    <td>
+                        <div class="custom-input row input_checkbox_container" >
+                            <input type="checkbox" formControlName="isEnabled" class="form-control checkbox" [checked]="checkbox_default_value" (change)="mostrar(product.id)" >
+                        </div>
+                    </td>
+                    <td class="actions_buttons_container">
+                        <button type="button" class="actions_button update_button" (click)="showProductPopup(product.id , product.price)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <button class="primary_button" (click)="send()"> Enviar</button>
+
+
+</section>

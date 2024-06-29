@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, catchError, map, of, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, take, tap, throwError } from 'rxjs';
 import { ICategory, BKICategory } from '../../models/ICategory';
 import Field from 'app/core/models/Field';
 import { ProductResponse } from 'app/core/models/ProductResponse';
@@ -14,6 +14,7 @@ import BKProduct from 'app/core/models/BKProduct';
 })
 
 export class AdminService {
+
 
 
     baseUrl: string = 'http://localhost:8001/';
@@ -102,7 +103,7 @@ export class AdminService {
     }
 
     updateProduct(p: any) {
-        return this._httpClient.put<any>(this.baseUrl+ 'products/' + p.id , p);
+        return this._httpClient.put<any>(this.baseUrl + 'products/' + p.id, p);
     }
 
     deleteProduct(id: string): Observable<boolean> {
@@ -112,8 +113,40 @@ export class AdminService {
         );
     }
 
+    getAllEnabledProducts(option: string): Observable<ProductResponse> {
+        if (option === 'enabled') {
+            option = '1';
+        }
+        else if (option === 'disabled') {
+            option = '0';
+        }
+        else{
+            return throwError(() => new Error('Invalid option'))
+        }
 
-    //USD
+        return this._httpClient.get<ProductResponse>(this.baseUrl + 'products/visible/' + option);
+    }
+
+
+    sendUpdateEnableProducts( ids : string[] , option : string) {
+        
+        if(option === 'enabled'){
+            option = 'hide';
+        }else if(option === 'disabled'){
+            option = 'show';
+        }else{
+            throwError(() => new Error('Invalid option'))
+        }
+
+        let body = {
+            ids : ids,
+        }
+        
+        return this._httpClient.patch(this.baseUrl + 'products/status/' + option, body);
+    }
+
+
+    //-------------------------USD-------------------------
     getAllUsd(): Observable<Usd[]> {
         return this._httpClient.get<Usd[]>(this.baseUrl + 'usd');
     }

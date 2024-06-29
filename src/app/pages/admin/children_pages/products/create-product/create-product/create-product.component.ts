@@ -115,6 +115,7 @@ export class CreateProductComponent implements OnInit {
       title: this.form.get("title")?.value,
       description: this.form.get("description")?.value,
       isEnabled: this.form.get("isEnabled")?.value,
+      // photos:[ "HOLA PROBANDO"],
       isApproved: true, // TODO: if Admin create this product, it will be approved automatically ? 
       fieldsJSON: fieldsJSON
     }

@@ -1,0 +1,49 @@
+@import 'styles.scss';
+@import '_media-queries.scss';
+
+.enable_products_container.admin_panel_table_main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .input_checkbox_container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+
+.enable_choice_container{
+    // width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    .choice_element{
+        padding: 0.5rem 0.5rem;
+        background-color: $gray_30;
+        cursor: pointer;
+        width: 120px;
+        text-align: center;
+        &:first-child{
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-right: 2px solid $gray_5;
+        }
+
+        &:last-child{
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        &.selected{
+            background-color: $primary-main;
+            color: white;
+        }
+    }
+
+
+}
