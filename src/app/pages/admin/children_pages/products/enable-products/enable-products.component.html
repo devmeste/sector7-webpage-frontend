@@ -67,7 +67,11 @@
         </table>
     }
 
+
+
     <button class="primary_button" (click)="send()"> Enviar</button>
 
-
+    @if(this.showPopup){
+        <app-product-details-pop-up [product_id]="this.id_to_show_pop_up" [product_USD_price]="this.price_to_show_pop_up"  (close)="this.closeModal('showPopup')"></app-product-details-pop-up>
+    }
 </section>

@@ -1,0 +1,168 @@
+<!-- TODO: sacar el pop up a una estructura, y que adentro le pueda poner lo que yo quiera -->
+<div class="overlay">
+    @if(this.product$){
+
+    <ng-container>
+        <div class="modal_container category_update_pop_up">
+            <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+            <div class="modal_info">
+
+                <!-- Esto es lo que seria componente -->
+
+                <section class="form_container">
+                    <form (ngSubmit)="closeUpdateModal()" [formGroup]="this.form" class="form algo">
+
+                        <!-- Nombre -->
+                        <div class="custom-input">
+                            <label class="form-label">Titulo: </label>
+                            <input type="text" formControlName="title" required class="form-control"
+                                [disabled]="disabled_input">
+
+                        </div>
+
+                        <!-- Descipcion -->
+                        <div class="custom-input">
+                            <label class="form-label">Descripcion: </label>
+                            <textarea (input)="adjustTextareaHeight($event)" class="custom_text_area"  name="description" formControlName="description" required class="form-control"
+                                [disabled]="disabled_input">
+                            </textarea>
+
+                        </div>
+
+
+                        <div class="half_container">
+
+                            <!-- Marca -->
+                            <div class="custom-input">
+                                <label class="form-label">Marca: </label>
+                                <input type="text" formControlName="brand" required class="form-control"
+                                    [disabled]="disabled_input">
+
+                            </div>
+
+
+
+
+                            <!-- </div> -->
+
+                            <!-- <div class="half_container"> -->
+                            <!-- Modelo -->
+                            <div class="custom-input">
+                                <label class="form-label">Modelo: </label>
+                                <input type="text" formControlName="model" required class="form-control"
+                                    [disabled]="disabled_input">
+                            </div>
+                            <!-- Precio -->
+                            <div class="custom-input">
+                                <label class="form-label">Precio: </label>
+                                <input type="number" formControlName="price" required class="form-control "
+                                    [disabled]="disabled_input">
+
+
+                            </div>
+
+                            <!-- Actual Stock -->
+                            <div class="custom-input">
+                                <label class="form-label">Stock Real: </label>
+                                <input type="number" formControlName="actualStock" required class="form-control"
+                                    [disabled]="disabled_input">
+                            </div>
+
+
+                            <!-- Stock Visual -->
+                            <div class="custom-input">
+                                <label class="form-label">Stock Visual: </label>
+                                <input type="number" formControlName="viewStock" required class="form-control"
+                                    [disabled]="disabled_input">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <div class="half_container">
+                            <!-- Habilitado -->
+                            <div class="custom-input row input_checkbox_container">
+                                <label class="form-label checkbox_label ">Habilitado: </label>
+                                <input type="checkbox" formControlName="isEnabled" class="form-control checkbox"
+                                    [disabled]="disabled_input">
+                            </div>
+
+                            <!-- Aprovado -->
+                            <div class="custom-input row input_checkbox_container">
+                                <label class="form-label checkbox_label ">Aprobado: </label>
+                                <input type="checkbox" formControlName="isApproved" class="form-control checkbox"
+                                    [disabled]="disabled_input">
+                            </div>
+
+                        </div>
+
+
+                        <!-- Fotos -->
+                        @for( photo of photosToShow ; track $index){
+                        <div> {{photo }}</div>
+                        }
+
+                        <div class="custom-input">
+                            <label class="form-label">Fotos: </label>
+                            <input type="text" name="photos" formControlName="photos" class="form-control"
+                                [disabled]="disabled_input">
+                            @for( photo of photosArray ; track $index){
+                            <div> {{photo }}</div>
+                            }
+                        </div>
+
+
+                        <label class="form-label">Campos: </label>
+
+                        <div formArrayName="fieldsArray">
+                            <div *ngFor="let formControl of fieldsArray.controls; let i = index" [formGroupName]="i">
+                                <div class="custom-input">
+                                    <label class="form-label">{{formControl.value.fieldName}}</label>
+                                    <div class="add_field_button_container">
+                                        <input formControlName="value" type="text" class="form-control" placeholder=" "
+                                            [disabled]="disabled_input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="primary_button" (click)="closeUpdateModal()">Cerrar</button>
+
+                    </form>
+                </section>
+
+            </div>
+        </div>
+    </ng-container>
+    }@else {
+    <div>
+        <app-input-danger-text text="Producto no encontrado"></app-input-danger-text>
+    </div>
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

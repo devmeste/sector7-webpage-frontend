@@ -103,6 +103,7 @@ export class AdminService {
     }
 
     updateProduct(p: any) {
+        console.log(p);
         return this._httpClient.put<any>(this.baseUrl + 'products/' + p.id, p);
     }
 
@@ -141,7 +142,7 @@ export class AdminService {
         let body = {
             ids : ids,
         }
-        
+
         return this._httpClient.patch(this.baseUrl + 'products/status/' + option, body);
     }
 

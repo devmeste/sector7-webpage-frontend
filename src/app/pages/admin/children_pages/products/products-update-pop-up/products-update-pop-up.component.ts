@@ -16,6 +16,7 @@ import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/m
 })
 export class ProductsUpdatePopUpComponent extends CustomForm {
 
+
   @Output() close = new EventEmitter();
   @Input({ required: true }) product_id !: string;
   @Input({ required: true }) product_USD_price !: number;
@@ -30,6 +31,8 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
   productUpdateFailed = false;
   errorMessage = '';
 
+  photosArray: string[]=[];
+  photosToShow: string[] = [];
 
 
   form!: FormGroup;
@@ -50,10 +53,13 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
         description: [this.product$.description, [Validators.required]],
         isEnabled: [this.product$.isEnabled, []],
         isApproved: [this.product$.isApproved, []],
-        photos: [this.product$.photos],
+        photos: [],
         fieldsJSON: [this.product$.fieldsJSON, []],
         fieldsArray: this.formBuilder.array([]),
       })
+      if(this.product$.photos){
+        this.photosToShow = this.product$.photos;
+      }
       this.fillFieldsArray();
     });
   }
@@ -80,31 +86,7 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
     return this.form.controls["fieldsArray"] as FormArray;
   }
 
-  // onCategoryChange($event: Event) {
-
-  //   const selectElement = $event.target as HTMLSelectElement;
-
-  //   const categoryId = selectElement.value;
-
-  //   this.form.get('categoryId')?.setValue(categoryId);
-
-  //   this._adminService.getCategoryById(categoryId).subscribe(category => {
-
-  //     const ArrayFieldsFromCategory = category.fields;
-
-  //     this.fieldsArray.clear();
-
-  //     ArrayFieldsFromCategory.forEach(name => {
-  //       const newFieldGroup = this.formBuilder.group({
-  //         fieldName: [name, Validators.required],
-  //         value: ['', Validators.required]
-  //       });
-  //       this.fieldsArray.push(newFieldGroup);
-  //     });
-  //   })
-  // }
-
-
+  
   send() {
 
     let fieldsJSON: string = '{\"';
@@ -140,16 +122,17 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
       title: this.form.get("title")?.value,
       isApproved: this.form.get("isApproved")?.value,
       description: this.form.get("description")?.value,
+      photos : this.photosArray,
       isEnabled: this.form.get("isEnabled")?.value,
       fieldsJSON: hola
     }
 
-    // console.log(p);
 
     this._adminService.updateProduct(p).subscribe({
-      next: (v) => { this.productUpdatedSuccessfully = true, console.log("Esoooo"); },
+      next: (v) => { this.productUpdatedSuccessfully = true },
 
       error: (error) => {
+        console.log(error);
         this.errorMessage = error.error.message;
         this.productUpdateFailed = true;
       }
@@ -181,6 +164,17 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
     this.closeUpdateModal();
   }
 
+
+  keyPress() {
+    
+    let photo  = this.form.get("photos")?.value;
+    this.photosArray.push(photo);
+    this.form.get('photos')?.reset();
+    // $event.preventDefault();
+    // if( $event.key === "Enter") {
+
+    // }
+  }
 }
 
 
