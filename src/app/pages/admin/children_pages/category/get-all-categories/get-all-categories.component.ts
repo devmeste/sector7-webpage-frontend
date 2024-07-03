@@ -45,10 +45,10 @@ export class GetAllCategoriesComponent {
   deleteCategory(id: string) {
     this._adminService.deleteCategory(id).subscribe({
       next: () => {
-        this.categoryDeletedSuccessfully = true,
+        this.categoryDeletedSuccessfully = true,``
           this.updateAllCategoriesInView();
       },
-      error: (e) => {
+      error: (e) => {        
         this.categoryDeletionFailed = true
         this.errorMessage = e.error.message
       },

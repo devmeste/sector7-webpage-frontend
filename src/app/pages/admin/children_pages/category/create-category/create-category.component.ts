@@ -39,9 +39,8 @@ export class CreateCategoryComponent {
     $event.preventDefault();
     const newField = this.inputField.nativeElement.value;
 
-    if (newField != '') {
+    if (newField != '' && newField.trim() != '') {
       this.fields.push({ name: newField });
-
       this.inputField.nativeElement.value = '';
     }
 

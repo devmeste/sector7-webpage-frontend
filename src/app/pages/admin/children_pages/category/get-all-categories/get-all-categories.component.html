@@ -43,9 +43,11 @@
         <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
         </mat-paginator>
     }
+    
     @else {
         <app-input-danger-text text="No hay categorias"></app-input-danger-text>
     }
+
 
     @if (categoryDeletedSuccessfully) {
         <app-message-pop-up  custom_message='Categoría eliminada exitosamente' (close)="closeModal('categoryDeletedSuccessfully')" > </app-message-pop-up>

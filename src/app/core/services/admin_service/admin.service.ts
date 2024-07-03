@@ -57,22 +57,22 @@ export class AdminService {
     }
 
 
-    // updateCategory(id: string, name: string, component: boolean, fields: Field[]): Observable <ICategory>{
+    updateCategory(id: string, name: string, component: boolean, fields: Field[]): Observable <ICategory>{
 
-    //     let array_with_just_string_names: string[] = fields.map(element=>{
-    //         return element.name;
-    //     });
+        let array_with_just_string_names: string[] = fields.map(element=>{
+            return element.name;
+        });
 
-    //     console.log(array_with_just_string_names);
+        console.log(array_with_just_string_names);
 
-    //     let body = {
-    //         name,
-    //         component,
-    //         fields: array_with_just_string_names
-    //     }
+        let body = {
+            name,
+            component,
+            fields: array_with_just_string_names
+        }
 
-    //     return this._httpClient.put<ICategory>(this.baseUrl + 'categories', body);
-    // }
+        return this._httpClient.put<ICategory>(this.baseUrl + 'categories/' + id, body);
+    }
 
     deleteCategory(id: string) {
         console.log(id);
