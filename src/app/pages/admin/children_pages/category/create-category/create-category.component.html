@@ -21,15 +21,12 @@
             <div class="custom-input">
                 <label class="form-label">Campos: </label>
                 <div class="add_field_button_container">
-                    <input #inputField type="text" formControlName="fields" required class="form-control"
+                    <input #inputField type="text" formControlName="fields" class="form-control"
                        [ngClass]="{ 'is-invalid': hasErrors('fields', 'required')  && fields.length == 0 }" (keydown.Enter)="insertNewField($event)">
                        <button class="add_field_button" (click)="insertNewField($event)">+</button>
                 </div>
             </div>
-            
-            @if( hasErrors('fields', 'required')  && fields.length == 0){ <app-input-danger-text
-                text="Al menos 1 campo es necesario" ></app-input-danger-text>
-            }
+
 
             @if(fields.length > 0){
                 <div class="fields_container">

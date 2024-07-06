@@ -8,6 +8,7 @@ import { ProductResponse } from 'app/core/models/ProductResponse';
 import { Usd } from 'app/core/models/Usd';
 import IField from 'app/core/models/Field';
 import BKProduct from 'app/core/models/BKProduct';
+import { IAccount, IAccountReq } from 'app/core/models/IAccount';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +18,7 @@ export class AdminService {
 
 
 
-    baseUrl: string = 'http://localhost:8001/';
+    baseUrl: string = 'http://localhost:8001/api/v1/';
 
     private _router: Router = inject(Router);
     private _httpClient: HttpClient = inject(HttpClient);
@@ -57,9 +58,9 @@ export class AdminService {
     }
 
 
-    updateCategory(id: string, name: string, component: boolean, fields: Field[]): Observable <ICategory>{
+    updateCategory(id: string, name: string, component: boolean, fields: Field[]): Observable<ICategory> {
 
-        let array_with_just_string_names: string[] = fields.map(element=>{
+        let array_with_just_string_names: string[] = fields.map(element => {
             return element.name;
         });
 
@@ -104,6 +105,7 @@ export class AdminService {
 
     updateProduct(p: any) {
         console.log(p);
+
         return this._httpClient.put<any>(this.baseUrl + 'products/' + p.id, p);
     }
 
@@ -121,7 +123,7 @@ export class AdminService {
         else if (option === 'disabled') {
             option = '0';
         }
-        else{
+        else {
             return throwError(() => new Error('Invalid option'))
         }
 
@@ -129,18 +131,18 @@ export class AdminService {
     }
 
 
-    sendUpdateEnableProducts( ids : string[] , option : string) {
-        
-        if(option === 'enabled'){
+    sendUpdateEnableProducts(ids: string[], option: string) {
+
+        if (option === 'enabled') {
             option = 'hide';
-        }else if(option === 'disabled'){
+        } else if (option === 'disabled') {
             option = 'show';
-        }else{
+        } else {
             throwError(() => new Error('Invalid option'))
         }
 
         let body = {
-            ids : ids,
+            ids: ids,
         }
 
         return this._httpClient.patch(this.baseUrl + 'products/status/' + option, body);
@@ -168,4 +170,26 @@ export class AdminService {
     getAllFields(): Observable<IField[]> {
         return this._httpClient.get<IField[]>(this.baseUrl + 'fields');
     }
+
+
+    // ACCOUNTS
+    getAllAccounts(): Observable<IAccount[]> {
+        return this._httpClient.get<IAccount[]>(this.baseUrl + 'account');
+    }
+
+    createAccount(value: IAccountReq) : Observable<IAccount> {
+       return this._httpClient.post<IAccount>(this.baseUrl + 'admin/register', value);
+    }
+
+    changeStateAccount(username: string, change: boolean) {
+        let body = {
+            username,
+            status: !change
+        }
+
+        return this._httpClient.patch(this.baseUrl + 'admin/change-status', body);
+    }
+
+    
+
 }

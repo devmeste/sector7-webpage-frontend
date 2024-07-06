@@ -1,0 +1,54 @@
+<section id="create_product_container">
+    <h2>Crear una nueva Cuenta Administrativa</h2>
+
+    <section class="form_container">
+        <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
+
+            <!-- username -->
+            <div class="custom-input">
+                <label class="form-label">Nombre de Usuario: </label>
+                <input type="text" formControlName="username" class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'username', 'required') }" (change)="this.show()">
+                @if( hasErrors( this.form,'username', 'required') ){
+                <app-input-danger-text text="El nombre de usuario es requerido"></app-input-danger-text>
+                }
+            </div>
+
+            <label class="form-label">Password: </label>
+            <div class="password_input_container">
+                <input [type]="passwordVisible" formControlName="password" placeholder="Contraseña" class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors(this.form, 'password', 'required') }">
+                <button type="button" class="password_visibility_button">
+                    <mat-icon (click)="changePasswordVisibility()" class="password_visibility_icon">
+                        {{passwordVisible === 'password' ? 'visibility' : 'visibility_off'}}
+                    </mat-icon>
+                </button>
+                @if( hasErrors( this.form,'password', 'required') ){
+                <app-input-danger-text text="La contraseña es requerida"></app-input-danger-text>
+                }
+            </div>
+
+
+            <label>Rol de la nueva cuenta:</label>
+            <select formControlName="authorities" name="authoritiesSelect" class="custom-select">
+                <option value="ROLE_ADMIN"> Administrador </option>
+                <option value="ROLE_SELLER"> Vendedor </option>                
+            </select>
+
+            @if (accountWasCreatedSuccessfully) {
+            <app-message-pop-up custom_message='Cuenta Creada Exitosamente'
+                (close)="closeModal('accountWasCreatedSuccessfully')"> </app-message-pop-up>
+            }
+            @if (accountHasError) {
+            <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('accountHasError')">
+            </app-message-pop-up>
+            }
+
+            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
+                [disabled]="disabledFormButton(this.form)" type="submit">Enviar</button>
+
+        </form>
+    </section>
+
+
+</section>

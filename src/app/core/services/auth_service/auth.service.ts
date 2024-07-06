@@ -10,10 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
 
-  // localhost:8001/auth/admin/login
-
-  // Preguntar al meste si cambio , si, cambio,
-  baseUrl: string = 'http://localhost:8001';
+  baseUrl: string = 'http://localhost:8001/api/v1';
 
   //TODO: Verificar luego el del Usuario normal
 
@@ -42,7 +39,7 @@ export class AuthService {
     } else {
       url = `${this.baseUrl + '/account/'}login`;
     }
-
+    
     const body = { username, password };
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

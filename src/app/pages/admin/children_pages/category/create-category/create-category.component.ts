@@ -28,7 +28,7 @@ export class CreateCategoryComponent {
 
   form: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
-    fields: ['', [Validators.required]],
+    fields: ['', []],
     component: ['', []],
   })
   categoryCreatedSuccessfully: boolean = false;
@@ -55,8 +55,7 @@ export class CreateCategoryComponent {
 
 
   disabledFormButton(): boolean {
-
-    return this.form.invalid || this.fields.length == 0;
+    return this.form.invalid;
   }
 
 

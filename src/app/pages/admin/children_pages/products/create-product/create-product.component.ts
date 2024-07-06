@@ -1,42 +1,42 @@
 import { AsyncPipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject, viewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { InputDangerTextComponent } from '@shared/components/inputs/input-danger-text/input-danger-text.component';
 import BKProduct from 'app/core/models/BKProduct';
 import IField from 'app/core/models/Field';
-import {ICategory} from 'app/core/models/ICategory';
+import { ICategory } from 'app/core/models/ICategory';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { BehaviorSubject } from 'rxjs';
-import { MessagePopUpComponent } from "../../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
+import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
+import { CustomForm } from 'app/core/custom-form/custom.form';
 @Component({
   selector: 'app-create-product',
   standalone: true,
   templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.scss', '../../../../../../shared/styles/admin_form.scss'],
+  styleUrls: ['./create-product.component.scss', '../../../../../shared/styles/admin_form.scss'],
   imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent]
 })
-export class CreateProductComponent implements OnInit {
+export class CreateProductComponent extends CustomForm implements OnInit {
 
-  
   categories$ !: ICategory[];
   productWasCreatedSuccessfully = false;
   productHasError = false;
-  errorMessage='';
-
+  errorMessage = '';
+  @ViewChild('photoInput') photoInput!: ElementRef;
 
   ngOnInit(): void {
     this._adminService.getAllCategories().subscribe(c => {
       this.categories$ = c;
     });
+    
   }
 
   private formBuilder = inject(FormBuilder);
   private _adminService = inject(AdminService);
 
-  private photos = [];
-
+  photos: string[] = ['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'];
 
   form: FormGroup = this.formBuilder.group({
     id: ['asdasd213asd2', [Validators.required]],
@@ -49,19 +49,19 @@ export class CreateProductComponent implements OnInit {
     title: ['asdasd', [Validators.required]],
     description: ['asdasd', [Validators.required]],
     isEnabled: [false, []],
-    photos: ['', ],
+    photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'], []),
     fieldsJSON: ['', []],
     fieldsArray: this.formBuilder.array([]),
   })
 
-  hasErrors(controlName: string, errorType: string) {
-    return this.form.get(controlName)?.hasError(errorType) && this.form.get(controlName)?.touched
+  ngAfterViewInit(): void {
+    this.photoInput.nativeElement.value = '';    
   }
 
-  disabledFormButton(): boolean {
-    return this.form.invalid;
-  }
 
+  get photosArray() {
+    return this.form.get('photos') as FormArray;
+  }
 
   get fieldsArray() {
     return this.form.controls["fieldsArray"] as FormArray;
@@ -88,21 +88,29 @@ export class CreateProductComponent implements OnInit {
         });
         this.fieldsArray.push(newFieldGroup);
       });
-
     })
   }
 
+  addPhoto() {
+    const p = this.photoInput.nativeElement.value;
+    if (p.trim().length == 0 || p == null) {
+      return;
+    }
+    this.photosArray.push(this.formBuilder.control(p, []));
+    this.photoInput.nativeElement.value = '';
+  }
 
-  send() {
-    let fieldsJSON: string = '{\"';
+  deletePhoto(i: number) {
+    this.photosArray.removeAt(i);
+  }
 
+  override send() {
+    let fields: any = {};
     (this.form.get('fieldsArray')?.value as Field[]).forEach((field: Field) => {
-      fieldsJSON += `${field.fieldName}\":\"${field.value}\","`;
+      fields[field.fieldName] = field.value;
     });
 
-    fieldsJSON = fieldsJSON.slice(0, -2); // Elimina la coma sobrante al final;
-
-    fieldsJSON += `}`;
+    fields = JSON.stringify(fields);
 
     const newProduct: any = {
       id: this.form.get("id")?.value,
@@ -111,22 +119,22 @@ export class CreateProductComponent implements OnInit {
       model: this.form.get("model")?.value,
       price: parseFloat(this.form.get("price")?.value),
       actualStock: parseInt(this.form.get("actualStock")?.value),
-      viewStock:  parseInt(this.form.get("viewStock")?.value),
+      viewStock: parseInt(this.form.get("viewStock")?.value),
       title: this.form.get("title")?.value,
       description: this.form.get("description")?.value,
       isEnabled: this.form.get("isEnabled")?.value,
-      // photos:[ "HOLA PROBANDO"],
-      isApproved: true, // TODO: if Admin create this product, it will be approved automatically ? 
-      fieldsJSON: fieldsJSON
+      photos: this.photosArray.value,
+      fieldsJSON: fields
     }
-
-
+     
+    console.log(newProduct);
+    
     this._adminService.createProduct(newProduct).subscribe({
-      next:(v) => this.productWasCreatedSuccessfully = true,
-      error:(error)=>{
-          this.errorMessage = error.error.message;
-          this.productHasError = true;
-        }
+      next: (v) => this.productWasCreatedSuccessfully = true,
+      error: (error) => {
+        this.errorMessage = error.error.message;
+        this.productHasError = true;
+      }
     });
   }
 
@@ -136,7 +144,7 @@ export class CreateProductComponent implements OnInit {
     switch (option) {
       case "productWasCreatedSuccessfully": this.productWasCreatedSuccessfully = false;
         break;
-      case "productHasError" : this.productHasError = false;
+      case "productHasError": this.productHasError = false;
         break;
     }
   }

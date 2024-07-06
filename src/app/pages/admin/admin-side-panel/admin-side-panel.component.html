@@ -1,5 +1,6 @@
 <section class="admin_side_panel_content">
     <mat-accordion>
+        <!-- Categories -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header   >
                 <mat-panel-title >
@@ -12,7 +13,7 @@
             </ul>
         </mat-expansion-panel>
 
-
+        <!-- Products -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -25,17 +26,17 @@
                 <li [routerLink]="['products/enable']">Habilitar</li>
             </ul>
         </mat-expansion-panel>
-
-        <!-- Users -->
+        
+        <!-- Accounts -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Usuarios
+                    Cuentas
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
-                <!-- <li>Crear Producto</li>
-                <li>Ver Todos</li> -->
+                <li [routerLink]="['accounts']">Ver Cuentas</li>
+                <li [routerLink]="['accounts/new']">Crear Cuenta</li>
             </ul>
         </mat-expansion-panel>
 

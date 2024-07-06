@@ -3,6 +3,8 @@ import { InputDangerTextComponent } from "../../../../../shared/components/input
 import BKProduct from 'app/core/models/BKProduct';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
+import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-product-details-pop-up',
@@ -11,7 +13,7 @@ import { AdminService } from 'app/core/services/admin_service/admin.service';
   styleUrls: ['./product-details-pop-up.component.scss', '../../../../../shared/styles/admin_form.scss', '../../../../../shared/styles/pop-up-styles.scss',
     // '../products-update-pop-up/products-update-pop-up.component.scss'
   ],
-  imports: [InputDangerTextComponent, ReactiveFormsModule]
+  imports: [InputDangerTextComponent, ReactiveFormsModule, SplitLinkPipe, NgFor]
 })
 export class ProductDetailsPopUpComponent {
 
@@ -26,9 +28,7 @@ export class ProductDetailsPopUpComponent {
   product$ !: BKProduct;
   private photos = [];
 
-  photosArray: string[] = [];
   photosToShow: string[] = [];
-  disabled_input: boolean = true;
 
   ngOnInit(): void {
     this._adminService.getProductById(this.product_id).subscribe(p => {
@@ -54,9 +54,6 @@ export class ProductDetailsPopUpComponent {
         this.photosToShow = this.product$.photos;
       }
       this.fillFieldsArray();
-
-
-
 
       // Ajusta la altura del textarea después de inicializar el formulario
       setTimeout(() => {

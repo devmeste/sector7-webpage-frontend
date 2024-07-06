@@ -19,7 +19,7 @@ export const ADMIN_ROUTES: Routes = [
             },
             {
                 path: 'products/new',
-                loadComponent:()=>import('./children_pages/products/create-product/create-product/create-product.component').then(c=>c.CreateProductComponent)
+                loadComponent:()=>import('./children_pages/products/create-product/create-product.component').then(c=>c.CreateProductComponent)
             },
             {
                 path: 'products/enable',
@@ -32,6 +32,14 @@ export const ADMIN_ROUTES: Routes = [
             {
                 path: 'usd/new',
                 loadComponent: ()=>import('./children_pages/usd/create-usd/create-usd.component').then(r => r.CreateUsdComponent)
+            },
+            {
+                path: 'accounts',
+                loadComponent: ()=>import('./children_pages/accounts/get-all-accounts/get-all-accounts.component').then(r => r.GetAllAccountsComponent)
+            },
+            {
+                path: 'accounts/new',
+                loadComponent: ()=>import('./children_pages/accounts/create-account/create-account.component').then(r => r.CreateAccountComponent)
             }
 
         ]

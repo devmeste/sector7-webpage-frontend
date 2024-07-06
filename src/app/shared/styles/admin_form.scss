@@ -1,7 +1,7 @@
 @import 'styles.scss';
 @import '_media-queries.scss';
 
-.form_container{
+.form_container {
   display: flex;
   width: 100%;
 }
@@ -21,7 +21,6 @@
   .custom-input {
     display: flex;
     flex-direction: column;
-
   }
 
   .form-label {
@@ -58,6 +57,8 @@
     border: 2px solid $danger_500;
     // border-color: #dc3545;
   }
+
+
 
   .warning_text_container {
     display: flex;
@@ -124,9 +125,10 @@
   }
 
   .add_field_button {
-    margin-bottom: 1.5rem;
+    margin-bottom: 24px;
     width: 30px;
-    height: 30px;
+    // height: 30px;
+
     border-radius: 5px;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
@@ -193,8 +195,78 @@
   .custom-option {
     background-color: #333;
     color: #fff;
+  }
+
+  // Photos
+
+  .add_photo_button_container {
+    display: flex;
+
+    button {
+      margin-bottom: 24px;
+      width: 2rem;
+      border-radius: 5px;
+    }
+  }
+
+  .photosContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .photo {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      border-radius: 5px;
+      overflow: hidden;
+      filter: $filter_background_for_products;
+
+      .delete_button_absolute {
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        margin: 10px;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background-color: $gray_5;
+        color: white;
+        // border: 1px solid red;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
 
 
 
   }
+}
+
+
+.password_input_container {
+  position: relative;
+  width: 100%;
+}
+
+.password_visibility_button {
+  position: absolute;
+  right: 3%;
+  top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  color: white;
 }

@@ -1,0 +1,68 @@
+<section class="admin_panel_table_main_container">
+
+    <h2 class="title"> Cuentas </h2>
+    <h4 class="subtitle">Lista de todas las cuentas de Sector 7</h4>
+
+    @if(accounts$){
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    Username
+                </td>
+                <td>
+                    Habilitado
+                </td>
+                <td>
+                    Acciones
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @for(account of accounts$ ; track account.id){
+            <tr>
+                <td>
+                    {{account.username}}
+                </td>
+                <td>
+                    @if (account.enabled) {Habilitado}
+                    @else{Deshabilitado}
+                </td>
+                <td class="actions_buttons_container">
+                    <!-- <button type="button" class="actions_button update_button" (click)="showUpdatePopUpMethod(account.id ">
+                            <mat-icon>Ver Mas</mat-icon>
+                        </button> -->
+
+                    <button type="button" class="actions_button update_button"
+                        (click)="updateStateAccount(account.username , account.enabled)">
+                        <mat-icon>sync</mat-icon>
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- <mat-paginator #paginator [length]="products$.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        aria-label="Select page">
+    </mat-paginator> -->
+
+    }
+    @else {
+    <app-input-danger-text text="No hay cuentas"></app-input-danger-text>
+    }
+
+    @if (accountUpdatedSuccessfully) {
+    <app-message-pop-up custom_message='Cuenta fue modificada exitosamente'
+        (close)="closeModal('accountUpdatedSuccessfully')"> </app-message-pop-up>
+    }
+    @if (accountUpdatedFailed) {
+    <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('accountUpdatedFailed')">
+    </app-message-pop-up>
+    }
+</section>
+
+<!-- @if(this.showUpdatePopUp){
+<app-products-update-pop-up [product_id]="this.update_id" [product_USD_price]="this.product_USD_price"
+    (close)="closeModal('showUpdatePopUp')"></app-products-update-pop-up>
+} -->

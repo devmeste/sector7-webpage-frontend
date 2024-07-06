@@ -42,7 +42,7 @@ export const adminInterceptor: HttpInterceptorFn = (request, next) => {
   if (_authService.isAdminLoggedIn()) {
     const token = localStorage.getItem('admin_token');
     if (token) {
-
+      console.log("Entro en el isAdminLoggedIn del admin interceptor");
       if (clonedRequest.headers.get('skip') == 'true') {
         return next(clonedRequest);
       }

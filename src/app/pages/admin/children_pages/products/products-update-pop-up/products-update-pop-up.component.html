@@ -116,16 +116,40 @@
 
 
                         <!-- Fotos -->
-                        @for( photo of photosToShow ; track $index){
-                            <div> {{photo }}</div>
+                        <!-- @for( photo of photosToShow ; track $index){
+                        <div> {{photo }}</div>
                         }
                         <div class="custom-input">
                             <label class="form-label">Fotos: </label>
                             <input type="text"  name="photos" formControlName="photos" class="form-control" >
                             <button type="button" (click)="keyPress()"> enviar </button>
                             @for( photo of photosArray ; track $index){
-                                <div> {{photo }}</div>
+                            <div> {{photo }}</div>
                             }
+                        </div> -->
+
+                        <!-- Fotos -->
+                        <div class="custom-input">
+                            <label class="form-label">Fotos: </label>
+
+                            <div class="add_photo_button_container">
+                                <input #photoInput formControlName="photos" type="text" class="form-control"
+                                    placeholder="link de la foto">
+
+                                <button type="button" (click)="addPhoto()"
+                                    class="btn btn-success add_field_button">+</button>
+                            </div>
+                            <div class="photosContainer">
+                                @for (item of this.photosArray2.value ; track $index) {
+
+                                <picture class="photo">
+                                    <button type="button" class="delete_button_absolute" (click)="deletePhoto($index)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                    <img [src]="item | splitLink" alt="photo">
+                                </picture>
+                                }
+                            </div>
                         </div>
 
 

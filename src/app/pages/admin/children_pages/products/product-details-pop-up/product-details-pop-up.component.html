@@ -16,7 +16,7 @@
                         <div class="custom-input">
                             <label class="form-label">Titulo: </label>
                             <input type="text" formControlName="title" required class="form-control"
-                                [disabled]="disabled_input">
+                                >
 
                         </div>
 
@@ -24,7 +24,7 @@
                         <div class="custom-input">
                             <label class="form-label">Descripcion: </label>
                             <textarea (input)="adjustTextareaHeight($event)" class="custom_text_area"  name="description" formControlName="description" required class="form-control"
-                                [disabled]="disabled_input">
+                               >
                             </textarea>
 
                         </div>
@@ -36,7 +36,7 @@
                             <div class="custom-input">
                                 <label class="form-label">Marca: </label>
                                 <input type="text" formControlName="brand" required class="form-control"
-                                    [disabled]="disabled_input">
+                                    >
 
                             </div>
 
@@ -50,13 +50,13 @@
                             <div class="custom-input">
                                 <label class="form-label">Modelo: </label>
                                 <input type="text" formControlName="model" required class="form-control"
-                                    [disabled]="disabled_input">
+                                    >
                             </div>
                             <!-- Precio -->
                             <div class="custom-input">
                                 <label class="form-label">Precio: </label>
                                 <input type="number" formControlName="price" required class="form-control "
-                                    [disabled]="disabled_input">
+                                    >
 
 
                             </div>
@@ -65,7 +65,7 @@
                             <div class="custom-input">
                                 <label class="form-label">Stock Real: </label>
                                 <input type="number" formControlName="actualStock" required class="form-control"
-                                    [disabled]="disabled_input">
+                                    >
                             </div>
 
 
@@ -73,7 +73,7 @@
                             <div class="custom-input">
                                 <label class="form-label">Stock Visual: </label>
                                 <input type="number" formControlName="viewStock" required class="form-control"
-                                    [disabled]="disabled_input">
+                                    >
 
                             </div>
 
@@ -88,30 +88,26 @@
                             <div class="custom-input row input_checkbox_container">
                                 <label class="form-label checkbox_label ">Habilitado: </label>
                                 <input type="checkbox" formControlName="isEnabled" class="form-control checkbox"
-                                    [disabled]="disabled_input">
+                                    >
                             </div>
 
                             <!-- Aprovado -->
                             <div class="custom-input row input_checkbox_container">
                                 <label class="form-label checkbox_label ">Aprobado: </label>
                                 <input type="checkbox" formControlName="isApproved" class="form-control checkbox"
-                                    [disabled]="disabled_input">
+                                    >
                             </div>
 
                         </div>
 
 
-                        <!-- Fotos -->
-                        @for( photo of photosToShow ; track $index){
-                        <div> {{photo }}</div>
-                        }
+                        <!-- fotos -->
 
-                        <div class="custom-input">
-                            <label class="form-label">Fotos: </label>
-                            <input type="text" name="photos" formControlName="photos" class="form-control"
-                                [disabled]="disabled_input">
-                            @for( photo of photosArray ; track $index){
-                            <div> {{photo }}</div>
+                        <div class="photosContainer">
+                            @for (item of this.photosToShow ; track $index) {
+                            <picture class="photo">
+                                <img [src]="item | splitLink" alt="photo">
+                            </picture>
                             }
                         </div>
 
@@ -124,7 +120,7 @@
                                     <label class="form-label">{{formControl.value.fieldName}}</label>
                                     <div class="add_field_button_container">
                                         <input formControlName="value" type="text" class="form-control" placeholder=" "
-                                            [disabled]="disabled_input">
+                                            >
                                     </div>
                                 </div>
                             </div>
