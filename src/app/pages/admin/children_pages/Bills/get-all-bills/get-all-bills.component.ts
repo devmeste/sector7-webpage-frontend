@@ -12,11 +12,15 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-get-all-bills',
   standalone: true,
-  imports: [MatIcon, InputDangerTextComponent,ReactiveFormsModule],
+  imports: [MatIcon, InputDangerTextComponent, ReactiveFormsModule],
   templateUrl: './get-all-bills.component.html',
   styleUrls: ['./get-all-bills.component.scss', "../../../../../shared/styles/admin_table.scss"],
 })
 export class GetAllBillsComponent {
+  clearFilters() {
+    this.form.reset();
+    this.updateDataView();
+  }
 
   _adminService = inject(AdminService);
   _router = inject(Router);
@@ -28,6 +32,14 @@ export class GetAllBillsComponent {
     endDate: ['']
   });
 
+  verifyDates() {
+    const startDate = this.form.get('startDate');
+    const endDate = this.form.get('endDate');
+
+    if (startDate?.value && endDate?.value) {
+      this.updateDataViewWithDates();
+    }
+  }
 
   ngOnInit(): void {
     this.updateDataView();
@@ -49,14 +61,7 @@ export class GetAllBillsComponent {
     this._router.navigate(['/admin-dashboard/billing', id]);
   }
 
-  verifyDates() {
-    const startDate=this.form.get('startDate');
-    const endDate=this.form.get('endDate');
-    
-    if(startDate?.value && endDate?.value){
-      this.updateDataViewWithDates();
-    }
-  }
+
 
 }
 

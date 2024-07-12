@@ -1,32 +1,46 @@
 @import 'styles.scss';
 
-.date_inputs_container {
-    // margin: 2rem 0;
-    display: flex;
-    flex-direction: column;
+.get_all_bills_main_container {
 
-    .date_input {
-        height: 1.5rem;
+    .date_inputs_form {
         display: flex;
-        border-radius: 3px;
-        max-width: fit-content;
-        background: $primary-main url('../../../../../../assets/images/icons/calendar_icon.png');
-        color: black;
+        flex-direction: row;
+        width: 250px;
+        justify-content: space-between;
     }
 
-    input[type="date"] {
-        background: $gray_30 url('../../../../../../assets/images/icons/calendar_icon.png');   
-        background-size: 20px;
-        color: white;
-        background-repeat: no-repeat;
-        background-position: 95%;
-        padding-left: 0.5rem;
+    .date_inputs_container {
+        .date_input {
+            height: 1.5rem;
+            display: flex;
+            border-radius: 3px;
+            max-width: fit-content;
+            // background: $primary-main url('../../../../../../assets/images/icons/calendar_icon.png');
+            color: black;
+        }
+
+        input[type="date"] {
+            background: $gray_30 url('../../../../../../assets/images/icons/calendar_icon.png');
+            background-size: 20px;
+            color: white;
+            background-repeat: no-repeat;
+            background-position: 95%;
+            padding-left: 0.5rem;
+        }
+
+
+        // input[type="date"]
+        ::-webkit-calendar-picker-indicator {
+            opacity: 0;
+            cursor: pointer;
+        }
+
+
+
     }
 
-
-    // input[type="date"]
-    ::-webkit-calendar-picker-indicator {
-        opacity: 0;
+    .primary_button {
+        margin: 1rem 0;
+        padding: 0.2rem 0.8rem;
     }
-
 }

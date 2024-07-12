@@ -3,11 +3,13 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, firstValueFrom, map, of, tap, throwError } from 'rxjs';
 import { ITokenDto } from '../../models/ITokenDto';
 import { Router } from '@angular/router';
+import { IUser } from 'app/core/models/IUser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  
 
 
   baseUrl: string = 'http://localhost:8001/api/v1/es/';
@@ -93,5 +95,13 @@ export class AuthService {
       { token: token },
       { headers: new HttpHeaders({ 'skip': 'true' }) }
     )
+  }
+
+  // register
+  register(user: IUser): Observable<string> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this._http.post(this.baseUrl + 'account/register', user, { headers, responseType: 'text' });
   }
 }

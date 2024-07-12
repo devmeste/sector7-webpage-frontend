@@ -27,7 +27,7 @@ export class ProductsUpdatePopUpComponent extends CustomFormPopUp {
   private formBuilder = inject(FormBuilder);
   private _adminService = inject(AdminService);
   product$ !: BKProduct;
-  private photos = [];
+  // private photos = [];
 
 
   productUpdatedSuccessfully = false;
@@ -67,8 +67,6 @@ export class ProductsUpdatePopUpComponent extends CustomFormPopUp {
       
       this._adminService.getCategoryById(this.product$.categoryId).subscribe(c => {
         this.categoryName = c.name;
-        console.log("hola");
-        console.log(this.categoryName);
       })
     });
 

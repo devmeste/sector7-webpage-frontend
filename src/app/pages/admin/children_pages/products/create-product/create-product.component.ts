@@ -19,6 +19,25 @@ import { CustomForm } from 'app/core/utils/custom-form/custom.form';
   imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent]
 })
 export class CreateProductComponent extends CustomForm implements OnInit {
+  
+  override initializeForm(): void {
+    this.form = this.formBuilder.group({
+      id: ['asdasd213asd2', [Validators.required]],
+      categoryId: ['', [Validators.required]],
+      brand: ['aaa', [Validators.required]],
+      model: ['aaa', [Validators.required]],
+      price: ['100', [Validators.required]],
+      actualStock: ['123', [Validators.required]],
+      viewStock: ['1002', [Validators.required]],
+      title: ['asdasd', [Validators.required]],
+      description: ['asdasd', [Validators.required]],
+      isEnabled: [false, []],
+      photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'], []),
+      fieldsJSON: ['', []],
+      fieldsArray: this.formBuilder.array([]),
+    })
+  
+  }
 
   categories$ !: ICategory[];
   productWasCreatedSuccessfully = false;
@@ -33,26 +52,14 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     
   }
 
-  private formBuilder = inject(FormBuilder);
+  // private formBuilder = inject(FormBuilder);
   private _adminService = inject(AdminService);
 
   photos: string[] = ['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'];
 
-  form: FormGroup = this.formBuilder.group({
-    id: ['asdasd213asd2', [Validators.required]],
-    categoryId: ['', [Validators.required]],
-    brand: ['aaa', [Validators.required]],
-    model: ['aaa', [Validators.required]],
-    price: ['100', [Validators.required]],
-    actualStock: ['123', [Validators.required]],
-    viewStock: ['1002', [Validators.required]],
-    title: ['asdasd', [Validators.required]],
-    description: ['asdasd', [Validators.required]],
-    isEnabled: [false, []],
-    photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'], []),
-    fieldsJSON: ['', []],
-    fieldsArray: this.formBuilder.array([]),
-  })
+  
+
+
 
   ngAfterViewInit(): void {
     this.photoInput.nativeElement.value = '';    

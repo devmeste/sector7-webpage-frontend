@@ -17,21 +17,26 @@ import { IAccountReq } from 'app/core/models/IAccount';
   imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, MatIcon]
 })
 export class CreateAccountComponent extends CustomForm {
+  
+  
+  override initializeForm(): void {
+
+    this.form = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      authorities: ['ROLE_SELLER', []],
+    })
+  
+  }
 
   accountWasCreatedSuccessfully = false;
   accountHasError = false;
   errorMessage = '';
   passwordVisible = 'password';
 
-  private formBuilder = inject(FormBuilder);
   private _adminService = inject(AdminService);
 
-  form: FormGroup = this.formBuilder.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    authorities: ['ROLE_SELLER', []],
-  })
-
+ 
 
 
   override send(): void {

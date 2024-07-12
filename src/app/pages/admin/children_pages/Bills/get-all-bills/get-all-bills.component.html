@@ -1,77 +1,83 @@
-<section class="admin_panel_table_main_container">
+<main class="get_all_bills_main_container">
+    <section class="admin_panel_table_main_container">
 
-    <h2 class="title"> Compras </h2>
-    <h4 class="subtitle">Lista de todas las compras de Sector 7</h4>
+        <h2 class="title"> Compras </h2>
+        <h4 class="subtitle">Lista de todas las compras de Sector 7</h4>
 
-    <!-- Campos de entrada de fecha -->
-    <form [formGroup]="form">
-        <div class="date_inputs_container" (change)="verifyDates()">
-            <input type="date" class="date_input" formControlName="startDate">
-        </div>
 
-        <div class="date_inputs_container" (change)="verifyDates()">
-            <input type="date" class="date_input" formControlName="endDate">
-        </div>
-    </form>
+        <!-- Campos de entrada de fecha -->
+        <form [formGroup]="form" class="date_inputs_form">
+            <div class="date_inputs_container" (change)="verifyDates()">
+                <input type="date" class="date_input" formControlName="startDate">
+            </div>
 
-    @if(this.purchases$ && this.purchases$.length > 0){
-    <table>
-        <thead>
-            <tr>
-                <td>
-                    Cliente
-                </td>
-                <td>
-                    Cant. Prod.
-                </td>
-                <td>
-                    Total
-                </td>
-                <td>
-                    Envío
-                </td>
-                <td>
-                    Ver detalles
-                </td>
+            <div class="date_inputs_container" (change)="verifyDates()">
+                <input type="date" class="date_input" formControlName="endDate">
+            </div>
+        </form>
 
-            </tr>
-        </thead>
-        <tbody>
-            @for(purchase of purchases$ ; track $index ){
-            <tr>
-                <td>
-                    {{purchase.fullname}}
-                </td>
-                <td>
-                    {{purchase.products.length}}
-                </td>
-                <td>
-                    {{purchase.totalAmount}}
-                </td>
-                <td>
-                    @if(purchase.shipment){
-                    {{purchase.shipment}}
-                    }@else{
-                    No tiene envío
-                    }
-                </td>
+        <button type="button" class="primary_button" (click)="clearFilters()">Limpiar filtros</button>
 
-                <td class="actions_buttons_container">
-                    <button type="button" (click)="showDetails(purchase.id)" class="actions_button update_button">
-                        <mat-icon>visibility</mat-icon>
-                    </button>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+        @if(this.purchases$ && this.purchases$.length > 0){
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        Cliente
+                    </td>
+                    <td>
+                        Cant. Prod.
+                    </td>
+                    <td>
+                        Total
+                    </td>
+                    <td>
+                        Envío
+                    </td>
+                    <td>
+                        Ver detalles
+                    </td>
 
-    <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
-        </mat-paginator> -->
-    }
-    @else if (this.form.get('startDate')?.value && this.form.get('endDate')?.value) {
+                </tr>
+            </thead>
+            <tbody>
+                @for(purchase of purchases$ ; track $index ){
+                <tr>
+                    <td>
+                        {{purchase.fullname}}
+                    </td>
+                    <td>
+                        {{purchase.products.length}}
+                    </td>
+                    <td>
+                        {{purchase.totalAmount}}
+                    </td>
+                    <td>
+                        @if(purchase.shipment){
+                        {{purchase.shipment}}
+                        }@else{
+                        No tiene envío
+                        }
+                    </td>
+
+                    <td class="actions_buttons_container">
+                        <button type="button" (click)="showDetails(purchase.id)" class="actions_button update_button">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator> -->
+        }
+        @else if (this.form.get('startDate')?.value && this.form.get('endDate')?.value) {
         <app-input-danger-text text="No hay compras entre esas fechas"></app-input-danger-text>
-    }
-    @else  {
+        }
+        @else {
         <app-input-danger-text text="No hay ventas"></app-input-danger-text>
-    }
+        }
+    </section>
+</main>

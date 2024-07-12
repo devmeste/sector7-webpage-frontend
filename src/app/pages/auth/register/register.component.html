@@ -1,7 +1,7 @@
 <main class="main_register">
 
     <section class="register_form_container">
-        <form [formGroup]="registerForm" class="register_form" (ngSubmit)="register()">
+        <form [formGroup]="form" class="register_form" (ngSubmit)="send()">
             <div class="register_logo_container">
                 <img src="assets/images/logos/Sector7LogoSmall_without_background.png" alt="">
             </div>
@@ -10,24 +10,27 @@
             </h3>
 
             <input type="text" formControlName="username" placeholder="Nombre de usuario" class="input_text_style">
-            @if(hasErrors('username', 'required')){<small class="text-danger text_error"> el nombre de usuario es
+            @if(hasErrors(this.form, 'username', 'required')){<small class="text-danger text_error"> el nombre de usuario es
                 requerido</small>}
 
             <input type="password" formControlName="password" placeholder="Contraseña" class="input_text_style">
-            @if(hasErrors('password', 'required')){<small class="text-danger text_error"> la contraseña es requerida</small>}
+            @if(hasErrors(this.form, 'password', 'required')){<small class="text-danger text_error"> la contraseña es requerida</small>}
 
             <input type="text" formControlName="name" placeholder="Nombre" class="input_text_style">
-            @if(hasErrors('name', 'required')){<small class="text-danger text_error"> el nombre es requerido</small>}
+            @if(hasErrors(this.form, 'name', 'required')){<small class="text-danger text_error"> el nombre es requerido</small>}
 
             <input type="text" formControlName="lastname" placeholder="Apellido" class="input_text_style">
-            @if(hasErrors('lastname', 'required')){<small class="text-danger text_error"> el apellido es requerido</small>}
+            @if(hasErrors(this.form, 'lastname', 'required')){<small class="text-danger text_error"> el apellido es requerido</small>}
 
             <input type="email" formControlName="email" placeholder="Email" class="input_text_style">
-            @if(hasErrors('email', 'required')){<small class="text-danger text_error"> el email es requerido</small>}
-            @if(hasErrors('email', 'email')){<small class="text-danger text_error">formato de email incorrecto</small>}
+            @if(hasErrors(this.form, 'email', 'required')){<small class="text-danger text_error"> el email es requerido</small>}
+            @if(hasErrors(this.form, 'email', 'email')){<small class="text-danger text_error">formato de email incorrecto</small>}
 
-            <input type="text" formControlName="phone" placeholder="Telefono" class="input_text_style">
-            @if(hasErrors('phone', 'required')){<small class="text-danger text_error">el telefono es requerido</small>}
+            <input type="number" formControlName="area_Code" placeholder="Codigo De Área" class="input_text_style">
+            @if(hasErrors(this.form, 'area_Code', 'required')){<small class="text-danger text_error">el telefono es requerido</small>}
+
+            <input type="number" formControlName="phone" placeholder="Telefono" class="input_text_style">
+            @if(hasErrors(this.form, 'phone', 'required')){<small class="text-danger text_error">el telefono es requerido</small>}
 
             <input type="submit" class="primary_button" value="Registrarse">
 
