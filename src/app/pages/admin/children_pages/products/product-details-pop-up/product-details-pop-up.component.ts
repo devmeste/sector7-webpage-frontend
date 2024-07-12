@@ -5,6 +5,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 import { CommonModule, NgFor } from '@angular/common';
+import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.pop.up';
 
 @Component({
   selector: 'app-product-details-pop-up',
@@ -15,10 +16,8 @@ import { CommonModule, NgFor } from '@angular/common';
   ],
   imports: [InputDangerTextComponent, ReactiveFormsModule, SplitLinkPipe, NgFor]
 })
-export class ProductDetailsPopUpComponent {
+export class ProductDetailsPopUpComponent extends CustomFormPopUp {
 
-  // Repeated code
-  @Output() close = new EventEmitter();
   @Input({ required: true }) product_id !: string;
   @Input({ required: true }) product_USD_price !: number;
   private formBuilder = inject(FormBuilder);
@@ -99,20 +98,11 @@ export class ProductDetailsPopUpComponent {
     return this.form.controls["fieldsArray"] as FormArray;
   }
 
-
-  @HostListener('document:keydown.escape', ['$event'])
-  handleEscapeKey(event: KeyboardEvent) {
-    this.closeUpdateModal();
-  }
-
-
-
-  // Repeated code
-  closeUpdateModal() {
-    this.close.emit();
-  }
-
   
+  override send(): void {
+    // this method is not used
+    return;
+  }
 
   
 

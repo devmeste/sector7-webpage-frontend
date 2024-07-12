@@ -36,7 +36,6 @@ export class GetAllAccountsComponent {
   updateAllAccountsInView() {
     this._adminService.getAllAccounts().subscribe(a => {
       this.accounts$ = a;
-      console.log(this.accounts$);
     })
   }
 

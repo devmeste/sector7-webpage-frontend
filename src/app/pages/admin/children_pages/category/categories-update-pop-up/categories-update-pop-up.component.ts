@@ -8,7 +8,8 @@ import { MessagePopUpComponent } from '@shared/components/pop_up/message-pop-up/
 import { BKICategory, ICategory } from 'app/core/models/ICategory';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import Field from '../../../../../core/models/Field';
-import { CustomForm } from 'app/core/custom-form/custom.form'
+import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.pop.up';
+
 
 @Component({
   selector: 'app-categories-update-pop-up',
@@ -17,9 +18,8 @@ import { CustomForm } from 'app/core/custom-form/custom.form'
   templateUrl: './categories-update-pop-up.component.html',
   styleUrls: ['./categories-update-pop-up.component.scss', '../../../../../shared/styles/pop-up-styles.scss']
 })
-export class CategoriesUpdatePopUpComponent extends CustomForm {
+export class CategoriesUpdatePopUpComponent extends CustomFormPopUp {
 
-  @Output() close = new EventEmitter();
   @Input({ required: true }) category_id !: string;
 
   _adminService = inject(AdminService);
@@ -57,11 +57,6 @@ export class CategoriesUpdatePopUpComponent extends CustomForm {
 
   }
 
-  closeUpdateModal() {
-    this.close.emit();
-  }
-
-
   insertNewField($event: Event) {
     $event.preventDefault();
     const newField = this.inputField.nativeElement.value;
@@ -71,7 +66,6 @@ export class CategoriesUpdatePopUpComponent extends CustomForm {
       this.fields.push({ name: newField });
       console.log(this.fields);
       this.inputField.nativeElement.value = '';
-
     }
 
   }
@@ -82,10 +76,6 @@ export class CategoriesUpdatePopUpComponent extends CustomForm {
   }
 
 
-  override disabledFormButton(): boolean {
-    return this.form.invalid;
-  }
-
 
   send() {
     let name = this.form.get('name')?.value;
@@ -95,17 +85,6 @@ export class CategoriesUpdatePopUpComponent extends CustomForm {
     }
     let fields = this.fields;
     let id = this.category_id;
-
-    // const c: ICategory = {
-    //   id: this.category_id,
-    //   name: this.form.get('name')?.value,
-    //   component: this.form.get('component')?.value,
-    //   fields: this.fields
-
-    // }
-    // id: string, name: string, component: boolean, fields: Field[]
-
-
 
     this._adminService.updateCategory(id, name, component, fields).subscribe
       (

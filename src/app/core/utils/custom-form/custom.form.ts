@@ -1,7 +1,6 @@
 import { FormGroup } from '@angular/forms';
 
-export abstract class CustomForm {
-
+export abstract class CustomForm  {
 
     hasErrors(form: FormGroup, controlName: string, errorType: string): boolean {
         const control = form.get(controlName);
@@ -18,6 +17,7 @@ export abstract class CustomForm {
     }
 
     abstract send() : void
+
 
 
 }

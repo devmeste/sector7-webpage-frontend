@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
 
-  baseUrl: string = 'http://localhost:8001/api/v1';
+  baseUrl: string = 'http://localhost:8001/api/v1/es/';
 
   //TODO: Verificar luego el del Usuario normal
 
@@ -25,21 +25,20 @@ export class AuthService {
     const admin_token = localStorage.getItem('admin_token');
 
     this.isLoggedInSubject = new BehaviorSubject<boolean>(!!token);
-    this.isAdminLoggedInSubject = new BehaviorSubject<boolean>(!!admin_token);   
-    
+    this.isAdminLoggedInSubject = new BehaviorSubject<boolean>(!!admin_token);
   }
 
   login(username: string, password: string, specialCase?: string): Observable<ITokenDto> {
-    
+
     this.logout();
-    
+
     let url;
     if (specialCase) {
-      url = `${this.baseUrl + '/'}${specialCase + '/'}login`;
+      url = `${this.baseUrl}${specialCase + '/'}login`;
     } else {
-      url = `${this.baseUrl + '/account/'}login`;
+      url = `${this.baseUrl + 'account/'}login`;
     }
-    
+
     const body = { username, password };
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -50,7 +49,7 @@ export class AuthService {
         if (response && response.token && specialCase == 'admin') {
           this.isAdminLoggedInSubject.next(true);
         }
-        else if (response && response.token) { 
+        else if (response && response.token) {
           this.isLoggedInSubject.next(true);
         }
         else {
@@ -84,15 +83,15 @@ export class AuthService {
   }
 
   //return just a boolean
-  isAdminLoggedIn ()  : boolean  {
+  isAdminLoggedIn(): boolean {
     return this.isAdminLoggedInSubject.getValue();
   }
 
-  verifyToken(token: string) : Observable<ITokenDto> {
+  verifyToken(token: string): Observable<ITokenDto> {
     return this._http.post<ITokenDto>(
-      this.baseUrl +'/account/validate', 
-      {token : token}, 
-      {headers: new HttpHeaders({ 'skip': 'true' })}  
+      this.baseUrl + 'account/validate',
+      { token: token },
+      { headers: new HttpHeaders({ 'skip': 'true' }) }
     )
   }
 }

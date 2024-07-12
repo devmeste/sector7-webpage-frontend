@@ -9,6 +9,8 @@ import { Usd } from 'app/core/models/Usd';
 import IField from 'app/core/models/Field';
 import BKProduct from 'app/core/models/BKProduct';
 import { IAccount, IAccountReq } from 'app/core/models/IAccount';
+import { IPurchase } from 'app/core/models/IPurchase';
+import { IPurchasesBetweenDatesResponse } from 'app/core/models/IPurchasesBetweenDatesResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +20,8 @@ export class AdminService {
 
 
 
-    baseUrl: string = 'http://localhost:8001/api/v1/';
+
+    baseUrl: string = 'http://localhost:8001/api/v1/es/';
 
     private _router: Router = inject(Router);
     private _httpClient: HttpClient = inject(HttpClient);
@@ -76,6 +79,7 @@ export class AdminService {
     }
 
     deleteCategory(id: string) {
+        console.log("ID: ");
         console.log(id);
         return this._httpClient.delete(this.baseUrl + 'categories/' + id, {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' },
@@ -177,8 +181,8 @@ export class AdminService {
         return this._httpClient.get<IAccount[]>(this.baseUrl + 'account');
     }
 
-    createAccount(value: IAccountReq) : Observable<IAccount> {
-       return this._httpClient.post<IAccount>(this.baseUrl + 'admin/register', value);
+    createAccount(value: IAccountReq): Observable<IAccount> {
+        return this._httpClient.post<IAccount>(this.baseUrl + 'admin/register', value);
     }
 
     changeStateAccount(username: string, change: boolean) {
@@ -186,10 +190,19 @@ export class AdminService {
             username,
             status: !change
         }
-
         return this._httpClient.patch(this.baseUrl + 'admin/change-status', body);
     }
 
-    
+
+
+    // purchases
+    getAllPurchases() {
+        console.log(this.baseUrl + 'purchase');
+        return this._httpClient.get<IPurchase[]>(this.baseUrl + 'purchase');
+    }
+
+    getAllPurchasesBetweenDates(startDate: Date, endDate: Date) : Observable<IPurchasesBetweenDatesResponse> {
+        return this._httpClient.get<IPurchasesBetweenDatesResponse>(this.baseUrl + 'purchase/bill?since=' + startDate + '&until=' + endDate);
+    }
 
 }

@@ -1,15 +1,19 @@
-
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
 $background: #000;
 $background_alternative: #12181e;
 
-html, body { 
+html,
+body {
   height: 100%;
   background-color: $background;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 @import "./media-queries";
 
@@ -22,9 +26,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 // fonts and color variables 
-
-$gradient-orange-yellow-1: linear-gradient(78deg, #ff4d00 9.86%, #ff9900 100%); 
-$filter_background_for_products: drop-shadow(0 4px 8px #ff4d00f0); 
+$gradient-orange-yellow-1: linear-gradient(78deg, #ff4d00 9.86%, #ff9900 100%);
+$filter_background_for_products: drop-shadow(0 4px 8px #ff4d00f0);
 
 $gray_5:#0d0d0d;
 $gray_10:#292929;
@@ -35,51 +38,54 @@ $gray_55:#757575;
 $gray_60:#9e9e9e;
 $gray_85:#d9d9d9;
 
-$warning-50: #fdf5e8; 
-$warning-100: #f8deb8; 
-$warning-200: #f4cf96; 
-$warning-300: #f0b966; 
-$warning-400: #edab49; 
-$warning-500: #e8961b; 
-$warning-600: #d38919; 
-$warning-700: #a56b13; 
-$warning-800: #80530f; 
-$warning-900: #613f0b; 
+$warning-50: #fdf5e8;
+$warning-100: #f8deb8;
+$warning-200: #f4cf96;
+$warning-300: #f0b966;
+$warning-400: #edab49;
+$warning-500: #e8961b;
+$warning-600: #d38919;
+$warning-700: #a56b13;
+$warning-800: #80530f;
+$warning-900: #613f0b;
 
-$acromatic-50: #e9e9ec; 
-$acromatic-100: #babbc4; 
-$acromatic-200: #989ba8; 
-$acromatic-300: #696d80; 
-$acromatic-400: #4c5167; 
-$acromatic-500: #1f2541; 
-$acromatic-600: #1c223b; 
-$acromatic-700: #161a2e; 
-$acromatic-800: #111424; 
-$acromatic-900: #0d101b; 
+$acromatic-50: #e9e9ec;
+$acromatic-100: #babbc4;
+$acromatic-200: #989ba8;
+$acromatic-300: #696d80;
+$acromatic-400: #4c5167;
+$acromatic-500: #1f2541;
+$acromatic-600: #1c223b;
+$acromatic-700: #161a2e;
+$acromatic-800: #111424;
+$acromatic-900: #0d101b;
 
 
-$primary-l1: #f07f66; 
-$primary-l2: #f4a796; 
-$primary-l3: #f8c4b8; 
-$primary-main: #e8401b; 
-$primary-s1: #d33a19; 
-$primary-s2: #a52d13; 
-$primary-s3: #80230f; 
+$primary-l1: #f07f66;
+$primary-l2: #f4a796;
+$primary-l3: #f8c4b8;
+$primary-main: #e8401b;
+$primary-s1: #d33a19;
+$primary-s2: #a52d13;
+$primary-s3: #80230f;
+
+
+
 
 //fonts
-$mobile-h1: 700 2rem/normal Klavika; 
-$mobile-h1italic: bold italic 2rem/normal Klavika; 
-$mobile-h2: 700 1.5rem/normal Klavika; 
-$mobile-h2italic: bold italic 1.5rem/normal Klavika; 
-$mobile-h3: 700 1.125rem/normal Klavika; 
-$mobile-h3italic: bold italic 1.125rem/normal Klavika; 
-$mobile-normal: 400 1rem/1.5rem Raleway; 
-$mobilenormalmeddium: 500 1rem/normal Raleway; 
-$mobilenormalsemi-bold: 600 1rem/normal Raleway; 
-$mobilenormalbold: 700 1rem/normal Raleway; 
-$mobilenormalextrabold: extrabold 1rem/normal Raleway; 
-$mobile-h4: 700 1rem/normal Klavika; 
-$mobile-small-text: 400 0.6875rem/normal Raleway; 
+$mobile-h1: 700 2rem/normal Klavika;
+$mobile-h1italic: bold italic 2rem/normal Klavika;
+$mobile-h2: 700 1.5rem/normal Klavika;
+$mobile-h2italic: bold italic 1.5rem/normal Klavika;
+$mobile-h3: 700 1.125rem/normal Klavika;
+$mobile-h3italic: bold italic 1.125rem/normal Klavika;
+$mobile-normal: 400 1rem/1.5rem Raleway;
+$mobilenormalmeddium: 500 1rem/normal Raleway;
+$mobilenormalsemi-bold: 600 1rem/normal Raleway;
+$mobilenormalbold: 700 1rem/normal Raleway;
+$mobilenormalextrabold: extrabold 1rem/normal Raleway;
+$mobile-h4: 700 1rem/normal Klavika;
+$mobile-small-text: 400 0.6875rem/normal Raleway;
 
 
 $success-50: #e9feec;
@@ -118,35 +124,38 @@ $info-900: #104165;
 
 $shadow_1_3 : 1px 3px 10px 4px rgba($primary_main, 0.50);
 
-.text-danger{
+.text-danger {
   color: $danger-400;
 }
 
 
-h1{
+h1 {
   font: $mobile-h1;
 }
-h2{
+
+h2 {
   font: $mobile-h2;
 }
-h3{
+
+h3 {
   font: $mobile-h3;
 }
-h4{
+
+h4 {
   font: $mobile-h4;
 }
 
-small{
+small {
   font: $mobile-small-text;
 }
 
-p{
+p {
   font: $mobile-normal;
 }
 
-li{
+li {
   font: $mobile-normal;
-  list-style-type: none; 
+  list-style-type: none;
 }
 
 a {
@@ -193,34 +202,36 @@ a {
 
 }
 
-h2{
+h2 {
   font: $mobile-h2;
   color: rgb(255, 255, 255);
 }
 
-h2.italic{
+h2.italic {
   font: $mobile-h2italic;
 }
 
-h3{
+h3 {
   font: $mobile-h3;
 }
-h3.italic{
+
+h3.italic {
   font: $mobile-h3italic;
 }
 
-h4{
+h4 {
   font: $mobile-h4;
 }
 
-p{
+p {
   font: $mobile-normal;
 }
-small{
+
+small {
   font: $mobile-small-text;
 }
 
-mat-icon{
+mat-icon {
   height: fit-content;
   width: fit-content;
 }
@@ -235,52 +246,52 @@ $height_for_toolbar_no_fixed : 90px;
 //The height is used in a div within the sidenav content, as the navbar is positioned above the rest of the page
 $height_helper : $height_for_toolbar_no_fixed;
 
-.primary_button{
+.primary_button {
 
   color: white;
-  
+
   padding: 8px 10px;
 
-  background-image: linear-gradient(160deg, $primary-main 20%, $primary-s1 150%); 
+  background-image: linear-gradient(160deg, $primary-main 20%, $primary-s1 150%);
   border-radius: 4px;
-  box-shadow: 3px, 1px, 4px, rgb(0, 0, 0,0.25);
+  box-shadow: 3px, 1px, 4px, rgb(0, 0, 0, 0.25);
 
   font-size: .8rem;
 
 
-  @include tablet{
-      padding: 8px 15px;
+  @include tablet {
+    padding: 8px 15px;
   }
 
-  @include laptop{
-      padding: 10px 22px;
-      font-size: 1rem;
+  @include laptop {
+    padding: 10px 22px;
+    font-size: 1rem;
   }
 
-  @include desktop{
-      padding: 10px 25px;
-      font-size: 1rem;
+  @include desktop {
+    padding: 10px 25px;
+    font-size: 1rem;
   }
 
-  transition: background-color 0.3s ease; 
-  
+  transition: background-color 0.3s ease;
+
 }
 
-.primary_button:hover{
+.primary_button:hover {
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.283);
-  background-image: linear-gradient(160deg, $primary-main 20%, $primary-l1 150%); 
+  background-image: linear-gradient(160deg, $primary-main 20%, $primary-l1 150%);
   cursor: pointer;
 }
 
-.primary_button_disabled{
-    opacity: 0.6;
-    pointer-events: none; 
-  }
+.primary_button_disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
 
 
-.tertiary_button{
-  color:  $primary-main;
-  
+.tertiary_button {
+  color: $primary-main;
+
   padding: 8px 10px;
   background-color: $background;
 
@@ -289,33 +300,41 @@ $height_helper : $height_for_toolbar_no_fixed;
   font-size: .8rem;
 
 
-  @include tablet{
-      padding: 8px 15px;
+  @include tablet {
+    padding: 8px 15px;
   }
 
-  @include laptop{
-      padding: 10px 22px;
-      font-size: 1rem;
+  @include laptop {
+    padding: 10px 22px;
+    font-size: 1rem;
   }
 
-  @include desktop{
-      padding: 10px 25px;
-      font-size: 1rem;
+  @include desktop {
+    padding: 10px 25px;
+    font-size: 1rem;
   }
 
-  transition: all 0.1s ease; 
-  
+  transition: all 0.1s ease;
+
 }
 
-  .tertiary_button:hover{
-    box-shadow: inset 0 0 0 2px $primary-main; 
-    cursor: pointer;
-  }	
+.tertiary_button:hover {
+  box-shadow: inset 0 0 0 2px $primary-main;
+  cursor: pointer;
+}
 
-  .show{
-    display: flex;
-  }
+.show {
+  display: flex;
+}
 
-  .hide{
-    display: none !important;
-  }
+.hide {
+  display: none !important;
+}
+
+
+// Define a mixin that groups the properties
+@mixin gradient-text {
+  background: linear-gradient(10deg , $primary-main 0%, yellow 140%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

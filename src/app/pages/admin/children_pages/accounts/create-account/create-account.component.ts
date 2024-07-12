@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CustomForm } from 'app/core/custom-form/custom.form';
+import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 import { NgClass } from '@angular/common';
@@ -17,8 +17,6 @@ import { IAccountReq } from 'app/core/models/IAccount';
   imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, MatIcon]
 })
 export class CreateAccountComponent extends CustomForm {
-
-
 
   accountWasCreatedSuccessfully = false;
   accountHasError = false;

@@ -1,0 +1,115 @@
+<main class="purchase-details-main-container" style="color: white;">
+    @if(this.purchase){
+    
+    <div class="admin_panel_table_main_container" >
+        <h1>Detalles de la compra</h1> 
+
+
+
+
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        Comprador
+                    </td>
+                    <td>
+                        Total de la venta
+                    </td>
+                    <td>
+                        Envío
+                    </td>
+                    <td>
+                        Nro de Orden / Codigo de Envio
+                    </td>
+                    <td>
+                        Estado del Envío
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+               
+                <tr>
+                    <td>
+                        <span> {{ this.purchase.fullname }}</span>
+                    </td>
+                    <td>
+                        <span> {{ this.purchase.totalAmount | currency }}</span>
+                    </td>
+                    <td>
+                        @if(this.purchase.shipment){ {{this.purchase.shipment}}}@else{<span>"No tiene"</span>}
+                    </td>
+                    <td>
+                        @if(this.purchase.merchantOrder){
+                            {{this.purchase.merchantOrder}}}@else{<span>"No tiene"</span>}
+                    </td>
+                    <td>
+                        @if(this.purchase.paymentStatus){ {{this.purchase.paymentStatus}}}@else{<span>"No
+                            tiene"</span>}
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <h2 class="products_title">Productos comprados:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        Marca
+                    </td>
+                    <td>
+                        Modelo
+                    </td>
+                    <td>
+                        precio unitario
+                    </td>
+                    <td>
+                        cantidad
+                    </td>
+                    <td>
+                        subtotal
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @for(product of purchase.products ; track $index){
+                <tr>
+                    <td>
+                        {{product.brand}}
+                    </td>
+                    <td>
+                        {{product.model}}
+                    </td>
+                    <td>
+                        {{product.price | currency}}
+                    </td>
+                    <td>
+                        {{product.quantity}}
+                    </td>
+                    <td>
+                        {{product.subtotal | currency}}
+                    </td>
+                </tr>
+                }
+
+                <tr class="total_row">
+                    <td  colspan="4">Total de la venta: </td>
+                    <td colspan="1">{{this.purchase.totalAmount | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+
+    }@else {
+    <div>
+        <app-input-danger-text text="Producto no encontrado"></app-input-danger-text>
+    </div>
+    }
+
+</main>

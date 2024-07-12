@@ -14,7 +14,7 @@
                     Habilitado
                 </td>
                 <td>
-                    Acciones
+                    Habilitar/Deshabilitar
                 </td>
             </tr>
         </thead>
@@ -29,11 +29,7 @@
                     @else{Deshabilitado}
                 </td>
                 <td class="actions_buttons_container">
-                    <!-- <button type="button" class="actions_button update_button" (click)="showUpdatePopUpMethod(account.id ">
-                            <mat-icon>Ver Mas</mat-icon>
-                        </button> -->
-
-                    <button type="button" class="actions_button update_button"
+                    <button type="button" class="actions_button update_button" title="Cambiar"
                         (click)="updateStateAccount(account.username , account.enabled)">
                         <mat-icon>sync</mat-icon>
                     </button>

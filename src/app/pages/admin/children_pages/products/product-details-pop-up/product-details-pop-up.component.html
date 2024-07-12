@@ -10,14 +10,13 @@
                 <!-- Esto es lo que seria componente -->
 
                 <section class="form_container">
-                    <form (ngSubmit)="closeUpdateModal()" [formGroup]="this.form" class="form algo">
+                    <form (ngSubmit)="closeUpdateModal()" [formGroup]="this.form" class="form">
 
                         <!-- Nombre -->
                         <div class="custom-input">
                             <label class="form-label">Titulo: </label>
                             <input type="text" formControlName="title" required class="form-control"
                                 >
-
                         </div>
 
                         <!-- Descipcion -->

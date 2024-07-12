@@ -40,6 +40,14 @@ export const ADMIN_ROUTES: Routes = [
             {
                 path: 'accounts/new',
                 loadComponent: ()=>import('./children_pages/accounts/create-account/create-account.component').then(r => r.CreateAccountComponent)
+            },
+            {
+                path: 'billing',
+                loadComponent: ()=>import('./children_pages/Bills/get-all-bills/get-all-bills.component').then(r=> r.GetAllBillsComponent) 
+            },
+            {
+                path: 'billing/:id',
+                loadComponent: ()=>import('./children_pages/Bills/purchase-details/purchase-details.component').then(r=> r.PurchaseDetailsComponent) 
             }
 
         ]

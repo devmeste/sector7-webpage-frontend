@@ -1,14 +1,14 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, inject, viewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import BKProduct from 'app/core/models/BKProduct';
-import { ICategory } from 'app/core/models/ICategory';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
-import { CustomForm } from 'app/core/custom-form/custom.form';
 import { NgClass, NgFor } from '@angular/common';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { MatIcon } from '@angular/material/icon';
 import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
+import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.pop.up';
+// import {} from '../../../../../shared/';
 
 @Component({
   selector: 'app-products-update-pop-up',
@@ -17,11 +17,8 @@ import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
   styleUrls: ['./products-update-pop-up.component.scss', '../../../../../shared/styles/pop-up-styles.scss', '../../../../../shared/styles/admin_form.scss'],
   imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon, SplitLinkPipe]
 })
-export class ProductsUpdatePopUpComponent extends CustomForm {
-  
+export class ProductsUpdatePopUpComponent extends CustomFormPopUp {
 
-
-  @Output() close = new EventEmitter();
   @Input({ required: true }) product_id !: string;
   @Input({ required: true }) product_USD_price !: number;
 
@@ -32,12 +29,15 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
   product$ !: BKProduct;
   private photos = [];
 
+
   productUpdatedSuccessfully = false;
   productUpdateFailed = false;
   errorMessage = '';
 
   photosArray: string[] = [];
   photosToShow: string[] = [];
+
+  categoryName: string = '';
 
   form!: FormGroup;
 
@@ -64,7 +64,15 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
 
       this.fillInitialPhotos(this.product$.photos || []);
       this.fillFieldsArray();
+      
+      this._adminService.getCategoryById(this.product$.categoryId).subscribe(c => {
+        this.categoryName = c.name;
+        console.log("hola");
+        console.log(this.categoryName);
+      })
     });
+
+    
   }
 
   fillInitialPhotos(photos: string[]): void {
@@ -156,12 +164,8 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
     });
   }
 
-  closeUpdateModal() {
-    this.close.emit();
-  }
-
   splitPhotos(): string[] {
-    let result = this.photosArray2.value.map((photo:string) => photo.split('!&!').pop());
+    let result = this.photosArray2.value.map((photo: string) => photo.split('!&!').pop());
     return result;
   }
 
@@ -179,12 +183,7 @@ export class ProductsUpdatePopUpComponent extends CustomForm {
         break;
     }
   }
-
-  @HostListener('document:keydown.escape', ['$event'])
-  handleEscapeKey(event: KeyboardEvent) {
-    this.closeUpdateModal();
-  }
-
+  
 }
 
 

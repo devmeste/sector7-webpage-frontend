@@ -59,7 +59,7 @@
                                 <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closePopUpMessage('categoryUpdateFailed')" > </app-message-pop-up>
                             }
                             
-                            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}" [disabled]="disabledFormButton()"
+                            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}" [disabled]="disabledFormButton(this.form)"
                                 type="submit" >Enviar
                             </button>
                         </form>

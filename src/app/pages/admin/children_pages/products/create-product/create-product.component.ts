@@ -10,7 +10,7 @@ import { ICategory } from 'app/core/models/ICategory';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { BehaviorSubject } from 'rxjs';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
-import { CustomForm } from 'app/core/custom-form/custom.form';
+import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 @Component({
   selector: 'app-create-product',
   standalone: true,

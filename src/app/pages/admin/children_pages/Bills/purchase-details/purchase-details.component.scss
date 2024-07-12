@@ -1,0 +1,26 @@
+@import 'styles.scss';
+@import '_media-queries.scss';
+
+.top_details_container{
+    display: flex;
+    gap: 1rem;
+    padding: 0 10%;
+    // justify-content: space-around;
+}
+
+h1 , h2{
+    @include gradient-text;
+}
+
+.products_title{
+    margin-top: 1rem;
+}
+
+.purchase-details-main-container .admin_panel_table_main_container{
+    padding-top: 2rem;
+    
+    .total_row{
+        background: $gray_15;
+        font-weight: 500;
+    }
+}
