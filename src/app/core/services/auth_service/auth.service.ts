@@ -99,7 +99,7 @@ export class AuthService {
   }
 
   // register
-  register(user: IUser): Observable<string> {
+  register(user: IUser): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });

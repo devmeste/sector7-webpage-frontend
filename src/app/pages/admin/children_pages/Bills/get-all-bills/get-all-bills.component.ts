@@ -47,6 +47,7 @@ export class GetAllBillsComponent {
 
   updateDataView() {
     this._adminService.getAllPurchases().subscribe(c => {
+      console.log(c);
       this.purchases$ = c;
     })
   }

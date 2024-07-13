@@ -5,7 +5,27 @@ export interface IPurchase {
     fullname:      string;
     products:      IPurchaseProduct[];
     totalAmount:   number;
-    shipment:      string | null;
+    shipment:      IShipment | null;
     merchantOrder: string | null;
     paymentStatus: string | null;
+    purchaseDate: Date;
+}
+
+export interface IShipment {
+    id:        string;
+    address:   Address;
+    status:    string;
+    trackId:   string;
+    expeditor: string;
+}
+
+export interface Address {
+    id:           string;
+    zipCode:      number;
+    province:     string;
+    city:         string;
+    streetName:   string;
+    streetNumber: number;
+    floor:        number;
+    door:         string;
 }

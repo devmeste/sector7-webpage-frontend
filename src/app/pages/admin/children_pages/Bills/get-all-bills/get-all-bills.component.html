@@ -29,6 +29,9 @@
                         Cant. Prod.
                     </td>
                     <td>
+                        Fecha
+                    </td>
+                    <td>
                         Total
                     </td>
                     <td>
@@ -50,13 +53,17 @@
                         {{purchase.products.length}}
                     </td>
                     <td>
+                        {{purchase.purchaseDate}}
+                    </td>
+
+                    <td>
                         {{purchase.totalAmount}}
                     </td>
                     <td>
                         @if(purchase.shipment){
-                        {{purchase.shipment}}
+                        Si
                         }@else{
-                        No tiene envío
+                        No 
                         }
                     </td>
 

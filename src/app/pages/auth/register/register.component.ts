@@ -4,6 +4,7 @@ import { FooterComponent } from "../../../shared/components/footer/footer.compon
 import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { IUser } from 'app/core/models/IUser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent extends CustomForm {
 
   _authService = inject(AuthService);
   responseMessage!: string;
-
+  _router: Router = inject(Router);
   constructor() {
     super();
   }
@@ -37,8 +38,6 @@ export class RegisterComponent extends CustomForm {
 
   override send(): void {
 
-    console.log("hola");
-    console.log(this.form);
     if (this.form.valid) {
       const newUser: IUser = {
         username: this.form.get('username')?.value,
@@ -52,12 +51,23 @@ export class RegisterComponent extends CustomForm {
         }
       };
 
-      this._authService.register(newUser).subscribe(response => {
-        this.responseMessage = response;
-      })
-    }
+      this._authService.register(newUser).subscribe( {
 
-    
+        next: response => {
+          console.log("daleee");
+          alert(response + "\n \nVerifica tu cuenta y luego podras ingresar");
+          // TODO : Mostrar un pop up 
+          this.form.reset();
+
+          this._router.navigate(['/'])
+        },
+        error: err => alert('Ocurrio un error: ' + err.message.message),
+        complete: () => console.log('Observable emitted the complete notification')
+
+
+      } )
+
+    }
   }
 
 
