@@ -12,5 +12,13 @@ export const AUTH_ROUTES: Routes = [
     {
         path: 'admin',
         loadComponent: () => import('./login/admin_login.component').then(r => r.AdminLoginComponent),
-    }
+    },
+    {
+        path: 'recover-password',
+        loadComponent: () => import('./recover-password/recover-password.component').then(r => r.RecoverPasswordComponent),
+    },
+    {
+        path: 'recover-user',
+        loadComponent: () => import('./recover-user/recover-user.component').then(r => r.RecoverUserComponent),
+    },
 ]

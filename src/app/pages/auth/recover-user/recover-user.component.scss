@@ -1,0 +1,67 @@
+@import 'styles.scss';
+@import '_media-queries.scss';
+
+.recover_user_main_container{
+    // background-color: $gray_10;
+    min-height: 50vh;
+    display: flex;
+
+    .container{
+        border: 2px solid $gray_5;
+        width: 500px;
+        margin: auto;
+
+       
+        color: white;
+        
+        .form{
+            background-color: black;
+            border: 2px solid $primary-main;
+            padding: 0;
+            box-shadow: $shadow_1_3;
+            h2{
+                width: 80%;
+                margin: auto;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                @include gradient-text;
+            }
+        }
+        .form-label{
+            width: 80%;
+            margin: auto;
+            margin-top: 1rem;
+
+        }        
+        .custom-input{
+            background-color: black;
+            width: 80%;
+            margin: auto;
+        }
+        .divider{
+            background-color: $gray_10;
+            height: 2px ;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .primary_button{
+            width: 100px;
+            margin : 0 auto 1rem auto;
+        }
+
+        .form-control{
+            background-color: $background;
+        }
+        input::placeholder {
+            color: rgb(217, 217, 217); 
+            color: $primary-l2; 
+        }
+
+        .form-control:focus {
+            outline: 1px solid #007bff;
+            background-color: $gray_15;
+          }
+    }
+
+}

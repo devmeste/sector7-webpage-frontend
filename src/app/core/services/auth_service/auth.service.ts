@@ -9,7 +9,8 @@ import { IUser } from 'app/core/models/IUser';
   providedIn: 'root'
 })
 export class AuthService {
-  
+ 
+
 
 
   baseUrl: string = 'http://localhost:8001/api/v1/es/';
@@ -104,4 +105,22 @@ export class AuthService {
     });
     return this._http.post(this.baseUrl + 'account/register', user, { headers, responseType: 'text' });
   }
+
+
+  // recover user
+
+  recoverUser(emailOrPhone: string) {
+
+    return this._http.post(this.baseUrl + 'account/recover-user', { email: emailOrPhone }).pipe(
+      tap(() => console.log())
+    );
+
+  }
+
+  recoverPassword(username: string, email: string) {
+    return this._http.post(this.baseUrl + 'account/recover-password', { username, email } , { responseType: 'text' }).pipe(
+      tap(() => console.log())
+    );
+  }
+
 }

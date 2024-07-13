@@ -1,0 +1,32 @@
+<main class="recover_user_main_container">
+    <section class="container">
+
+
+
+
+        <form [formGroup]="this.form" class="form" (ngSubmit)="send()"> 
+            <h2>Recuperar Cuenta</h2>
+            <label for="email_or_phone" class="form-label">
+                <p>Ingresa tu correo electrónico o número de celular para buscar tu cuenta.</p>
+            </label>
+            <div class="divider"></div>
+            <div class="custom-input">
+                <input type="text" 
+                formControlName="email_or_phone"
+                 placeholder="Correo electrónico o número de celular"
+                class="form-control" 
+                [ngClass]="{ 'is-invalid': hasErrors(this.form,'email_or_phone', 'required') }"
+                >
+            </div>
+            @if(hasErrors(this.form,'email_or_phone', 'required') ){ <app-input-danger-text
+                text="El email es requerido"></app-input-danger-text>
+            }
+            @if(hasErrors(this.form,'email_or_phone', 'email') ){ <app-input-danger-text
+                text="El formato del mail es inválido"></app-input-danger-text>
+            }
+            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
+                [disabled]="disabledFormButton(this.form)" type="submit">Enviar
+            </button>
+        </form>
+    </section>
+</main>

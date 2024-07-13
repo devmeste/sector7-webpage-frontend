@@ -26,11 +26,21 @@
             }
             <input type="submit" class="primary_button" value="Iniciar Sesión">
         </form>
+
+        <div>
+            <p class="question_for_forget_password" [routerLink]="['recover-password']">¿Olvidaste tu contraseña?</p>
+        </div>
+
+        <div>
+            <p class="question_for_forget_password" [routerLink]="['recover-user']">¿Olvidaste tu usuario ?</p>
+        </div>
     
         <h3 class="question_for_account">
             ¿No tienes una cuenta?
         </h3>
+        
         <button class="primary_button" [routerLink]="['register']" >¡Regístrate!</button>
+
     </section>
     
 </main>

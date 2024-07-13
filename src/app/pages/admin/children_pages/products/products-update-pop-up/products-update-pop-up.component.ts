@@ -125,7 +125,6 @@ export class ProductsUpdatePopUpComponent extends CustomFormPopUp {
 
   send() {
 
-
     let fields: any = {};
 
     (this.form.get('fieldsArray')?.value as Field[]).forEach((field: Field) => {
