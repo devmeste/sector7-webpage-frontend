@@ -5,7 +5,7 @@
 
 
         <form [formGroup]="this.form" class="form" (ngSubmit)="send()"> 
-            <h2>Recuperar Cuenta</h2>
+            <h2>Recuperar Usuario</h2>
             <label for="email_or_phone" class="form-label">
                 <p>Ingresa tu correo electrónico o número de celular para buscar tu cuenta.</p>
             </label>
@@ -28,5 +28,16 @@
                 [disabled]="disabledFormButton(this.form)" type="submit">Enviar
             </button>
         </form>
+
+        @if(showSuccessPopUp){
+
+            <app-message-pop-up custom_message='{{successMessage}}' (close)="closeModal('showSuccessPopUp')">
+            </app-message-pop-up>
+        }
+        @if(showFailedPopUp){
+            <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('showFailedPopUp')">
+            </app-message-pop-up>
+        }
+    
     </section>
 </main>

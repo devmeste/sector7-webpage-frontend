@@ -109,16 +109,18 @@ export class AuthService {
 
   // recover user
 
-  recoverUser(emailOrPhone: string) {
-
-    return this._http.post(this.baseUrl + 'account/recover-user', { email: emailOrPhone }).pipe(
+  recoverUser(email: string) {
+    console.log(email);
+    return this._http.post(this.baseUrl + 'account/recover-user', { email }, { responseType: 'text' }).pipe(
       tap(() => console.log())
     );
 
   }
 
   recoverPassword(username: string, email: string) {
-    return this._http.post(this.baseUrl + 'account/recover-password', { username, email } , { responseType: 'text' }).pipe(
+    let body= { username, email };
+    console.log(body);
+    return this._http.post(this.baseUrl + 'account/recover-password', body , { responseType: 'text' }).pipe(
       tap(() => console.log())
     );
   }

@@ -36,5 +36,17 @@
 
         </form>
     </section>
+
+
+    @if(showSuccessPopUp){
+
+        <app-message-pop-up custom_message='{{successMessage}}' (close)="closeModal('showSuccessPopUp')">
+        </app-message-pop-up>
+    }
+    @if(showFailedPopUp){
+        <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('showFailedPopUp')">
+        </app-message-pop-up>
+    }
+
 </main>
 <app-footer></app-footer>

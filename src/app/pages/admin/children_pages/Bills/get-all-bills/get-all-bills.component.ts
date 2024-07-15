@@ -7,39 +7,52 @@ import { InputDangerTextComponent } from "../../../../../shared/components/input
 // import { PurchaseDetailsPopUpComponent } from "../purchase-details-pop-up/purchase-details-pop-up.component";
 import { IPurchase } from 'app/core/models/IPurchase';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
 
 
 @Component({
   selector: 'app-get-all-bills',
   standalone: true,
-  imports: [MatIcon, InputDangerTextComponent, ReactiveFormsModule],
+  imports: [MatIcon, InputDangerTextComponent, ReactiveFormsModule, CustomDatePipe],
   templateUrl: './get-all-bills.component.html',
   styleUrls: ['./get-all-bills.component.scss', "../../../../../shared/styles/admin_table.scss"],
-})
-export class GetAllBillsComponent {
-  clearFilters() {
-    this.form.reset();
-    this.updateDataView();
-  }
-
-  _adminService = inject(AdminService);
-  _router = inject(Router);
-  _formBuilder = inject(FormBuilder);
-  purchases$ !: IPurchase[];
-
-  form: FormGroup = this._formBuilder.group({
-    startDate: [''],
-    endDate: ['']
-  });
-
-  verifyDates() {
-    const startDate = this.form.get('startDate');
-    const endDate = this.form.get('endDate');
-
-    if (startDate?.value && endDate?.value) {
-      this.updateDataViewWithDates();
+  })
+  export class GetAllBillsComponent {
+    clearFilters() {
+      this.form.reset();
+      this.updateDataView();
     }
-  }
+
+    _adminService = inject(AdminService);
+    _router = inject(Router);
+    _formBuilder = inject(FormBuilder);
+    purchases$ !: IPurchase[];
+
+    form: FormGroup = this._formBuilder.group({
+      startDate: [''],
+      endDate: ['']
+    });
+
+    verifyDates() {
+      const startDate = this.form.get('startDate')?.value;
+      const endDate = this.form.get('endDate')?.value;
+  
+      const formattedStartDate = this.formatDate(startDate);
+      const formattedEndDate = this.formatDate(endDate);
+  
+      console.log(formattedStartDate, formattedEndDate);
+  
+      if (formattedStartDate && formattedEndDate) {
+        this.updateDataViewWithDates( formattedStartDate, formattedEndDate);
+      }
+    }
+
+    formatDate(dateString: string | null): string | null {
+      if (!dateString) return null;
+  
+      const [year, month, day] = dateString.split('-');
+      return `${day}-${month}-${year}`;
+    }
 
   ngOnInit(): void {
     this.updateDataView();
@@ -52,8 +65,8 @@ export class GetAllBillsComponent {
     })
   }
 
-  updateDataViewWithDates() {
-    this._adminService.getAllPurchasesBetweenDates(this.form.get('startDate')?.value, this.form.get('endDate')?.value).subscribe(c => {
+  updateDataViewWithDates(startDate: string, endDate: string) {
+    this._adminService.getAllPurchasesBetweenDates(startDate,endDate).subscribe(c => {
       this.purchases$ = c.purchases;
     })
   }

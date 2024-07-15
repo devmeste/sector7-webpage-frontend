@@ -6,7 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { Usd } from 'app/core/models/Usd';
-import { CustomDatePipePipe } from "../../../../../core/pipes/custom-date-pipe.pipe";
+import { CustomDatePipe } from "../../../../../core/pipes/custom-date-pipe.pipe";
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 
 @Component({
@@ -14,7 +14,7 @@ import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/m
   standalone: true,
   templateUrl: './get-all-usd.component.html',
   styleUrls: ['./get-all-usd.component.scss', "../../../../../shared/styles/admin_table.scss"],
-  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipePipe, MessagePopUpComponent]
+  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipe, MessagePopUpComponent]
 })
 
 export class GetAllUsdComponent {

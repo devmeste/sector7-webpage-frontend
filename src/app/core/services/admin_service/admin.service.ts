@@ -201,7 +201,7 @@ export class AdminService {
         return this._httpClient.get<IPurchase[]>(this.baseUrl + 'purchase');
     }
 
-    getAllPurchasesBetweenDates(startDate: Date, endDate: Date) : Observable<IPurchasesBetweenDatesResponse> {
+    getAllPurchasesBetweenDates(startDate: string, endDate: string) : Observable<IPurchasesBetweenDatesResponse> {
         return this._httpClient.get<IPurchasesBetweenDatesResponse>(this.baseUrl + 'purchase/bill?since=' + startDate + '&until=' + endDate);
     }
 
