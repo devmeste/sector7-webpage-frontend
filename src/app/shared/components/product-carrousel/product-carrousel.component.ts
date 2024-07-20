@@ -4,6 +4,8 @@ import { TagModule } from 'primeng/tag';
 import { ProductCardBigComponent } from "../cards/product-card-big/product-card-big.component";
 import { IProduct } from '../../../core/models/product';
 import { ProductService } from '../../../core/services/product_service/product.service';
+import BKProduct from 'app/core/models/BKProduct';
+import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 
 
 @Component({
@@ -11,16 +13,16 @@ import { ProductService } from '../../../core/services/product_service/product.s
     standalone: true,
     templateUrl: './product-carrousel.component.html',
     styleUrl: './product-carrousel.component.scss',
-    imports: [CarouselModule, TagModule, ProductCardBigComponent]
+    imports: [CarouselModule, TagModule, ProductCardBigComponent, SplitLinkPipe]
 })
 export class ProductCarrouselComponent implements OnInit {
 
   _productService : ProductService = inject( ProductService );
-  products !: IProduct [] ;
+  products !: BKProduct [] ;
 
   ngOnInit(): void {
-    this._productService.getProducts().subscribe( products => {
-      this.products = products;
+    this._productService.getProducts().subscribe( productResponse => {
+      this.products = productResponse.products;
     })
   }
   

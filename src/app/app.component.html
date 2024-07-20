@@ -80,16 +80,26 @@
                 </nav>
                 @if(searchBarOpened){
                 <div class="search_bar_container_desktop search_bar_container " (click)="searchBarClicked=true"
-                    (keydown.escape)="closeSearchBar()">
+                    (keydown.escape)="closeSearchBar()" (keydown)="handleKeydownInSearchBar($event)">
                     <div class="search_bar" [ngClass]="searchBarClicked ? 'searchBarClicked':''">
                         <button class="search_icon_inside_bar_button search_icon">
                             <mat-icon mat-icon-button>search</mat-icon>
                         </button>
                         <input type="text" #searchInputDesktop [(ngModel)]="searchBarInputText"
-                            (blur)="handleInputBlur()">
+                            (ngModelChange)="search($event)" (blur)="handleInputBlur()">
                         <button class="search_icon_inside_bar_button close_icon">
                             <mat-icon (click)="closeSearchBar()">close</mat-icon>
                         </button>
+                    </div>
+                    <!-- List of Searched Products  -->
+                    <div id="searchResults" class="search_bar_results_container"
+                        *ngIf="productsBySearch$ |async as response">
+                        <ul>
+                            <li *ngFor="let product of response.products let i = index "
+                                (click)="goToSearchComponentWithTextWirted()" [class.selected]="i === selectedIndex">
+                                {{product.title}}>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 }
@@ -102,34 +112,35 @@
                     }
                     <div class="corner_navbar_icon">
                         <mat-icon matBadge="{{totalProductsInCart}}" matBadgeSize="small" matBadgeColor="warn"
-                            routerLink="cart">
+                            [routerLink]="['cart']">
                             shopping_cart
                         </mat-icon>
                     </div>
-                    <button mat-icon-button [matMenuTriggerFor]="menu" class="corner_navbar_icon" >
+                    <button mat-icon-button [matMenuTriggerFor]="menu" class="corner_navbar_icon">
                         <div class="user_photo">
                             @if(userMadeLogin || adminMadeLogin){
-                                <img src="assets/images/temporales/Avatar.svg" alt="user photo">
+                            <img src="assets/images/temporales/Avatar.svg" alt="user photo">
                             }
                             @else{
-                                <img src="assets/images/utils/user_empty.png" alt="user photo" >
+                            <img src="assets/images/utils/user_empty.png" alt="user photo">
                             }
                         </div>
                     </button>
 
                     <mat-menu #menu="matMenu" class="account_panel_menu">
                         @if(userMadeLogin || adminMadeLogin){
-                            <app-header-panel-logged-in-user class="account_panel"></app-header-panel-logged-in-user>
+                        <app-header-panel-logged-in-user class="account_panel"></app-header-panel-logged-in-user>
                         }
                         @else if(!userMadeLogin){
-                        <app-header-panel-general class="account_panel"
-                            ></app-header-panel-general>
+                        <app-header-panel-general class="account_panel"></app-header-panel-general>
                         }
                     </mat-menu>
                 </div>
 
 
             </div>
+
+            <!-- TODO: Hacer andar la de version mobile -->
             @if (searchBarOpened) {
             <div class="search_bar_container_mobile search_bar_container" (keydown.escape)="closeSearchBar()"
                 (click)="searchBarClicked=true">
@@ -146,10 +157,12 @@
             }
         </mat-toolbar>
         <div class="height_helper"></div>
+
+
+
         <!-- Content  -->
         <router-outlet></router-outlet>
 
     </mat-sidenav-content>
-
 
 </mat-sidenav-container>

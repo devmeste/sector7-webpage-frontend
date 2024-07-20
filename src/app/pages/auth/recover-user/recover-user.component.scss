@@ -52,6 +52,7 @@
 
         .form-control{
             background-color: $background;
+            margin-bottom: 0.5rem;
         }
         input::placeholder {
             color: rgb(217, 217, 217); 
@@ -62,6 +63,10 @@
             outline: 1px solid #007bff;
             background-color: $gray_15;
           }
+    }
+    app-input-danger-text{
+        width: 80%  ;
+        margin: auto ;
     }
 
 }

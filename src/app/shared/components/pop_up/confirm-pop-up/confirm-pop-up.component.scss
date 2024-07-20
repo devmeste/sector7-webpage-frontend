@@ -1,0 +1,26 @@
+.modal_container{
+
+    .buttons_container{
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        gap: 1rem;
+    }
+    .primary_button{
+        margin: 0px;
+        transition: all 0.2s ease;
+    }
+
+    .primary_button:hover{
+        transform: translate(-1px, -1px);
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.365);
+    }
+
+    .primary_button.confirm_button:hover{
+        
+        background-image: linear-gradient(red, red);
+    }
+    .primary_button.cancel_button:hover{
+        
+    }
+}

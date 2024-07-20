@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../../../core/services/auth_service/auth.service";
 import { ITokenDto } from "../../../core/models/ITokenDto";
+import { IErrorResponse } from "app/core/models/IErrorResponse";
 
 
 @Injectable()
@@ -11,7 +12,7 @@ export abstract class ParentLoginComponent {
   LoginForm: FormGroup;
   requestHasError: boolean = false;    
   passwordVisible: string = 'password';
-  
+
   constructor(protected router:Router, protected auth_service: AuthService) {
 
     this.LoginForm = new FormGroup({
@@ -28,11 +29,8 @@ export abstract class ParentLoginComponent {
         this.requestHasError = false;
         this.saveTokenAndRedirect(response.token);
       },
-      error: (e) => {
+      error: (e : IErrorResponse) => {
         this.requestHasError = true;
-      },
-      complete: () => {
-        console.info('complete');
       },
     });
   }

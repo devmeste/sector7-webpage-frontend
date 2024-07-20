@@ -10,6 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { BreadcrumbComponent } from "../../../shared/components/breadcrumb/breadcrumb.component";
+import BKProduct from 'app/core/models/BKProduct';
 
 @Component({
     selector: 'app-search',
@@ -24,6 +25,7 @@ import { BreadcrumbComponent } from "../../../shared/components/breadcrumb/bread
         NgClass,
         RouterLink, BreadcrumbComponent]
 })
+
 export class SearchComponent {
 
   serchBarClicked: boolean = false;
@@ -32,9 +34,8 @@ export class SearchComponent {
 
   private _router: ActivatedRoute = inject(ActivatedRoute);
   private _productService = inject(ProductService);
-  category !: number;
 
-  products: IProduct[] = [];
+  products: BKProduct[] = [];
 
   features: IFeature[] = [
     {
@@ -54,13 +55,24 @@ export class SearchComponent {
     ;
 
 
+    textToSearch:string = "a";
 
+
+    // TODO: Mejorar esta logica
   ngOnInit(): void {
     this._router.params.subscribe(params => {
-      this.category = params['category'];
+      if(params['textToSearch']){
+        this.textToSearch = params['textToSearch'];
+        console.log(this.textToSearch);
+      }
+      this.updateProductsInfo();
     })
-    this._productService.getProducts().subscribe(products => {
-      this.products = products;
+    this.updateProductsInfo();
+  }
+
+  updateProductsInfo(){
+    this._productService.search(this.textToSearch).subscribe(productResponse => {
+      this.products = productResponse.products;
     });
   }
 

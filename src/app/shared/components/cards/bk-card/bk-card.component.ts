@@ -9,9 +9,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './bk-card.component.scss'
 })
 export class BkCardComponent {
-
+  
   @Input( {required:true}) id !: string;
   @Input( {required:true}) name !: string;
   @Input( {required:true}) img !: string;
   @Input( {required:true}) price !: number; 
+
 }

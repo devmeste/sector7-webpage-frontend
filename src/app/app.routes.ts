@@ -16,6 +16,14 @@ export const routes: Routes = [
         canActivate: [adminGuard]
     },
     {
+        path: 'admin-dashboard/login',
+        loadComponent : ()=> import('./pages/auth/login/admin_login.component').then(r=>r.AdminLoginComponent),
+    },
+    { // quitar luego
+        path: 'prueba', 
+        loadComponent : ()=> import('./prueba/prueba.component').then(r=>r.PruebaComponent),
+    },
+    {
         path: '**', 
         loadChildren : ()=> import('./pages/store/store.routes').then(r=>r.STORE_ROUTES)
     },

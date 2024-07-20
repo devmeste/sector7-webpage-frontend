@@ -3,7 +3,7 @@
         @for (product of products; track $index) {
         <div class="shopping_cart_item_container">
             <picture class="product_image">
-                <img src={{product.img}} alt="producto: {{product.name}}">
+                <img [src]="product.img | splitLink" alt="producto: {{product.name}}">
             </picture>
             <div class="side_text_container">
                 <div class="shopping_cart_item_name">
@@ -39,19 +39,20 @@
             <h3>Resumen de compra</h3>
             <div class="divider"></div>
             <div class="cart_summary_item">
-                <p class="total_products_in_cart ">Total de productos: ({{products.length}})</p>
-                <p>{{this.totalPrice | currency}}</p>
+                <p class="total_products_in_cart ">Productos: ({{products.length}})</p>
+                <p>{{this.totalPrice | currency :'USD':'symbol':'1.0-0'}}</p>
             </div>
             @if(shipping){
                 <div class="shipping_container cart_summary_item">
                     <p>Envío: </p>
-                    <p class="shipping_price"> {{shippingValue | currency}}</p>
+                    <p class="shipping_price"> {{shippingValue | currency :'USD':'symbol':'1.0-0'}}</p>
                 </div>
             }
             <div class="cart_summary_item cart_final_price">
-                <p class="total_price ">Total: </p>
-                <p class="total_price ">{{ (totalPrice + shippingValue) | currency }}</p>
+                <b class="total_price ">Total: </b>
+                <b class="total_price ">{{ (totalPrice + shippingValue) | currency :'USD':'symbol':'1.0-0' }}</b>
             </div>
+            <button class="primary_button" (click)="sendToChoiceDeliveryMethod()">Continuar compra</button>
         </div>
     }
 </main>

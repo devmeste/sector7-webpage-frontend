@@ -6,11 +6,11 @@
 
 .main_register {
     color: white;
-    background-color: $gray_10;
+    background-color: $background_alternative;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
     height: 700px;
 
     @include desktop{
@@ -18,7 +18,7 @@
     }
 
     .register_form_container {
-        background-color: $background;
+        background-color: $gray_5;
         border-radius: 10px;
 
         width: 90%;

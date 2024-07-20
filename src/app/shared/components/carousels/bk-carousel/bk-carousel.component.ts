@@ -5,11 +5,13 @@ import { IProduct } from '../../../../core/models/product';
 import { ProductCardBigComponent } from '../../cards/product-card-big/product-card-big.component';
 import { TagModule } from 'primeng/tag';
 import { BkCardComponent } from '../../cards/bk-card/bk-card.component';
+import BKProduct from 'app/core/models/BKProduct';
+import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 
 @Component({
   selector: 'app-bk-carousel',
   standalone: true,
-  imports: [CarouselModule, TagModule, ProductCardBigComponent, BkCardComponent],
+  imports: [CarouselModule, TagModule, ProductCardBigComponent, BkCardComponent, SplitLinkPipe],
   templateUrl: './bk-carousel.component.html',
   styleUrl: './bk-carousel.component.scss'
 })
@@ -17,11 +19,11 @@ export class BkCarouselComponent {
 
 
   _productService: ProductService = inject(ProductService);
-  products !: IProduct[];
+  products !: BKProduct[];
 
   ngOnInit(): void {
-    this._productService.getProducts().subscribe(products => {
-      this.products = products;
+    this._productService.getProducts().subscribe(productResponse => {
+      this.products = productResponse.products;
     })
   }
 

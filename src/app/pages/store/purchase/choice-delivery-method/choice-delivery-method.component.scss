@@ -1,0 +1,99 @@
+@import "styles.scss";
+
+.choice_delivery_method_main_container {
+    color: white;
+    background-color: $background_alternative;
+    min-height: 50vh;
+    padding: 3rem 15% 3rem ;
+
+    .container{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr;
+        background: linear-gradient( 140deg , $gray_5 30%  , $gray_10 50% , $gray_5 70%);        
+        padding-right: 2rem;
+    }
+    .delivery_method_container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        padding: 2rem ;
+
+        // background-color: $gray_5;
+        
+        .form{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            
+            .delivery_method_title_alternative {
+                cursor: pointer;
+                color: $primary-l1;
+            }
+    
+            .divider {
+                height: 2px;
+                background-color: $gray_20;
+                width: 100%;
+                margin: 1rem 0rem ;
+            }
+            .choice_container{
+                border: 2px solid $gray_20;
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: center;
+                padding: 2rem 0;
+                background-color: $gray_10;
+                width: 100%;
+                border-radius: 8px;
+                padding: 2rem;
+                margin-bottom: 2rem;
+                
+            }
+            
+            .submit_button_container {
+                display: flex;
+                width: 100%;
+                justify-content: end;
+                .primary_button {
+                    margin-top: 2rem;
+                    
+                }
+            }
+           
+        }
+
+        
+    }
+
+
+    .purchase_summary_container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        padding: 2rem 0;        
+        // background-color: $gray_5;   
+        .purchase_summary_content_element{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1rem 0;
+        }
+        .divider {
+            height: 2px;
+            background-color: $gray_20;
+            width: 100%;
+            margin: 1rem 0rem ;
+        }
+    }
+    
+}
+

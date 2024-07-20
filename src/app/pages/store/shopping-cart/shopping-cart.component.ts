@@ -3,12 +3,13 @@ import { CurrencyPipe } from '@angular/common';
 import { CartService } from '../../../core/services/cart_service/cart-service.service';
 import { IProduct_Cart } from '../../../core/models/product_cart';
 import { MatIcon } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CurrencyPipe, MatIcon, RouterLink],
+  imports: [CurrencyPipe, MatIcon, RouterLink, SplitLinkPipe],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })
@@ -16,7 +17,7 @@ export class ShoppingCartComponent implements OnInit {
   shipping!: boolean ;
   shippingValue !: number;
   totalPrice !: number;
-
+  _router: Router = inject(Router);
   products !: IProduct_Cart[];
   _cartService: CartService = inject(CartService);
 
@@ -30,8 +31,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     this._cartService.getAllProducts().subscribe(products => {
-      this.products = products;
-      
+      this.products = products;      
     })
   }
 
@@ -52,5 +52,7 @@ export class ShoppingCartComponent implements OnInit {
     this._cartService.updateProductQuantity(product, quantity);
   }
 
-
+  sendToChoiceDeliveryMethod() {
+    this._router.navigate(['buying/delivery-method']);
+  }
 }

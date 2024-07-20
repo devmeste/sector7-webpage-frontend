@@ -21,12 +21,6 @@ export class MessagePopUpComponent {
 
   @Input({ required: true }) custom_message !: string;
 
-  constructor() { }
-
-  ngOnInit() {
-
-  }
-
   closeModal() {
     this.close.emit();
   }

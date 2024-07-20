@@ -1,11 +1,12 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 
 @Component({
   selector: 'app-wide-product-card',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe , SplitLinkPipe],
   templateUrl: './wide-product-card.component.html',
   styleUrl: './wide-product-card.component.scss'
 })
@@ -15,6 +16,7 @@ export class WideProductCardComponent {
   @Input({ required: true }) name !: string;
   @Input({ required: true }) img !: string;
   @Input({ required: true }) price !: number;
+  
   constructor(private router: Router) {}
 
   navigateToProduct(id: string) {

@@ -1,5 +1,9 @@
 import { IPurchaseProduct } from "./IPurchaseProduct";
 
+// This Purchase comes from the server, 
+// but is not the purchase that the user can make
+// See MakePurchase to see the purchase that the user can make
+
 export interface IPurchase {
     id: string;
     fullname:      string;
@@ -20,7 +24,7 @@ export interface IShipment {
 }
 
 export interface Address {
-    id:           string;
+    id ?:           string;
     zipCode:      number;
     province:     string;
     city:         string;
@@ -29,3 +33,4 @@ export interface Address {
     floor:        number;
     door:         string;
 }
+

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable , of} from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { IProduct_Cart } from '../../models/product_cart';
 
 @Injectable({
@@ -12,61 +12,50 @@ export class CartService {
   private $cartQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private $cartTotal: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor() { 
-    const p : IProduct_Cart = {
-      id: '0',
-      name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler',
-      img: '../../../../assets/images/products/product-detail-1.png',
-      price: 2000,
-      stock: 10,
-      quantityRequested: 1
+  constructor() {
+    const cartData = localStorage.getItem('cart');
+    if (cartData) {
+      this.cart = JSON.parse(cartData);
+      this.$cart.next(this.cart);
+      this.$cartQuantity.next(this.cart.length);
+      this.$cartTotal.next(this.calculateTotal());
     }
-    const p2 : IProduct_Cart = {
-      id: '1',
-      name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler',
-      img: '../../../../assets/images/products/silla.png',
-      price: 2000,
-      stock: 10,
-      quantityRequested: 1
-    }
-    const p3 : IProduct_Cart = {
-      id: '2',
-      name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler',
-      img: '../../../../assets/images/products/auriculares.png',
-      price: 2000,
-      stock: 10,
-      quantityRequested: 1
-    }
-    const p4 : IProduct_Cart = {
-      id: '3',
-      name: 'Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler',
-      img: '../../../../assets/images/products/product-detail-1.png',
-      price: 2000,
-      stock: 10,
-      quantityRequested: 1
-    }
-
-    this.cart.push(p);
-    this.cart.push(p2);
-    this.cart.push(p3);
-    this.cart.push(p4);
-    this.$cartQuantity.next(this.cart.length);
-    this.$cartTotal.next(this.calculateTotal());
-  } 
+  }
 
   public addToCart(product: IProduct_Cart): void {
-    // const index = this.cart.indexOf(product);
-    const index = this.cart.findIndex(item => item.id === product.id);
-
-    if (index !== -1) {
-      this.cart[index].quantityRequested = this.cart[index].quantityRequested + 1;
-    }
-    else {
+    const index = this.findIndexIfProductIsAlreadyInCart(product.id);
+    if (index === -1) {
+      //if product not in cart, add it
       product.quantityRequested = 1;
       this.cart.push(product);
       this.$cartQuantity.next(this.cart.length);
       this.$cartTotal.next(this.calculateTotal());
+      this.saveCartInLocalStorage();
     }
+    else {
+      //if product already in cart, add quantity
+      this.cart[index].quantityRequested = this.cart[index].quantityRequested + 1;
+      this.saveCartInLocalStorage();
+    }
+  }
+
+  private saveCartInLocalStorage(): void {
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+
+    if (localStorage.getItem('cart') !== null) {
+      console.log("Cart:");
+      console.log(JSON.parse(localStorage.getItem('cart') as string));
+    }
+    else{
+      console.log("Cart is empty");
+    }
+
+  }
+
+
+
+  findIndexIfProductIsAlreadyInCart(idReceived: string): number {
+    return this.cart.findIndex(item => item.id === idReceived);
   }
 
   public getAllProducts(): Observable<IProduct_Cart[]> {
@@ -77,6 +66,7 @@ export class CartService {
     this.cart = [];
     this.$cartQuantity.next(0);
     this.$cartTotal.next(0);
+    this.saveCartInLocalStorage();
   }
 
   public getCartTotal(): Observable<number> {
@@ -88,15 +78,17 @@ export class CartService {
   }
 
   public deleteProduct(id: string): void {
-    const index = this.cart.findIndex(product => product.id === id);
+    const index = this.findIndexIfProductIsAlreadyInCart(id);
     if (index !== -1) {
       this.cart.splice(index, 1);
       this.$cartQuantity.next(this.cart.length);
       this.$cartTotal.next(this.calculateTotal());
+      this.saveCartInLocalStorage();
     }
   }
 
   public getProductById(id: string): IProduct_Cart | undefined {
+    // Verificar si el producto existe? 
     return this.cart.find(product => product.id === id);
   }
 
@@ -105,20 +97,24 @@ export class CartService {
     const index = this.cart.indexOf(product);
     if (index !== -1) {
       this.cart[index].quantityRequested = quantity;
+      this.saveCartInLocalStorage();
     }
   }
 
-  
+
   public updateProductQuantitySimple(product: IProduct_Cart, action: string): void {
     const index = this.cart.indexOf(product);
     if (index !== -1) {
-      if(action==="increase"){
-        this.cart[index].quantityRequested = this.cart[index].quantityRequested +1;
+      let product = this.cart[index];
+      if (action === "increase" && product.quantityRequested < product.stock) {
+        this.cart[index].quantityRequested = this.cart[index].quantityRequested + 1;
         this.$cartTotal.next(this.calculateTotal());
+        this.saveCartInLocalStorage();
       }
-      else{
-        this.cart[index].quantityRequested+= -1;
+      else if (action === "decrease" && product.quantityRequested > 0) {
+        this.cart[index].quantityRequested += -1;
         this.$cartTotal.next(this.calculateTotal());
+        this.saveCartInLocalStorage();
       }
     }
   }

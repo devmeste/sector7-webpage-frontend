@@ -32,10 +32,6 @@ export class RecoverPasswordComponent  extends CustomForm{
     if(this.form.valid){
       console.log(this.form.value);
       
-      // this.showSuccessPopUp = true;
-      // this.successMessage = 'Se ha enviado un correo con la nueva contraseña de tu cuenta';
-      // this.form.reset();
-
       const username= this.form.get('user')?.value;
       const email = this.form.get('email')?.value;
 
@@ -45,6 +41,8 @@ export class RecoverPasswordComponent  extends CustomForm{
           alert(response);
         },
         error: (error) => {
+          this.errorMessage = error.message;
+          this.showFailedPopUp = true;
           console.log(error);
         }
       })

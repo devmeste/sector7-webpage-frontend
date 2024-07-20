@@ -11,6 +11,7 @@ export default interface BKProduct {
     isEnabled:      boolean;
     isApproved: boolean;
     creationDate?: Date;
-    photos?:       string[];
+    photos :     string[];
     fieldsJSON:   string;
+    quantityRequested?: number;
 }

@@ -23,7 +23,7 @@ export const STORE_ROUTES: Routes = [
             import("./search/search.component").then(c => c.SearchComponent)
     },
     {
-        path: 'search/:category', 
+        path: 'search/:textToSearch', 
         loadComponent: () =>
             import("./search/search.component").then(c => c.SearchComponent)
     },
@@ -31,5 +31,10 @@ export const STORE_ROUTES: Routes = [
         path: 'cart', 
         loadComponent: () =>
             import("./shopping-cart/shopping-cart.component").then(c => c.ShoppingCartComponent)
+    },
+    {
+        path: 'buying/delivery-method', 
+        loadComponent: () =>
+            import("./purchase/choice-delivery-method/choice-delivery-method.component").then(c => c.ChoiceDeliveryMethodComponent)
     },
 ]

@@ -1,24 +1,24 @@
 <main class="product_details_container">
-    <app-breadcrumb class="app-breadcrumb" text="home > products"></app-breadcrumb>
+    <!-- <app-breadcrumb class="app-breadcrumb" text="home > products"></app-breadcrumb> -->
     <div class="mobile_display">
         <h3 class="product_name">
-            {{product?.name}}
+            {{product.title}}
         </h3>
 
         <div class="imgs_carousel_container">
-            <p-carousel [value]="product?.imgs || []" [circular]="true" [responsiveOptions]="responsiveOptions">
+            <p-carousel [value]="product.photos || []" [circular]="true" [responsiveOptions]="responsiveOptions">
                     <ng-template let-photo pTemplate="item">
                         <div class="main_img_container">
-                            <img src="{{photo}}" alt="product image">
+                            <img [src]="photo | splitLink" alt="product image">
                         </div>
                     </ng-template>
             </p-carousel>
         </div>
 
-        <p class="product_price"> {{product?.price | currency}}</p>
+        <p class="product_price"> {{product.price | currency}}</p>
         <div class="stock_available_container">
             <p class="stock_available">stock disponible</p>
-            <p class="stock_available_quantity">cantidad: <span class="quantity_number">{{product?.stock}}</span> <span
+            <p class="stock_available_quantity">cantidad: <span class="quantity_number">{{product.viewStock}}>
                     class="stock_available_quantity_text">(+50 disponibles)</span></p>
         </div>
         <div class="add_to_cart_button_container">
@@ -34,24 +34,24 @@
     <div class="desktop_display" >
         <picture class="desktop_img_container">
             <div class="side_imgs_container">
-                @for (img of product?.imgs?.slice(0, 5); track $index) {
-                    @if (img != this.mainImage()) {
+                @for (img of product.photos.slice(0, 5); track $index) {
+                    @if (img!= this.mainImage()) {
                     <div class="side_img_div_container" (click)="changeMainImage(img)">
-                        <img [src]="img" alt="Imagen del producto">
+                        <img [src]="img | splitLink" alt="Imagen del producto">
                     </div>
                 }
                 }
             </div>
             <div class="main_img_container">
-                <img src={{this.mainImage()}} alt="imagen del producto">
+                <img [src]="this.mainImage()| splitLink" alt="imagen del producto">
             </div>
             <div class="main_details_container">
                 <h2>
-                    {{product?.name}}
+                    {{product.title}}
                 </h2>
                 <p>procesadores > Procedadores AMD</p>
 
-                <h2 class="product_price">{{product?.price | currency}}</h2>
+                <h2 class="product_price">{{product.price | currency}}</h2>
 
                 <div class="reasons_to_buy_div"><mat-icon >check</mat-icon> Stock disponble</div>
                 <div class="reasons_to_buy_div"><mat-icon >local_shipping</mat-icon> Envio a todo el pais</div>

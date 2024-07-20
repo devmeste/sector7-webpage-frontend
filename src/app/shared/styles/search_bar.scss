@@ -1,5 +1,9 @@
+@import 'styles.scss';
+
+
 
 .search_bar{
+    // position: relative;
     $color_input: #9e9e9e;
     background-color: $color_input;
     color: white;
@@ -49,5 +53,32 @@
     }
     &.search_icon{
         margin-left: 1rem;
+    }
+}
+
+
+.search_bar_results_container{
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    border-radius: 15px;
+    top: 3rem;
+    
+    li{
+        cursor: pointer;
+        padding-left: 1rem;
+        &:hover , &.selected {
+            background-color: $primary-l2;
+
+            &:first-child{
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
+            &:last-child{
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+            }
+        }
+
     }
 }

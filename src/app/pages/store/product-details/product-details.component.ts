@@ -11,24 +11,27 @@ import { IProduct_Cart } from '../../../core/models/product_cart';
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { BkCarouselComponent } from "../../../shared/components/carousels/bk-carousel/bk-carousel.component";
 import { BreadcrumbComponent } from "../../../shared/components/breadcrumb/breadcrumb.component";
+import BKProduct from 'app/core/models/BKProduct';
+import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 
 @Component({
-    selector: 'app-product-details',
-    standalone: true,
-    templateUrl: './product-details.component.html',
-    styleUrl: './product-details.component.scss',
-    imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent]
+  selector: 'app-product-details',
+  standalone: true,
+  templateUrl: './product-details.component.html',
+  styleUrl: './product-details.component.scss',
+  imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent, SplitLinkPipe]
 })
 export class ProductDetailsComponent implements OnInit {
 
   private _router: ActivatedRoute = inject(ActivatedRoute);
   private _productService = inject(ProductService);
   private _cartService = inject(CartService);
-  cantidad !: number ;
+  cantidad !: number;
 
   id !: string;
-  product !: IProduct | undefined;
+  product!: BKProduct;
   mainImage = signal<string>('');
+
   responsiveOptions: CarouselResponsiveOptions[] = [
     {
       breakpoint: '481px',
@@ -41,39 +44,47 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     this._router.params.subscribe(params => {
       this.id = params['id'];
+      this.updateProductDetails(this.id);
     })
 
-    this.product = this._productService.getProductById(this.id);
+  }
 
-    if (this.product === undefined) {
-      //TODO: mostrar modal de error y luego redirigir al home, dado que pueden haber ingresado cualquier id en la url
-    }
-    else {
-      this.mainImage.set(this.product.imgs[0]);
-    }
 
+  updateProductDetails(id: string) {
+    this._productService.getProductById(this.id).subscribe(
+      product => {
+        this.product = product;
+        if (product.photos) {
+          this.mainImage.set(product.photos[0]);
+        } else {
+          //TODO: conseguir una foto por defecto
+        }
+      }
+    );
     this._cartService.getCartQuantity().subscribe(quantity =>{
       this.cantidad = quantity
     })
-    }
+  }
+
   
- 
+
+
   changeMainImage(img: string) {
     this.mainImage.set(img);
   }
 
 
-  addToCart(product: IProduct) {
+  addToCart(product: BKProduct) {
 
-    const productToAdd : IProduct_Cart = {
+    const productToAdd: IProduct_Cart = {
       id: product.id,
-      name: product.name,
-      img: product.imgs[0],
+      name: product.title,
+      img: product.photos?.[0] || '',
       price: product.price,
-      stock: product.stock,
+      stock: product.viewStock,
       quantityRequested: 0
     }
-    
+
     this._cartService.addToCart(productToAdd);
   }
 }

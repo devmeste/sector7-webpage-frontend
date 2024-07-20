@@ -7,19 +7,22 @@
     margin: auto;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(5 auto);
+    grid-template-rows: repeat(5, auto);
+
     padding: 0 5%;
     color: white;
 
     @include desktop {
         padding: 0 3%;
     }
-    
-    .app-breadcrumb{
+
+    .app-breadcrumb {
+        margin-top: 1.5rem;
         grid-column-start: 1;
         grid-column-end: 13;
         grid-row-start: 2;
-        grid-row-end: 3; 
+        grid-row-end: 3;
+        // background-color: yellow;
     }
 
     .search_bar_container {
@@ -29,32 +32,33 @@
         grid-row-end: 2;
         width: 90%;
         margin: 1rem auto 2rem;
+        // background-color: blue;
 
-        @include tablet{
+        @include tablet {
             width: 80%;
         }
 
-        @include laptop{
+        @include laptop {
             width: 70%;
         }
 
-        @include desktop{
+        @include desktop {
             width: 80%;
         }
 
-        .search_bar{
+        .search_bar {
             height: 40px;
         }
     }
 
-
-
     .search_title_container {
+        margin-top: 1.5rem;
         grid-column-start: 1;
         grid-column-end: 13;
         grid-row-start: 3;
         grid-row-end: 4;
         margin-bottom: 1rem;
+        // background-color: red;
 
         h2 {
             margin-bottom: 0.5rem;
@@ -65,9 +69,11 @@
             height: 1px;
             background-color: gray;
 
+
             @include tablet {
                 width: 80%;
             }
+
             @include laptop {
                 width: 50%;
             }
@@ -85,7 +91,9 @@
         background-color: transparent;
         color: black;
         padding: 0 1rem 0 0;
-        @include desktop{
+        // background-color: green;
+
+        @include desktop {
             padding: 0 2rem;
         }
 
@@ -118,7 +126,7 @@
         }
     }
 
-    .search_results_container {
+    .search_results_container { // TODO: Channge name to this container
         grid-column-start: 1;
         grid-column-end: 13;
         grid-row-start: 4;

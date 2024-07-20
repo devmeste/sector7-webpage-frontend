@@ -4,6 +4,15 @@
     <section class="form_container">
         <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
 
+            <!-- Nombre -->
+            <div class="custom-input">
+                <label class="form-label">Nombre: </label>
+                <input type="text" formControlName="title" required class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
+            </div>
+            @if( hasErrors(this.form,'title', 'required') ){ <app-input-danger-text
+                text="El nombre del producto es requerida"></app-input-danger-text>
+            }
 
             <!-- ID -->
             <div class="custom-input">
@@ -70,16 +79,7 @@
                 text="El viewStock del producto es requerida"></app-input-danger-text>
             }
 
-            <!-- Nombre -->
-            <div class="custom-input">
-                <label class="form-label">Nombre: </label>
-                <input type="text" formControlName="title" required class="form-control"
-                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
-            </div>
-            @if( hasErrors(this.form,'title', 'required') ){ <app-input-danger-text
-                text="El nombre del producto es requerida"></app-input-danger-text>
-            }
-
+            
 
             <!-- Descipcion -->
             <div class="custom-input">

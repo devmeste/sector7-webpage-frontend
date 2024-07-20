@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {  Component, inject } from '@angular/core';
+import {ReactiveFormsModule, Validators } from '@angular/forms';
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 import { AuthService } from 'app/core/services/auth_service/auth.service';
@@ -23,6 +23,9 @@ export class RegisterComponent extends CustomForm {
   showFailedPopUp: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
+
+
+
   constructor() {
     super();
   }
@@ -87,7 +90,7 @@ export class RegisterComponent extends CustomForm {
       case "showFailedPopUp": this.showFailedPopUp = false;
         break;
     }
-    
+
   }
 
 

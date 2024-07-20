@@ -59,16 +59,7 @@
                                     text="El modelo del producto es requerida"></app-input-danger-text>
                                 }
                             </div>
-                            <!-- Precio -->
-                            <div class="custom-input">
-                                <label class="form-label">Precio: </label>
-                                <input type="number" formControlName="price" required class="form-control"
-                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'price', 'required') }">
 
-                                @if( hasErrors(this.form,'price', 'required') ){ <app-input-danger-text
-                                    text="El precio del producto es requerida"></app-input-danger-text>
-                                }
-                            </div>
                             <!-- </div> -->
 
                             <!-- <div class="half_container"> -->
@@ -93,7 +84,16 @@
                                 }
                             </div>
 
+                            <!-- Precio -->
+                            <div class="custom-input">
+                                <label class="form-label">Precio: </label>
+                                <input type="number" formControlName="price" required class="form-control"
+                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'price', 'required') }">
 
+                                @if( hasErrors(this.form,'price', 'required') ){ <app-input-danger-text
+                                    text="El precio del producto es requerida"></app-input-danger-text>
+                                }
+                            </div>
                         </div>
 
 
@@ -117,7 +117,7 @@
 
                         </div>
 
-                       
+
 
 
                         <!-- Fotos -->
@@ -144,7 +144,7 @@
                             </div>
                         </div>
 
-                        
+
                         <label class="form-label">Campos: </label>
 
                         <div formArrayName="fieldsArray">

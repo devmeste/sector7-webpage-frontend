@@ -3,9 +3,9 @@
         <ng-template let-product pTemplate="item">
             <app-product-card-big 
                 id="{{product.id}}"
-                name="{{product.name}}" 
+                name="{{product.title}}" 
                 description="{{product.description}}" 
-                img="{{product.imgs[0]}}"
+                [img]="product.photos[0] | splitLink"
                 [price]="product.price">
             </app-product-card-big>
         </ng-template>

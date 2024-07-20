@@ -38,15 +38,9 @@
     .carousel-prev-icon {
         width: 60px;
         height: 160px;
-        // width: clamp(1.5rem, 1.143rem + 1.786vw, 2rem); TODO: fix clamps for media queries
-        // height: clamp(1.5rem, 1.143rem + 1.786vw, 2rem);
         color: $primary-main;
         transition: color 0.3s ease;
 
-        @include tablet {
-            // width: clamp(1.5rem, 1.143rem + 1.786vw, 2rem);
-            // height: clamp(1.5rem, 1.143rem + 1.786vw, 2rem);
-        }
 
     }
 
@@ -55,8 +49,6 @@
         color: $primary-l1;
     }
     
-
-    //no recuerdo
     .p-carousel-indicators {
         margin-top: 0.5rem;
         display: flex;

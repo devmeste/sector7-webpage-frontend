@@ -1,0 +1,53 @@
+.custom-autocomplete {
+    .p-autocomplete {
+        width: 400px; // Ajusta el ancho del contenedor
+    }
+
+    .p-inputtext {
+        background-color: #f0f0f0; // Cambia el color de fondo del input
+        color: #000; // Cambia el color del texto del input
+        border: 1px solid #ccc; // Cambia el color del borde del input
+        padding: 10px; // Añade padding al input
+    }
+
+    .p-autocomplete-panel {
+        // Estilos para el panel de sugerencias, si es necesario
+    }
+
+    .p-autocomplete-items {
+        // Estilos para el contenedor de las sugerencias, si es necesario
+    }
+
+    .p-autocomplete-item {
+        // Estilos para cada ítem de la lista de sugerencias, si es necesario
+    }
+}
+
+
+::ng-deep {
+    .p-autocomplete {
+        width: 400px !important; // Ajusta el ancho del contenedor
+        // background-color: red;
+    }
+
+    .p-inputtext {
+        background-color: #b8b8b8; // Cambia el color de fondo del input
+        color: #f8ff2e; // Cambia el color del texto del input
+        border: 1px solid #ccc; // Cambia el color del borde del input
+        padding: 10px; // Añade padding al input
+        // width: 4000px !important; 
+    }
+
+    .p-autocomplete-panel {
+        // Estilos para el panel de sugerencias, si es necesario
+        // width: 4000px !important;   
+    }
+
+    .p-autocomplete-items {
+        // Estilos para el contenedor de las sugerencias, si es necesario
+    }
+
+    .p-autocomplete-item {
+        // Estilos para cada ítem de la lista de sugerencias, si es necesario
+    }
+}

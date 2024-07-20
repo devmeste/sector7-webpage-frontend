@@ -1,0 +1,65 @@
+<main class="choice_delivery_method_main_container">
+
+    <div class="container">
+        <section class="delivery_method_container" >
+            <h2>Elegí la forma de entrega</h2>
+
+            <form class="form">
+                <label class="choice_container">
+
+                    <h3><input type="radio" name="deliveryMethod" value="home_delivery">Envío a domicilio</h3>
+                    <div>Calle Falsa 123 (Datos del usuario)</div>
+                    <div>Ciudad </div>
+
+                    <div class="divider"></div>
+
+                    <b class=" delivery_method_title_alternative">Elegir otro domicilio</b>
+
+                </label>
+
+                <label class="choice_container">
+
+                    <h3> <input type="radio" name="deliveryMethod" value="in_local">Retiro en el Local</h3>
+                </label>
+                <div class="submit_button_container">
+                    <button id="boton" type="button" class="primary_button">Continuar</button>
+                </div>
+            </form>
+
+        </section>
+
+
+        <section class="purchase_summary_container">
+            <h2 class="purchase_summary_title">
+                Resumen de compra
+            </h2>
+            <div class="divider"></div>
+            <div class="purchase_summary_content_element">
+                <div>
+                    Productos({{this.cartQuantity$}})
+                </div>
+                <div>
+                    {{this.total$ | currency: 'USD':'symbol':'1.0-0'}}
+                </div>
+            </div>
+            @if(shipping){
+            <div class="purchase_summary_content_element">
+                <div>
+                    Envío: 
+                </div>
+                <div>
+                    {{this.shipping | currency: 'USD':'symbol':'1.0-0'}}
+                </div>
+            </div>}
+            <div class="purchase_summary_content_element">
+                <div>
+                    Pagás
+                </div>
+                <div>
+                    {{this.total$ | currency: 'USD':'symbol':'1.0-0'}}
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="wallet-container"></div>
+</main>

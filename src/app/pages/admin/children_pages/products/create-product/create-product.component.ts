@@ -1,14 +1,11 @@
 import { AsyncPipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild, inject, viewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, booleanAttribute, inject, viewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { InputDangerTextComponent } from '@shared/components/inputs/input-danger-text/input-danger-text.component';
-import BKProduct from 'app/core/models/BKProduct';
-import IField from 'app/core/models/Field';
 import { ICategory } from 'app/core/models/ICategory';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
-import { BehaviorSubject } from 'rxjs';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 @Component({
@@ -38,7 +35,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     })
   
   }
-
+  
   categories$ !: ICategory[];
   productWasCreatedSuccessfully = false;
   productHasError = false;
@@ -133,9 +130,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       photos: this.photosArray.value,
       fieldsJSON: fields
     }
-     
-    console.log(newProduct);
-    
+         
     this._adminService.createProduct(newProduct).subscribe({
       next: (v) => this.productWasCreatedSuccessfully = true,
       error: (error) => {

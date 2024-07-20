@@ -1,6 +1,6 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, QueryList, ViewChild, ViewChildren, inject, viewChildren } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,12 +14,19 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth_service/auth.service';
 import { HeaderPanelLoggedInUserComponent } from "./shared/components/header/header-panel-logged-in-user/header-panel-logged-in-user.component";
 import { HeaderPanelGeneralComponent } from "./shared/components/header/header-panel-general/header-panel-general.component";
+import { ProductService } from './core/services/product_service/product.service';
+import BKProduct from './core/models/BKProduct';
+import { ProductResponse } from './core/models/ProductResponse';
+import { Observable, of } from 'rxjs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   imports: [
+    AsyncPipe,
     CommonModule,
     RouterOutlet,
     MatIconModule,
@@ -27,6 +34,7 @@ import { HeaderPanelGeneralComponent } from "./shared/components/header/header-p
     MatSidenavModule,
     NgStyle,
     NgClass,
+    MatAutocompleteModule,
     MatMenuModule,
     MatToolbarModule,
     MatBadgeModule,
@@ -34,10 +42,13 @@ import { HeaderPanelGeneralComponent } from "./shared/components/header/header-p
     SearchBarComponent,
     FormsModule,
     HeaderPanelLoggedInUserComponent,
-    HeaderPanelGeneralComponent
+    HeaderPanelGeneralComponent,
   ]
 })
 export class AppComponent {
+
+
+
 
   menuOpened: boolean = false;
   searchBarOpened: boolean = false;
@@ -49,6 +60,8 @@ export class AppComponent {
   mobileBreackPoint: number = 480;
   // showUserPanel: boolean = false;
 
+
+
   @ViewChild('searchInputDesktop', { static: false }) searchInputDesktop!: ElementRef;
   @ViewChild('searchInputMobile', { static: false }) searchInputMobile!: ElementRef;
 
@@ -56,6 +69,9 @@ export class AppComponent {
   userMadeLogin: boolean = false;
   adminMadeLogin: boolean = false;
   _authService: AuthService = inject(AuthService);
+  _productService: ProductService = inject(ProductService);
+  _router = inject(Router);
+  productsBySearch$!: Observable<ProductResponse>;
 
   constructor() {
     // set screenWidth on page load
@@ -72,16 +88,21 @@ export class AppComponent {
 
   }
 
+  search(value: any) {
+    console.log(value);
+    if (value == '') return;
+    this.productsBySearch$ = this._productService.search(value);
+  }
+
+
   ngOnInit(): void {
     this._authService.isLoggedIn().subscribe(isLoggedIn => {
       this.userMadeLogin = isLoggedIn;
-      
     })
 
     this._authService.isAdminLoggedIn$().subscribe(isAdminLoggedIn => {
       this.adminMadeLogin = isAdminLoggedIn;
     })
-
   }
 
 
@@ -145,12 +166,48 @@ export class AppComponent {
   closeSearchBar() {
     this.searchBarOpened = false;
     this.searchBarInputText = '';
-
+    this.clearProductsBySearch();
   }
 
   handleInputBlur() {
     this.searchBarClicked = false;
   }
 
+  goToProductDetails(id: string) {
+    this._router.navigate(['/product-details', id]);
+    this.closeSearchBar();
+    this.clearProductsBySearch();
+  }
 
+  clearProductsBySearch() {
+    this.productsBySearch$ = of();
+  }
+
+  selectedIndex: number = -1;
+  handleKeydownInSearchBar($event: KeyboardEvent) {
+    if ($event.key === 'ArrowDown') {
+      this.moveSelection(1);
+    } else if ($event.key === 'ArrowUp') {
+      this.moveSelection(-1);
+    } else if ($event.key === 'Enter') {
+        this.goToSearchComponentWithTextWirted();
+    }
+  }
+
+  moveSelection(step: number) {
+    if (this.productsBySearch$) {
+      this.productsBySearch$.subscribe(response => {
+        const maxIndex = response.products.length - 1;
+        this.selectedIndex = (this.selectedIndex + step + response.products.length) % response.products.length;
+        this.searchBarInputText = response.products[this.selectedIndex]?.title || '';
+      });
+    }
+  }
+
+  goToSearchComponentWithTextWirted() {
+    if (this.searchBarInputText !== "") {
+     this._router.navigate(['/search', this.searchBarInputText]);
+     this.closeSearchBar();
+    }
+  }
 }

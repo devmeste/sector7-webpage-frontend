@@ -3,8 +3,8 @@
         <ng-template let-product pTemplate="item">
             <app-bk-card
                 id="{{product.id}}"
-                name="{{product.name}}" 
-                img="{{product.imgs[0]}}"
+                name="{{product.title}}" 
+                img="{{product.photos[0] | splitLink}}"
                 [price]="product.price">
             </app-bk-card>
         </ng-template>

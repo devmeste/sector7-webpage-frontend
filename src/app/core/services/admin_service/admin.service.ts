@@ -21,6 +21,7 @@ export class AdminService {
 
 
 
+
     baseUrl: string = 'http://localhost:8001/api/v1/es/';
 
     private _router: Router = inject(Router);
@@ -92,8 +93,9 @@ export class AdminService {
     getAllProducts(): Observable<ProductResponse> {
         return this._httpClient.get<ProductResponse>(this.baseUrl + 'products');
     }
-    getAllProductsForAdmin(): Observable<ProductResponse> {
-        return this._httpClient.get<ProductResponse>(this.baseUrl + 'products/actual');
+    
+    getAllProductsForAdmin( currentPage : number, pageSize : number ): Observable<ProductResponse> {
+        return this._httpClient.get<ProductResponse>(`${this.baseUrl}products/actual?page=${currentPage}`);
     }
 
 
@@ -152,6 +154,10 @@ export class AdminService {
         return this._httpClient.patch(this.baseUrl + 'products/status/' + option, body);
     }
 
+    getAllProductsPending() {
+        return this._httpClient.get<ProductResponse>(this.baseUrl + 'products/pending');
+    }
+
 
     //-------------------------USD-------------------------
     getAllUsd(): Observable<Usd[]> {
@@ -201,7 +207,7 @@ export class AdminService {
         return this._httpClient.get<IPurchase[]>(this.baseUrl + 'purchase');
     }
 
-    getAllPurchasesBetweenDates(startDate: string, endDate: string) : Observable<IPurchasesBetweenDatesResponse> {
+    getAllPurchasesBetweenDates(startDate: string, endDate: string): Observable<IPurchasesBetweenDatesResponse> {
         return this._httpClient.get<IPurchasesBetweenDatesResponse>(this.baseUrl + 'purchase/bill?since=' + startDate + '&until=' + endDate);
     }
 

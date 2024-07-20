@@ -33,7 +33,7 @@ export class AuthService {
 
   login(username: string, password: string, specialCase?: string): Observable<ITokenDto> {
 
-    this.logout();
+    this.resetTokens();
 
     let url;
     if (specialCase) {
@@ -69,11 +69,15 @@ export class AuthService {
   }
 
   logout() {
+    this.resetTokens();
+    this._router.navigate(['/']);
+  }
+
+  resetTokens(){
     localStorage.removeItem('token');
     localStorage.removeItem('admin_token');
     this.isLoggedInSubject.next(false);
     this.isAdminLoggedInSubject.next(false);
-    this._router.navigate(['/']);
   }
 
   isLoggedIn(): Observable<boolean> {
@@ -112,7 +116,8 @@ export class AuthService {
   recoverUser(email: string) {
     console.log(email);
     return this._http.post(this.baseUrl + 'account/recover-user', { email }, { responseType: 'text' }).pipe(
-      tap(() => console.log())
+      tap(() => console.log()),
+      catchError(error => this.transformTextResponseToJson(error))
     );
 
   }
@@ -121,8 +126,23 @@ export class AuthService {
     let body= { username, email };
     console.log(body);
     return this._http.post(this.baseUrl + 'account/recover-password', body , { responseType: 'text' }).pipe(
-      tap(() => console.log())
+      tap(() => console.log()),
+      catchError(error => this.transformTextResponseToJson(error))
     );
   }
 
+  private transformTextResponseToJson(error: any): Observable<ParsedError> {
+    let parsedError : ParsedError;
+    try {
+      parsedError = JSON.parse(error.error);
+    } catch (jsonError) {
+      parsedError = { message: 'Error parsing response to JSON', originalError: error.error };
+    }
+    return throwError(() => parsedError);
+  }
+}
+
+interface ParsedError {
+  message: string;
+  originalError ?: string;
 }

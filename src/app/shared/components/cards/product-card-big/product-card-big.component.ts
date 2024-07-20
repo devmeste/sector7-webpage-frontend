@@ -16,4 +16,5 @@ export class ProductCardBigComponent {
   @Input( {required:true}) description !: string;
   @Input( {required:true}) img !: string;
   @Input( {required:true}) price !: number; 
+  
 }

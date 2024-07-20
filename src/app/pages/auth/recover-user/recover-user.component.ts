@@ -35,14 +35,14 @@ export class RecoverUserComponent extends CustomForm {
       this._authService.recoverUser(emailOrPhone).subscribe({
         next: response => {
           console.log(response);
-          this.successMessage = response; 
+          this.successMessage = <string> response; 
           this.showSuccessPopUp = true;
           this.form.reset();
         },
         error: err => {
           this.showFailedPopUp = true;
           console.log(err);
-          this.errorMessage = err.error.message;
+          this.errorMessage = err.message;
         },
       })
     }

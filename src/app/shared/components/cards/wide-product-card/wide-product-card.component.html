@@ -1,6 +1,6 @@
 <div class="wide_product_card_container">
     <div class="wide_product_card_image_container">
-        <img src="{{this.img}}" alt="{{this.name + ' image'}}">
+        <img [src]="this.img | splitLink" alt="{{this.name + ' image'}}">
     </div>
     <div class="wide_product_card_text_container">
         <h4>{{this.name}}</h4>

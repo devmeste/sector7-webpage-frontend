@@ -8,6 +8,6 @@
     </div>
     <div class="header_panel_user_container">
         <p class="my_account_section"><mat-icon>account_circle</mat-icon> Mi Cuenta</p>
-        <p class="my_account_section"><mat-icon>shopping_cart</mat-icon> Mi Carrito</p>
+        <p class="my_account_section" [routerLink]="['cart']" ><mat-icon>shopping_cart</mat-icon> Mi Carrito</p>
         <p class="my_account_section" (click)="logout()"><mat-icon>logout</mat-icon> Cerrar Sesion</p>
     </div>
