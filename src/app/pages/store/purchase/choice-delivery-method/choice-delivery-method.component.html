@@ -4,10 +4,10 @@
         <section class="delivery_method_container" >
             <h2>Elegí la forma de entrega</h2>
 
-            <form class="form">
+            <form class="form" [formGroup]="this.form" (submit)="send($event)">
                 <label class="choice_container">
 
-                    <h3><input type="radio" name="deliveryMethod" value="home_delivery">Envío a domicilio</h3>
+                    <h3><input type="radio" formControlName="deliveryMethod" value="home_delivery">Envío a domicilio</h3>
                     <div>Calle Falsa 123 (Datos del usuario)</div>
                     <div>Ciudad </div>
 
@@ -19,10 +19,10 @@
 
                 <label class="choice_container">
 
-                    <h3> <input type="radio" name="deliveryMethod" value="in_local">Retiro en el Local</h3>
+                    <h3> <input type="radio" formControlName="deliveryMethod" value="in_local">Retiro en el Local</h3>
                 </label>
                 <div class="submit_button_container">
-                    <button id="boton" type="button" class="primary_button">Continuar</button>
+                    <button id="boton" type="submit" class="primary_button">Continuar</button>
                 </div>
             </form>
 

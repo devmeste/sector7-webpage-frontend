@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
+import { userGuard } from "app/core/guards/user-guard/user.guard";
 
 export const STORE_ROUTES: Routes = [
     {
@@ -35,6 +36,7 @@ export const STORE_ROUTES: Routes = [
     {
         path: 'buying/delivery-method', 
         loadComponent: () =>
-            import("./purchase/choice-delivery-method/choice-delivery-method.component").then(c => c.ChoiceDeliveryMethodComponent)
+            import("./purchase/choice-delivery-method/choice-delivery-method.component").then(c => c.ChoiceDeliveryMethodComponent),
+        canActivate: [userGuard]
     },
 ]

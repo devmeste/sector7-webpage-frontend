@@ -26,7 +26,7 @@ export abstract class CustomForm  {
         return form.invalid;
     }
 
-    abstract send() : void
+    abstract send($event : SubmitEvent) : void
 
 
 

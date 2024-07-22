@@ -17,7 +17,7 @@ export class AuthService {
 
   //TODO: Verificar luego el del Usuario normal
 
-  private isLoggedInSubject: BehaviorSubject<boolean>;
+  private isUserLoggedInSubject: BehaviorSubject<boolean>;
   private isAdminLoggedInSubject: BehaviorSubject<boolean>;
 
   private _router: Router = inject(Router);
@@ -27,7 +27,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const admin_token = localStorage.getItem('admin_token');
 
-    this.isLoggedInSubject = new BehaviorSubject<boolean>(!!token);
+    this.isUserLoggedInSubject = new BehaviorSubject<boolean>(!!token);
     this.isAdminLoggedInSubject = new BehaviorSubject<boolean>(!!admin_token);
   }
 
@@ -53,16 +53,16 @@ export class AuthService {
           this.isAdminLoggedInSubject.next(true);
         }
         else if (response && response.token) {
-          this.isLoggedInSubject.next(true);
+          this.isUserLoggedInSubject.next(true);
         }
         else {
-          this.isLoggedInSubject.next(false);
+          this.isUserLoggedInSubject.next(false);
           this.isAdminLoggedInSubject.next(false);
         }
 
       }),
       catchError(err => {
-        this.isLoggedInSubject.next(false);
+        this.isUserLoggedInSubject.next(false);
         throw err;
       })
     );
@@ -76,12 +76,12 @@ export class AuthService {
   resetTokens(){
     localStorage.removeItem('token');
     localStorage.removeItem('admin_token');
-    this.isLoggedInSubject.next(false);
+    this.isUserLoggedInSubject.next(false);
     this.isAdminLoggedInSubject.next(false);
   }
 
-  isLoggedIn(): Observable<boolean> {
-    return this.isLoggedInSubject.asObservable();
+  isUserLoggedIn$(): Observable<boolean> {
+    return this.isUserLoggedInSubject.asObservable();
   }
 
   //return an observable

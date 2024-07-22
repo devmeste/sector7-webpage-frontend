@@ -5,36 +5,34 @@ import { CartService } from 'app/core/services/cart_service/cart-service.service
 import { PurchaseService } from 'app/core/services/purchase_service/purchase.service';
 import { ChargeJsScriptsService } from 'app/charge-js-scripts.service';
 
-import { MiClase } from 'assets/js/mp';
+import { MercadoPagoJS } from 'assets/js/mp';
+import { CustomForm } from 'app/core/utils/custom-form/custom.form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-choice-delivery-method',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, ReactiveFormsModule],
   templateUrl: './choice-delivery-method.component.html',
   styleUrl: './choice-delivery-method.component.scss'
 })
-export class ChoiceDeliveryMethodComponent {
+export class ChoiceDeliveryMethodComponent extends CustomForm {
+  override initializeForm(): void {
+    this.form = this.formBuilder.group({
+      deliveryMethod: ['in_local']
+    })
+  }
+ 
+
   shipping: any;
 
   _PurchaseService = inject(PurchaseService);
   _cartService = inject(CartService);
   _chargeJsScriptsService = inject(ChargeJsScriptsService);
-  miClase !:MiClase ;
+  mercadoPago !: MercadoPagoJS;
   products$ !: IProduct_Cart[];
   cartQuantity$ !: number;
   total$ !: number;
-
-  constructor() {
-    this.miClase = new MiClase();
-    let mp = this.miClase.metodo();
-    let mpCode = "algo";
-    mp. mp.bricks().create("wallet", "wallet-container", {
-      initialization: {
-          preferenceId: mpCode
-      }
-  })
-  }
 
   ngOnInit(): void {
     this._cartService.getAllProducts().subscribe(products => {
@@ -48,42 +46,31 @@ export class ChoiceDeliveryMethodComponent {
     })
 
     this._chargeJsScriptsService.charge(['mp']);
-    
-    
-
-    
-    // console.log("Cargo el Purchase Service");
-    // this.promise = new Promise((resolve) => {
-    //   resolve(this.loadScripts());
-    // }).then(() => {
-    //   setTimeout(() => {
-    //     // configuraciones aquí
-    //     console.log('Loaded scripts.');
-    //     console.log(this.promise);
-    //   }, 2000);
-    // });
 
   }
 
 
+  override send($event: SubmitEvent): void {
+    $event.preventDefault();
 
-  
+    console.log(this.form.value);
+    // this._PurchaseService.makePurchase().subscribe({
+    //   next: mpCode => {
+    //       this.createMpButton(mpCode);
+    //   },
+    //   error: error => {  
+    //     console.error('Error making purchase', error);
+    //   }
+    // }
+    // );
+  }
 
 
-
-  // mp : any;
-   
-  // promise?: Promise<any>;
-  // url = 'https://sdk.mercadopago.com/js/v2';
-
-  // loadScripts() {
-  //   let node = document.createElement('script');
-  //   node.src = this.url;
-  //   node.type = 'text/javascript';
-  //   node.async = true;
-  //   node.charset = 'utf-8';
-  //   document.getElementsByTagName('head')[0].appendChild(node);
-  //   return true;
-  // }
+  createMpButton(mpCode: string) {
+    this.mercadoPago = new MercadoPagoJS();
+    this.mercadoPago.createButton(mpCode);
+  }
 
 }
+
+

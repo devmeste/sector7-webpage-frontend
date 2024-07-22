@@ -1,22 +1,17 @@
-
-
-
-import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { catchError, switchMap } from 'rxjs';
 
-export const adminInterceptor: HttpInterceptorFn = (request, next) => {
+export const userInterceptor: HttpInterceptorFn = (request, next) => {
 
-  // return next(request);
   const _authService = inject(AuthService);
   const _router = inject(Router);
 
   let clonedRequest = request;
-  if (_authService.isAdminLoggedIn()) {
-    const token = localStorage.getItem('admin_token');
+  if (_authService.isUserLoggedIn$()) {
+    const token = localStorage.getItem('token');
     if (token) {
       if (clonedRequest.headers.get('skip') == 'true') {
         return next(clonedRequest);
@@ -33,14 +28,14 @@ export const adminInterceptor: HttpInterceptorFn = (request, next) => {
               },
             )
           }
+          console.log(clonedRequest);
           return next(clonedRequest);
         }),
-
 
         catchError((error) => {
           if (error.status === 401) {
             _authService.logout();
-            _router.navigate(['/auth/admin']);
+            _router.navigate(['/auth']);
           }
           return next(clonedRequest);
         })
@@ -49,4 +44,5 @@ export const adminInterceptor: HttpInterceptorFn = (request, next) => {
   }
 
   return next(clonedRequest);
+
 }
