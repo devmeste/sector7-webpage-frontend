@@ -20,6 +20,7 @@ import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.p
 })
 export class CategoriesUpdatePopUpComponent extends CustomFormPopUp {
 
+
   @Input({ required: true }) category_id !: string;
 
   _adminService = inject(AdminService);
@@ -28,87 +29,94 @@ export class CategoriesUpdatePopUpComponent extends CustomFormPopUp {
   categoryUpdatedSuccessfully = false;
   categoryUpdateFailed = false;
   errorMessage = '';
-  form!: FormGroup;
 
   @ViewChild('inputField') inputField!: ElementRef;
-  private formBuilder = inject(FormBuilder);
 
   fields: Field[] = [];
 
+  
+
+  override initializeForm(): void {
+    if(this.category_id){
+      this._adminService.getCategoryById(this.category_id).subscribe(category => {
+        this.category$ = category;
+        console.log(this.category$);
+  
+        this.form = this.formBuilder.group({
+          name: [`${this.category$.name}`, [Validators.required]],
+          fields: ['', []],
+          component: [`${this.category$.component}`, []],
+        })
+  
+        this.fields = category.fields.map(name => ({
+          name: name
+        }));
+  
+        console.log(this.fields);
+  
+      });
+    }
+   
+  }
+
   ngOnInit(): void {
-    this._adminService.getCategoryById(this.category_id).subscribe(category => {
-      this.category$ = category;
-      console.log(this.category$);
-
-      this.form = this.formBuilder.group({
-        name: [`${this.category$.name}`, [Validators.required]],
-        fields: ['', []],
-        component: [`${this.category$.component}`, []],
-      })
-
-      this.fields = category.fields.map(name => ({
-        name: name
-      }));
-
-      console.log(this.fields);
-
-    });
-
-
-  }
-
-  insertNewField($event: Event) {
-    $event.preventDefault();
-    const newField = this.inputField.nativeElement.value;
-
-    if (newField != '') {
-
-      this.fields.push({ name: newField });
-      console.log(this.fields);
-      this.inputField.nativeElement.value = '';
-    }
-
-  }
-
-
-  deleteField(numberField: number) {
-    this.fields.splice(numberField, 1);
+    this.initializeForm();    
   }
 
 
 
-  send() {
-    let name = this.form.get('name')?.value;
-    let component = this.form.get('component')?.value;
-    if(this.fields.length == 0){
-      console.log(this.fields);
-    }
-    let fields = this.fields;
-    let id = this.category_id;
+insertNewField($event: Event) {
+  $event.preventDefault();
+  const newField = this.inputField.nativeElement.value;
 
-    this._adminService.updateCategory(id, name, component, fields).subscribe
-      (
-        {
-          next: (v) => this.categoryUpdatedSuccessfully = true,
+  if (newField != '') {
 
-          error: (e) => {
-            this.categoryUpdateFailed = true,
-              this.errorMessage = e.error.message
-          },
-        }
-      )
+    this.fields.push({ name: newField });
+    console.log(this.fields);
+    this.inputField.nativeElement.value = '';
   }
 
-  closePopUpMessage(option: string) {
-    switch (option) {
-      case "categoryUpdatedSuccessfully": {
-        this.categoryUpdatedSuccessfully = false;
-        this.closeUpdateModal();
+}
+
+
+deleteField(numberField: number) {
+  this.fields.splice(numberField, 1);
+}
+
+
+
+override send() {
+  let name = this.form.get('name')?.value;
+  let component = this.form.get('component')?.value;
+  if (this.fields.length == 0) {
+    console.log(this.fields);
+  }
+  let fields = this.fields;
+  let id = this.category_id;
+
+  this._adminService.updateCategory(id, name, component, fields).subscribe
+    (
+      {
+        next: (v) => this.categoryUpdatedSuccessfully = true,
+
+        error: (e) => {
+          this.categoryUpdateFailed = true,
+            this.errorMessage = e.error.message
+        },
       }
-        break;
-      case "categoryUpdateFailed": this.categoryUpdateFailed = false;
-        break;
+    )
+}
+
+closePopUpMessage(option: string) {
+  switch (option) {
+    case "categoryUpdatedSuccessfully": {
+      this.categoryUpdatedSuccessfully = false;
+      this.closeUpdateModal();
     }
+      break;
+    case "categoryUpdateFailed": this.categoryUpdateFailed = false;
+      break;
   }
+}
 
 }

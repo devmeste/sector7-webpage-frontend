@@ -7,7 +7,6 @@
 }
 
 .form {
-  // width
   width: 100%;
   max-width: 600px;
   margin: auto;
@@ -17,6 +16,10 @@
   margin: 0 auto;
   padding: 20px;
   border-radius: 10px;
+
+
+
+
 
   .custom-input {
     display: flex;
@@ -167,6 +170,12 @@
 
   label {
     color: white;
+    text-align: left;
+  }
+
+
+  .required_symbol {
+    color: rgb(255, 72, 0);
   }
 
   .custom-select {
@@ -269,4 +278,29 @@
   cursor: pointer;
   display: flex;
   color: white;
+}
+
+
+
+.half_container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include laptop {
+    flex-direction: row;
+  }
+
+  .custom-input {
+
+    flex: 0 1 1;
+
+    @include laptop {
+      flex: 0 1 calc(50% - 0.5rem);
+    }
+
+  }
+
 }

@@ -2,13 +2,13 @@
     @if(this.product$){
 
     <ng-container>
-        <div class="modal_container category_update_pop_up">
+        <div class="modal_container update_pop_up">
             <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
             <div class="modal_info">
 
                 <!-- Form -->
                 <section class="form_container">
-                    <form (ngSubmit)="send()" [formGroup]="this.form" class="form algo">
+                    <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
 
                         <!-- Nombre -->
                         <div class="custom-input">
@@ -45,11 +45,6 @@
                             </div>
 
 
-
-
-                            <!-- </div> -->
-
-                            <!-- <div class="half_container"> -->
                             <!-- Modelo -->
                             <div class="custom-input">
                                 <label class="form-label">Modelo: </label>
@@ -60,9 +55,6 @@
                                 }
                             </div>
 
-                            <!-- </div> -->
-
-                            <!-- <div class="half_container"> -->
                             <!-- Actual Stock -->
                             <div class="custom-input">
                                 <label class="form-label">Stock Real: </label>

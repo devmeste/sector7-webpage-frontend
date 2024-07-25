@@ -22,7 +22,6 @@ export abstract class _ProductsUpdatePopUpComponent extends CustomFormPopUp {
 
   @ViewChild('photoInput') photoInput !: ElementRef;
 
-  protected formBuilder = inject(FormBuilder);
   protected _adminService = inject(AdminService);
   product$ !: BKProduct;
 
@@ -35,38 +34,43 @@ export abstract class _ProductsUpdatePopUpComponent extends CustomFormPopUp {
 
   categoryName: string = '';
 
-  form!: FormGroup;
+  override initializeForm(): void {
+    console.log('here');
+    if(this.product_id){
+      console.log('here2');
+      this._adminService.getProductById(this.product_id).subscribe(p => {
+        this.product$ = p;
+        console.log(p);
+        this.form = this.formBuilder.group({
+          id: [this.product$.id, [Validators.required]],
+          categoryId: [this.product$.categoryId, [Validators.required]],
+          brand: [this.product$.brand, [Validators.required]],
+          model: [this.product$.model, [Validators.required]],
+          price: [this.product_USD_price, [Validators.required]],
+          actualStock: [this.product$.actualStock, [Validators.required]],
+          viewStock: [this.product$.viewStock, [Validators.required]],
+          title: [this.product$.title, [Validators.required]],
+          description: [this.product$.description, [Validators.required]],
+          isEnabled: [this.product$.isEnabled, []],
+          isApproved: [this.product$.isApproved, []],
+          photos: this.formBuilder.array([]),
+          fieldsJSON: [this.product$.fieldsJSON, []],
+          fieldsArray: this.formBuilder.array([]),
+        })
+  
+        this.fillInitialPhotos(this.product$.photos || []);
+        this.fillFieldsArray();
+        
+        this._adminService.getCategoryById(this.product$.categoryId).subscribe(c => {
+          this.categoryName = c.name;
+        })
+      });
+    }
+  }
+
 
   ngOnInit(): void {
-    this._adminService.getProductById(this.product_id).subscribe(p => {
-      this.product$ = p;
-      console.log(p);
-      this.form = this.formBuilder.group({
-        id: [this.product$.id, [Validators.required]],
-        categoryId: [this.product$.categoryId, [Validators.required]],
-        brand: [this.product$.brand, [Validators.required]],
-        model: [this.product$.model, [Validators.required]],
-        price: [this.product_USD_price, [Validators.required]],
-        actualStock: [this.product$.actualStock, [Validators.required]],
-        viewStock: [this.product$.viewStock, [Validators.required]],
-        title: [this.product$.title, [Validators.required]],
-        description: [this.product$.description, [Validators.required]],
-        isEnabled: [this.product$.isEnabled, []],
-        isApproved: [this.product$.isApproved, []],
-        photos: this.formBuilder.array([]),
-        fieldsJSON: [this.product$.fieldsJSON, []],
-        fieldsArray: this.formBuilder.array([]),
-      })
-
-      this.fillInitialPhotos(this.product$.photos || []);
-      this.fillFieldsArray();
-      
-      this._adminService.getCategoryById(this.product$.categoryId).subscribe(c => {
-        this.categoryName = c.name;
-      })
-    });
-
-    
+    this.initializeForm();    
   }
 
   fillInitialPhotos(photos: string[]): void {

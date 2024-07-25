@@ -74,11 +74,11 @@ export class GetAllCategoriesComponent {
 
 
   updateCategory(id: string) {
-    this.showUpdatePopUp = true;
     this.update_id = id;
+    this.showUpdatePopUp = true;
   }
 
-
+  
   updateAllCategoriesInView() {
     this._adminService.getAllCategories().subscribe(c => {
       this.categories$ = c;

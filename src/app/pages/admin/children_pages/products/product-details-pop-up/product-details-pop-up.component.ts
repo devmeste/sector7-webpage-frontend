@@ -18,11 +18,10 @@ import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.p
 })
 export class ProductDetailsPopUpComponent extends CustomFormPopUp {
 
+
   @Input({ required: true }) product_id !: string;
   @Input({ required: true }) product_USD_price !: number;
-  private formBuilder = inject(FormBuilder);
   private _adminService = inject(AdminService);
-  form!: FormGroup;
 
   product$ !: BKProduct;
   private photos = [];
@@ -30,38 +29,44 @@ export class ProductDetailsPopUpComponent extends CustomFormPopUp {
   photosToShow: string[] = [];
 
   ngOnInit(): void {
-    this._adminService.getProductById(this.product_id).subscribe(p => {
-      this.product$ = p;
-      console.log(p);
-      this.form = this.formBuilder.group({
-        id: [{ value: this.product$.id, disabled: true }, [Validators.required]],
-        title: [{ value: this.product$.title, disabled: true }, [Validators.required]],
-        categoryId: [{ value: this.product$.categoryId, disabled: true }, [Validators.required]],
-        brand: [{ value: this.product$.brand, disabled: true }, [Validators.required]],
-        model: [{ value: this.product$.model, disabled: true }, [Validators.required]],
-        price: [{ value: this.product_USD_price, disabled: true }, [Validators.required]],
-        actualStock: [{ value: this.product$.actualStock, disabled: true }, [Validators.required]],
-        viewStock: [{ value: this.product$.viewStock, disabled: true }, [Validators.required]],
-        description: [{ value: this.product$.description, disabled: true }, [Validators.required]],
-        isEnabled: [{ value: this.product$.isEnabled, disabled: true }, []],
-        isApproved: [{ value: this.product$.isApproved, disabled: true }, []],
-        photos: [{ value: [], disabled: true }],
-        fieldsJSON: [this.product$.fieldsJSON, []],
-        fieldsArray: this.formBuilder.array([]),
-      })
-      if (this.product$.photos) {
-        this.photosToShow = this.product$.photos;
-      }
-      this.fillFieldsArray();
-
-      // Ajusta la altura del textarea después de inicializar el formulario
-      setTimeout(() => {
-        this.adjustTextareaHeightForInitialData();
-      }, 0);
-
-    });
+    this.initializeForm();    
   }
 
+  override initializeForm(): void {
+    if (this.product_id) {
+      this._adminService.getProductById(this.product_id).subscribe(p => {
+        this.product$ = p;
+        console.log(p);
+        this.form = this.formBuilder.group({
+          id: [{ value: this.product$.id, disabled: true }, [Validators.required]],
+          title: [{ value: this.product$.title, disabled: true }, [Validators.required]],
+          categoryId: [{ value: this.product$.categoryId, disabled: true }, [Validators.required]],
+          brand: [{ value: this.product$.brand, disabled: true }, [Validators.required]],
+          model: [{ value: this.product$.model, disabled: true }, [Validators.required]],
+          price: [{ value: this.product_USD_price, disabled: true }, [Validators.required]],
+          actualStock: [{ value: this.product$.actualStock, disabled: true }, [Validators.required]],
+          viewStock: [{ value: this.product$.viewStock, disabled: true }, [Validators.required]],
+          description: [{ value: this.product$.description, disabled: true }, [Validators.required]],
+          isEnabled: [{ value: this.product$.isEnabled, disabled: true }, []],
+          isApproved: [{ value: this.product$.isApproved, disabled: true }, []],
+          photos: [{ value: [], disabled: true }],
+          fieldsJSON: [this.product$.fieldsJSON, []],
+          fieldsArray: this.formBuilder.array([]),
+        })
+        if (this.product$.photos) {
+          this.photosToShow = this.product$.photos;
+        }
+        this.fillFieldsArray();
+
+        // Ajusta la altura del textarea después de inicializar el formulario
+        setTimeout(() => {
+          this.adjustTextareaHeightForInitialData();
+        }, 0);
+
+      });
+    }
+
+  }
 
   adjustTextareaHeightForInitialData(): void {
     const textarea = document.querySelector('textarea[formControlName="description"]') as HTMLTextAreaElement;
@@ -98,12 +103,12 @@ export class ProductDetailsPopUpComponent extends CustomFormPopUp {
     return this.form.controls["fieldsArray"] as FormArray;
   }
 
-  
+
   override send(): void {
     // this method is not used
     return;
   }
 
-  
+
 
 }

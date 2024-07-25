@@ -16,6 +16,7 @@ import { _ProductsUpdatePopUpComponent, Field } from './_products-update-pop-up-
 })
 export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpComponent {
 
+
   override send() {
 
     let fields: any = {};

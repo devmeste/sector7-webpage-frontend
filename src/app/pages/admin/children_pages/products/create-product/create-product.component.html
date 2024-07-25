@@ -85,12 +85,12 @@
             <div class="custom-input">
                 <label class="form-label">Descripcion: </label>
                 <textarea name="description" formControlName="description" required class="form-control"
-                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
+                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'description', 'required') }">
                 </textarea>
 
             </div>
-            @if( hasErrors(this.form,'title', 'required') ){ <app-input-danger-text
-                text="El nombre del producto es requerida"></app-input-danger-text>
+            @if( hasErrors(this.form,'description', 'required') ){ <app-input-danger-text
+                text="La descripción del producto es requerida"></app-input-danger-text>
             }
 
             <!-- Habilitado -->
@@ -124,7 +124,7 @@
             </div>
 
             <label>Categoria:</label>
-            <select name="categoryId" (change)="onCategoryChange($event)" class="custom-select">
+            <select name="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)" class="custom-select">
                 <option value=""> </option>
                 @for (category of categories$; track category.id) {
                 <option value="{{category.id}}"> {{category.name}} </option>
@@ -144,7 +144,6 @@
                     </div>
                 </div>
             </div>
-
 
 
             @if (productWasCreatedSuccessfully) {

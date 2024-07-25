@@ -1,14 +1,15 @@
-import { inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+// @Component Just to allow use the ngOnInit
+@Component({
+    template: ''
+})
 export abstract class CustomForm  {
 
     form !: FormGroup;
     formBuilder: FormBuilder = inject(FormBuilder);
     
-    constructor() {
-        this.initializeForm();
-    }
 
     abstract initializeForm() :void;
 
@@ -27,7 +28,6 @@ export abstract class CustomForm  {
     }
 
     abstract send($event : SubmitEvent) : void
-
 
 
 }

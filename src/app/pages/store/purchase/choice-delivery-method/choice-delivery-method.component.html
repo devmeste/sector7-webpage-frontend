@@ -1,33 +1,55 @@
 <main class="choice_delivery_method_main_container">
 
-    <div class="container">
-        <section class="delivery_method_container" >
+    <div class="form_container">
+        <section class="delivery_method_container">
             <h2>Elegí la forma de entrega</h2>
 
             <form class="form" [formGroup]="this.form" (submit)="send($event)">
                 <label class="choice_container">
-
-                    <h3><input type="radio" formControlName="deliveryMethod" value="home_delivery">Envío a domicilio</h3>
-                    <div>Calle Falsa 123 (Datos del usuario)</div>
-                    <div>Ciudad </div>
+                    <h3><input type="radio" formControlName="deliveryMethod" value="home_delivery"
+                            (change)="onDeliveryMethodChange('home_delivery')">Envío a domicilio
+                    </h3>
+                    @if(this.addressFillOutByUser){
+                    <div>{{this.addressFillOutByUser.streetName}},
+                        {{this.addressFillOutByUser.streetNumber}}</div>
+                    <div>{{this.addressFillOutByUser.city}},
+                        {{this.addressFillOutByUser.province}} </div>
 
                     <div class="divider"></div>
 
-                    <b class=" delivery_method_title_alternative">Elegir otro domicilio</b>
+                    <b class="delivery_method_title_alternative" (click)="openAddressForm()">Elegir otro domicilio</b>
+                    }
 
                 </label>
 
                 <label class="choice_container">
 
-                    <h3> <input type="radio" formControlName="deliveryMethod" value="in_local">Retiro en el Local</h3>
+                    <h3> <input type="radio" formControlName="deliveryMethod" value="in_local"
+                            (change)="onDeliveryMethodChange('in_local')">Retiro en el Local
+                    </h3>
                 </label>
                 <div class="submit_button_container">
-                    <button id="boton" type="submit" class="primary_button">Continuar</button>
+                    <div class="primary_button_container" [ngStyle]="{'display' : this.showMPButton ? 'none' : 'flex'}" >
+                        <button class="primary_button" #primaryButton
+                            [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form) || this.isDisabledButton}"
+                            [disabled]="disabledFormButton(this.form) || this.isDisabledButton"
+                            type="submit">Continuar</button>
+                    </div>
+                    @if(this.isLoadingRequest){
+                        <div class="spinner_container">
+                            <mat-spinner [diameter]="40"  strokeWidth="7"></mat-spinner>
+                        </div>
+                    }
+                    <div [ngClass]="[isLoadingRequest ? 'wallet_not_displayed' : '' , 
+                                    this.showMPButton  ? 'wallet_displayed' : ''] " >
+                        <div id="wallet-container"></div>
+                    </div>
+
                 </div>
+
             </form>
 
         </section>
-
 
         <section class="purchase_summary_container">
             <h2 class="purchase_summary_title">
@@ -45,7 +67,7 @@
             @if(shipping){
             <div class="purchase_summary_content_element">
                 <div>
-                    Envío: 
+                    Envío:
                 </div>
                 <div>
                     {{this.shipping | currency: 'USD':'symbol':'1.0-0'}}
@@ -61,5 +83,13 @@
             </div>
         </section>
     </div>
-    <div id="wallet-container"></div>
+
+
+
+    @if(showFillAddressPopUp){
+    <app-fill-address-pop-up (formFilledEvent)="receiveAddressFromForm($event)"
+        (close)="this.closeModal('showFillAddressPopUp')"
+        [address]="this.addressFillOutByUser"></app-fill-address-pop-up>
+    }
 </main>
+<app-footer></app-footer>

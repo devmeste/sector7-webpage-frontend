@@ -188,6 +188,7 @@ export class AdminService {
     }
 
     createAccount(value: IAccountReq): Observable<IAccount> {
+        console.log(value);
         return this._httpClient.post<IAccount>(this.baseUrl + 'admin/register', value);
     }
 
@@ -198,7 +199,6 @@ export class AdminService {
         }
         return this._httpClient.patch(this.baseUrl + 'admin/change-status', body);
     }
-
 
 
     // purchases

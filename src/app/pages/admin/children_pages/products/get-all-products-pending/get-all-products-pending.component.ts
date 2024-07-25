@@ -32,7 +32,6 @@ export class GetAllProductsPendingComponent {
   pageSize = 5;
   pageSizeOptions: number[] | readonly number[] = [5, 10, 25, 50];
 
-
   ngOnInit(): void {
     this.updateProductsState();
   }

@@ -19,17 +19,17 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   
   override initializeForm(): void {
     this.form = this.formBuilder.group({
+      title: ['asdasd', [Validators.required]],
       id: ['asdasd213asd2', [Validators.required]],
-      categoryId: ['', [Validators.required]],
       brand: ['aaa', [Validators.required]],
       model: ['aaa', [Validators.required]],
       price: ['100', [Validators.required]],
       actualStock: ['123', [Validators.required]],
       viewStock: ['1002', [Validators.required]],
-      title: ['asdasd', [Validators.required]],
       description: ['asdasd', [Validators.required]],
       isEnabled: [false, []],
       photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'], []),
+      categoryId: ['', [Validators.required]],
       fieldsJSON: ['', []],
       fieldsArray: this.formBuilder.array([]),
     })
@@ -49,7 +49,6 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     
   }
 
-  // private formBuilder = inject(FormBuilder);
   private _adminService = inject(AdminService);
 
   photos: string[] = ['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'];

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { IMakePurchase, Product_QuantityRequested, } from 'app/core/models/IMakePurchase';
-import { MercadoPagoJS } from 'assets/js/mp';
+import { Address, IMakePurchase, Product_QuantityRequested, } from 'app/core/models/IMakePurchase';
+import { MercadoPagoJS } from 'assets/js/MercadoPagoJS.js';
 import { CartService } from '../cart_service/cart-service.service';
 import { map, Observable, switchMap, tap } from 'rxjs';
 
@@ -35,29 +35,23 @@ export class PurchaseService {
 
 
 
-  makePurchase(): Observable<any> {
+  makePurchase( address : Address | null): Observable<any> {
     return this._CartService.getAllProducts().pipe(
       
       switchMap(products => {
-
+        
         let jsonProducts: { [key: string]: number } = {};
 
         products.forEach(element => {
           jsonProducts[element.id] = element.quantityRequested;
         });
 
+        let localPickUp = address === null ? true : false; 
+
         let jsonResponse = {
           "products": jsonProducts,
-          "address": {
-            "zipCode": 7000,
-            "province": "Buenos Aires",
-            "city": "Tandil",
-            "streetName": "San martin",
-            "streetNumber": "366",
-            "floor": "5",
-            "door": "A"
-          },
-          "localPickUp": false
+          "address": address,
+          "localPickUp": localPickUp 
         };
 
         let body = JSON.stringify(jsonResponse);
@@ -72,52 +66,3 @@ export class PurchaseService {
     );
   }
 }
-
-  // makePurchase(): Observable<any> {
-
-  //   let jsonProducts: Product_QuantityRequested[] = [];
-
-  //   this._CartService.getAllProducts().subscribe(products => {
-  //     jsonProducts = products.map(element => ({
-  //       [element.id]: element.quantityRequested
-  //     })
-  //     )}
-  //   )
-
-  //   let jsonResponse = {
-  //     "products": jsonProducts,
-  //     "address": {
-  //       "zipCode": 7000,
-  //       "province": "Buenos Aires",
-  //       "city": "Tandil",
-  //       "streetName": "San martin",
-  //       "streetNumber": "366",
-  //       "floor": "5",
-  //       "door": "A"
-  //     },
-  //     "localPickUp": false
-  //   };
-
-  //   let body = JSON.stringify(jsonResponse);
-
-  //   console.log(jsonProducts);
-
-  //   const headers = new HttpHeaders({
-  //     "Accept": "application/json",
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Bearer ${localStorage.getItem('token')}`
-  //   });
-
-  //   return this._httpClient.post(this.BASE_URL + "purchase/make", body, { headers }).pipe(
-  //     tap((response: any) => {
-  //       console.log(response);
-  //       // return response;
-  //     })
-  //   );
-
-
-
-  // }
-
-
-// }
