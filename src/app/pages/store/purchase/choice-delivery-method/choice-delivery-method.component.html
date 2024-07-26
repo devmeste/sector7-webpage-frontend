@@ -41,7 +41,7 @@
                         </div>
                     }
                     <div [ngClass]="[isLoadingRequest ? 'wallet_not_displayed' : '' , 
-                                    this.showMPButton  ? 'wallet_displayed' : ''] " >
+                                    this.showMPButton  ? 'wallet_displayed' : 'wallet_not_displayed'] " >
                         <div id="wallet-container"></div>
                     </div>
 
@@ -84,7 +84,11 @@
         </section>
     </div>
 
-
+    @if (showErrorPopUp) {
+        <app-message-pop-up custom_message='{{errorMessage}}'
+            (close)="closeModal('purchaseFailed')">
+        </app-message-pop-up>
+        }
 
     @if(showFillAddressPopUp){
     <app-fill-address-pop-up (formFilledEvent)="receiveAddressFromForm($event)"

@@ -16,7 +16,7 @@ export class MercadoPagoJS {
             }).then(() => {
                 resolve('Bricks ready!');
             }).catch((error) => {
-                console.error('Error creating button:', error);
+                // console.error('Error creating button:', error);
                 reject(error);
             });
         });

@@ -10,13 +10,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Address } from 'app/core/models/IMakePurchase';
 import { FillAddressPopUpComponent } from "../fill-address-pop-up/fill-address-pop-up.component";
 import { FooterComponent } from "../../../../shared/components/footer/footer.component";
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MessagePopUpComponent } from "../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 
 @Component({
   selector: 'app-choice-delivery-method',
   standalone: true,
-  imports: [CurrencyPipe, ReactiveFormsModule, 
-    FillAddressPopUpComponent, FooterComponent,NgClass,MatProgressSpinnerModule, NgStyle],
+  imports: [CurrencyPipe, ReactiveFormsModule,
+    FillAddressPopUpComponent, FooterComponent, NgClass, MatProgressSpinnerModule, NgStyle, MessagePopUpComponent],
   templateUrl: './choice-delivery-method.component.html',
   styleUrl: './choice-delivery-method.component.scss'
 })
@@ -33,11 +34,14 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
   total$ !: number;
   addressFillOutByUser: Address | null = null;
 
+
   showFillAddressPopUp: boolean = false;
   isLoadingRequest: boolean = false;
-  hidePrimaryButton : boolean = false;
-  isDisabledButton : boolean = false;
+  hidePrimaryButton: boolean = false;
+  isDisabledButton: boolean = false;
   showMPButton: boolean = false;
+  showErrorPopUp: boolean = false;
+  errorMessage: string = '';
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({
@@ -63,21 +67,22 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
     $event.preventDefault();
     let choice = this.form.get('deliveryMethod')?.value;
     this.isDisabledButton = true;
-    if ( choice === 'in_local') {
+    if (choice === 'in_local') {
       this.makePurchase(null);
-    } 
+    }
     else if (choice === 'home_delivery' && this.addressFillOutByUser) {
       this.makePurchase(this.addressFillOutByUser);
     }
     else if (choice === 'home_delivery' && !this.addressFillOutByUser) {
-      this.showFillAddressPopUp=true;
+      this.showFillAddressPopUp = true;
+      this.isDisabledButton = false;
     }
 
   }
 
 
 
-  makePurchase(address: Address | null) {    
+  makePurchase(address: Address | null) {
     this._PurchaseService.makePurchase(address).subscribe({
       next: mpCode => {
         this.createMpButton(mpCode);
@@ -94,17 +99,22 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
     this.hidePrimaryButtonFn();
     this.mercadoPago.createButton(mpCode).then((message) => {
       this.isLoadingRequest = false;
-      this.showMPButton=true;
+      this.showMPButton = true;
       this.form.disable();
-    }).catch((error) => {
+    }).catch((e) => {
+      this.showErrorPopUp = true;
+      this.errorMessage = "Lo sentimos, ha ocurrido un error. Por favor, vuelva a intentarlo mas tarde o comuniquese con el servicio de atención al cliente.";
+      this.isLoadingRequest = false;
+      this.showMPButton = false;
       this.showPrimaryButtonFn();
+      this.form.enable();
     });
   }
 
   onDeliveryMethodChange(choiceShippingRadioButton: string) {
-    choiceShippingRadioButton === 'home_delivery' ? 
-      this.showFillAddressPopUp = true 
-      : 
+    choiceShippingRadioButton === 'home_delivery' ?
+      this.showFillAddressPopUp = true
+      :
       this.showFillAddressPopUp = false;
   }
 
@@ -112,15 +122,20 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
     this.showFillAddressPopUp = true;
   }
 
-  receiveAddressFromForm( address: Address | null): void {
+  receiveAddressFromForm(address: Address | null): void {
     this.addressFillOutByUser = address;
     this.closeModal('showFillAddressPopUp');;
   }
 
-  closeModal(option : string) {
-    if(option === 'showFillAddressPopUp') {
-      this.showFillAddressPopUp = false;
+  closeModal(option: string) {
+
+    switch (option) {
+      case 'purchaseFailed': this.showErrorPopUp = false;
+        break;
+      case 'showFillAddressPopUp': this.showFillAddressPopUp = false;
+        break;
     }
+
   }
 
   hidePrimaryButtonFn() {
@@ -132,6 +147,7 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
   showPrimaryButtonFn() {
     if (this.primaryButton) {
       this.primaryButton.nativeElement.style.display = 'flex';
+      this.isDisabledButton = false;
     }
     this.isLoadingRequest = false;
   }
