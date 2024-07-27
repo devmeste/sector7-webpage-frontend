@@ -9,7 +9,7 @@ import { IUser } from 'app/core/models/IUser';
   providedIn: 'root'
 })
 export class AuthService {
- 
+
 
 
 
@@ -140,9 +140,19 @@ export class AuthService {
     }
     return throwError(() => parsedError);
   }
+
+
+  change_user_password(body: any) : Observable<ChangePasswordSuccessDTO> {
+    return this._http.patch<ChangePasswordSuccessDTO>(this.baseUrl + 'account/change-password', body);
+  }
 }
+
 
 interface ParsedError {
   message: string;
   originalError ?: string;
+}
+
+export interface ChangePasswordSuccessDTO{
+  message: string
 }
