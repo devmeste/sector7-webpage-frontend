@@ -39,4 +39,31 @@ export const STORE_ROUTES: Routes = [
             import("./purchase/choice-delivery-method/choice-delivery-method.component").then(c => c.ChoiceDeliveryMethodComponent),
         canActivate: [userGuard]
     },
+    {
+        path: 'user-account',
+        loadComponent: ()=> import ("./user/user-account/user-account.component").then(c=>c.UserAccountComponent), 
+        canActivate: [userGuard],
+        children: [
+            {
+                path: 'profile',
+                loadComponent : ()=> import ("./user/user-profile/user-profile.component").then(c=>c.UserProfileComponent)
+            },
+            {
+                path: 'orders',
+                loadComponent : ()=> import ("./user/user-orders/user-orders.component").then(c=>c.UserOrdersComponent)
+            },
+            {
+                path: 'change-password',
+                loadComponent : ()=> import ("./user/user-password/user-password.component").then(c=>c.UserPasswordComponent)
+            },
+            {
+                path: 'favorites',
+                loadComponent : ()=> import ("./user/user-favorites/user-favorites.component").then(c=>c.UserFavoritesComponent)
+            }
+        ]
+    },
+    // {
+    //     path: 'user-account/profile',
+    //     loadComponent : ()=> import ("./user/user-profile/user-profile.component").then(c=>c.UserProfileComponent)
+    // },
 ]

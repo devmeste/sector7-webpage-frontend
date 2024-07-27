@@ -1,0 +1,30 @@
+<main class="user_account_children_main_container">
+<app-top-button-return class="top_button_return" path="user-account"></app-top-button-return>
+    <h1 class="title">Perfil</h1>
+    <section class="user_account_data_section">
+
+        <div class="user_data_field">
+            <label class="user_data_field_label">Nombre</label>
+            <p class="user_data_field_value">Pepe</p>
+        </div>
+        <div class="user_data_field">
+            <label class="user_data_field_label">Apellido</label>
+            <p class="user_data_field_value">Martinez</p>
+        </div>
+        <div class="user_data_field">
+            <label class="user_data_field_label">Email</label>
+            <p class="user_data_field_value">PepeMartinez&#64;gmail.com</p>
+        </div>
+        <div class="user_data_field">
+            <label class="user_data_field_label">Teléfono</label>
+            <p class="user_data_field_value">2494004122</p>
+        </div>
+        <div class="primary_button_container">
+            <button class="primary_button" (click)="editData()">Editar</button>
+        </div>
+    </section>
+</main>
+
+@if(editPopUpWasOpen) {
+<!-- Un formulario -->
+}

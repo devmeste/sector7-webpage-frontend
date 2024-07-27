@@ -1,0 +1,46 @@
+<main class="user_account_main_container">
+
+    <div class="user_account_dashboard_container" [ngClass]="{'isDashboardView': isDashboardView}">
+        
+        <!-- top section -->
+        <section class="user_account_top_section">
+            <picture class="image_container">
+                <img src="assets/images/temporales/Avatar.svg" alt="logo">
+            </picture>
+            <div>
+                <p>Hola, </p>
+                <h3>Pepe</h3>
+            </div>
+        </section>
+
+        <!-- actions section -->
+        <section class="user_account_actions_section">
+            <ul>
+                <li>
+                    <a routerLink="profile" routerLinkActive="active" >Mi Perfil</a>
+                </li>
+                <li>
+                    <a routerLink="orders" routerLinkActive="active">Pedidos</a>
+                </li>
+                <li>
+                    <a routerLink="change-password" routerLinkActive="active">Cambiar contraseña</a>
+                </li>
+                <li>
+                    <a routerLink="favorites" routerLinkActive="active" >Favoritos(idea)</a>
+                </li>
+                <li>
+                    <a (click)="logout()">Salir</a>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    @if(isDashboardView){
+        <app-user-profile class="user_profile_just_high_screens"></app-user-profile>
+    }
+
+    <div class="router_oulet">
+        <router-outlet ></router-outlet>
+    </div>
+
+</main>

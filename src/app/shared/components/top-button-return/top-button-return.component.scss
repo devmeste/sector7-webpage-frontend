@@ -1,0 +1,15 @@
+@import 'styles.scss';
+
+.return_button{
+   
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    mat-icon.arrow_back{
+        color: $primary-main;
+    }
+}

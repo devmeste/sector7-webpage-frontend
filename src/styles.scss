@@ -231,6 +231,10 @@ small {
   font: $mobile-small-text;
 }
 
+main{
+  color: white;
+}
+
 mat-icon {
   height: fit-content;
   width: fit-content;
@@ -258,6 +262,7 @@ $height_helper : $height_for_toolbar_no_fixed;
 
   font-size: .8rem;
 
+  width: fit-content;
 
   @include tablet {
     padding: 8px 15px;
@@ -338,3 +343,4 @@ $height_helper : $height_for_toolbar_no_fixed;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
