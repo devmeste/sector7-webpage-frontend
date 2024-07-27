@@ -20,6 +20,10 @@ export class RecoverUserComponent extends CustomForm {
   showFailedPopUp: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
+  
+  ngOnInit(): void {
+    this.initializeForm();
+  }
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({

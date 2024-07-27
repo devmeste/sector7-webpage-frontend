@@ -10,9 +10,15 @@ import { PopUpChangePasswordComponent } from "./pop-up-change-password/pop-up-ch
   styleUrl: './user-password.component.scss'
 })
 export class UserPasswordComponent {
+
   editPopUpWasOpen: boolean = false;
+
   editPassword() {
-    this.editPopUpWasOpen=true;
+    this.editPopUpWasOpen = true;
+  }
+
+  closeForm() {
+    this.editPopUpWasOpen = false;
   }
 
 }

@@ -30,6 +30,10 @@ export class RegisterComponent extends CustomForm {
     super();
   }
 
+  ngOnInit(): void {
+    this.initializeForm();
+  }
+
   override initializeForm(): void {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
@@ -61,8 +65,9 @@ export class RegisterComponent extends CustomForm {
 
       this._authService.register(newUser).subscribe({
         next: response => {
-
-          this.successMessage = response + "\n \nVerifica tu cuenta y luego podras ingresar";
+          let res = JSON.parse(response);
+          console.log(response);
+          this.successMessage = res.message + "\n \nVerifica tu cuenta y luego podras ingresar";
           // TODO : Mostrar un pop up
           this.showSuccessPopUp = true;
           this.form.reset();

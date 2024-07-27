@@ -58,11 +58,14 @@ export class PopUpChangePasswordComponent extends CustomFormPopUp {
   }
 
   closeModal(option: string) {
-    switch(option){
-      case "thereWasAnError" : this.thereWasAnError = false;
-      break;
-      case "passwordWasChangedSuccessfully" : this.passwordWasChangedSuccessfully = false;
-      break;
+    switch (option) {
+      case "thereWasAnError": this.thereWasAnError = false;
+        break;
+      case "passwordWasChangedSuccessfully": {
+        this.passwordWasChangedSuccessfully = false;
+        this.closeUpdateModal()
+      }
+        break;
     }
   }
 
