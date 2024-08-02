@@ -1,0 +1,10 @@
+<div class="amd-vs-intel-section-container">
+    <div class="fight-container">
+        <div  class="amd"  (click)="toggleAmd()" [ngClass]="{'moveAmd' : move, 'blinkAmd':amdIsActive, }">
+            <picture class="amd-logo-container"></picture>
+        </div>
+        <div class="intel" (click)="toggleIntel()" [ngClass]="{'moveIntel' : move2, 'blinkIntel':intelIsActive } " >
+            <picture class="intel-logo-container"></picture>
+        </div>
+    </div>
+</div>

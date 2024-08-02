@@ -1,0 +1,182 @@
+@import 'styles.scss';
+
+$heigh_path_line: 30px;
+$height_point_outside: 25px;
+$heigh_path_line_checked: $heigh_path_line+25px;
+$width_for_path_line_and_point : 40px;
+
+
+.build_your_pc_main_container {
+    max-width: 1440px;
+    margin: auto;
+
+    .path_to_build_your_pc_container {
+        max-width: 500px;
+    }
+
+    .highlight_text {
+        @include gradient_orange_to_black_right_to_left;
+    }
+
+    .path_points {
+        padding: 0 20px;
+    }
+
+    .path_element_container {
+        position: relative;
+        // background-color: rgba(0, 255, 255, 0.125);
+        height: calc($heigh_path_line + $height_point_outside);
+
+        &.checked {
+            height: calc($heigh_path_line_checked + $height_point_outside);
+        }
+
+        @include laptop {
+            height: calc($heigh_path_line + $height_point_outside);
+
+            &.checked {
+                height: calc($heigh_path_line + $height_point_outside);
+            }
+        }
+
+
+    }
+
+
+    .path_point_container {
+        display: flex;
+        position: absolute;
+        width: fit-content;
+        width: $width_for_path_line_and_point;
+    }
+
+    $z_index_for_point_outside : 3;
+
+    .point_outside {
+        width: 25px;
+        height: $height_point_outside;
+        margin-right: 10px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, $gray_55 -15%, white 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: $z_index_for_point_outside;
+    }
+
+    .point_inside {
+        width: 20px;
+        height: calc($height_point_outside - 5px);
+        border-radius: 50%;
+        background: linear-gradient(180deg, $gray_85 0%, white 100%);
+        text-align: center;
+        color: gray;
+    }
+
+    .path_point_text {
+        margin: 0;
+        color: $primary-l1;
+    }
+
+
+    .path_line_container {
+        display: flex;
+        position: absolute;
+        top: 24px;
+        left: 0;
+        width: $width_for_path_line_and_point;
+    }
+
+
+    .path_line {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25px;
+        height: $heigh_path_line;
+
+        margin-right: 9px;
+        z-index: calc($z_index_for_point_outside - 1);
+
+        @include laptop {
+            height: calc($heigh_path_line - 60px);
+        }
+    }
+
+    .path_line.checked {
+        height: $heigh_path_line_checked;
+
+        @include laptop {
+            height: calc($heigh_path_line_checked - 25px);
+        }
+    }
+
+
+    .path_line_outside {
+        width: 10px;
+        height: 103%;
+        background-color: $gray_85;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include laptop {
+            height: 100%;
+        }
+    }
+
+    .path_line_inside {
+        width: 50%;
+        height: 100%;
+        background-color: $gray_60;
+    }
+
+    .text_container {
+        padding-left: $width_for_path_line_and_point;
+        // background-color: rgba(255, 255, 0, 0.375);
+        flex: 1;
+    }
+
+    .path_line_text_container {
+        display: flex;
+        flex-wrap: nowrap;
+        width: fit-content;
+    }
+
+    .path_line_text {
+        display: flex;
+        align-items: center;
+        text-overflow: ellipsis;
+        width: fit-content;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* Número máximo de líneas */
+        -webkit-box-orient: vertical;
+
+        @include laptop {
+            -webkit-line-clamp: 1;
+        }
+    }
+
+    .check_icon {
+        color: $primary-main;
+        font-size: 25px;
+        width: 15%;
+
+    }
+
+    .point_inside.checked {
+        background: linear-gradient(180deg, $primary-main 0%, $primary-main 100%);
+    }
+
+    .point_inside.checked::after {
+        content: '✔';
+        color: white;
+    }
+
+    .path_line_inside.checked {
+        background-color: $primary-main;
+    }
+
+}

@@ -1,0 +1,28 @@
+@import 'styles.scss';
+
+.build_your_pc_vs_main_container{
+    max-width: 1440px;
+    margin: auto;
+    color: white;
+    margin-bottom: 50px;
+    .title_container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+    .title{
+        text-align: center;
+        font-size: 3.5rem;
+        margin-bottom: 0;
+        @include gradient-text;
+    }
+    .fire_container{
+        width: 150px;
+        height: 100px;
+        background-image: url('../../../../../assets/images/build-your-pc/fire-gif.gif');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}

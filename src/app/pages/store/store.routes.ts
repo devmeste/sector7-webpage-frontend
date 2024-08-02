@@ -14,56 +14,59 @@ export const STORE_ROUTES: Routes = [
             import("./build-your-pc/build-your-pc.component").then(c => c.BuildYourPcComponent)
     },
     {
-        path: 'product-details/:id', 
+        path: 'build-your-pc/vs',
+        loadComponent: () =>
+            import("./build-your-pc/vs/build-your-pc-vs.component").then(c => c.BuildYourPcVsComponent)
+    },
+
+    {
+        path: 'product-details/:id',
         loadComponent: () =>
             import("./product-details/product-details.component").then(c => c.ProductDetailsComponent)
     },
     {
-        path: 'search', 
+        path: 'search',
         loadComponent: () =>
             import("./search/search.component").then(c => c.SearchComponent)
     },
     {
-        path: 'search/:textToSearch', 
+        path: 'search/:textToSearch',
         loadComponent: () =>
             import("./search/search.component").then(c => c.SearchComponent)
     },
     {
-        path: 'cart', 
+        path: 'cart',
         loadComponent: () =>
             import("./shopping-cart/shopping-cart.component").then(c => c.ShoppingCartComponent)
     },
     {
-        path: 'buying/delivery-method', 
+        path: 'buying/delivery-method',
         loadComponent: () =>
             import("./purchase/choice-delivery-method/choice-delivery-method.component").then(c => c.ChoiceDeliveryMethodComponent),
         canActivate: [userGuard]
     },
     {
         path: 'user-account',
-        loadComponent: ()=> import ("./user/user-account/user-account.component").then(c=>c.UserAccountComponent), 
+        loadComponent: () => import("./user/user-account/user-account.component").then(c => c.UserAccountComponent),
         canActivate: [userGuard],
         children: [
             {
                 path: 'profile',
-                loadComponent : ()=> import ("./user/user-profile/user-profile.component").then(c=>c.UserProfileComponent)
+                loadComponent: () => import("./user/user-profile/user-profile.component").then(c => c.UserProfileComponent)
             },
             {
                 path: 'orders',
-                loadComponent : ()=> import ("./user/user-orders/user-orders.component").then(c=>c.UserOrdersComponent)
+                loadComponent: () => import("./user/user-orders/user-orders.component").then(c => c.UserOrdersComponent)
             },
             {
                 path: 'change-password',
-                loadComponent : ()=> import ("./user/user-password/user-password.component").then(c=>c.UserPasswordComponent)
+                loadComponent: () => import("./user/user-password/user-password.component").then(c => c.UserPasswordComponent)
             },
             {
                 path: 'favorites',
-                loadComponent : ()=> import ("./user/user-favorites/user-favorites.component").then(c=>c.UserFavoritesComponent)
+                loadComponent: () => import("./user/user-favorites/user-favorites.component").then(c => c.UserFavoritesComponent)
             }
         ]
     },
-    // {
-    //     path: 'user-account/profile',
-    //     loadComponent : ()=> import ("./user/user-profile/user-profile.component").then(c=>c.UserProfileComponent)
-    // },
+
 ]

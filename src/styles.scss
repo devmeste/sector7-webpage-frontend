@@ -344,3 +344,7 @@ $height_helper : $height_for_toolbar_no_fixed;
   -webkit-text-fill-color: transparent;
 }
 
+@mixin gradient_orange_to_black_right_to_left {
+  background: linear-gradient(10deg , $primary-main 0%, rgb(0, 0, 0) 80%);
+}
+
