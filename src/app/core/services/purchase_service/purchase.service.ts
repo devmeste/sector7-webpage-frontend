@@ -4,7 +4,7 @@ import { Address, IMakePurchase, Product_QuantityRequested, } from 'app/core/mod
 import { MercadoPagoJS } from 'assets/js/MercadoPagoJS.js';
 import { CartService } from '../cart_service/cart-service.service';
 import { map, Observable, switchMap, tap } from 'rxjs';
-import { environment } from 'app/core/enviroments/environment';
+import { environment } from 'app/core/environments/environment';
 
 @Injectable({
   providedIn: 'root'

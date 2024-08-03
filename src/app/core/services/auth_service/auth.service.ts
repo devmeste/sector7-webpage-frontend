@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, catchError, firstValueFrom, map, of, tap, 
 import { ITokenDto } from '../../models/ITokenDto';
 import { Router } from '@angular/router';
 import { IUser } from 'app/core/models/IUser';
-import { environment } from 'app/core/enviroments/environment';
+import { environment } from 'app/core/environments/environment';
 
 @Injectable({
   providedIn: 'root'

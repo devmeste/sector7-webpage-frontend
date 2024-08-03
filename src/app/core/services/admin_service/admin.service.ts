@@ -11,7 +11,7 @@ import BKProduct from 'app/core/models/BKProduct';
 import { IAccount, IAccountReq } from 'app/core/models/IAccount';
 import { IPurchase } from 'app/core/models/IPurchase';
 import { IPurchasesBetweenDatesResponse } from 'app/core/models/IPurchasesBetweenDatesResponse';
-import { environment } from 'app/core/enviroments/environment';
+import { environment } from 'app/core/environments/environment';
 
 @Injectable({
     providedIn: 'root'

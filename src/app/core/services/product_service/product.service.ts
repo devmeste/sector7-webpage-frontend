@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import BKProduct from 'app/core/models/BKProduct';
 import { ProductResponse } from 'app/core/models/ProductResponse';
-import { environment } from 'app/core/enviroments/environment';
+import { environment } from 'app/core/environments/environment';
 
 @Injectable({
   providedIn: 'root'
