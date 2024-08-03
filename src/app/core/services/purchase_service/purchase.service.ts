@@ -4,6 +4,7 @@ import { Address, IMakePurchase, Product_QuantityRequested, } from 'app/core/mod
 import { MercadoPagoJS } from 'assets/js/MercadoPagoJS.js';
 import { CartService } from '../cart_service/cart-service.service';
 import { map, Observable, switchMap, tap } from 'rxjs';
+import { environment } from 'app/core/enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class PurchaseService {
 
   shipment: IMakePurchase | null = null;
   mercadoPago !: MercadoPagoJS;
-  BASE_URL = "http://localhost:8001/api/v1/es/";
+  private baseUrl: string = environment.apiUrl;
   _httpClient: HttpClient = inject(HttpClient);
   _CartService: CartService = inject(CartService);
 
@@ -61,7 +62,7 @@ export class PurchaseService {
           'Content-Type': 'application/json',
         });
 
-        return this._httpClient.post(this.BASE_URL + "purchase/make", body,  { headers, responseType: 'text' });
+        return this._httpClient.post(this.baseUrl + "purchase/make", body,  { headers, responseType: 'text' });
       })
     );
   }

@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import BKProduct from 'app/core/models/BKProduct';
 import { ProductResponse } from 'app/core/models/ProductResponse';
+import { environment } from 'app/core/enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  baseUrl: string = 'http://localhost:8001/api/v1/es/';
+  private baseUrl: string = environment.apiUrl;
   _httpClient: HttpClient = inject(HttpClient);
 
   products: IProduct[] = [

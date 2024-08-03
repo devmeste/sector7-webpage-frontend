@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, catchError, firstValueFrom, map, of, tap, 
 import { ITokenDto } from '../../models/ITokenDto';
 import { Router } from '@angular/router';
 import { IUser } from 'app/core/models/IUser';
+import { environment } from 'app/core/enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
 
 
 
-  baseUrl: string = 'http://localhost:8001/api/v1/es/';
+  private baseUrl: string = environment.apiUrl;
 
   //TODO: Verificar luego el del Usuario normal
 

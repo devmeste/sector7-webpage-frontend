@@ -11,6 +11,7 @@ import BKProduct from 'app/core/models/BKProduct';
 import { IAccount, IAccountReq } from 'app/core/models/IAccount';
 import { IPurchase } from 'app/core/models/IPurchase';
 import { IPurchasesBetweenDatesResponse } from 'app/core/models/IPurchasesBetweenDatesResponse';
+import { environment } from 'app/core/enviroments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,8 @@ export class AdminService {
 
 
 
-    baseUrl: string = 'http://localhost:8001/api/v1/es/';
+    // baseUrl: string = 'http://localhost:8001/api/v1/es/';
+    private baseUrl: string = environment.apiUrl;
 
     private _router: Router = inject(Router);
     private _httpClient: HttpClient = inject(HttpClient);

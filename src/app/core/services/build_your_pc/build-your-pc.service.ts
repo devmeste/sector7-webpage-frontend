@@ -10,7 +10,7 @@ export class BuildYourPcService {
   buildYourPcCart: BuildYourPcCart = {
     Procesador: 'Procesador gamer Intel Core i9-13900K (9a. generación)',
     Motherboard: 'Motherboard Asus Prime A320m-k Am4 Ddr4 ATX',
-    MemoriaRAM: 'Hyper X ddr4 3200 mhz 16 Gb',
+    MemoriaRAM: null,
     Almacenamiento: 'Disco sólido interno Crucial CT240BX500SSD1 240GB negro',
     FuenteDePoder: 'XCORE Power XCP630-TS 3200 mhz 16 Gb 80+ gold',
     TarjetaDeVideo: null,
