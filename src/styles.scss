@@ -336,6 +336,7 @@ $height_helper : $height_for_toolbar_no_fixed;
   display: none !important;
 }
 
+// mixins
 
 // Define a mixin that groups the properties
 @mixin gradient-text {
@@ -348,3 +349,31 @@ $height_helper : $height_for_toolbar_no_fixed;
   background: linear-gradient(10deg , $primary-main 0%, rgb(0, 0, 0) 80%);
 }
 
+@mixin gradient_gray_to_black_top_to_bottom {
+  background: linear-gradient(180deg , $gray_30 0%, rgb(20, 20, 20) 60%);
+}
+
+@mixin gradient_orange_yellow_left_to_right {
+  background: linear-gradient(90deg , $primary-main 0%, rgb(255, 187, 0) 140%);
+}
+
+
+
+// divider
+
+
+
+
+.show_in_mobile_tablet{
+  display: flex;
+  
+  @include laptop{
+      display: none;
+  }
+}
+.show_in_laptop_desktop{
+  display: none;
+  @include laptop{
+      display: flex;
+  }
+}

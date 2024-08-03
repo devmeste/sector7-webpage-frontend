@@ -6,17 +6,11 @@ export const STORE_ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('./home/home.component').then(r => r.HomeComponent),
-        // loadComponent: () =>import("./search/search.component").then(c => c.SearchComponent)
     },
     {
         path: 'build-your-pc',
-        loadComponent: () =>
-            import("./build-your-pc/build-your-pc.component").then(c => c.BuildYourPcComponent)
-    },
-    {
-        path: 'build-your-pc/vs',
-        loadComponent: () =>
-            import("./build-your-pc/vs/build-your-pc-vs.component").then(c => c.BuildYourPcVsComponent)
+        loadChildren: () =>
+            import("./build-your-pc/build-your-pc.routes").then(r => r.BUILD_YOUR_PC_ROUTES)
     },
 
     {
@@ -68,5 +62,4 @@ export const STORE_ROUTES: Routes = [
             }
         ]
     },
-
 ]

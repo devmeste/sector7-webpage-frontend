@@ -9,174 +9,100 @@ $width_for_path_line_and_point : 40px;
 .build_your_pc_main_container {
     max-width: 1440px;
     margin: auto;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto 1fr;
 
-    .path_to_build_your_pc_container {
-        max-width: 500px;
+    .build_your_pc_top_banner{
+        grid-column: 1 / span 12;
+        width: 100%;
+        height: 115px;
     }
-
-    .highlight_text {
-        @include gradient_orange_to_black_right_to_left;
+    .path_desktop_container{
+        grid-column: 1 / span 4;
     }
+    .content_container{
+        grid-column: 1 / span 12;
+        padding: 0 1rem;
 
-    .path_points {
-        padding: 0 20px;
-    }
+        @include tablet{
+            padding: 0 0rem;
 
-    .path_element_container {
-        position: relative;
-        // background-color: rgba(0, 255, 255, 0.125);
-        height: calc($heigh_path_line + $height_point_outside);
-
-        &.checked {
-            height: calc($heigh_path_line_checked + $height_point_outside);
         }
-
-        @include laptop {
-            height: calc($heigh_path_line + $height_point_outside);
-
-            &.checked {
-                height: calc($heigh_path_line + $height_point_outside);
-            }
+        @include laptop{
+            grid-column: 5 / span 8;
         }
-
-
     }
 
-
-    .path_point_container {
+    .cards_container{
         display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
+        justify-content: space-evenly;
+        height: fit-content;
+    }
+
+    .title_choice_your_item{
+        margin: 0 0 0.5rem 0;
+        @include gradient-text;
+        padding-left: 10px;
+    }
+
+    .divider_gradient{
+        height: 4px;
+        width: 80%;
+        margin-bottom: 2rem;
+        @include gradient_orange_yellow_left_to_right;
+    }
+
+    .fourth_button_border{
+        width: 100%;
+        @include gradient_orange_yellow_left_to_right;
+        width: 80%;
+        padding: 4px;
+        border-radius: 16px;
+        margin: auto;
+        max-width: 400px;
+        margin-bottom: 2rem;
+    }
+    .fourth_button {
+        // border: 4px solid;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        
+        @include gradient_gray_to_black_top_to_bottom; // background
+        // border-image: linear-gradient(to right, rgb(255, 72, 0), orange) 1;
+        // border
+        margin: auto;
+        border-radius: 16px;
+        padding: 5px 7% ;
+        p{ 
+            @include gradient-text; // text
+            font-size: 1.2rem;
+            font-weight: bolder;
+            margin: 0;
+            
+        }
+        .arrow_drop_down{
+            display: flex;
+            
+            font-size: 2.5rem;
+            @include gradient-text;
+        }
+    }
+    
+
+    .path_mobile_container {
         position: absolute;
-        width: fit-content;
-        width: $width_for_path_line_and_point;
-    }
-
-    $z_index_for_point_outside : 3;
-
-    .point_outside {
-        width: 25px;
-        height: $height_point_outside;
-        margin-right: 10px;
-        border-radius: 50%;
-        background: linear-gradient(180deg, $gray_55 -15%, white 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: $z_index_for_point_outside;
-    }
-
-    .point_inside {
-        width: 20px;
-        height: calc($height_point_outside - 5px);
-        border-radius: 50%;
-        background: linear-gradient(180deg, $gray_85 0%, white 100%);
-        text-align: center;
-        color: gray;
-    }
-
-    .path_point_text {
-        margin: 0;
-        color: $primary-l1;
-    }
-
-
-    .path_line_container {
-        display: flex;
-        position: absolute;
-        top: 24px;
-        left: 0;
-        width: $width_for_path_line_and_point;
-    }
-
-
-    .path_line {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 25px;
-        height: $heigh_path_line;
-
-        margin-right: 9px;
-        z-index: calc($z_index_for_point_outside - 1);
-
+        top: 0;
+        // height: 100%;
+        width: 100vw;
         @include laptop {
-            height: calc($heigh_path_line - 60px);
+            display: none;
         }
-    }
-
-    .path_line.checked {
-        height: $heigh_path_line_checked;
-
-        @include laptop {
-            height: calc($heigh_path_line_checked - 25px);
-        }
-    }
-
-
-    .path_line_outside {
-        width: 10px;
-        height: 103%;
-        background-color: $gray_85;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        @include laptop {
-            height: 100%;
-        }
-    }
-
-    .path_line_inside {
-        width: 50%;
-        height: 100%;
-        background-color: $gray_60;
-    }
-
-    .text_container {
-        padding-left: $width_for_path_line_and_point;
-        // background-color: rgba(255, 255, 0, 0.375);
-        flex: 1;
-    }
-
-    .path_line_text_container {
-        display: flex;
-        flex-wrap: nowrap;
-        width: fit-content;
-    }
-
-    .path_line_text {
-        display: flex;
-        align-items: center;
-        text-overflow: ellipsis;
-        width: fit-content;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        /* Número máximo de líneas */
-        -webkit-box-orient: vertical;
-
-        @include laptop {
-            -webkit-line-clamp: 1;
-        }
-    }
-
-    .check_icon {
-        color: $primary-main;
-        font-size: 25px;
-        width: 15%;
-
-    }
-
-    .point_inside.checked {
-        background: linear-gradient(180deg, $primary-main 0%, $primary-main 100%);
-    }
-
-    .point_inside.checked::after {
-        content: '✔';
-        color: white;
-    }
-
-    .path_line_inside.checked {
-        background-color: $primary-main;
     }
 
 }

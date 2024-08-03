@@ -1,0 +1,118 @@
+@import 'styles.scss';
+
+$border_radius_for_card: 14px;
+$border_radius_inside_element: $border_radius_for_card - 3px;
+
+.two_colors_card {
+    display: flex;
+    // justify-content: start;
+    // align-items: start;
+    flex-direction: row;
+    width: min( 90% , 400px);
+    margin: auto;
+    height: 140px; // despues cambiar
+    color: white;
+    border-radius: $border_radius_for_card;
+    cursor: pointer;
+    background-color: aqua;
+
+    &.selected {
+        box-shadow: 2px 2px 2px 2px $primary-main;
+    }
+
+    @include tablet {
+        flex-direction: column;
+        width: 220px;
+        height: 300px; // despues cambiar
+        justify-content: start;
+        align-items: center;
+        margin: 0;
+    }
+
+    .top_container {
+        width: 40%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $gray_10;
+        border-radius: $border_radius_inside_element 0 0 $border_radius_inside_element;
+
+    
+        img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            
+            @include tablet{
+                width: 80%;
+                height: 80%;
+
+            }
+        }
+
+        @include tablet {
+            width: 100%;
+            height: 49%;
+            border-radius: $border_radius_inside_element  $border_radius_inside_element 0 0;
+
+        }
+    }
+
+    .divider {
+        @include gradient_orange_yellow_left_to_right;
+        width: 1%;
+        height: 100%;
+
+        @include tablet{
+            width: 100%;
+        height: 1%;
+        }
+    }
+
+    .bottom_container {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: $gray_20;
+        border-radius: 0 $border_radius_inside_element $border_radius_inside_element 0;
+
+        
+        @include tablet {
+            width: 100%;
+            height: 50%;
+            border-radius: 0 0 $border_radius_inside_element $border_radius_inside_element;
+        }
+        
+        .product_price {
+            width: 90%;
+            font-weight: bolder;
+            color: $success-300;
+            margin : 0.5rem 0 0 0 ;
+        }
+
+        .product_name {
+            width: 90%;
+            line-height: 1rem;
+            font-size: 14px;
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Número máximo de líneas */
+            -webkit-box-orient: vertical;
+        }
+
+        .button_container{
+            width: 90%;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+        }
+
+    }
+}
