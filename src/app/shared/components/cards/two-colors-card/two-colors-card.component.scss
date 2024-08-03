@@ -14,7 +14,7 @@ $border_radius_inside_element: $border_radius_for_card - 3px;
     color: white;
     border-radius: $border_radius_for_card;
     cursor: pointer;
-    background-color: aqua;
+    // background-color: aqua;
 
     &.selected {
         box-shadow: 2px 2px 2px 2px $primary-main;

@@ -12,6 +12,16 @@ $width_for_path_line_and_point : 40px;
         // max-width: 500px;
         color: white;
         background-color: $background;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 75px;
+
+        @include laptop{
+            position: relative;
+            width: fit-content;
+        }
+
 
         .close_mobile_button_container{
             display: flex;

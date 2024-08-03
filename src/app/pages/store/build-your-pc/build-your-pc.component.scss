@@ -98,7 +98,6 @@ $width_for_path_line_and_point : 40px;
     .path_mobile_container {
         position: absolute;
         top: 0;
-        // height: 100%;
         width: 100vw;
         @include laptop {
             display: none;
