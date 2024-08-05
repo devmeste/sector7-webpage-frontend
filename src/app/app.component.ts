@@ -89,8 +89,7 @@ export class AppComponent {
   }
 
   search(value: any) {
-    console.log(value);
-    if (value == '') return;
+    if (value == '' || value == null) return;
     this.productsBySearch$ = this._productService.search(value);
   }
 
