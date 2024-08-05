@@ -1,12 +1,11 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 
 @Component({
   selector: 'app-wide-product-card',
   standalone: true,
-  imports: [CurrencyPipe , SplitLinkPipe],
+  imports: [CurrencyPipe ],
   templateUrl: './wide-product-card.component.html',
   styleUrl: './wide-product-card.component.scss'
 })

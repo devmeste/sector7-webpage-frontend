@@ -6,12 +6,11 @@ import { ProductCardBigComponent } from '../../cards/product-card-big/product-ca
 import { TagModule } from 'primeng/tag';
 import { BkCardComponent } from '../../cards/bk-card/bk-card.component';
 import BKProduct from 'app/core/models/BKProduct';
-import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 
 @Component({
   selector: 'app-bk-carousel',
   standalone: true,
-  imports: [CarouselModule, TagModule, ProductCardBigComponent, BkCardComponent, SplitLinkPipe],
+  imports: [CarouselModule, TagModule, ProductCardBigComponent, BkCardComponent],
   templateUrl: './bk-carousel.component.html',
   styleUrl: './bk-carousel.component.scss'
 })

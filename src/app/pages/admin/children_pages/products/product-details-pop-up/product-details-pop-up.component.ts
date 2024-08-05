@@ -3,7 +3,6 @@ import { InputDangerTextComponent } from "../../../../../shared/components/input
 import BKProduct from 'app/core/models/BKProduct';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
-import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 import { CommonModule, NgFor } from '@angular/common';
 import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.pop.up';
 
@@ -14,7 +13,7 @@ import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.p
   styleUrls: ['./product-details-pop-up.component.scss', '../../../../../shared/styles/admin_form.scss', '../../../../../shared/styles/pop-up-styles.scss',
     // '../products-update-pop-up/products-update-pop-up.component.scss'
   ],
-  imports: [InputDangerTextComponent, ReactiveFormsModule, SplitLinkPipe, NgFor]
+  imports: [InputDangerTextComponent, ReactiveFormsModule, NgFor]
 })
 export class ProductDetailsPopUpComponent extends CustomFormPopUp {
 

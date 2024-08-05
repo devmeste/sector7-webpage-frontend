@@ -118,6 +118,7 @@ mat-toolbar.toolbar {
                         font: $mobile-normal;
                         font-size: clamp(0.9rem, 0.722rem + 0.37vw, 1rem);
                         text-decoration: none;
+                        color: white;
 
                         &:hover {
                             text-decoration: none;
@@ -241,13 +242,14 @@ mat-sidenav-content {
     }
 }
 
+
+
 ul.side_nav_ul {
     padding-left: 0px;
 
     @media screen and (min-width: 330px) {
         padding-left: 20px;
     }
-
 
     @media screen and (min-width: 500px) {
         padding-left: 40px;
@@ -266,11 +268,13 @@ ul.side_nav_ul {
 
         a {
             text-decoration: none;
+            color: white;
         }
 
         a:visited {
             text-decoration: none;
-            color: inherit;
+            // color: inherit;
+            color: white;
         }
     }
 

@@ -105,7 +105,7 @@
                         <div class="photosContainer">
                             @for (item of this.photosToShow ; track $index) {
                             <picture class="photo">
-                                <img [src]="item | splitLink" alt="photo">
+                                <img [src]="item" alt="photo">
                             </picture>
                             }
                         </div>

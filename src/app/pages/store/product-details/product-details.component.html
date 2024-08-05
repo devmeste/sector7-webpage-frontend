@@ -9,7 +9,7 @@
             <p-carousel [value]="product.photos || []" [circular]="true" [responsiveOptions]="responsiveOptions">
                     <ng-template let-photo pTemplate="item">
                         <div class="main_img_container">
-                            <img [src]="photo | splitLink" alt="product image">
+                            <img [src]="photo " alt="product image">
                         </div>
                     </ng-template>
             </p-carousel>
@@ -37,13 +37,13 @@
                 @for (img of product.photos.slice(0, 5); track $index) {
                     @if (img!= this.mainImage()) {
                     <div class="side_img_div_container" (click)="changeMainImage(img)">
-                        <img [src]="img | splitLink" alt="Imagen del producto">
+                        <img [src]="img " alt="Imagen del producto">
                     </div>
                 }
                 }
             </div>
             <div class="main_img_container">
-                <img [src]="this.mainImage()| splitLink" alt="imagen del producto">
+                <img [src]="this.mainImage()" alt="imagen del producto">
             </div>
             <div class="main_details_container">
                 <h2>

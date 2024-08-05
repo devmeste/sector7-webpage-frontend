@@ -3,7 +3,7 @@
         @for (product of products; track $index) {
         <div class="shopping_cart_item_container">
             <picture class="product_image">
-                <img [src]="product.img | splitLink" alt="producto: {{product.name}}">
+                <img [src]="product.img" alt="producto: {{product.name}}">
             </picture>
             <div class="side_text_container">
                 <div class="shopping_cart_item_name">

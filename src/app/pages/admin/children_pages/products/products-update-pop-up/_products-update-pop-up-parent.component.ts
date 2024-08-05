@@ -6,14 +6,13 @@ import { InputDangerTextComponent } from "../../../../../shared/components/input
 import { NgClass, NgFor } from '@angular/common';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { MatIcon } from '@angular/material/icon';
-import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.pop.up';
 // import {} from '../../../../../shared/';
 
 @Component({
   standalone: true,
   template: '',
-  imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon, SplitLinkPipe]
+  imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon]
 })
 export abstract class _ProductsUpdatePopUpComponent extends CustomFormPopUp {
 

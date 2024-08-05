@@ -4,7 +4,6 @@ import { InputDangerTextComponent } from "../../../../../shared/components/input
 import { NgClass, NgFor } from '@angular/common';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { MatIcon } from '@angular/material/icon';
-import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 import { _ProductsUpdatePopUpComponent, Field } from './_products-update-pop-up-parent.component';
 
 @Component({
@@ -12,7 +11,7 @@ import { _ProductsUpdatePopUpComponent, Field } from './_products-update-pop-up-
   standalone: true,
   templateUrl: './products-update-pop-up.component.html',
   styleUrls: ['./products-update-pop-up.component.scss', '../../../../../shared/styles/pop-up-styles.scss', '../../../../../shared/styles/admin_form.scss'],
-  imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon, SplitLinkPipe]
+  imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon]
 })
 export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpComponent {
 

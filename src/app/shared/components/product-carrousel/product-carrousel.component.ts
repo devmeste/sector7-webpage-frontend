@@ -5,7 +5,6 @@ import { ProductCardBigComponent } from "../cards/product-card-big/product-card-
 import { IProduct } from '../../../core/models/product';
 import { ProductService } from '../../../core/services/product_service/product.service';
 import BKProduct from 'app/core/models/BKProduct';
-import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
 
 
 @Component({
@@ -13,7 +12,7 @@ import { SplitLinkPipe } from 'app/core/pipes/splitLinks/split-link.pipe';
     standalone: true,
     templateUrl: './product-carrousel.component.html',
     styleUrl: './product-carrousel.component.scss',
-    imports: [CarouselModule, TagModule, ProductCardBigComponent, SplitLinkPipe]
+    imports: [CarouselModule, TagModule, ProductCardBigComponent]
 })
 export class ProductCarrouselComponent implements OnInit {
 
