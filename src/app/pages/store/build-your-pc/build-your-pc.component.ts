@@ -17,8 +17,6 @@ export class BuildYourPcComponent {
 
     showMenuInMobile=false;
 
-    items = Array(12).fill(0); // later will be replaced by real data
-
     toggleMenu(){
         this.showMenuInMobile = !this.showMenuInMobile;
     }

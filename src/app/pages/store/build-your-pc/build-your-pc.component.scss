@@ -24,7 +24,7 @@ $width_for_path_line_and_point : 40px;
     }
     .content_container{
         grid-column: 1 / span 12;
-        padding: 0 1rem;
+        
 
         @include tablet{
             padding: 0 0rem;
@@ -36,10 +36,6 @@ $width_for_path_line_and_point : 40px;
     }
 
     .cards_container{
-        display: flex;
-        flex-wrap: wrap;
-        gap: 3rem;
-        justify-content: space-evenly;
         height: fit-content;
     }
 
@@ -103,5 +99,5 @@ $width_for_path_line_and_point : 40px;
             display: none;
         }
     }
-
+    
 }

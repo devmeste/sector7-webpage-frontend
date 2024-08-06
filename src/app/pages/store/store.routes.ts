@@ -18,6 +18,7 @@ export const STORE_ROUTES: Routes = [
         loadComponent: () =>
             import("./product-details/product-details.component").then(c => c.ProductDetailsComponent)
     },
+
     {
         path: 'search',
         loadComponent: () =>
@@ -28,6 +29,7 @@ export const STORE_ROUTES: Routes = [
         loadComponent: () =>
             import("./search/search.component").then(c => c.SearchComponent)
     },
+    
     {
         path: 'cart',
         loadComponent: () =>

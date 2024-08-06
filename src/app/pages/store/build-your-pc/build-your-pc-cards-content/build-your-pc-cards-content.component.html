@@ -1,0 +1,6 @@
+
+<div class="cards_container">
+    @for( item of this.items ; track $index){
+        <app-two-colors-card [selected]="item.selected" class="card"></app-two-colors-card>
+    }
+</div>

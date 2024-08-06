@@ -1,47 +1,104 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BuildYourPcService {
 
-  constructor() { }
 
-  buildYourPcCart: BuildYourPcCart = {
-    Procesador: 'Procesador gamer Intel Core i9-13900K (9a. generación)',
-    Motherboard: 'Motherboard Asus Prime A320m-k Am4 Ddr4 ATX',
-    MemoriaRAM: null,
-    Almacenamiento: 'Disco sólido interno Crucial CT240BX500SSD1 240GB negro',
-    FuenteDePoder: 'XCORE Power XCP630-TS 3200 mhz 16 Gb 80+ gold',
-    TarjetaDeVideo: null,
-    SistemaDeEnfriamiento: null,
-    Monitor: null,
-    Audifonos: null,
-    Teclado: null,
-    Mouse: null,
-  };
 
-  getBuildYourPcCart() {
-    return this.buildYourPcCart;
+  // buildYourPcCart: BuildYourPcCart = {
+  //   Procesador: {name : 'Procesador gamer Intel Core i9-13900K (9a. generación)', quantity: 1},
+  //   Motherboard: {name : 'Motherboard Asus Prime A320m-k Am4 Ddr4 ATX', quantity:1},
+  //   Memoria_RAM: null,
+  //   Almacenamiento: {name : 'Disco sólido interno Crucial CT240BX500SSD1 240GB negro',  quantity: 1},
+  //   Fuente_De_Poder: {name : 'XCORE Power XCP630-TS 3200 mhz 16 Gb 80+ gold', quantity: 1}, 
+  //   Tarjeta_De_Video: null,
+  //   Sistema_De_Enfriamiento: null,
+  //   Monitor: null,
+  //   Audifonos: null,
+  //   Teclado: null,
+  //   Mouse: null,
+  // };
+
+  categories: string[] = [
+    'Procesador',
+    'Motherboard',
+    'Memoria RAM',
+    'Almacenamiento',
+    'Fuente De Poder',
+    'Tarjeta De Video',
+    'Sistema De Enfriamiento',
+    'Monitor',
+    'Audifonos',
+    'Teclado',
+    'Mouse'
+  ]
+
+  buildYourPcCart: BuildYourPcCartEntry[] = this.categories.map(category => ({
+    categoryName: category,
+    selectedProductName: null,
+    selectedProductQuantity: 0
+  }));
+
+
+  buildYourPcCart$ = new BehaviorSubject<BuildYourPcCartEntry[]>(this.buildYourPcCart);
+
+  constructor() {
+    const processorProduct = this.searchEntry('Procesador');
+    if (processorProduct) {
+      processorProduct.selectedProductName = 'Procesador gamer Intel Core i9-13900K (9a. generación)';
+      processorProduct.selectedProductQuantity = 1;
+    }
   }
+
+ 
+  getBuildYourPcCart(): Observable<BuildYourPcCartEntry[]> {
+    return this.buildYourPcCart$;
+  }
+
+  updateBuildYourPcCart(newEntry: BuildYourPcCartEntry) {
+    const existingEntry = this.searchEntry(newEntry.categoryName);
+    if(existingEntry) {
+      existingEntry.selectedProductName = newEntry.selectedProductName;
+      existingEntry.selectedProductQuantity = newEntry.selectedProductQuantity;
+    }
+    this.buildYourPcCart$.next(this.buildYourPcCart);
+  }
+
+  private searchEntry( category: string): BuildYourPcCartEntry | undefined {
+    return this.buildYourPcCart.find(entry => entry.categoryName === category);
+  }
+
+
 }
 
-interface BuildYourPcCart {
-  Procesador: string | null;
-  Motherboard: string | null;
-  MemoriaRAM: string | null;
-  Almacenamiento: string | null;
-  FuenteDePoder: string | null;
-  TarjetaDeVideo: string | null;
-  SistemaDeEnfriamiento: string | null;
-  Monitor: string | null;
-  Audifonos: string | null;
-  Teclado: string | null;
-  Mouse: string | null;
+// export interface Product_BuildYourPcCart {
+//   name: string;
+//   quantity: number;
+// }
+
+// export interface BuildYourPcCart {
+//   Procesador: Product_BuildYourPcCart | null;
+//   Motherboard: Product_BuildYourPcCart | null;
+//   Memoria_RAM: Product_BuildYourPcCart | null;
+//   Almacenamiento: Product_BuildYourPcCart | null;
+//   Fuente_De_Poder: Product_BuildYourPcCart | null;
+//   Tarjeta_De_Video: Product_BuildYourPcCart | null;
+//   Sistema_De_Enfriamiento: Product_BuildYourPcCart | null;
+//   Monitor: Product_BuildYourPcCart | null;
+//   Audifonos: Product_BuildYourPcCart | null;
+//   Teclado: Product_BuildYourPcCart | null;
+//   Mouse: Product_BuildYourPcCart | null;
+// }
+
+
+export interface BuildYourPcCartEntry {
+  categoryName: string;
+  selectedProductName: string | null;
+  selectedProductQuantity: number;
 }
-
-
-
 
 
 

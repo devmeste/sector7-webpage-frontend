@@ -24,11 +24,11 @@
                 <p>Mi Avance</p> <mat-icon class="arrow_drop_down">arrow_drop_down</mat-icon>
             </button>
         </div>
+        <!-- Button just for mobile -->
 
+        
         <div class="cards_container">
-            @for( item of this.items ; track $index){
-                <app-two-colors-card [selected]="item.selected"></app-two-colors-card>
-            }
+            <router-outlet></router-outlet>
         </div>
     </div>
 

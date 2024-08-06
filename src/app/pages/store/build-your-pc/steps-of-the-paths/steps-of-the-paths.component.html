@@ -13,31 +13,30 @@
     <div class="path_points">
 
 
-        @for( item of this.getCartEntries() ; track $index){
-            <div class="path_element_container" [ngClass]="{'checked' : item[1]}">
+        @for( entry of cart$  ; track $index){
+            <div class="path_element_container" [ngClass]="{'checked' : entry.selectedProductName}">
                 <div class="path_point_container">
                     <div class="point_outside">
-                        <div class="point_inside " [ngClass]="{'checked' : item[1]!=null }">
+                        <div class="point_inside " [ngClass]="{'checked' : entry.selectedProductName!=null }">
 
-                            @if(item[1]==null){
-                                {{$index}}
+                            @if(entry.selectedProductName==null){
+                                {{$index +1}}
                             }
-
                         </div>
                     </div>
                     <div class="path_line_container">
-                        <div class="path_line " [ngClass]="{'checked' : item[1]!=null }">
+                        <div class="path_line " [ngClass]="{'checked' : entry.selectedProductName!=null }">
                             <div class="path_line_outside">
-                                <div class="path_line_inside" [ngClass]="{'checked' : item[1]!=null }"></div>
+                                <div class="path_line_inside" [ngClass]="{'checked' : entry.selectedProductName!=null }"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="text_container">
-                    <p class="path_point_text">{{item[0]}}</p>
+                    <p class="path_point_text">{{entry.categoryName}}</p>
                     <div class="path_line_text_container">
                         <p class="path_line_text">
-                            {{item[1]}}
+                            {{ entry.selectedProductName }}
                         </p>
                         <mat-icon class="check_icon">check</mat-icon>
                     </div>
