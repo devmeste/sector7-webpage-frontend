@@ -33,7 +33,6 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       fieldsJSON: ['', []],
       fieldsArray: this.formBuilder.array([]),
     })
-  
   }
   
   categories$ !: ICategory[];
@@ -41,41 +40,47 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   productHasError = false;
   errorMessage = '';
   @ViewChild('photoInput') photoInput!: ElementRef;
+  private _adminService = inject(AdminService);
+  // photos: string[] = ['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'];
+
 
   ngOnInit(): void {
     this._adminService.getAllCategories().subscribe(c => {
       this.categories$ = c;
     });
-    
+    this.initializeForm();
   }
 
-  private _adminService = inject(AdminService);
-
-  photos: string[] = ['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'];
-
-  
-
-
-
   ngAfterViewInit(): void {
-    this.photoInput.nativeElement.value = '';    
+    this.photoInput.nativeElement.value = '';
   }
 
 
   get photosArray() {
+    // console.log(this.form.get('photos'));
     return this.form.get('photos') as FormArray;
+    // return this.form.controls['photos'] as FormArray;
+    // return this.form.get('photos') as FormArray;
   }
 
   get fieldsArray() {
-    return this.form.controls["fieldsArray"] as FormArray;
+    // console.log(this.form.get("fieldsArray"));
+    return this.form.get("fieldsArray") as FormArray;
+    // return this.form.controls["fieldsArray"] as FormArray;
   }
 
+
+  // VOY POR ACA
   onCategoryChange($event: Event) {
 
     const selectElement = $event.target as HTMLSelectElement;
 
     const categoryId = selectElement.value;
 
+    if (categoryId == '') {
+      return;
+    }
+    
     this.form.get('categoryId')?.setValue(categoryId);
 
     this._adminService.getCategoryById(categoryId).subscribe(category => {

@@ -1,9 +1,8 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { OutletContext } from '@angular/router';
-import { BuildYourPcCartEntry, BuildYourPcService } from 'app/core/services/build_your_pc/build-your-pc.service';
-import { Observable } from 'rxjs';
+import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
+import { BuildYourPcService } from 'app/core/services/build_your_pc/build-your-pc.service';
 
 @Component({
   selector: 'app-steps-of-the-paths',

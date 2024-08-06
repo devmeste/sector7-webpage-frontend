@@ -1,26 +1,11 @@
 import { Injectable } from '@angular/core';
+import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BuildYourPcService {
-
-
-
-  // buildYourPcCart: BuildYourPcCart = {
-  //   Procesador: {name : 'Procesador gamer Intel Core i9-13900K (9a. generación)', quantity: 1},
-  //   Motherboard: {name : 'Motherboard Asus Prime A320m-k Am4 Ddr4 ATX', quantity:1},
-  //   Memoria_RAM: null,
-  //   Almacenamiento: {name : 'Disco sólido interno Crucial CT240BX500SSD1 240GB negro',  quantity: 1},
-  //   Fuente_De_Poder: {name : 'XCORE Power XCP630-TS 3200 mhz 16 Gb 80+ gold', quantity: 1}, 
-  //   Tarjeta_De_Video: null,
-  //   Sistema_De_Enfriamiento: null,
-  //   Monitor: null,
-  //   Audifonos: null,
-  //   Teclado: null,
-  //   Mouse: null,
-  // };
 
   categories: string[] = [
     'Procesador',
@@ -71,34 +56,9 @@ export class BuildYourPcService {
     return this.buildYourPcCart.find(entry => entry.categoryName === category);
   }
 
-
 }
 
-// export interface Product_BuildYourPcCart {
-//   name: string;
-//   quantity: number;
-// }
 
-// export interface BuildYourPcCart {
-//   Procesador: Product_BuildYourPcCart | null;
-//   Motherboard: Product_BuildYourPcCart | null;
-//   Memoria_RAM: Product_BuildYourPcCart | null;
-//   Almacenamiento: Product_BuildYourPcCart | null;
-//   Fuente_De_Poder: Product_BuildYourPcCart | null;
-//   Tarjeta_De_Video: Product_BuildYourPcCart | null;
-//   Sistema_De_Enfriamiento: Product_BuildYourPcCart | null;
-//   Monitor: Product_BuildYourPcCart | null;
-//   Audifonos: Product_BuildYourPcCart | null;
-//   Teclado: Product_BuildYourPcCart | null;
-//   Mouse: Product_BuildYourPcCart | null;
-// }
-
-
-export interface BuildYourPcCartEntry {
-  categoryName: string;
-  selectedProductName: string | null;
-  selectedProductQuantity: number;
-}
 
 
 

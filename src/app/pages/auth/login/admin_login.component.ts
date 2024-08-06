@@ -17,17 +17,16 @@ import { MatIcon } from '@angular/material/icon';
 
 export class AdminLoginComponent extends ParentLoginComponent {
 
-
+    constructor(router: Router, auth_service: AuthService) {
+        super(router, auth_service);
+        if(auth_service.isAdminLoggedIn()) {
+            router.navigate(['/admin-dashboard']);
+        }
+    }
 
     override getSpecialPath(): string {
         return 'admin';
     }
-
-    constructor(router: Router, auth_service: AuthService) {
-        super(router, auth_service);
-    }
-
-
             
     override saveTokenAndRedirect(token: string): void {
         localStorage.setItem('admin_token', token);

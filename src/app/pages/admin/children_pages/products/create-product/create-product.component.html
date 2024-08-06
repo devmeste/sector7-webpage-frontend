@@ -127,7 +127,7 @@
             <select name="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)" class="custom-select">
                 <option value=""> </option>
                 @for (category of categories$; track category.id) {
-                <option value="{{category.id}}"> {{category.name}} </option>
+                    <option value="{{category.id}}"> {{category.name}} </option>
                 }
             </select>
 

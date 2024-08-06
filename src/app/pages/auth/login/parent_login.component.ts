@@ -14,7 +14,6 @@ export abstract class ParentLoginComponent {
   passwordVisible: string = 'password';
 
   constructor(protected router:Router, protected auth_service: AuthService) {
-
     this.LoginForm = new FormGroup({
       username: new FormControl(''),
       password: new FormControl(''),
