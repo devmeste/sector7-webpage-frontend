@@ -47,8 +47,8 @@
             </tbody>
         </table>
     
-        <mat-paginator #paginator [length]="products$.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
-        </mat-paginator>
+        <!-- <mat-paginator #paginator [length]="products$.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
+        </mat-paginator> -->
 
     }
     @else {
@@ -58,11 +58,21 @@
     @if (productUpdatedSuccessfully) {
         <app-message-pop-up  custom_message='Producto Aprobado Exitosamente' (close)="closeModal('productUpdatedSuccessfully')" > </app-message-pop-up>
     }
+    @if (productDeletedSuccessfully) {
+        <app-message-pop-up  custom_message='Producto Borrado Exitosamente' (close)="closeModal('productDeletedSuccessfully')" > </app-message-pop-up>
+    }
     @if (productUpdateFailed) {
         <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('productUpdateFailed')" > </app-message-pop-up>
     }
+
 </section>
 
 @if(this.showUpdatePopUp){
-    <app-products-update-pop-up [product_id]="this.update_id" [product_USD_price]="this.product_USD_price" (close)="closeModal('showUpdatePopUp')"></app-products-update-pop-up>
+    <app-products-update-pop-up   
+
+        [product_id]="this.update_id" 
+        [product_USD_price]="this.product_USD_price" 
+        (itemWasUpdatedSuccesfully)="this.updateProductsState()"
+        (close)="closeModal('showUpdatePopUp')">
+</app-products-update-pop-up>
 }

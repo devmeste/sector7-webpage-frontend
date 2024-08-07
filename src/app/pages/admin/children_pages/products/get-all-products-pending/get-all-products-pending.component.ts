@@ -23,6 +23,7 @@ export class GetAllProductsPendingComponent {
 
   productUpdatedSuccessfully = false;
   productUpdateFailed: boolean = false;
+  productDeletedSuccessfully: boolean = false;
   errorMessage: any;
 
   showUpdatePopUp = false;
@@ -39,7 +40,7 @@ export class GetAllProductsPendingComponent {
   deleteProduct(id: string) {
     this._adminService.deleteProduct(id).subscribe({
       next: (success) => {
-        this.productUpdatedSuccessfully = success
+        this.productDeletedSuccessfully = success
         this.updateProductsState();
       },
       error: (e) => {
@@ -56,12 +57,13 @@ export class GetAllProductsPendingComponent {
     switch (option) {
       case "productUpdatedSuccessfully": this.productUpdatedSuccessfully = false;
         break;
+      case "productDeletedSuccessfully": this.productDeletedSuccessfully = false;
+        break;
       case "productUpdateFailed": this.productUpdateFailed = false;
         break;
       case "showUpdatePopUp": this.showUpdatePopUp = false;
         break;
     }
-    this.updateProductsState();
   }
 
   showUpdatePopUpMethod(id: string, price: number) {
@@ -72,6 +74,7 @@ export class GetAllProductsPendingComponent {
 
 
   updateProductsState() {
+    console.log("se ejecuto");
     this._adminService.getAllProductsPending().subscribe(productResponse => {
       this.products$ = productResponse.products;
     })

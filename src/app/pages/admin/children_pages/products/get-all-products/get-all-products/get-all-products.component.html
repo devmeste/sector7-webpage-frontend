@@ -70,16 +70,24 @@
         (close)="closeModal('productDeletedSuccessfully')"> </app-message-pop-up>
     }
     @if (productDeletionFailed) {
-    <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('productDeletionFailed')">
+    <app-message-pop-up 
+    custom_message='{{errorMessage}}' 
+    (close)="closeModal('productDeletionFailed')">
     </app-message-pop-up>
     }
 
     @if(this.showPopUpToConfirmDelete){
-        <app-confirm-pop-up custom_message="¿Desea eliminar este producto?" (confirm)="confirmDeleteAction()" (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
+        <app-confirm-pop-up custom_message="¿Desea eliminar este producto?" 
+        (confirm)="confirmDeleteAction()" 
+        (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
     }
 </section>
 
-@if(this.showUpdatePopUp){
-<app-products-update-pop-up [product_id]="this.update_id" [product_USD_price]="this.product_USD_price"
-    (close)="closeModal('showUpdatePopUp')"></app-products-update-pop-up>
-}
+    @if(this.showUpdatePopUp){
+    <app-products-update-pop-up 
+        [product_id]="this.update_id" 
+        [product_USD_price]="this.product_USD_price"
+        (itemWasUpdatedSuccesfully)="this.updateProductsState()"
+        (close)="closeModal('showUpdatePopUp')">
+    </app-products-update-pop-up>
+    }

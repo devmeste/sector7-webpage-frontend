@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule} from '@angular/forms';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 import { NgClass, NgFor } from '@angular/common';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { MatIcon } from '@angular/material/icon';
-import { _ProductsUpdatePopUpComponent, Field } from './_products-update-pop-up-parent.component';
+import { _ProductsUpdatePopUpParentComponent, Field } from './_products-update-pop-up-parent.component';
 
 @Component({
   selector: 'app-products-update-pop-up',
@@ -13,7 +13,7 @@ import { _ProductsUpdatePopUpComponent, Field } from './_products-update-pop-up-
   styleUrls: ['./products-update-pop-up.component.scss', '../../../../../shared/styles/pop-up-styles.scss', '../../../../../shared/styles/admin_form.scss'],
   imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon]
 })
-export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpComponent {
+export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpParentComponent {
 
 
   override send() {
@@ -44,7 +44,10 @@ export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpComponent 
     }
     console.log(p);
     this._adminService.updateProduct(p).subscribe({
-      next: (v) => { this.productUpdatedSuccessfully = true },
+      next: (v) => { 
+        this.itemWasUpdatedSuccesfully.emit();
+        this.productUpdatedSuccessfully = true
+       },
 
       error: (error) => {
         console.log(error);

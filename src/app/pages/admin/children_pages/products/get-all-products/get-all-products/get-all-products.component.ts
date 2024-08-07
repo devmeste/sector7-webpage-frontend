@@ -21,8 +21,6 @@ import { ConfirmPopUpComponent } from "../../../../../../shared/components/pop_u
 export class GetAllProductsComponent {
 
 
-
-
   _adminService: AdminService = inject(AdminService);
   products$!: BKProduct[];
 
@@ -65,14 +63,14 @@ export class GetAllProductsComponent {
     switch (option) {
       case "productDeletedSuccessfully": {
         this.productDeletedSuccessfully = false;
-        this.updateProductsState();
+        // this.updateProductsState();
       }
         break;
       case "productDeletionFailed": this.productDeletionFailed = false;
         break;
       case "showUpdatePopUp": {
         this.showUpdatePopUp = false;
-        this.updateProductsState();
+        // this.updateProductsState();
       }
         break;
       case "showPopUpToConfirmDelete": {
@@ -93,6 +91,7 @@ export class GetAllProductsComponent {
 
 
   updateProductsState() {
+    console.log("Se ejecuto");
     this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize).subscribe(productResponse => {
       this.products$ = productResponse.products;
       this.totalPages = productResponse.pagination.totalPages;
@@ -117,6 +116,7 @@ export class GetAllProductsComponent {
 
   confirmDeleteAction() {
     this.deleteProduct(this.productIdToDelete);
+    this.updateProductsState();
     this.closeModal("showPopUpToConfirmDelete");
   }
 }

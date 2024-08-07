@@ -14,10 +14,11 @@ import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.p
   template: '',
   imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon]
 })
-export abstract class _ProductsUpdatePopUpComponent extends CustomFormPopUp {
+export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopUp {
 
   @Input({ required: true }) product_id !: string;
   @Input({ required: true }) product_USD_price !: number;
+  @Output() itemWasUpdatedSuccesfully = new EventEmitter();
 
   @ViewChild('photoInput') photoInput !: ElementRef;
 

@@ -16,31 +16,64 @@ import { CustomForm } from 'app/core/utils/custom-form/custom.form';
   imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent]
 })
 export class CreateProductComponent extends CustomForm implements OnInit {
-  
+
   override initializeForm(): void {
     this.form = this.formBuilder.group({
       title: ['asdasd', [Validators.required]],
-      id: ['asdasd213asd2', [Validators.required]],
+      id: [this.generateRandomString(10), [Validators.required]],
       brand: ['aaa', [Validators.required]],
       model: ['aaa', [Validators.required]],
       price: ['100', [Validators.required]],
-      actualStock: ['123', [Validators.required]],
+      actualStock: ['1234', [Validators.required]],
       viewStock: ['1002', [Validators.required]],
       description: ['asdasd', [Validators.required]],
-      isEnabled: [false, []],
+      isEnabled: [true, []],
       photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/teclado/teclado.png?raw=true'], []),
       categoryId: ['', [Validators.required]],
       fieldsJSON: ['', []],
       fieldsArray: this.formBuilder.array([]),
     })
   }
-  
+  // Para Produccion
+  // override initializeForm(): void {
+  //   this.form = this.formBuilder.group({
+  //     title: ['asdasd', [Validators.required]],
+  //     id: [this.generateRandomString(10), [Validators.required]],
+  //     brand: ['aaa', [Validators.required]],
+  //     model: ['aaa', [Validators.required]],
+  //     price: ['100', [Validators.required]],
+  //     actualStock: ['1234', [Validators.required]],
+  //     viewStock: ['1002', [Validators.required]],
+  //     description: ['asdasd', [Validators.required]],
+  //     isEnabled: [true, []],
+  //     photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/teclado/teclado.png?raw=true'], []),
+  //     categoryId: ['', [Validators.required]],
+  //     fieldsJSON: ['', []],
+  //     fieldsArray: this.formBuilder.array([]),
+  //   })
+  // }
+
   categories$ !: ICategory[];
   productWasCreatedSuccessfully = false;
   productHasError = false;
   errorMessage = '';
-  @ViewChild('photoInput') photoInput!: ElementRef; 
+  @ViewChild('photoInput') photoInput!: ElementRef;
   private _adminService = inject(AdminService);
+
+
+
+  // Recordar poner isEnabled en true!!       isEnabled: [false, []],
+
+  // luego borrar este metodo
+  generateRandomString(length: number = 10): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
 
 
   override ngOnInit(): void {
@@ -51,7 +84,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.photoInput.nativeElement.value = ''; 
+    this.photoInput.nativeElement.value = '';
   }
 
 
@@ -74,7 +107,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     if (categoryId == '') {
       return;
     }
-    
+
     this.form.get('categoryId')?.setValue(categoryId);
 
     this._adminService.getCategoryById(categoryId).subscribe(category => {
@@ -129,9 +162,12 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       photos: this.photosArray.value,
       fieldsJSON: fields
     }
-         
+
     this._adminService.createProduct(newProduct).subscribe({
-      next: (v) => this.productWasCreatedSuccessfully = true,
+      next: (v) => {
+        this.productWasCreatedSuccessfully = true
+        this.form.reset();
+      },
       error: (error) => {
         this.errorMessage = error.error.message;
         this.productHasError = true;
