@@ -63,19 +63,26 @@ export class GetAllProductsComponent {
   closeModal(option: string) {
 
     switch (option) {
-      case "productDeletedSuccessfully": this.productDeletedSuccessfully = false;
+      case "productDeletedSuccessfully": {
+        this.productDeletedSuccessfully = false;
+        this.updateProductsState();
+      }
         break;
       case "productDeletionFailed": this.productDeletionFailed = false;
         break;
-      case "showUpdatePopUp": this.showUpdatePopUp = false;
+      case "showUpdatePopUp": {
+        this.showUpdatePopUp = false;
+        this.updateProductsState();
+      }
         break;
       case "showPopUpToConfirmDelete": {
         this.showPopUpToConfirmDelete = false;
         this.productIdToDelete = "";
+        // this.updateProductsState();
       }
         break;
     }
-    this.updateProductsState();
+
   }
 
   showUpdatePopUpMethod(id: string, price: number) {
