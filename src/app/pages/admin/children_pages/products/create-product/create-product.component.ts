@@ -28,7 +28,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       viewStock: ['1002', [Validators.required]],
       description: ['asdasd', [Validators.required]],
       isEnabled: [false, []],
-      photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'], []),
+      photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/teclado/teclado.png?raw=true'], []),
       categoryId: ['', [Validators.required]],
       fieldsJSON: ['', []],
       fieldsArray: this.formBuilder.array([]),
@@ -39,34 +39,28 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   productWasCreatedSuccessfully = false;
   productHasError = false;
   errorMessage = '';
-  @ViewChild('photoInput') photoInput!: ElementRef;
+  @ViewChild('photoInput') photoInput!: ElementRef; 
   private _adminService = inject(AdminService);
-  // photos: string[] = ['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/procesador/product-detail-2.png?raw=true'];
 
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
     this._adminService.getAllCategories().subscribe(c => {
       this.categories$ = c;
     });
-    this.initializeForm();
   }
 
   ngAfterViewInit(): void {
-    this.photoInput.nativeElement.value = '';
+    this.photoInput.nativeElement.value = ''; 
   }
 
 
   get photosArray() {
-    // console.log(this.form.get('photos'));
     return this.form.get('photos') as FormArray;
-    // return this.form.controls['photos'] as FormArray;
-    // return this.form.get('photos') as FormArray;
   }
 
   get fieldsArray() {
-    // console.log(this.form.get("fieldsArray"));
     return this.form.get("fieldsArray") as FormArray;
-    // return this.form.controls["fieldsArray"] as FormArray;
   }
 
 
@@ -100,6 +94,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   }
 
   addPhoto() {
+    // Todo este metodo volver
     const p = this.photoInput.nativeElement.value;
     if (p.trim().length == 0 || p == null) {
       return;

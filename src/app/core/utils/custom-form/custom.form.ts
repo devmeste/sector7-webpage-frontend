@@ -1,11 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 // @Component Just to allow use the ngOnInit
 @Component({
     template: ''
 })
-export abstract class CustomForm  {
+export abstract class CustomForm  implements OnInit {
+    ngOnInit(): void {
+        this.initializeForm();
+    }
 
     form !: FormGroup;
     formBuilder: FormBuilder = inject(FormBuilder);

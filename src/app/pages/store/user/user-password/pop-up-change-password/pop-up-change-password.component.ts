@@ -22,10 +22,7 @@ export class PopUpChangePasswordComponent extends CustomFormPopUp {
   errorMessage: string = '';
   thereWasAnError: boolean = false;
 
-  ngOnInit(): void {
-
-    this.initializeForm();
-  }
+ 
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({

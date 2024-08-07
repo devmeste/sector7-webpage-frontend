@@ -19,8 +19,14 @@ import { IAccountReq } from 'app/core/models/IAccount';
 export class CreateAccountComponent extends CustomForm {
 
 
-  override initializeForm(): void {
+  accountWasCreatedSuccessfully = false;
+  accountHasError = false;
+  errorMessage = '';
+  passwordVisible = 'password';
 
+  private _adminService = inject(AdminService);
+
+  override initializeForm(): void {
     this.form = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -29,29 +35,7 @@ export class CreateAccountComponent extends CustomForm {
 
   }
 
-  ngOnInit(): void {
-    this.initializeForm();
-  }
-
-  accountWasCreatedSuccessfully = false;
-  accountHasError = false;
-  errorMessage = '';
-  passwordVisible = 'password';
-
-  private _adminService = inject(AdminService);
-
-
-
-
   override send(): void {
-
-    const newAccount: IAccountReq = {
-      username: this.form.value.username,
-      password: this.form.value.password,
-      role: this.form.value.authorities
-    };
-    console.log(newAccount);
-
     this._adminService.createAccount(this.form.value).subscribe({
       next: () => this.accountWasCreatedSuccessfully = true,
       error: (error) => {

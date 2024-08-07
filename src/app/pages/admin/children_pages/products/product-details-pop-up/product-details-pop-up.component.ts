@@ -27,9 +27,6 @@ export class ProductDetailsPopUpComponent extends CustomFormPopUp {
 
   photosToShow: string[] = [];
 
-  ngOnInit(): void {
-    this.initializeForm();    
-  }
 
   override initializeForm(): void {
     if (this.product_id) {

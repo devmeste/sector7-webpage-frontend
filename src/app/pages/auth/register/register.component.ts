@@ -30,9 +30,7 @@ export class RegisterComponent extends CustomForm {
     super();
   }
 
-  ngOnInit(): void {
-    this.initializeForm();
-  }
+
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({

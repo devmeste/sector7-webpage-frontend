@@ -68,9 +68,6 @@ export abstract class _ProductsUpdatePopUpComponent extends CustomFormPopUp {
   }
 
 
-  ngOnInit(): void {
-    this.initializeForm();    
-  }
 
   fillInitialPhotos(photos: string[]): void {
     photos.forEach(photo => this.photosArray2.push(this.formBuilder.control(photo, [])));

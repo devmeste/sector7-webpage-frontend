@@ -10,6 +10,7 @@
                 <input type="text" formControlName="title" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
             </div>
+
             @if( hasErrors(this.form,'title', 'required') ){ <app-input-danger-text
                 text="El nombre del producto es requerida"></app-input-danger-text>
             }
@@ -34,8 +35,6 @@
                 text="La marca del producto es requerida"></app-input-danger-text>
             }
 
-
-
             <!-- Modelo -->
             <div class="custom-input">
                 <label class="form-label">Modelo: </label>
@@ -57,7 +56,6 @@
                 text="El precio del producto es requerida"></app-input-danger-text>
             }
 
-
             <!-- Actual Stock -->
             <div class="custom-input">
                 <label class="form-label">Stock Real: </label>
@@ -68,7 +66,6 @@
                 text="El stock del producto es requerida"></app-input-danger-text>
             }
 
-
             <!-- Stock Visual -->
             <div class="custom-input">
                 <label class="form-label">Stock Visual: </label>
@@ -78,8 +75,6 @@
             @if( hasErrors(this.form,'viewStock', 'required') ){ <app-input-danger-text
                 text="El viewStock del producto es requerida"></app-input-danger-text>
             }
-
-            
 
             <!-- Descipcion -->
             <div class="custom-input">
@@ -99,35 +94,32 @@
                 <input type="checkbox" formControlName="isEnabled" class="form-control checkbox">
             </div>
 
-
             <!-- Fotos -->
             <div class="custom-input">
                 <label class="form-label">Fotos: </label>
 
                 <div class="add_photo_button_container">
-                    <input #photoInput formControlName="photos" type="text" class="form-control"
-                        placeholder="link de la foto">
-
+                    <input #photoInput type="text" class="form-control" placeholder="link de la foto">
                     <button type="button" (click)="addPhoto()" class="btn btn-success add_field_button">+</button>
                 </div>
                 <div class="photosContainer">
-                    @for (item of this.photosArray.value ; track $index) {
-                    
+                    @for (photoUrl of this.photosArray.value ; track $index) {
                     <picture class="photo">
                         <button type="button" class="delete_button_absolute" (click)="deletePhoto($index)">
                             <mat-icon>close</mat-icon>
                         </button>
-                        <img src="{{item}}" alt="photo">
+                        <img src="{{photoUrl}}" alt="photo">
                     </picture>
                     }
                 </div>
             </div>
 
             <label>Categoria:</label>
-            <select name="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)" class="custom-select">
+            <select name="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)"
+                class="custom-select">
                 <option value=""> </option>
                 @for (category of categories$; track category.id) {
-                    <option value="{{category.id}}"> {{category.name}} </option>
+                <option value="{{category.id}}"> {{category.name}} </option>
                 }
             </select>
 

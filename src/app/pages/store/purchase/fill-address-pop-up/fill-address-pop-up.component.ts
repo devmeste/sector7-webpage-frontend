@@ -20,9 +20,6 @@ export class FillAddressPopUpComponent extends CustomFormPopUp{
   @Output() formFilledEvent : EventEmitter<Address> = new EventEmitter();
   addressFillOutByUser : Address | null = null;
 
-  ngOnInit(): void {
-    this.initializeForm();    
-  }
   override initializeForm(): void {
     this.address ? this.initializeFormFilled() : this.initializeFormEmpty(); 
   }

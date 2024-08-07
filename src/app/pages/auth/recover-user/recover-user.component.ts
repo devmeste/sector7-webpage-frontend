@@ -21,9 +21,7 @@ export class RecoverUserComponent extends CustomForm {
   errorMessage: string = '';
   successMessage: string = '';
   
-  ngOnInit(): void {
-    this.initializeForm();
-  }
+
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({

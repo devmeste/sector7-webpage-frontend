@@ -49,7 +49,8 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
     })
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
     this._cartService.getAllProducts().subscribe(products => {
       this.products$ = products
     })
@@ -59,7 +60,6 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
     this._cartService.getCartTotal().subscribe(total => {
       this.total$ = total;
     })
-    this.initializeForm();
   }
 
 
