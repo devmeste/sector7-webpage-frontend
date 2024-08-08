@@ -28,8 +28,16 @@
                 <td>
                     precio
                 </td>
-                <td>
-                    stock
+                <td class="td_two_children" colspan="2">
+                    stock 
+                    <div class="td_children_container">
+                        <div  class="td_children">
+                            real
+                        </div>
+                        <div class="td_children" >
+                            visual
+                        </div>
+                    </div>
                 </td>
                 <td>
                     habilitar / Dehabilitar
@@ -48,7 +56,10 @@
                 <td>
                     {{product.price | currency}}
                 </td>
-                <td>
+                <td class="td_text_center">
+                    {{product.actualStock}}
+                </td>
+                <td class="td_text_center">
                     {{product.viewStock}}
                 </td>
                 <td>
