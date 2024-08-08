@@ -39,6 +39,11 @@ export class GetAllProductsComponent {
   currentPage = 0;
   totalPages = 0;
 
+  // Confirm Delete 
+  userConfirmDelete = false;
+  showPopUpToConfirmDelete = false;
+  productIdToDelete = "";
+
   ngOnInit(): void {
     this.updateProductsState();
   }
@@ -61,26 +66,18 @@ export class GetAllProductsComponent {
   closeModal(option: string) {
 
     switch (option) {
-      case "productDeletedSuccessfully": {
-        this.productDeletedSuccessfully = false;
-        // this.updateProductsState();
-      }
+      case "productDeletedSuccessfully": this.productDeletedSuccessfully = false;
         break;
       case "productDeletionFailed": this.productDeletionFailed = false;
         break;
-      case "showUpdatePopUp": {
-        this.showUpdatePopUp = false;
-        // this.updateProductsState();
-      }
+      case "showUpdatePopUp": this.showUpdatePopUp = false;
         break;
       case "showPopUpToConfirmDelete": {
         this.showPopUpToConfirmDelete = false;
         this.productIdToDelete = "";
-        // this.updateProductsState();
       }
         break;
     }
-
   }
 
   showUpdatePopUpMethod(id: string, price: number) {
@@ -105,10 +102,8 @@ export class GetAllProductsComponent {
   }
 
 
-  userConfirmDelete = false;
 
-  showPopUpToConfirmDelete = false;
-  productIdToDelete = "";
+
   askToConfirmDelete(id: string) {
     this.showPopUpToConfirmDelete = true;
     this.productIdToDelete = id;

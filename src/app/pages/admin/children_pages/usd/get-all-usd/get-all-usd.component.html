@@ -4,51 +4,60 @@
     <h4 class="subtitle">Lista de todos los registros de USD </h4>
 
     @if(usd$ && usd$.length > 0){
-        <table>
-            <thead>
-                <tr>
-                    <td>
-                        Fecha
-                    </td>
-                    <td>
-                        precio
-                    </td>
-                    <td>
-                        Acciones
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                @for(usd of usd$ ; track usd.id){
-                <tr>
-                    <td>
-                        {{usd.date | customDatePipe}}
-                    </td>
-                    <td>
-                        {{usd.price | currency}}
-                    </td>
-                    
-                    <td class="actions_buttons_container">
-                        <button class="actions_button update_button">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                        <button class="actions_button delete_button" (click)="deleteUsd(usd.id)" >
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    Fecha
+                </td>
+                <td>
+                    precio
+                </td>
+                <td>
+                    Acciones
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @for(usd of usd$ ; track usd.id){
+            <tr>
+                <td>
+                    {{usd.date | customDatePipe}}
+                </td>
+                <td>
+                    {{usd.price | currency}}
+                </td>
+
+                <td class="actions_buttons_container">
+                    <div class="flex_container">
+                        <button class="actions_button delete_button" (click)="askToConfirmDelete(usd.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    
-        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
-        </mat-paginator>
 
-        @if(showSuccessDeleteMessage){
-            <app-message-pop-up  custom_message='Borrado Exitoso' (close)="closeModal('successfulDeletion')" > </app-message-pop-up>
-        }
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <!--     
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+        </mat-paginator> -->
+
+    @if(showSuccessDeleteMessage){
+        <app-message-pop-up custom_message='Borrado Exitoso' (close)="closeModal('successfulDeletion')">
+        </app-message-pop-up>
     }
-    @else {
-        <app-input-danger-text text="No hay registros de precios para mostrar"></app-input-danger-text>
+
+    @if(this.showPopUpToConfirmDelete){
+        <app-confirm-pop-up custom_message="¿Desea eliminar este precio?" 
+        (confirm)="confirmDeleteAction()" 
+        (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
+    }
+
+
+
+    }@else {
+    <app-input-danger-text text="No hay registros de precios para mostrar"></app-input-danger-text>
     }
 </section>

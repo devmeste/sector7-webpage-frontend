@@ -4,75 +4,82 @@
     <h4 class="subtitle">Lista de todosas los productos de Sector 7</h4>
 
     @if(products$ && products$.length > 0){
-        <table>
-            <thead>
-                <tr>
-                    <td>
-                        Nombre
-                    </td>
-                    <td>
-                        precio
-                    </td>
-                    <td>
-                        stock
-                    </td>
-                    <td>
-                        Acciones
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                @for(product of products$ ; track product.id){
-                <tr>
-                    <td>
-                        {{product.title}}
-                    </td>
-                    <td>
-                        {{product.price | currency}}
-                    </td>
-                    <td>
-                        {{product.viewStock}}
-                    </td>
-                    
-                    <td class="actions_buttons_container">
-                        <button type="button" class="actions_button update_button" (click)="showUpdatePopUpMethod(product.id , product.price)">
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    precio
+                </td>
+                <td>
+                    stock
+                </td>
+                <td>
+                    Acciones
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @for(product of products$ ; track product.id){
+            <tr>
+                <td>
+                    {{product.title}}
+                </td>
+                <td>
+                    {{product.price | currency}}
+                </td>
+                <td>
+                    {{product.viewStock}}
+                </td>
+
+                <td class="actions_buttons_container">
+                    <div class="flex_container">
+                        <button type="button" class="actions_button update_button"
+                            (click)="showUpdatePopUpMethod(product.id , product.price)">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button type="button" class="actions_button delete_button" (click)="deleteProduct(product.id)" >
+                        <button type="button" class="actions_button delete_button"
+                            (click)="askToConfirmDelete(product.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    
-        <!-- <mat-paginator #paginator [length]="products$.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- <mat-paginator #paginator [length]="products$.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
         </mat-paginator> -->
 
     }
     @else {
-        <app-input-danger-text text="No hay productos"></app-input-danger-text>
+    <app-input-danger-text text="No hay productos"></app-input-danger-text>
     }
 
     @if (productUpdatedSuccessfully) {
-        <app-message-pop-up  custom_message='Producto Aprobado Exitosamente' (close)="closeModal('productUpdatedSuccessfully')" > </app-message-pop-up>
+    <app-message-pop-up custom_message='Producto Aprobado Exitosamente'
+        (close)="closeModal('productUpdatedSuccessfully')"> </app-message-pop-up>
     }
     @if (productDeletedSuccessfully) {
-        <app-message-pop-up  custom_message='Producto Borrado Exitosamente' (close)="closeModal('productDeletedSuccessfully')" > </app-message-pop-up>
+    <app-message-pop-up custom_message='Producto Borrado Exitosamente'
+        (close)="closeModal('productDeletedSuccessfully')"> </app-message-pop-up>
     }
     @if (productUpdateFailed) {
-        <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('productUpdateFailed')" > </app-message-pop-up>
+    <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('productUpdateFailed')">
+    </app-message-pop-up>
+    }
+    @if(this.showPopUpToConfirmDelete){
+    <app-confirm-pop-up custom_message="¿Desea eliminar este Producto?" (confirm)="confirmDeleteAction()"
+        (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
     }
 
 </section>
 
 @if(this.showUpdatePopUp){
-    <app-products-update-pop-up   
-
-        [product_id]="this.update_id" 
-        [product_USD_price]="this.product_USD_price" 
-        (itemWasUpdatedSuccesfully)="this.updateProductsState()"
-        (close)="closeModal('showUpdatePopUp')">
+<app-products-update-pop-up [product_id]="this.update_id" [product_USD_price]="this.product_USD_price"
+    (itemWasUpdatedSuccesfully)="this.updateProductsState()" (close)="closeModal('showUpdatePopUp')">
 </app-products-update-pop-up>
 }

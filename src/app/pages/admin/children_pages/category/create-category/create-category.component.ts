@@ -9,11 +9,11 @@ import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 
 @Component({
-    selector: 'app-create-category',
-    standalone: true,
-    templateUrl: './create-category.component.html',
-    styleUrl: './create-category.component.scss',
-    imports: [NgClass, ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, MessagePopUpComponent]
+  selector: 'app-create-category',
+  standalone: true,
+  templateUrl: './create-category.component.html',
+  styleUrl: './create-category.component.scss',
+  imports: [NgClass, ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, MessagePopUpComponent]
 })
 export class CreateCategoryComponent {
 
@@ -68,9 +68,15 @@ export class CreateCategoryComponent {
     this._adminService.createCategory(name, component, fields).subscribe
       (
         {
-          next: (v) => this.categoryCreatedSuccessfully = true,
-          error: (e) => {this.categoryCreationFailed = true, 
-                        this.errorMessage = e.error.message},
+          next: (v) => {
+            this.categoryCreatedSuccessfully = true
+            this.form.reset();
+            this.fields = [];
+          },
+          error: (e) => {
+            this.categoryCreationFailed = true,
+            this.errorMessage = e.error.message
+          },
         }
       )
   }
@@ -79,7 +85,7 @@ export class CreateCategoryComponent {
     switch (option) {
       case "categoryCreatedSuccessfully": this.categoryCreatedSuccessfully = false;
         break;
-      case "categoryCreationFailed" : this.categoryCreationFailed = false;
+      case "categoryCreationFailed": this.categoryCreationFailed = false;
         break;
     }
   }

@@ -10,12 +10,8 @@ import { Router } from '@angular/router';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { CategoriesUpdatePopUpComponent } from "../categories-update-pop-up/categories-update-pop-up.component";
-// export interface PeriodicElement {
-//   name: string;
-//   position: number;
-//   weight: number;
-//   symbol: string;
-// }
+import { ConfirmPopUpComponent } from "../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
+
 
 
 @Component({
@@ -23,7 +19,7 @@ import { CategoriesUpdatePopUpComponent } from "../categories-update-pop-up/cate
   standalone: true,
   templateUrl: './get-all-categories.component.html',
   styleUrls: ['./get-all-categories.component.scss', "../../../../../shared/styles/admin_table.scss"],
-  imports: [AsyncPipe, MatPaginatorModule, MatTableModule, NgIf, JsonPipe, MatIcon, InputDangerTextComponent, MessagePopUpComponent, CategoriesUpdatePopUpComponent]
+  imports: [AsyncPipe, MatPaginatorModule, MatTableModule, NgIf, JsonPipe, MatIcon, InputDangerTextComponent, MessagePopUpComponent, CategoriesUpdatePopUpComponent, ConfirmPopUpComponent]
 })
 
 export class GetAllCategoriesComponent {
@@ -38,6 +34,12 @@ export class GetAllCategoriesComponent {
   showUpdatePopUp = false;
   update_id: string = '';
 
+
+  // Confirm Delete 
+  userConfirmDelete = false;
+  showPopUpToConfirmDelete = false;
+  elementIdToDelete = "";
+
   ngOnInit(): void {
     this.updateAllCategoriesInView();
   }
@@ -45,10 +47,10 @@ export class GetAllCategoriesComponent {
   deleteCategory(id: string) {
     this._adminService.deleteCategory(id).subscribe({
       next: () => {
-        this.categoryDeletedSuccessfully = true,``
-          this.updateAllCategoriesInView();
+        this.categoryDeletedSuccessfully = true,
+        this.updateAllCategoriesInView();
       },
-      error: (e) => {        
+      error: (e) => {
         this.categoryDeletionFailed = true
         this.errorMessage = e.error.message
       },
@@ -60,6 +62,8 @@ export class GetAllCategoriesComponent {
 
   closeModal(option: string) {
     switch (option) {
+      case "showPopUpToConfirmDelete": this.showPopUpToConfirmDelete = false;
+        break;
       case "categoryDeletedSuccessfully": this.categoryDeletedSuccessfully = false;
         break;
       case "categoryDeletionFailed": this.categoryDeletionFailed = false;
@@ -78,11 +82,22 @@ export class GetAllCategoriesComponent {
     this.showUpdatePopUp = true;
   }
 
-  
+
   updateAllCategoriesInView() {
     this._adminService.getAllCategories().subscribe(c => {
       this.categories$ = c;
     })
+  }
+
+
+  askToConfirmDelete(id: string) {
+    this.elementIdToDelete = id;
+    this.showPopUpToConfirmDelete = true;
+  }
+
+  confirmDeleteAction() {
+    this.deleteCategory(this.elementIdToDelete);
+    this.closeModal("showPopUpToConfirmDelete");
   }
 
 }

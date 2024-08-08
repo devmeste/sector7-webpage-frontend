@@ -29,10 +29,12 @@
                     @else{Deshabilitado}
                 </td>
                 <td class="actions_buttons_container">
-                    <button type="button" class="actions_button update_button" title="Cambiar"
-                        (click)="updateStateAccount(account.username , account.enabled)">
-                        <mat-icon>sync</mat-icon>
-                    </button>
+                    <div class="flex_container">
+                        <button type="button" class="actions_button update_button" title="Cambiar"
+                            (click)="updateStateAccount(account.username , account.enabled)">
+                            <mat-icon>sync</mat-icon>
+                        </button>
+                    </div>
                 </td>
             </tr>
             }

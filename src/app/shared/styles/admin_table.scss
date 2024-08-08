@@ -30,13 +30,16 @@
         height: 100%;
     }
     .actions_buttons_container{
-        display: flex;
         gap: 0.5rem;
-        // background-color: aqua;
+        margin: auto;        
+    }
+
+    .flex_container{
+        display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 2.5rem;
-        margin: auto;
+        gap: 0.5rem;
     }
     .actions_button{
         width: 1.5rem;
@@ -94,14 +97,14 @@
         border: none;
     }
     
-
-
     th, td {
-        border: 1px solid $gray_60; 
+        padding: 4px ;
+        text-align: left;border: 
+        1px solid $gray_60; 
         border-collapse: collapse; 
         overflow: hidden; 
     }
-
+    
     thead tr{
         background-color: $gray_20;
     }   
@@ -115,10 +118,7 @@
         background-color: $gray_30;
     }
 
-    th, td {
-        padding: 4px ;
-        text-align: left;
-    }
+
 
     // Border Radius for table
     $table_border : 3px;

@@ -3,12 +3,13 @@
         <span class="modal_close_button" (click)="closeModal()">&times;</span>
         <div class="modal_info">
             @for (sentence of getMessageLines(); track $index) {
-                <p>{{sentence}}</p>
+            <p>{{sentence}}</p>
             }
         </div>
         <div class="buttons_container">
-            <button type="button"  class="primary_button confirm_button" (click)="confirmAction()"> Continuar </button>
-            <button type="button"  class="primary_button cancel_button" (click)="closeModal()"> Cancelar </button>
+            <button #confirmButton type="button" class="primary_button confirm_button" (click)="confirmAction()">
+                Continuar </button>
+            <button type="button" class="primary_button cancel_button" (click)="closeModal()"> Cancelar </button>
         </div>
     </div>
 </div>

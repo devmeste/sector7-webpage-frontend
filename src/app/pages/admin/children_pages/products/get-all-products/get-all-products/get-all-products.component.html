@@ -34,35 +34,33 @@
                 </td>
 
                 <td class="actions_buttons_container">
-                    <button type="button" class="actions_button update_button"
-                        (click)="showUpdatePopUpMethod(product.id , product.price)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button type="button" class="actions_button delete_button" (click)="askToConfirmDelete(product.id)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
+                    <div class="flex_container">
+                        <button type="button" class="actions_button update_button"
+                            (click)="showUpdatePopUpMethod(product.id , product.price)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button type="button" class="actions_button delete_button"
+                            (click)="askToConfirmDelete(product.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
                 </td>
             </tr>
             }
         </tbody>
     </table>
     <div class="paginator-container">
-        <mat-paginator id="myPaginator" #paginator 
-        [showFirstLastButtons]="true" 
-        [length]="totalItems" 
-        [pageIndex]="currentPage" 
-        [pageSize]="pageSize" 
-        [hidePageSize]="true"
-        [pageSizeOptions]="pageSizeOptions"
-        (page)="pageChanged($event)" aria-label="Select page">
+        <mat-paginator id="myPaginator" #paginator [showFirstLastButtons]="true" [length]="totalItems"
+            [pageIndex]="currentPage" [pageSize]="pageSize" [hidePageSize]="true" [pageSizeOptions]="pageSizeOptions"
+            (page)="pageChanged($event)" aria-label="Select page">
         </mat-paginator>
     </div>
 
 
     }
     @else {
-        <!-- Spinner -->
-        <app-input-danger-text text="No hay productos"></app-input-danger-text>
+    <!-- Spinner -->
+    <app-input-danger-text text="No hay productos"></app-input-danger-text>
     }
 
     @if (productDeletedSuccessfully) {
@@ -70,24 +68,18 @@
         (close)="closeModal('productDeletedSuccessfully')"> </app-message-pop-up>
     }
     @if (productDeletionFailed) {
-    <app-message-pop-up 
-    custom_message='{{errorMessage}}' 
-    (close)="closeModal('productDeletionFailed')">
+    <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('productDeletionFailed')">
     </app-message-pop-up>
     }
 
     @if(this.showPopUpToConfirmDelete){
-        <app-confirm-pop-up custom_message="¿Desea eliminar este producto?" 
-        (confirm)="confirmDeleteAction()" 
+    <app-confirm-pop-up custom_message="¿Desea eliminar este producto?" (confirm)="confirmDeleteAction()"
         (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
     }
 </section>
 
-    @if(this.showUpdatePopUp){
-    <app-products-update-pop-up 
-        [product_id]="this.update_id" 
-        [product_USD_price]="this.product_USD_price"
-        (itemWasUpdatedSuccesfully)="this.updateProductsState()"
-        (close)="closeModal('showUpdatePopUp')">
-    </app-products-update-pop-up>
-    }
+@if(this.showUpdatePopUp){
+<app-products-update-pop-up [product_id]="this.update_id" [product_USD_price]="this.product_USD_price"
+    (itemWasUpdatedSuccesfully)="this.updateProductsState()" (close)="closeModal('showUpdatePopUp')">
+</app-products-update-pop-up>
+}

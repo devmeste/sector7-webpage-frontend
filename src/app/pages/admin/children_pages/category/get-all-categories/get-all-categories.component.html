@@ -28,20 +28,22 @@
                         {{category.component}}
                     </td>
                     <td class="actions_buttons_container">
-                        <button type="button" (click)="updateCategory(category.id)" class="actions_button update_button">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                        <button class="actions_button delete_button" (click)="deleteCategory(category.id)" >
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                        <div class="flex_container">
+                            <button type="button" (click)="updateCategory(category.id)" class="actions_button update_button">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button class="actions_button delete_button" (click)="askToConfirmDelete(category.id)" >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
                     </td>
                 </tr>
                 }
             </tbody>
         </table>
     
-        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
-        </mat-paginator>
+        <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+        </mat-paginator> -->
     }
     
     @else {
@@ -58,5 +60,11 @@
 
     @if(this.showUpdatePopUp){
         <app-categories-update-pop-up [category_id]="this.update_id" (close)="closeModal('showUpdatePopUp')"></app-categories-update-pop-up>
+    }
+
+    @if(this.showPopUpToConfirmDelete){
+        <app-confirm-pop-up custom_message="¿Desea eliminar esta categoría?" 
+        (confirm)="confirmDeleteAction()" 
+        (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
     }
 </section>

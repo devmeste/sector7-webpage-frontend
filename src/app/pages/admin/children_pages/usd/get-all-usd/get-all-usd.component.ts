@@ -8,16 +8,18 @@ import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { Usd } from 'app/core/models/Usd';
 import { CustomDatePipe } from "../../../../../core/pipes/custom-date-pipe.pipe";
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
+import { ConfirmPopUpComponent } from "../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
 
 @Component({
   selector: 'app-get-all-usd',
   standalone: true,
   templateUrl: './get-all-usd.component.html',
   styleUrls: ['./get-all-usd.component.scss', "../../../../../shared/styles/admin_table.scss"],
-  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipe, MessagePopUpComponent]
+  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipe, MessagePopUpComponent, ConfirmPopUpComponent]
 })
 
 export class GetAllUsdComponent {
+
 
 
   _adminService: AdminService = inject(AdminService);
@@ -26,7 +28,17 @@ export class GetAllUsdComponent {
 
   showSuccessDeleteMessage: boolean = false;
 
+  // Confirm Delete 
+  userConfirmDelete = false;
+  showPopUpToConfirmDelete = false;
+  elementIdToDelete = "";
+
+
   ngOnInit(): void {
+    this.updateUsdStateInView();
+  }
+
+  updateUsdStateInView() {
     this._adminService.getAllUsd().subscribe(u => {
       this.usd$ = u;
     });
@@ -49,9 +61,21 @@ export class GetAllUsdComponent {
 
   closeModal(option: string) {
     switch (option) {
-      case "successfulDeletion" : this.showSuccessDeleteMessage = false;
-      break;
+      case "showPopUpToConfirmDelete": this.showPopUpToConfirmDelete = false;
+        break;
+      case "successfulDeletion": this.showSuccessDeleteMessage = false;
+        break;
     }
-    
+
+  }
+  askToConfirmDelete(id: string) {
+    this.showPopUpToConfirmDelete = true;
+    this.elementIdToDelete = id;
+  }
+
+  confirmDeleteAction() {
+    this.deleteUsd(this.elementIdToDelete);
+    this.updateUsdStateInView();
+    this.closeModal("showPopUpToConfirmDelete");
   }
 }

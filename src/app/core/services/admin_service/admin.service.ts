@@ -163,7 +163,7 @@ export class AdminService {
 
     //-------------------------USD-------------------------
     getAllUsd(): Observable<Usd[]> {
-        return this._httpClient.get<Usd[]>(this.baseUrl + 'usd');
+        return this._httpClient.get<Usd[]>(this.baseUrl + 'usd?page=1');
     }
 
     deleteUsd(id: string): Observable<void> {

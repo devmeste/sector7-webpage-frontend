@@ -51,7 +51,6 @@ export class FillAddressPopUpComponent extends CustomFormPopUp{
   override send($event : SubmitEvent): void {
     $event.preventDefault();
     if(this.form.valid) {
-      console.log("form valid");
       this.addressFillOutByUser = {
         zipCode : this.form.get('zipCode')?.value,
         province : this.form.get('province')?.value,
@@ -61,7 +60,6 @@ export class FillAddressPopUpComponent extends CustomFormPopUp{
         floor : this.form.get('floor')?.value,
         door : this.form.get('door')?.value
       }
-      console.log(this.addressFillOutByUser);
       this.formFilledEvent.emit(this.addressFillOutByUser);
       this.closeUpdateModal();      
     }

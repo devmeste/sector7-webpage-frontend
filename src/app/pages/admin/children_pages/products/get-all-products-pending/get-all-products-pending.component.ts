@@ -8,15 +8,17 @@ import { CurrencyPipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ConfirmPopUpComponent } from "../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
 
 @Component({
   selector: 'app-get-all-products-pending',
   standalone: true,
-  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent],
+  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent],
   templateUrl: './get-all-products-pending.component.html',
   styleUrls: ['./get-all-products-pending.component.scss', "../../../../../shared/styles/admin_table.scss"]
 })
 export class GetAllProductsPendingComponent {
+
 
   _adminService: AdminService = inject(AdminService);
   products$!: BKProduct[];
@@ -30,8 +32,15 @@ export class GetAllProductsPendingComponent {
   update_id = '';
   product_USD_price!: number;
 
+  // MatPaginator Inputs
   pageSize = 5;
   pageSizeOptions: number[] | readonly number[] = [5, 10, 25, 50];
+
+
+  // Confirm Delete 
+  userConfirmDelete = false;
+  showPopUpToConfirmDelete = false;
+  elementIdToDelete = "";
 
   ngOnInit(): void {
     this.updateProductsState();
@@ -63,6 +72,8 @@ export class GetAllProductsPendingComponent {
         break;
       case "showUpdatePopUp": this.showUpdatePopUp = false;
         break;
+      case "showPopUpToConfirmDelete": this.showPopUpToConfirmDelete = false;
+        break;
     }
   }
 
@@ -74,13 +85,21 @@ export class GetAllProductsPendingComponent {
 
 
   updateProductsState() {
-    console.log("se ejecuto");
     this._adminService.getAllProductsPending().subscribe(productResponse => {
       this.products$ = productResponse.products;
     })
   }
 
+  askToConfirmDelete(id: string) {
+    this.showPopUpToConfirmDelete = true;
+    this.elementIdToDelete = id;
+  }
 
+  confirmDeleteAction() {
+    this.deleteProduct(this.elementIdToDelete);
+    this.updateProductsState();
+    this.closeModal("showPopUpToConfirmDelete");
+  }
 
 
 
