@@ -74,7 +74,6 @@ export class ProductDetailsComponent implements OnInit {
 
 
   addToCart(product: BKProduct) {
-
     const productToAdd: IProduct_Cart = {
       id: product.id,
       name: product.title,

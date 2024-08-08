@@ -14,22 +14,23 @@
     padding: 0 5%;
     padding-top: 2rem;
 
-    @include tablet{
+    @include tablet {
         padding: 2rem 10% 0 10%;
     }
-    @include laptop{
-        padding:2rem 5% 0 5%;
+
+    @include laptop {
+        padding: 2rem 5% 0 5%;
     }
 
     .app-breadcrumb {
         width: 100%;
     }
 
-    
 
 
-    .mobile_display{
-        @include laptop{
+
+    .mobile_display {
+        @include laptop {
             display: none;
         }
     }
@@ -54,7 +55,7 @@
         color: black;
         padding: 0.5rem 1.5rem;
         border-radius: 5px;
-        width:fit-content;
+        width: fit-content;
 
         .quantity_number {
             font-weight: bold;
@@ -66,11 +67,12 @@
         }
     }
 
-    .add_to_cart_button_container{
+    .add_to_cart_button_container {
         width: 100%;
         margin-bottom: 3rem;
+
         // background-color: cadetblue;
-        .add_to_cart_button{
+        .add_to_cart_button {
             margin-right: auto;
             display: block;
             margin-bottom: 1rem;
@@ -84,9 +86,10 @@
         // height: 575px;
         height: 100%;
         width: 100%;
-        background-image:linear-gradient(to bottom, rgba(255, 166, 0, 0.86) 0%, transparent 100%);    
+        background-image: linear-gradient(to bottom, rgba(255, 166, 0, 0.86) 0%, transparent 100%);
         display: flex;
         justify-content: center;
+
         img {
             width: 100%;
             height: 100%;
@@ -94,98 +97,109 @@
         }
     }
 
-    
+    .description_container {
+        width: 100%;
+        display: flex;
+
+        flex-direction: column;
+        margin-bottom: 2rem;
+    }
+
+
 }
 
 :host ::ng-deep {
-    .product_details_container{
+    .product_details_container {
         p-carousel.p-element {
             width: min(100%, 1440px);
         }
-    
-        .p-carousel-container{
-            min-height: 300px ;
+
+        .p-carousel-container {
+            min-height: 300px;
         }
-    
+
         ol,
         ul {
             padding: 0;
         }
-    
+
         // Arrow icons Container
         .p-carousel .p-carousel-content .p-carousel-prev,
         .p-carousel .p-carousel-content .p-carousel-next {
             width: 5%;
             padding: 0 1rem;
             background-color: $background;
-    
+
             @include tablet {
                 padding: 0 2rem;
             }
         }
-    
-    
+
+
         // Arrow icons
         .carousel-prev-icon {
             width: 60px;
             height: 160px;
             color: $primary-main;
             transition: color 0.3s ease;
-    
+
         }
-    
-    
+
+
         .carousel-prev-icon:hover {
             color: $primary-l1;
         }
-    
-    
+
+
         //no recuerdo
         .p-carousel-indicators {
             margin-top: 0.5rem;
             display: flex;
             width: 100%;
-    
+
             @include tablet {
                 margin-top: 1.5rem;
             }
         }
-    
+
         //// bottom circles 
         .p-link {
             border-radius: 50px;
             width: 8px;
             margin: 0 0.2rem;
         }
-    
+
         // bottom circles selected
         .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
             background-color: $primary-main;
         }
     }
-    
+
 
 }
 
 
-.desktop_display{
+.desktop_display {
     display: none;
-    @include laptop{
+
+    @include laptop {
         display: flex;
         flex-direction: column;
     }
 }
-.desktop_img_container{
+
+.desktop_img_container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto auto; 
+    grid-template-rows: auto auto;
     // background-color: aqua;
 
-    @include desktop{
-        grid-template-rows: auto; 
+    @include desktop {
+        grid-template-rows: auto;
     }
 
-    .side_imgs_container{
+
+    .side_imgs_container {
         grid-column-start: 1;
         grid-column-end: 3;
         grid-row-start: 0;
@@ -197,71 +211,82 @@
         align-items: center;
         gap: 1rem;
 
-        @include desktop{
+        @include desktop {
             grid-row: 0 / span 1;
         }
-        
-        .side_img_div_container{
+
+        .side_img_div_container {
 
             border: 2px solid red;
             cursor: pointer;
             height: 113px;
             width: 113px;
             border-radius: 10px;
-            img{
+
+            img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
             }
         }
     }
-    .main_img_container{
+
+    .main_img_container {
         grid-column-start: 3;
         grid-column-end: 13;
         grid-row-start: 0;
         grid-row-end: 1;
         // background-color: red;
-        
+
         @media screen and (min-width : 500px) {
             height: 400px;
         }
 
-        @include desktop{
+        @include desktop {
             grid-column: 3 / span 5;
             grid-row: 0 / span 1;
         }
-        img{
+
+        img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
+
+        &.there_is_only_one_img {
+            grid-column-start:1;
+            grid-column-end: 13;
+            @include desktop {
+                grid-column: 1 / span 7;
+            }
+        }
     }
 
-    .main_details_container{
+    .main_details_container {
         grid-column-start: 1;
         grid-column-end: 13;
         grid-row-start: 1;
         grid-row-end: 2;
 
-        h2{
+        h2 {
             margin-top: 2rem;
         }
-        
 
-        @include desktop{
-            grid-column: 8  / 13;
-            grid-row: -3 / span 1; 
+
+        @include desktop {
+            grid-column: 8 / 13;
+            grid-row: -3 / span 1;
             padding-left: 3rem;
         }
 
-        .reasons_to_buy_div{
+        .reasons_to_buy_div {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 1rem;
             font-size: 0.9rem;
 
-            mat-icon{
+            mat-icon {
                 color: $primary-main;
             }
 
@@ -270,34 +295,34 @@
 }
 
 
-.similar_products_section_background{
+.similar_products_section_background {
     width: 100%;
     background-image: linear-gradient(to bottom, rgb(25, 25, 25) 0%, transparent 100%);
     padding-top: 1rem;
     padding-bottom: 2rem;
 }
 
-.similar_products_section_container{
+.similar_products_section_container {
     max-width: 1440px;
     margin: auto;
 
-    
-    .similar_products_section_elements{
+
+    .similar_products_section_elements {
         width: 100%;
-        
+
         @media screen and (min-width:380px) {
             padding: 0 10%;
-        
+
         }
 
-        
-        .similar_products_section_title{
+
+        .similar_products_section_title {
             text-align: center;
             margin-bottom: 1rem;
             color: $primary-main;
         }
     }
 
-    
+
 
 }

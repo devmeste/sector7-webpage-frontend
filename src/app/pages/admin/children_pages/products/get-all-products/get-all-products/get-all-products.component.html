@@ -12,8 +12,16 @@
                 <td>
                     precio
                 </td>
-                <td>
-                    stock
+                <td class="td_two_children" colspan="2">
+                    stock 
+                    <div class="td_children_container">
+                        <div  class="td_children">
+                            real
+                        </div>
+                        <div class="td_children" >
+                            visual
+                        </div>
+                    </div>
                 </td>
                 <td>
                     Acciones
@@ -29,8 +37,11 @@
                 <td>
                     {{product.price | currency}}
                 </td>
-                <td>
+                <td style="text-align: center;">
                     {{product.viewStock}}
+                </td>
+                <td style="text-align: center;">
+                    {{product.actualStock}}
                 </td>
 
                 <td class="actions_buttons_container">

@@ -138,6 +138,27 @@
         border-bottom-right-radius: $table_border;
     }
 
+    // Table two children
+    thead tr td.td_two_children {
+        padding: 0;
+        text-align: center;
+        width: 8rem;
+    
+        div.td_children_container {
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid gray ;
+    
+            div.td_children {
+                width: 50%;
+                text-align: center;
+                border-left:  1px solid gray ;
+                border-right:  1px solid gray ;
+            }
+        }
+    
+    }
+
 
     .mat-mdc-paginator{
         margin-top: 2rem;
