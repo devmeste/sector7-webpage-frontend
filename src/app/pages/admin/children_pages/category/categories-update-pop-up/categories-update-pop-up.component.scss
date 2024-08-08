@@ -4,9 +4,8 @@
 .modal_container.update_pop_up {
     max-width: 1000px;
     width: 100%;
+    max-height: 70vh;    // fue esto
 }
-
-
 
 .form {
     width: 500px;
@@ -18,7 +17,7 @@
     margin: 0 auto;
     padding: 20px;
     border-radius: 10px;
-  
+
     .custom-input {
       display: flex;
       flex-direction: column;
