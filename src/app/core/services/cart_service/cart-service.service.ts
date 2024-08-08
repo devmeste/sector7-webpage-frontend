@@ -43,8 +43,7 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(this.cart));
 
     if (localStorage.getItem('cart') !== null) {
-      console.log("Cart:");
-      console.log(JSON.parse(localStorage.getItem('cart') as string));
+      JSON.parse(localStorage.getItem('cart') as string);
     }
     else{
       console.log("Cart is empty");

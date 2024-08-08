@@ -64,7 +64,6 @@ export class RegisterComponent extends CustomForm {
       this._authService.register(newUser).subscribe({
         next: response => {
           let res = JSON.parse(response);
-          console.log(response);
           this.successMessage = res.message + "\n \nVerifica tu cuenta y luego podras ingresar";
           // TODO : Mostrar un pop up
           this.showSuccessPopUp = true;

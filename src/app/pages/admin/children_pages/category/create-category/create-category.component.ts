@@ -60,7 +60,6 @@ export class CreateCategoryComponent {
 
 
   send() {
-    console.log("send");
     let name = this.form.get('name')?.value;
     let component = (this.form.get('component')?.value) ? true : false;
     let fields = this.fields;

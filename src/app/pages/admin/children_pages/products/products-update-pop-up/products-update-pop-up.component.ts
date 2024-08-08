@@ -10,7 +10,7 @@ import { _ProductsUpdatePopUpParentComponent, Field } from './_products-update-p
   selector: 'app-products-update-pop-up',
   standalone: true,
   templateUrl: './products-update-pop-up.component.html',
-  styleUrls: ['./products-update-pop-up.component.scss', '../../../../../shared/styles/pop-up-styles.scss', '../../../../../shared/styles/admin_form.scss'],
+  styleUrls: ['./products-update-pop-up.component.scss'],
   imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon]
 })
 export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpParentComponent {
@@ -42,7 +42,6 @@ export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpParentComp
       isEnabled: this.form.get("isEnabled")?.value,
       fieldsJSON: newFieldJson
     }
-    console.log(p);
     this._adminService.updateProduct(p).subscribe({
       next: (v) => { 
         this.itemWasUpdatedSuccesfully.emit();
@@ -50,7 +49,6 @@ export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpParentComp
        },
 
       error: (error) => {
-        console.log(error);
         this.errorMessage = error.error.message;
         this.productUpdateFailed = true;
       }

@@ -49,7 +49,6 @@ export class ProductsUpdatePopUpPendingComponent extends _ProductsUpdatePopUpPar
       },
 
       error: (error) => {
-        console.log(error);
         this.errorMessage = error.error.message;
         this.productUpdateFailed = true;
       }

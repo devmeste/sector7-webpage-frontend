@@ -8,7 +8,7 @@
             <div class="custom-input">
                 <label class="form-label">Nombre de Usuario: </label>
                 <input type="text" formControlName="username" class="form-control"
-                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'username', 'required') }" (change)="this.show()">
+                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'username', 'required') }">
                 @if( hasErrors( this.form,'username', 'required') ){
                 <app-input-danger-text text="El nombre de usuario es requerido"></app-input-danger-text>
                 }

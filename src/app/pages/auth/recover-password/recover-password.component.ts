@@ -31,12 +31,9 @@ export class RecoverPasswordComponent  extends CustomForm{
 
   override send(): void {
     if(this.form.valid){
-      console.log(this.form.value);
       
       const username= this.form.get('user')?.value;
       const email = this.form.get('email')?.value;
-
-      console.log(username, email);
       this._authService.recoverPassword(username,email).subscribe({
         next: (response) => {
           alert(response);
@@ -44,7 +41,6 @@ export class RecoverPasswordComponent  extends CustomForm{
         error: (error) => {
           this.errorMessage = error.message;
           this.showFailedPopUp = true;
-          console.log(error);
         }
       })
     }

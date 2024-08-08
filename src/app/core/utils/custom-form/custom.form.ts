@@ -21,7 +21,7 @@ export abstract class CustomForm  implements OnInit {
         if (control) {
             return control.hasError(errorType) && control.touched;
         } else {
-            console.log("control not found");
+            console.log("control not found, error in hasErrors() method");
             return false;
         }
     }

@@ -35,12 +35,9 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
   categoryName: string = '';
 
   override initializeForm(): void {
-    console.log('here');
     if(this.product_id){
-      console.log('here2');
       this._adminService.getProductById(this.product_id).subscribe(p => {
         this.product$ = p;
-        console.log(p);
         this.form = this.formBuilder.group({
           id: [this.product$.id, [Validators.required]],
           categoryId: [this.product$.categoryId, [Validators.required]],

@@ -63,7 +63,6 @@ export class SearchComponent {
     this._router.params.subscribe(params => {
       if(params['textToSearch']){
         this.textToSearch = params['textToSearch'];
-        console.log(this.textToSearch);
       }
       this.updateProductsInfo();
     })

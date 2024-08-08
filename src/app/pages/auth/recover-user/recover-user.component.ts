@@ -31,19 +31,16 @@ export class RecoverUserComponent extends CustomForm {
 
   override send(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
       const emailOrPhone = this.form.get('email_or_phone')?.value;
 
       this._authService.recoverUser(emailOrPhone).subscribe({
         next: response => {
-          console.log(response);
           this.successMessage = <string> response; 
           this.showSuccessPopUp = true;
           this.form.reset();
         },
         error: err => {
           this.showFailedPopUp = true;
-          console.log(err);
           this.errorMessage = err.message;
         },
       })

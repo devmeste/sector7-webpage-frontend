@@ -53,7 +53,6 @@ export class AdminService {
             component,
             fields: array_with_just_string_names
         }
-        console.log(body);
 
         return this._httpClient.post(this.baseUrl + 'categories', body);
     }
@@ -70,7 +69,6 @@ export class AdminService {
             return element.name;
         });
 
-        console.log(array_with_just_string_names);
 
         let body = {
             name,
@@ -82,8 +80,6 @@ export class AdminService {
     }
 
     deleteCategory(id: string) {
-        console.log("ID: ");
-        console.log(id);
         return this._httpClient.delete(this.baseUrl + 'categories/' + id, {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' },
 
@@ -102,7 +98,6 @@ export class AdminService {
 
 
     getProductById(id: string): Observable<BKProduct> {
-        console.log(id);
         return this._httpClient.get<BKProduct>(this.baseUrl + 'products/' + id);
     }
 
@@ -112,8 +107,6 @@ export class AdminService {
     }
 
     updateProduct(p: any) {
-        console.log(p);
-
         return this._httpClient.put<any>(this.baseUrl + 'products/' + p.id, p);
     }
 
@@ -204,7 +197,6 @@ export class AdminService {
 
     // purchases
     getAllPurchases() {
-        console.log(this.baseUrl + 'purchase');
         return this._httpClient.get<IPurchase[]>(this.baseUrl + 'purchase');
     }
 

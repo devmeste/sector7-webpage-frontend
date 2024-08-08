@@ -3,14 +3,12 @@
     @if(this.product$){
 
     <ng-container>
-        <div class="modal_container update_pop_up">
+        <div class="modal_container modal_form update_pop_up ">
             <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
             <div class="modal_info">
-
                 <!-- Esto es lo que seria componente -->
-
                 <section class="form_container">
-                    <form (ngSubmit)="closeUpdateModal()" [formGroup]="this.form" class="form">
+                    <form (ngSubmit)="closeUpdateModal()" [formGroup]="this.form" class="form form_pop_up">
 
                         <!-- Nombre -->
                         <div class="custom-input">
@@ -109,7 +107,12 @@
                             </picture>
                             }
                         </div>
-
+                        
+                        
+                        <div class="half_container">
+                            <label class="form-label">Categoria del producto:</label>
+                            <div> {{categoryName}} </div>
+                        </div>
 
                         <label class="form-label">Campos: </label>
 

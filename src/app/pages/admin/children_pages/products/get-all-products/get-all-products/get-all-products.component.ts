@@ -88,7 +88,6 @@ export class GetAllProductsComponent {
 
 
   updateProductsState() {
-    console.log("Se ejecuto");
     this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize).subscribe(productResponse => {
       this.products$ = productResponse.products;
       this.totalPages = productResponse.pagination.totalPages;

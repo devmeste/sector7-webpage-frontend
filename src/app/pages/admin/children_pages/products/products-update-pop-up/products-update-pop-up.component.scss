@@ -1,5 +1,7 @@
 @import 'styles.scss';
 @import '_media-queries.scss';
+@import '@shared/styles/admin_form.scss';
+@import '@shared/styles/pop-up-styles.scss';
 
 .modal_container.update_pop_up {
 
@@ -19,7 +21,7 @@
 
     .form {
         max-width: 100% !important;
-        height: 70vh;
+        max-height: 70vh;
         overflow-y: scroll;
         display: flex;
         flex-direction: column;

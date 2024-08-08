@@ -115,9 +115,7 @@ export class AuthService {
   // recover user
 
   recoverUser(email: string) {
-    console.log(email);
     return this._http.post(this.baseUrl + 'account/recover-user', { email }, { responseType: 'text' }).pipe(
-      tap(() => console.log()),
       catchError(error => this.transformTextResponseToJson(error))
     );
 
@@ -125,9 +123,7 @@ export class AuthService {
 
   recoverPassword(username: string, email: string) {
     let body= { username, email };
-    console.log(body);
     return this._http.post(this.baseUrl + 'account/recover-password', body , { responseType: 'text' }).pipe(
-      tap(() => console.log()),
       catchError(error => this.transformTextResponseToJson(error))
     );
   }

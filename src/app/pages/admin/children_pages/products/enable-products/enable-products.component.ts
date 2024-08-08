@@ -39,19 +39,12 @@ export class EnableProductsComponent {
   chargeProducts(option: string) {
     this._adminService.getAllEnabledProducts(option).subscribe(productResponse => {
       this.products$ = productResponse.products;
-      console.log(productResponse.products);
     })
   }
 
   mostrar(id: string) {
-    // console.log('----------------------');
-    // console.log(id);
-    // console.log('----------------------');
     this.products$.filter(product => product.id == id)[0].isEnabled = !this.products$.filter(product => product.id == id)[0].isEnabled;
 
-    for (let product of this.products$) {
-      console.log(product.id + ": " + product.isEnabled);
-    }
   }
 
   send() {
@@ -73,7 +66,6 @@ export class EnableProductsComponent {
 
     this._adminService.sendUpdateEnableProducts(ids_to_send, this.selectedOption).subscribe({
       next:()=>{
-        console.log('EXITO');
         this.changeProductsState(this.selectedOption);
       },
       error:(error)=>{}

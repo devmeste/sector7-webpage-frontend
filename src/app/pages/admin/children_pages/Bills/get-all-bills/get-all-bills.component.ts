@@ -39,9 +39,7 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
   
       const formattedStartDate = this.formatDate(startDate);
       const formattedEndDate = this.formatDate(endDate);
-  
-      console.log(formattedStartDate, formattedEndDate);
-  
+    
       if (formattedStartDate && formattedEndDate) {
         this.updateDataViewWithDates( formattedStartDate, formattedEndDate);
       }
@@ -60,7 +58,6 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
 
   updateDataView() {
     this._adminService.getAllPurchases().subscribe(c => {
-      console.log(c);
       this.purchases$ = c;
     })
   }

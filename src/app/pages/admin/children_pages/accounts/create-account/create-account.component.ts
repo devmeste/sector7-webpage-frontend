@@ -64,9 +64,6 @@ export class CreateAccountComponent extends CustomForm {
     }
   }
 
-  show() {
-    console.log(this.form.valid);
-  }
 
 
 }

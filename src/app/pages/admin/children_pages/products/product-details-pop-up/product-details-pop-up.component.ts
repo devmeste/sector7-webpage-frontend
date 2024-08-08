@@ -10,9 +10,7 @@ import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.p
   selector: 'app-product-details-pop-up',
   standalone: true,
   templateUrl: './product-details-pop-up.component.html',
-  styleUrls: ['./product-details-pop-up.component.scss', '../../../../../shared/styles/admin_form.scss', '../../../../../shared/styles/pop-up-styles.scss',
-    // '../products-update-pop-up/products-update-pop-up.component.scss'
-  ],
+  styleUrl: './product-details-pop-up.component.scss',
   imports: [InputDangerTextComponent, ReactiveFormsModule, NgFor]
 })
 export class ProductDetailsPopUpComponent extends CustomFormPopUp {
@@ -21,6 +19,7 @@ export class ProductDetailsPopUpComponent extends CustomFormPopUp {
   @Input({ required: true }) product_id !: string;
   @Input({ required: true }) product_USD_price !: number;
   private _adminService = inject(AdminService);
+  categoryName = '';
 
   product$ !: BKProduct;
   private photos = [];
@@ -32,7 +31,6 @@ export class ProductDetailsPopUpComponent extends CustomFormPopUp {
     if (this.product_id) {
       this._adminService.getProductById(this.product_id).subscribe(p => {
         this.product$ = p;
-        console.log(p);
         this.form = this.formBuilder.group({
           id: [{ value: this.product$.id, disabled: true }, [Validators.required]],
           title: [{ value: this.product$.title, disabled: true }, [Validators.required]],
@@ -62,6 +60,9 @@ export class ProductDetailsPopUpComponent extends CustomFormPopUp {
       });
     }
 
+    this._adminService.getCategoryById(this.product$.categoryId).subscribe(c => {
+      this.categoryName = c.name;
+    })
   }
 
   adjustTextareaHeightForInitialData(): void {

@@ -28,7 +28,6 @@ export const userInterceptor: HttpInterceptorFn = (request, next) => {
               },
             )
           }
-          console.log(clonedRequest);
           return next(clonedRequest);
         }),
 

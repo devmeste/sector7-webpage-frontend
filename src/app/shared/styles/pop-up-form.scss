@@ -1,15 +1,29 @@
 .modal_container.modal_form {
 
-    max-height: 70vh;   
+    max-height: 70vh;
     overflow: hidden;
     padding: 0;
-    @include tablet{
+
+    @include tablet {
         padding: 2rem;
     }
+
     .form {
-        background-color: inherit;
+        // background-color: red !important;
         overflow: auto;
-        padding:  2rem 0 ;
-        width: 90%;        
+        padding: 2rem 0;
+        width: 90%;
+    }
+
+    // #prueba {
+    //     background-color: red !important;
+    // }
+
+
+}
+
+.modal_container.update_pop_up {
+    .form {
+        background-color: red !important;
     }
 }

@@ -38,7 +38,6 @@ export class PurchaseDetailsComponent {
       this.purchases$ = c;      
       this.purchase = this.purchases$.find(purchase => purchase.id === this.purchase_id);
       if (this.purchase == undefined) {
-        console.log("No se encontro la compra");
         this._router.navigate(['/admin-dashboard/billing']);
       }
     })

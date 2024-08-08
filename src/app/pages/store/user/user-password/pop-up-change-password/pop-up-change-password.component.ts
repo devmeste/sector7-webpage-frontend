@@ -33,7 +33,6 @@ export class PopUpChangePasswordComponent extends CustomFormPopUp {
   }
 
   override send($event: SubmitEvent): void {
-    console.log(this.form.value);
     const { oldPassword, newPassword, validationPassword } = this.form.value;
     let body = {
       oldPassword,
@@ -44,12 +43,10 @@ export class PopUpChangePasswordComponent extends CustomFormPopUp {
       next: (response) => {
         this.passwordWasChangedSuccessfully = true;
         this.successMessage = response.message;
-        console.log(this.successMessage);
       },
       error: (e) => {
         this.thereWasAnError = true;
         this.errorMessage = e.error.message;
-        console.log(this.errorMessage);
       }
     })
   }

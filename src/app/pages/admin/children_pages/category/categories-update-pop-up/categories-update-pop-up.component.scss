@@ -3,8 +3,23 @@
 
 .modal_container.update_pop_up {
     max-width: 1000px;
-    width: 100%;
-    max-height: 70vh;    // fue esto
+    
+    max-height: 70vh;
+
+    width: 90%;
+
+    @include tablet {
+      width: 70%;
+    }
+
+    @include laptop {
+      width: 50%;
+    }
+
+    @include desktop {
+      width: 40%;
+    }
+
 }
 
 .form {
@@ -12,7 +27,7 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    background: $gray_15;
+    // background: $gray_15;
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;

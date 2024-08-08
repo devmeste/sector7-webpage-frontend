@@ -40,7 +40,6 @@ export class CategoriesUpdatePopUpComponent extends CustomFormPopUp {
     if (this.category_id) {
       this._adminService.getCategoryById(this.category_id).subscribe(category => {
         this.category$ = category;
-        console.log(this.category$);
 
         this.form = this.formBuilder.group({
           name: [`${this.category$.name}`, [Validators.required]],
@@ -51,8 +50,6 @@ export class CategoriesUpdatePopUpComponent extends CustomFormPopUp {
         this.fields = category.fields.map(name => ({
           name: name
         }));
-
-        console.log(this.fields);
 
       });
     }
@@ -66,7 +63,6 @@ export class CategoriesUpdatePopUpComponent extends CustomFormPopUp {
     if (newField != '') {
 
       this.fields.push({ name: newField });
-      console.log(this.fields);
       this.inputField.nativeElement.value = '';
     }
 
