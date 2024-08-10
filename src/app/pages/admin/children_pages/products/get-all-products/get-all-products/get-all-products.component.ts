@@ -1,5 +1,5 @@
 import { AsyncPipe, CurrencyPipe, JsonPipe, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -10,15 +10,28 @@ import { InputDangerTextComponent } from "../../../../../../shared/components/in
 import { MessagePopUpComponent } from "../../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { ProductsUpdatePopUpComponent } from "../../products-update-pop-up/products-update-pop-up.component";
 import { ConfirmPopUpComponent } from "../../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
+
+
+import { ProductService } from 'app/core/services/product_service/product.service';
+
+
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { FormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
+import { SearchInputProductsComponent } from "../../../../../../shared/components/search-input-products/search-input-products.component";
+
+
 // import{} from ;
 @Component({
   selector: 'app-get-all-products',
   standalone: true,
   templateUrl: './get-all-products.component.html',
   styleUrls: ['./get-all-products.component.scss', "../../../../../../shared/styles/admin_table.scss"],
-  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent]
+  imports: [FormsModule, FloatLabelModule, AutoCompleteModule, MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent, SearchInputProductsComponent]
 })
 export class GetAllProductsComponent {
+
 
 
   _adminService: AdminService = inject(AdminService);
@@ -43,6 +56,8 @@ export class GetAllProductsComponent {
   userConfirmDelete = false;
   showPopUpToConfirmDelete = false;
   productIdToDelete = "";
+
+  // @ViewChild ('algo') algo!: ElementRef;
 
   ngOnInit(): void {
     this.updateProductsState();
@@ -87,8 +102,9 @@ export class GetAllProductsComponent {
   }
 
 
-  updateProductsState() {
-    this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize).subscribe(productResponse => {
+  updateProductsState(text?: string) {
+    console.log(text);
+    this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, text).subscribe(productResponse => {
       this.products$ = productResponse.products;
       this.totalPages = productResponse.pagination.totalPages;
       this.totalItems = productResponse.pagination.totalElements;
@@ -113,4 +129,20 @@ export class GetAllProductsComponent {
     this.updateProductsState();
     this.closeModal("showPopUpToConfirmDelete");
   }
+
+
+  search(value: string) {
+    console.log(value);
+    this.updateProductsState(value);
+    // this.algo.nativeElement.focus();
+  }
+
+
 }
+
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
+
+

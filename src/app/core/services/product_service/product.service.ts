@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { IProduct } from '../../models/product';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import BKProduct from 'app/core/models/BKProduct';
 import { ProductResponse } from 'app/core/models/ProductResponse';
@@ -92,5 +92,6 @@ export class ProductService {
   search(value: string): Observable<ProductResponse> {
     return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&page=1`);
   }
+
 
 }

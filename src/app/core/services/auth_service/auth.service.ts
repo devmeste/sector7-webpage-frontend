@@ -40,7 +40,7 @@ export class AuthService {
     if (specialCase) {
       url = `${this.baseUrl}${specialCase + '/'}login`;
     } else {
-      url = `${this.baseUrl + 'account/'}login`;
+      url = `${this.baseUrl + 'user/'}login`;
     }
 
     const body = { username, password };
@@ -97,7 +97,7 @@ export class AuthService {
 
   verifyToken(token: string): Observable<ITokenDto> {
     return this._http.post<ITokenDto>(
-      this.baseUrl + 'account/validate',
+      this.baseUrl + 'user/validate',
       { token: token },
       { headers: new HttpHeaders({ 'skip': 'true' }) }
     )
@@ -108,14 +108,14 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this._http.post(this.baseUrl + 'account/register', user, { headers, responseType: 'text' });
+    return this._http.post(this.baseUrl + 'user/register', user, { headers, responseType: 'text' });
   }
 
 
   // recover user
 
   recoverUser(email: string) {
-    return this._http.post(this.baseUrl + 'account/recover-user', { email }, { responseType: 'text' }).pipe(
+    return this._http.post(this.baseUrl + 'user/recover-user', { email }, { responseType: 'text' }).pipe(
       catchError(error => this.transformTextResponseToJson(error))
     );
 
@@ -123,7 +123,7 @@ export class AuthService {
 
   recoverPassword(username: string, email: string) {
     let body= { username, email };
-    return this._http.post(this.baseUrl + 'account/recover-password', body , { responseType: 'text' }).pipe(
+    return this._http.post(this.baseUrl + 'user/recover-password', body , { responseType: 'text' }).pipe(
       catchError(error => this.transformTextResponseToJson(error))
     );
   }
@@ -140,7 +140,7 @@ export class AuthService {
 
 
   change_user_password(body: any) : Observable<ChangePasswordSuccessDTO> {
-    return this._http.patch<ChangePasswordSuccessDTO>(this.baseUrl + 'account/change-password', body);
+    return this._http.patch<ChangePasswordSuccessDTO>(this.baseUrl + 'user/change-password', body);
   }
 }
 

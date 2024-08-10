@@ -19,10 +19,6 @@ import { environment } from 'app/core/environments/environment';
 
 export class AdminService {
 
-
-
-
-
     // baseUrl: string = 'http://localhost:8001/api/v1/es/';
     private baseUrl: string = environment.apiUrl;
 
@@ -92,8 +88,15 @@ export class AdminService {
         return this._httpClient.get<ProductResponse>(this.baseUrl + 'products');
     }
     
-    getAllProductsForAdmin( currentPage : number, pageSize : number ): Observable<ProductResponse> {
-        return this._httpClient.get<ProductResponse>(`${this.baseUrl}products/actual?page=${currentPage}`);
+    getAllProductsForAdmin( currentPage : number, pageSize : number , text?:string ): Observable<ProductResponse> {
+        
+        let url = `${this.baseUrl}products/actual?page=${currentPage}`
+        
+        if  (text){
+            url =`${this.baseUrl}products/actual?page=${currentPage}&title=${text}`;
+        }
+
+        return this._httpClient.get<ProductResponse>(url);
     }
 
 
@@ -179,7 +182,7 @@ export class AdminService {
 
     // ACCOUNTS
     getAllAccounts(): Observable<IAccount[]> {
-        return this._httpClient.get<IAccount[]>(this.baseUrl + 'account');
+        return this._httpClient.get<IAccount[]>(this.baseUrl + 'user');
     }
 
     createAccount(value: IAccountReq): Observable<IAccount> {

@@ -1,0 +1,17 @@
+<div >
+    <p-floatLabel>
+       <p-autoComplete 
+           #autoCompleteComp
+           [(ngModel)]="inputText" 
+           [suggestions]="suggestions" 
+           [emptyMessage]="'No se encontraron resultados'"
+           (completeMethod)="search($event)" 
+           (onSelect)="send($event)"
+           (keydown.enter)="sendByEnter(autoCompleteComp)"
+           inputId="float-label" 
+           styleClass="custom-autocomplete"
+         />
+       <label for="float-label" >Buscar productos</label>
+   </p-floatLabel>
+</div>
+    
