@@ -27,6 +27,19 @@
                 <li [routerLink]="['products/pendings']">Aprobar Pendientes</li>
             </ul>
         </mat-expansion-panel>
+
+        <!-- Sockets -->
+        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Sockets
+                </mat-panel-title>
+            </mat-expansion-panel-header>   
+            <ul class="options_list">
+                <li [routerLink]="['sockets/new']">Crear socket</li>
+                <li [routerLink]="['sockets']">Ver todos</li>
+            </ul>
+        </mat-expansion-panel>
         
         <!-- Accounts -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">

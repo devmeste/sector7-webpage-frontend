@@ -30,6 +30,14 @@ export const ADMIN_ROUTES: Routes = [
                 loadComponent: () => import('./children_pages/products/get-all-products-pending/get-all-products-pending.component').then(c => c.GetAllProductsPendingComponent)
             },
             {
+                path: 'sockets',
+                loadComponent: ()=> import('./children_pages/sockets/get-all-sockets/get-all-sockets.component').then(r => r.GetAllSocketsComponent)
+            },
+            {
+                path: 'sockets/new',
+                loadComponent: () => import('./children_pages/sockets/create-socket/create-socket.component').then(r => r.CreateSocketComponent)
+            },
+            {
                 path: 'usd',
                 loadComponent: () => import('./children_pages/usd/get-all-usd/get-all-usd.component').then(r => r.GetAllUsdComponent)
             },

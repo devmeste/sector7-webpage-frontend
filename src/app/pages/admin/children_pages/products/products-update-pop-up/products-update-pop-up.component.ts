@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 import { NgClass, NgFor } from '@angular/common';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
@@ -43,15 +43,17 @@ export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpParentComp
       fieldsJSON: newFieldJson
     }
     this._adminService.updateProduct(p).subscribe({
-      next: (v) => { 
+      next: (v) => {
         this.itemWasUpdatedSuccesfully.emit();
         this.productUpdatedSuccessfully = true
-       },
+      },
 
       error: (error) => {
         this.errorMessage = error.error.message;
         this.productUpdateFailed = true;
       }
     });
-  }  
+  }
+
+ 
 }

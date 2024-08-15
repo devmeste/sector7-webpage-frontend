@@ -1,4 +1,4 @@
-<section id="create_product_container">
+<section class="create_product_container">
     <h2>Crear un nuevo Producto</h2>
 
     <section class="form_container">
@@ -114,12 +114,12 @@
                 </div>
             </div>
 
-            <label>Categoria:</label>
+            <label class="form-label">Categoria:</label>
             <select name="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)"
                 class="custom-select">
                 <option value=""> </option>
                 @for (category of categories$; track category.id) {
-                <option value="{{category.id}}"> {{category.name}} </option>
+                    <option value="{{category.id}}"> {{category.name}} </option>
                 }
             </select>
 
@@ -128,12 +128,28 @@
 
             <div formArrayName="fieldsArray">
                 <div *ngFor="let formControl of fieldsArray.controls; let i = index" [formGroupName]="i">
-                    <div class="custom-input">
-                        <label class="form-label">{{formControl.value.fieldName}}</label>
-                        <div class="add_field_button_container">
-                            <input formControlName="value" type="text" class="form-control" placeholder=" ">
+                   
+                    <!-- Socket select -->
+                    @if(formControl.value.fieldName == 'Socket'){
+                        <div><label for="Socket">Socket</label></div>
+                        <select 
+                        formControlName="value" 
+                        class="custom-select field">
+                           @for( socket of sockets ; track $index) {
+                               <option value="{{socket}}" > {{socket}} </option>
+                           }
+                        </select>
+                    }
+                    @else {
+                        <!-- any other field -->
+                        <div class="custom-input">
+                            <label class="form-label">{{formControl.value.fieldName}}</label>
+                            <div class="add_field_button_container">
+                                <input formControlName="value" type="text" class="form-control" placeholder=" ">
+                            </div>
                         </div>
-                    </div>
+                    }
+
                 </div>
             </div>
 

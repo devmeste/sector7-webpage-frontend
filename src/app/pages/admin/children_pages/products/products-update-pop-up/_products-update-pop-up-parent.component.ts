@@ -60,10 +60,14 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
         
         this._adminService.getCategoryById(this.product$.categoryId).subscribe(c => {
           this.categoryName = c.name;
+          if(this.categoryName == 'Procesadores' || this.categoryName == 'Mothers'){
+            this.getSockets();
+          }
         })
       });
     }
   }
+
 
 
 
@@ -137,6 +141,14 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
       };
         break;
     }
+  }
+
+  sockets: string[] = [];
+  getSockets() {
+    this._adminService.getAllSockets().subscribe((sockets) => {
+      this.sockets = sockets.map(socket => socket.type);
+      console.log(this.sockets);
+    });
   }
   
 }

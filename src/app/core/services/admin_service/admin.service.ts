@@ -12,6 +12,7 @@ import { IAccount, IAccountReq } from 'app/core/models/IAccount';
 import { IPurchase } from 'app/core/models/IPurchase';
 import { IPurchasesBetweenDatesResponse } from 'app/core/models/IPurchasesBetweenDatesResponse';
 import { environment } from 'app/core/environments/environment';
+import { ISocket } from 'app/core/models/ISocket';
 
 @Injectable({
     providedIn: 'root'
@@ -19,17 +20,17 @@ import { environment } from 'app/core/environments/environment';
 
 export class AdminService {
 
+
+
+
+
     // baseUrl: string = 'http://localhost:8001/api/v1/es/';
     private baseUrl: string = environment.apiUrl;
 
     private _router: Router = inject(Router);
     private _httpClient: HttpClient = inject(HttpClient);
 
-    constructor() {
-
-    }
-
-    // CATEGORIES
+    // categories
     getAllCategories(): Observable<ICategory[]> {
         return this._httpClient.get<ICategory[]>(this.baseUrl + 'categories');
     };
@@ -83,17 +84,18 @@ export class AdminService {
         });
     }
 
-    //PRODUCTS
+    // products
+
     getAllProducts(): Observable<ProductResponse> {
         return this._httpClient.get<ProductResponse>(this.baseUrl + 'products');
     }
-    
-    getAllProductsForAdmin( currentPage : number, pageSize : number , text?:string ): Observable<ProductResponse> {
-        
+
+    getAllProductsForAdmin(currentPage: number, pageSize: number, text?: string): Observable<ProductResponse> {
+
         let url = `${this.baseUrl}products/actual?page=${currentPage}`
-        
-        if  (text){
-            url =`${this.baseUrl}products/actual?page=${currentPage}&title=${text}`;
+
+        if (text) {
+            url = `${this.baseUrl}products/actual?page=${currentPage}&title=${text}`;
         }
 
         return this._httpClient.get<ProductResponse>(url);
@@ -157,7 +159,8 @@ export class AdminService {
     }
 
 
-    //-------------------------USD-------------------------
+    // usd
+
     getAllUsd(): Observable<Usd[]> {
         return this._httpClient.get<Usd[]>(this.baseUrl + 'usd?page=1');
     }
@@ -173,14 +176,15 @@ export class AdminService {
         return this._httpClient.post<Usd>(this.baseUrl + 'usd', body);
     }
 
-    // FIELDS
+    // fields
 
     getAllFields(): Observable<IField[]> {
         return this._httpClient.get<IField[]>(this.baseUrl + 'fields');
     }
 
 
-    // ACCOUNTS
+    // accounts
+
     getAllAccounts(): Observable<IAccount[]> {
         return this._httpClient.get<IAccount[]>(this.baseUrl + 'user');
     }
@@ -207,4 +211,29 @@ export class AdminService {
         return this._httpClient.get<IPurchasesBetweenDatesResponse>(this.baseUrl + 'purchase/bill?since=' + startDate + '&until=' + endDate);
     }
 
+
+    // sockets
+
+    createSocket(type: string): Observable<ISocket> {
+        return this._httpClient.post<ISocket>(this.baseUrl + 'socket', { type });
+    }
+
+    getAllSockets() {
+        return this._httpClient.get<ISocket[]>(this.baseUrl + 'socket');
+    }
+
+    getSocketById(socket_id: string) {
+        return this._httpClient.get<ISocket>(this.baseUrl + 'socket/' + socket_id);
+    }
+
+    updateSocket(socket_id: string, type: string) {
+        return this._httpClient.put<ISocket>(this.baseUrl + 'socket/' + socket_id, { type });
+    }
+
+    deleteScocket(id: string) {
+        return this._httpClient.delete<any>(this.baseUrl + 'socket/' + id);
+    }
+
 }
+
+

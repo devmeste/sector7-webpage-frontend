@@ -20,6 +20,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
 import { SearchInputProductsComponent } from "../../../../../../shared/components/search-input-products/search-input-products.component";
+import { SpinnerS7Component } from "../../../../../../shared/components/spinner-s7/spinner-s7.component";
 
 
 // import{} from ;
@@ -28,7 +29,7 @@ import { SearchInputProductsComponent } from "../../../../../../shared/component
   standalone: true,
   templateUrl: './get-all-products.component.html',
   styleUrls: ['./get-all-products.component.scss', "../../../../../../shared/styles/admin_table.scss"],
-  imports: [FormsModule, FloatLabelModule, AutoCompleteModule, MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent, SearchInputProductsComponent]
+  imports: [FormsModule, FloatLabelModule, AutoCompleteModule, MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent, SearchInputProductsComponent, SpinnerS7Component]
 })
 export class GetAllProductsComponent {
 
@@ -57,7 +58,9 @@ export class GetAllProductsComponent {
   showPopUpToConfirmDelete = false;
   productIdToDelete = "";
 
-  // @ViewChild ('algo') algo!: ElementRef;
+
+  // Spinner
+  isLoading = false;
 
   ngOnInit(): void {
     this.updateProductsState();
@@ -101,9 +104,7 @@ export class GetAllProductsComponent {
     this.product_USD_price = price;
   }
 
-
   updateProductsState(text?: string) {
-    console.log(text);
     this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, text).subscribe(productResponse => {
       this.products$ = productResponse.products;
       this.totalPages = productResponse.pagination.totalPages;
@@ -132,9 +133,7 @@ export class GetAllProductsComponent {
 
 
   search(value: string) {
-    console.log(value);
     this.updateProductsState(value);
-    // this.algo.nativeElement.focus();
   }
 
 

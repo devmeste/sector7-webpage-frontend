@@ -18,7 +18,7 @@
   border-radius: 10px;
 
 
-  &.form_pop_up{
+  &.form_pop_up {
     background-color: transparent;
   }
 
@@ -29,7 +29,7 @@
   }
 
   .form-label {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: white;
   }
 
@@ -187,6 +187,7 @@
     padding: 10px;
     border-radius: 5px;
     appearance: none;
+    width: 100%;
     -webkit-appearance: none;
     /* for Safari */
     -moz-appearance: none;

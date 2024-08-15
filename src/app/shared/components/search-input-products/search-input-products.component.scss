@@ -1,3 +1,4 @@
+@import '@shared/styles/search_bar.scss';
 
 .custom-autocomplete {
     .p-autocomplete {
@@ -52,4 +53,25 @@
     .p-autocomplete-item {
         // Estilos para cada ítem de la lista de sugerencias, si es necesario
     }
+    // .p-element .p-icon-wrapper{
+    //     display: none;
+    // }
+}
+
+.search_input_component_container{
+    .float-label{
+        // color: white;
+
+        &.active{
+            color: red;
+        }
+    }
+}
+
+
+.searchBarInputText{
+    color: #000 !important;
+}
+.searchBarInputText{
+    color: #000 !important;
 }

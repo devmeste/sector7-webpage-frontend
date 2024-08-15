@@ -1,0 +1,74 @@
+<section class="admin_panel_table_main_container main_socket_container">
+
+    <h2 class="title"> Productos </h2>
+    <h4 class="subtitle">Lista de todos los productos de Sector 7</h4>
+
+    @if(this.sockets$ && this.sockets$.length > 0 ) {
+
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    tipo
+                </td>
+                <td>
+                    Acciones
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @for(socket of sockets$ ; track socket.id){
+            <tr>
+                <td>
+                    {{socket.type}}
+                </td>
+                <td class="actions_buttons_container">
+                    <div class="flex_container">
+                        <button type="button" class="actions_button update_button"
+                            (click)="showUpdatePopUpMethod(socket.id)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button type="button" class="actions_button delete_button"
+                            (click)="askToConfirmDelete(socket.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (socketDeletedSuccessfully) {
+    <app-message-pop-up custom_message='Socket Eliminado Exitosamente'
+        (close)="closeModal('socketDeletedSuccessfully')"> </app-message-pop-up>
+    }
+    @if (socketDeletionFailed) {
+    <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('socketDeletionFailed')">
+    </app-message-pop-up>
+    }   
+
+    @if(showPopUpToConfirmDelete){
+    <app-confirm-pop-up custom_message="¿Realmente desea eliminar este socket?" (confirm)="confirmDeleteAction()"
+        (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
+    }
+
+
+
+    }
+    @else {
+    @if( isLoading ){
+    <app-spinner-s7></app-spinner-s7>
+    }
+    @else {
+    <app-input-danger-text text="No hay sockets"></app-input-danger-text>
+    }
+    }
+
+</section>
+
+@if(this.showUpdatePopUp){
+    <app-sockets-update-pop-up [socket_id]="this.update_id"
+        (itemWasUpdatedSuccesfully)="this.updateSocketsState()" (close)="closeModal('showUpdatePopUp')">
+    </app-sockets-update-pop-up>
+}

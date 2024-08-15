@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 import { NgClass, NgFor } from '@angular/common';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
@@ -14,6 +14,9 @@ import { _ProductsUpdatePopUpParentComponent, Field } from './_products-update-p
   imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon]
 })
 export class ProductsUpdatePopUpPendingComponent extends _ProductsUpdatePopUpParentComponent {
+
+
+
 
   override send() {
 
@@ -41,11 +44,11 @@ export class ProductsUpdatePopUpPendingComponent extends _ProductsUpdatePopUpPar
       isEnabled: this.form.get("isEnabled")?.value,
       fieldsJSON: newFieldJson
     }
-    
+
     this._adminService.updateProduct(p).subscribe({
-      next: (v) => { 
+      next: (v) => {
         this.itemWasUpdatedSuccesfully.emit();
-        this.productUpdatedSuccessfully = true 
+        this.productUpdatedSuccessfully = true
       },
 
       error: (error) => {
@@ -53,5 +56,9 @@ export class ProductsUpdatePopUpPendingComponent extends _ProductsUpdatePopUpPar
         this.productUpdateFailed = true;
       }
     });
-  }  
+  }
+
+  
+
+
 }

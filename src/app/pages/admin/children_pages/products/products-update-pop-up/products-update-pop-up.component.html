@@ -140,7 +140,7 @@
 
                         <label class="form-label">Campos: </label>
 
-                        <div formArrayName="fieldsArray">
+                        <!-- <div formArrayName="fieldsArray">
                             <div *ngFor="let formControl of fieldsArray.controls; let i = index" [formGroupName]="i">
                                 <div class="custom-input">
                                     <label class="form-label">{{formControl.value.fieldName}}</label>
@@ -148,6 +148,33 @@
                                         <input formControlName="value" type="text" class="form-control" placeholder=" ">
                                     </div>
                                 </div>
+                            </div>
+                        </div> -->
+
+                        <div formArrayName="fieldsArray">
+                            <div *ngFor="let formControl of fieldsArray.controls; let i = index" [formGroupName]="i">
+                               
+                                <!-- Socket select -->
+                                @if(formControl.value.fieldName == 'Socket'){
+                                    <div><label for="Socket">Socket</label></div>
+                                    <select 
+                                    formControlName="value" 
+                                    class="custom-select field">
+                                       @for( socket of sockets ; track $index) {
+                                           <option value="{{socket}}" > {{socket}} </option>
+                                       }
+                                    </select>
+                                }
+                                @else {
+                                    <!-- any other field -->
+                                    <div class="custom-input">
+                                        <label class="form-label">{{formControl.value.fieldName}}</label>
+                                        <div class="add_field_button_container">
+                                            <input formControlName="value" type="text" class="form-control" placeholder=" ">
+                                        </div>
+                                    </div>
+                                }
+            
                             </div>
                         </div>
 

@@ -1,0 +1,41 @@
+<div class="overlay">
+    @if(this.socket$){
+
+    <ng-container>
+        <div class="modal_container update_pop_up modal_form">
+            <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+            <div class="modal_info">
+
+                <!-- Form -->
+                <section class="form_container">
+                    <form (ngSubmit)="send()" [formGroup]="this.form" class="form form_pop_up">
+
+                        <!-- tipo -->
+                        <div class="custom-input">
+                            <label class="form-label">Titulo: </label>
+                            <input type="text" formControlName="type" required class="form-control"
+                                [ngClass]="{ 'is-invalid': hasErrors(this.form,'type', 'required') }">
+                            @if( hasErrors(this.form,'type', 'required') ){ <app-input-danger-text
+                                text="El tipo de Socket es requerido"></app-input-danger-text>
+                            }
+                        </div>
+                        @if (socketUpdatedSuccessfully) {
+                            <app-message-pop-up custom_message='Socket Modificado Exitosamente'
+                                (close)="closeMessageModal('socketUpdatedSuccessfully')">
+                            </app-message-pop-up>
+                            }
+                            @if (socketUpdateFailed) {
+                            <app-message-pop-up custom_message='{{errorMessage}}'
+                                (close)="closeMessageModal('socketUpdateFailed')">
+                            </app-message-pop-up>
+                            }
+    
+                            <button class="primary_button"
+                                [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
+                                [disabled]="disabledFormButton(this.form)" type="submit">Enviar</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </ng-container>
+    }

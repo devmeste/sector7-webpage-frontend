@@ -1,3 +1,5 @@
+@import './pop-up-styles.scss';
+
 .modal_container.modal_form {
 
     max-height: 70vh;
@@ -9,21 +11,11 @@
     }
 
     .form {
-        // background-color: red !important;
         overflow: auto;
         padding: 2rem 0;
         width: 90%;
     }
 
-    // #prueba {
-    //     background-color: red !important;
-    // }
-
 
 }
 
-.modal_container.update_pop_up {
-    .form {
-        background-color: red !important;
-    }
-}

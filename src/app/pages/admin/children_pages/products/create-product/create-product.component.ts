@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild, booleanAttribute, inject, viewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { InputDangerTextComponent } from '@shared/components/inputs/input-danger-text/input-danger-text.component';
@@ -8,14 +8,19 @@ import { ICategory } from 'app/core/models/ICategory';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { CustomForm } from 'app/core/utils/custom-form/custom.form';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+
 @Component({
   selector: 'app-create-product',
   standalone: true,
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss', '../../../../../shared/styles/admin_form.scss'],
-  imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent]
+  imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent, MatSelectModule]
 })
 export class CreateProductComponent extends CustomForm implements OnInit {
+
+
+  sockets!: string[];
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({
@@ -34,24 +39,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       fieldsArray: this.formBuilder.array([]),
     })
   }
-  // Para Produccion
-  // override initializeForm(): void {
-  //   this.form = this.formBuilder.group({
-  //     title: ['asdasd', [Validators.required]],
-  //     id: [this.generateRandomString(10), [Validators.required]],
-  //     brand: ['aaa', [Validators.required]],
-  //     model: ['aaa', [Validators.required]],
-  //     price: ['100', [Validators.required]],
-  //     actualStock: ['1234', [Validators.required]],
-  //     viewStock: ['1002', [Validators.required]],
-  //     description: ['asdasd', [Validators.required]],
-  //     isEnabled: [true, []],
-  //     photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/teclado/teclado.png?raw=true'], []),
-  //     categoryId: ['', [Validators.required]],
-  //     fieldsJSON: ['', []],
-  //     fieldsArray: this.formBuilder.array([]),
-  //   })
-  // }
+
 
   categories$ !: ICategory[];
   productWasCreatedSuccessfully = false;
@@ -61,8 +49,6 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   private _adminService = inject(AdminService);
 
 
-
-  // Recordar poner isEnabled en true!!       isEnabled: [false, []],
 
   // luego borrar este metodo
   generateRandomString(length: number = 10): string {
@@ -97,12 +83,9 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   }
 
 
-  // VOY POR ACA
   onCategoryChange($event: Event) {
 
-    const selectElement = $event.target as HTMLSelectElement;
-
-    const categoryId = selectElement.value;
+    const categoryId = ($event.target as HTMLSelectElement).value;
 
     if (categoryId == '') {
       return;
@@ -117,14 +100,35 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       this.fieldsArray.clear();
 
       ArrayFieldsFromCategory.forEach(name => {
-        const newFieldGroup = this.formBuilder.group({
-          fieldName: [name, Validators.required],
-          value: ['', Validators.required]
-        });
-        this.fieldsArray.push(newFieldGroup);
+
+        if (name.toLowerCase() === 'socket') {
+          this._adminService.getAllSockets().subscribe(sockets => {
+            this.sockets = sockets.map(socket => socket.type);
+            const newFieldGroup = this.createNewFieldGroup(name);
+            // Automatically set the first socket value
+            if (this.sockets.length > 0) {
+              newFieldGroup.get('value')?.setValue(this.sockets[0]); // Set the first value
+            }
+          })
+        } else {
+          this.createNewFieldGroup(name);
+        }
       });
     })
+
+    console.log(this.form.value.fieldsArray);
   }
+
+  createNewFieldGroup(name: string): FormGroup<{ fieldName: FormControl<string | null>; value: FormControl<string | null>; }> {
+    const newFieldGroup = this.formBuilder.group({
+      fieldName: [name, Validators.required],
+      value: ['', Validators.required]
+    });
+    this.fieldsArray.push(newFieldGroup);
+    return newFieldGroup;
+  }
+
+
 
   addPhoto() {
     // Todo este metodo volver

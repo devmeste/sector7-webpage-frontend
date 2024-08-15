@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, inject, Output, ViewChild } from '@angular/core';
-import { AutoComplete, AutoCompleteCompleteEvent, AutoCompleteSelectEvent } from 'primeng/autocomplete';
+import { Component, ElementRef, EventEmitter, inject, Output, signal, Signal, ViewChild } from '@angular/core';
+import { AutoComplete, AutoCompleteCompleteEvent, AutoCompleteSelectEvent, AutoCompleteUnselectEvent } from 'primeng/autocomplete';
 import { debounceTime, distinctUntilChanged, Subject, switchMap, takeUntil } from 'rxjs';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -16,10 +16,10 @@ import BKProduct from 'app/core/models/BKProduct';
   styleUrl: './search-input-products.component.scss'
 })
 export class SearchInputProductsComponent {
-  
 
   @Output() searchString = new EventEmitter<string>();
 
+  isDropdownHidden = signal<boolean>(false);
   //  Search Bar 
   items: BKProduct[] | undefined;
 
@@ -30,20 +30,14 @@ export class SearchInputProductsComponent {
   _productService: ProductService = inject(ProductService);
 
   private searchSubject = new Subject<string>();
-  // private cancelSearchSubject = new Subject<void>();
-
-  @ViewChild('autoComplete') autoComplete!: ElementRef;
-
 
   search(event: AutoCompleteCompleteEvent) {
+    console.log("InputText en search: " + this.inputText);
     this.searchSubject.next(event.query);
   }
 
   ngOnInit(): void {
-    // search bar
     this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
       switchMap(query => this._productService.search(query)),
     ).subscribe(productResponse => {
       this.suggestions = productResponse.products.map(product => product.title);
@@ -51,21 +45,22 @@ export class SearchInputProductsComponent {
   }
 
   send(event?: AutoCompleteSelectEvent) {
-    if(event){
-      this.searchString.emit(event.value); 
-      // this.searchString.emit(this.inputText); 
+    this.isDropdownHidden.set(false);
+    this.searchString.emit(this.inputText);
+  }
+  
+  onClear() {
+    this.searchString.emit(this.inputText);
+  }
+
+  onKeyUp( event: KeyboardEvent) {
+    if (event.key === "Enter") {
+     this.isDropdownHidden.set(true);
+     this.searchString.emit(this.inputText);
     }
-    this.searchString.emit(this.inputText);
+    else{
+      this.isDropdownHidden.set(false);
+    }
   }
-
-  sendByEnter(autoCompleteComp: AutoComplete) {
-    this.searchString.emit(this.inputText);
-    autoCompleteComp.hide(true); // Cierra el popup al presionar Enter
-    this.removeFocus();
-    // this.cancelSearchSubject.next(); // Cancelar cualquier búsqueda en curso
-  }
-
-  removeFocus() {
-    this.autoComplete.nativeElement.blur();
-  }
+  
 }

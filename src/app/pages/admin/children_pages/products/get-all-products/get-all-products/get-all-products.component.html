@@ -3,20 +3,17 @@
     <h2 class="title"> Productos </h2>
     <h4 class="subtitle">Lista de todos los productos de Sector 7</h4>
 
-
-
-
-
     <!-- buscador -->
 
+    <!-- TODO: Cambiar los br -->
+    <br>
+    <app-search-input-products (searchString)="search($event)"></app-search-input-products>
+    <br>
+    <br>
 
-    <br>
-    <app-search-input-products  (searchString)="search($event)"></app-search-input-products>
-    <br>
-    <br>
-        <!-- tabla de productos -->
+    <!-- tabla de productos -->
     @if(products$ && products$.length > 0 ) {
-    <table >
+    <table>
         <thead>
             <tr>
                 <td>
@@ -26,12 +23,12 @@
                     precio
                 </td>
                 <td class="td_two_children" colspan="2">
-                    stock 
+                    stock
                     <div class="td_children_container">
-                        <div  class="td_children">
+                        <div class="td_children">
                             real
                         </div>
-                        <div class="td_children" >
+                        <div class="td_children">
                             visual
                         </div>
                     </div>
@@ -83,8 +80,12 @@
 
     }
     @else {
-    <!-- Spinner -->
-    <app-input-danger-text text="No hay productos"></app-input-danger-text>
+        @if( isLoading ){
+            <app-spinner-s7></app-spinner-s7>
+        }
+        @else {
+            <app-input-danger-text text="No hay productos"></app-input-danger-text>
+        }
     }
 
     @if (productDeletedSuccessfully) {
