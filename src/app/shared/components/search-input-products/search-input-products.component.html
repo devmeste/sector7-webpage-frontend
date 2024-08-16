@@ -9,9 +9,11 @@
              inputId="float-label" 
              (onClear)="onClear()"
              (onKeyUp)="onKeyUp($event)"
+             (onFocus)="onFocus()"
+             (onBlur)="onBlur()"
              [panelStyleClass]="this.isDropdownHidden() ? 'hide' : 'show'"
            /> 
-         <label class="float-label" for="float-label" >Buscar productos</label>
+         <label class="float-label" [ngClass]="{'focused': inputHasFocus}" for="float-label">Buscar productos</label>
      </p-floatLabel>
   </div>
       

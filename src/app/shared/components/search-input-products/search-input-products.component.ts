@@ -6,16 +6,19 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from 'app/core/services/product_service/product.service';
 import BKProduct from 'app/core/models/BKProduct';
+import { NgClass } from '@angular/common';
 
 
 @Component({
   selector: 'app-search-input-products',
   standalone: true,
-  imports: [AutoCompleteModule, FloatLabelModule, FormsModule],
+  imports: [AutoCompleteModule, FloatLabelModule, FormsModule, NgClass],
   templateUrl: './search-input-products.component.html',
   styleUrl: './search-input-products.component.scss'
 })
 export class SearchInputProductsComponent {
+
+
 
   @Output() searchString = new EventEmitter<string>();
 
@@ -30,6 +33,7 @@ export class SearchInputProductsComponent {
   _productService: ProductService = inject(ProductService);
 
   private searchSubject = new Subject<string>();
+  inputHasFocus: boolean = false;
 
   search(event: AutoCompleteCompleteEvent) {
     console.log("InputText en search: " + this.inputText);
@@ -48,19 +52,28 @@ export class SearchInputProductsComponent {
     this.isDropdownHidden.set(false);
     this.searchString.emit(this.inputText);
   }
-  
+
   onClear() {
     this.searchString.emit(this.inputText);
   }
 
-  onKeyUp( event: KeyboardEvent) {
+  onKeyUp(event: KeyboardEvent) {
     if (event.key === "Enter") {
-     this.isDropdownHidden.set(true);
-     this.searchString.emit(this.inputText);
+      this.isDropdownHidden.set(true);
+      this.searchString.emit(this.inputText);
     }
-    else{
+    else {
       this.isDropdownHidden.set(false);
     }
   }
-  
+
+
+  onFocus() {
+    this.inputHasFocus = true;
+  }
+
+  onBlur() {
+    this.inputHasFocus = false;
+  }
+
 }
