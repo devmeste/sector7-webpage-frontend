@@ -1,14 +1,14 @@
 
 <div class="two_colors_card">
     <div class="top_container">
-        <img src="../../../../../assets/images/products/auriculares.png" alt="">
+        <img [src]="this.photo" alt="">
     </div>
     <div class="divider"></div>
     <div class="bottom_container">
-        <p class="product_price">$ 40.700</p>
-        <p class="product_name">Procesador AMD RYZEN 3 3200G 4.0GHz Turbo + Radeon Vega 8 AM4 Wraith Stealth Cooler</p>
+        <p class="product_price">{{this.price | currency}}</p>
+        <p class="product_name">{{this.title}}</p>
         <div class="button_container">
-            <button class="primary_button">ver más</button>
+            <button class="primary_button" >ver más</button>
         </div>
     </div>
 </div>

@@ -12,55 +12,21 @@ export const BUILD_YOUR_PC_ROUTES: Routes = [
         path: 'vs',
         loadComponent: () =>
             import("./vs/build-your-pc-vs.component").then(c => c.BuildYourPcVsComponent),
-    }, 
+    },
+    {
+        path: 'Linea', loadComponent: () =>
+            import("./vs/build-your-pc-vs.component").then(c => c.BuildYourPcVsComponent)
+    },
     {
         path: '',
         loadComponent: () =>
             import("./build-your-pc.component").then(c => c.BuildYourPcComponent),
-        children: [
-            {
-                path: 'procesadores',loadComponent: loadMainView
-            },
-            {
-                path: 'mothers', loadComponent: loadMainView
-            },
-            {
-                path: 'memoria_RAM',loadComponent: loadMainView
-            },
-            {
-                path: 'Almacenamiento',loadComponent: loadMainView
-            },
-            {
-                path: 'Fuentes',loadComponent: loadMainView
-            },
-            {
-                path: 'Placas_de_video',loadComponent: loadMainView
-            },
-            {
-                path: 'Refrigeracion',loadComponent: loadMainView
-            },
-            {
-                path: 'Monitores',loadComponent: loadMainView
-            },
-            {
-                path: 'Auriculares',loadComponent: loadMainView
-            },
-            {
-                path: 'Gabinetes',loadComponent: loadMainView
-            },
-            {
-                path: 'Teclados',loadComponent: loadMainView
-            },
-            {
-                path: 'Mouses',loadComponent: loadMainView
-            },
-            {
-                path: '',
-                redirectTo: 'procesadores',
-                pathMatch: 'full'
-            }
-        ]
     },
+    {
+        path: ':section', loadComponent: () =>
+            import("./build-your-pc.component").then(c => c.BuildYourPcComponent),
+    },
+
     {
         path: '**',
         redirectTo: ''

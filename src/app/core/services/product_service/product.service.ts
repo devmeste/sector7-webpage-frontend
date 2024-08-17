@@ -10,6 +10,7 @@ import { environment } from 'app/core/environments/environment';
   providedIn: 'root'
 })
 export class ProductService {
+  
 
   private baseUrl: string = environment.apiUrl;
   _httpClient: HttpClient = inject(HttpClient);
@@ -93,5 +94,8 @@ export class ProductService {
     return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&page=1`);
   }
 
+  getAllProductsByCategory(category: string) {
+    return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?category=${category}&page=1`);
+  }
 
 }

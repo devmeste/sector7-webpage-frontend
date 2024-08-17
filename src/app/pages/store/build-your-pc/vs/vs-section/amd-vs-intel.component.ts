@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
 import { BuildYourPcService } from 'app/core/services/build_your_pc/build-your-pc.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class AmdVsIntelComponent {
 
   intelIsActive: boolean = false;
   amdIsActive: boolean = false;
-  move : boolean = false;
+  move: boolean = false;
   move2: boolean = false;
   _router = inject(Router);
   _buildYourPcService = inject(BuildYourPcService);
@@ -24,22 +25,27 @@ export class AmdVsIntelComponent {
     this.move = true;
     this.move2 = true;
     setTimeout(() => {
-      this.continueBuildingPc();
+      this.continueBuildingPc('Intel');
     }, 2000);
   }
 
   toggleAmd() {
     this.amdIsActive = true;
     this.move = true;
-    this.move2= true;
+    this.move2 = true;
     setTimeout(() => {
-      this.continueBuildingPc();
+      this.continueBuildingPc('AMD');
     }, 2300);
   }
 
-  continueBuildingPc() {
-    this._router.navigate(['/build-your-pc/']);
+  continueBuildingPc(line: string) {
+    const newEntry: BuildYourPcCartEntry = {
+      categoryName: 'Linea',
+      selectedProductName: line,
+      selectedProductQuantity: 1,
+      titleWords: 'Linea'
+    }
+    this._buildYourPcService.updateBuildYourPcCart(newEntry)
+    this._router.navigate(['/build-your-pc/Procesadores']);
   }
-  
-
 }

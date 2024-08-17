@@ -6,53 +6,94 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BuildYourPcService {
+ 
 
-  categories: string[] = [
-    'Procesador',
-    'Motherboard',
-    'Memoria RAM',
-    'Almacenamiento',
-    'Fuente De Poder',
-    'Tarjeta De Video',
-    'Sistema De Enfriamiento',
-    'Monitor',
-    'Audifonos',
-    'Teclado',
-    'Mouse'
-  ]
+  categories: Object = {
+    'Linea' : 'linea',
+    'Procesadores' : 'procesador',
+    'Mothers' : 'mother',
+    'Memorias' : 'memoria RAM',
+    'Almacenamiento' : 'almacenamiento',
+    'Fuentes' : 'fuente',
+    'Placas de video' : 'placa de video',
+    'Refrigeracion' : 'refrigeracion',
+    'Monitores' : 'monitor',
+    'Gabinetes' : 'gabinete',
+    'Auriculares' : 'auriculares',
+    'Teclados' : 'teclado',
+    'Mouses' : 'mouse',
+  }
+  
 
-  buildYourPcCart: BuildYourPcCartEntry[] = this.categories.map(category => ({
-    categoryName: category,
-    selectedProductName: null,
-    selectedProductQuantity: 0
-  }));
+  buildYourPcCart: BuildYourPcCartEntry[] = Object.entries(this.categories).map(([key, value]) => (
+    { 
+      'categoryName': key, 
+      'selectedProductName': null, 
+      'selectedProductQuantity': 0, 
+      'titleWords': value
+     }
+  ))
 
 
   buildYourPcCart$ = new BehaviorSubject<BuildYourPcCartEntry[]>(this.buildYourPcCart);
 
   constructor() {
-    const processorProduct = this.searchEntry('Procesador');
-    if (processorProduct) {
-      processorProduct.selectedProductName = 'Procesador gamer Intel Core i9-13900K (9a. generación)';
-      processorProduct.selectedProductQuantity = 1;
-    }
+    
   }
 
  
   getBuildYourPcCart(): Observable<BuildYourPcCartEntry[]> {
+
+    this.createLocalStorageCartIfNotExists();
+
+    this.buildYourPcCart$.next(JSON.parse(localStorage.getItem('buildYourPcCart')!));
     return this.buildYourPcCart$;
   }
 
   updateBuildYourPcCart(newEntry: BuildYourPcCartEntry) {
+
+    this.createLocalStorageCartIfNotExists();
+
+    this.updateEntry(newEntry);
+
+    this.buildYourPcCart$.next(this.buildYourPcCart);
+    localStorage.setItem('buildYourPcCart', JSON.stringify(this.buildYourPcCart));
+  }
+
+
+  getEntryBySection(section: string): string {
+    const entrysIndex = this.buildYourPcCart.findIndex(entry => entry.categoryName === section);
+    if(entrysIndex) {
+      return this.buildYourPcCart[entrysIndex].titleWords;
+    }
+    return '';
+  }
+
+
+
+
+
+
+
+
+  
+  // Auxiliary methods
+  private createLocalStorageCartIfNotExists(): void {
+    if(localStorage.getItem('buildYourPcCart')==null) {
+      localStorage.setItem('buildYourPcCart', JSON.stringify(this.buildYourPcCart));
+    }
+  }
+
+  private updateEntry(newEntry: BuildYourPcCartEntry): void {
     const existingEntry = this.searchEntry(newEntry.categoryName);
     if(existingEntry) {
       existingEntry.selectedProductName = newEntry.selectedProductName;
       existingEntry.selectedProductQuantity = newEntry.selectedProductQuantity;
     }
-    this.buildYourPcCart$.next(this.buildYourPcCart);
   }
 
-  private searchEntry( category: string): BuildYourPcCartEntry | undefined {
+
+  private searchEntry(category: string): BuildYourPcCartEntry | undefined {
     return this.buildYourPcCart.find(entry => entry.categoryName === category);
   }
 

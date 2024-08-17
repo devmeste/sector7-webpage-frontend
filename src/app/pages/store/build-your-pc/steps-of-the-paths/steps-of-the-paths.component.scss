@@ -17,9 +17,13 @@ $width_for_path_line_and_point : 40px;
         position: fixed;
         top: 75px;
 
+
         @include laptop{
             position: relative;
             width: fit-content;
+            height: fit-content;
+            top: 0;
+            // background-color: rgba(0, 255, 255, 0.222);
         }
 
 
@@ -27,12 +31,23 @@ $width_for_path_line_and_point : 40px;
             display: flex;
             justify-content: end;
             padding: 1rem 2rem 0 0 ;
+
+            @include laptop{
+                display: none;
+            }
         }
+        
+    }
+
+    .currentPath_highlight{
+        font-weight: 700;
+        border-bottom: 2px solid $primary-main;
+        @include gradient-text;
+        width: fit-content;
     }
 
     .highlight_text {
         @include gradient_orange_to_black_right_to_left;
-
     }
 
     .highlight_text.total{

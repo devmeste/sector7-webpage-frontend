@@ -1,21 +1,36 @@
 <main class="build_your_pc_main_container">
 
-    <!-- menu with path in MOBILE -->
-    <div class="path_mobile_container">
-        <app-steps-of-the-paths class="" [show]="showMenuInMobile" (close)="toggleMenu()"></app-steps-of-the-paths>
-    </div>
+    <!-- @if( currentPath){ -->
+        <!-- menu with path in MOBILE -->
+        <div class="path_mobile_container">
+            <app-steps-of-the-paths class="" [show]="showMenuInMobile" (close)="toggleMenu() "></app-steps-of-the-paths>
+        </div>
+    <!-- } -->
 
-    <img src="assets/images/build-your-pc/build-your-pc-top-banner.png" alt="" class="build_your_pc_top_banner">
+    <div class="build_your_pc_top_banner">
+        <img src="assets/images/build-your-pc/build-your-pc-top-banner.png" alt="construi tu pc top banner" >
+    </div>
 
     <!-- left part in Desktop -->
     <!-- menu with path in DESKTOP -->
-    <div class="path_desktop_container show_in_laptop_desktop">
-        <app-steps-of-the-paths class="steps_in_desktop_only" [show]="true"></app-steps-of-the-paths>
-    </div>
+    <!-- @if(currentPath){ -->
+        <div class="path_desktop_container show_in_laptop_desktop">
+            <app-steps-of-the-paths class="steps_in_desktop_only" [show]="true" ></app-steps-of-the-paths>
+        </div>
+    <!-- } -->
 
     <!-- right part in Desktop and full in Mobile -->
     <div class="content_container">
-        <h2 class="title_choice_your_item">Elegi tu Disco Rigido</h2>
+        @if(this.section.toLowerCase() === 'auriculares'){
+            <h1 class="title_choice_your_item">
+                Elegí tus {{titleWord}}
+            </h1>
+
+        }@else {
+            <h1 class="title_choice_your_item">
+                Elegí tu {{titleWord}}
+            </h1>
+        }
         <div class="divider_gradient"></div>
 
         <!-- Button just for mobile -->
@@ -26,9 +41,9 @@
         </div>
         <!-- Button just for mobile -->
 
-        
+
         <div class="cards_container">
-            <router-outlet></router-outlet>
+            <app-build-your-pc-cards-content>   </app-build-your-pc-cards-content>
         </div>
     </div>
 

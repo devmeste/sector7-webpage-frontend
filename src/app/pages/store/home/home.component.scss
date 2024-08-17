@@ -44,14 +44,14 @@
         }  
     }
     section.main_banner{
-        div{
-            background-image: url('../../../../assets/images/temporales/hero-temporal-mobile.png');
+        // div{
+        //     background-image: url('../../../../assets/images/temporales/hero-temporal-mobile.png');
             
             
-            @include tablet{
-                background-image: url('../../../../assets/images/temporales/hero-temporal-desktop.png');
-            }
-        }
+        //     @include tablet{
+        //         background-image: url('../../../../assets/images/temporales/hero-temporal-desktop.png');
+        //     }
+        // }
     }
 
     section.carrousel_section{

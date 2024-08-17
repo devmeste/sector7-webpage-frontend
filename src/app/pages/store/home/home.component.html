@@ -8,10 +8,13 @@
 
     <section class="main_banner banner">
         <div>
-            
+            <img [src]="bannerMain" alt="imagen del banner">
         </div>
     </section>
-
+    
+    <!-- <app-image-uploader></app-image-uploader> -->
+    
+    
     <section class="carrousel_section">
         <h2>Destacados</h2>
         <div class="carrousel_divider"></div>
@@ -22,10 +25,10 @@
         <div class="carrousel_divider"></div>
         <app-product-carrousel></app-product-carrousel>
     </section>
-
+    
     <section class="technical_service_banner banner">
         <div>
-
+            <img [src]="bannerSecondary" alt="imagen del banner">
         </div>
     </section>
     <section class="carrousel_section">
@@ -33,6 +36,6 @@
         <div class="carrousel_divider"></div>
         <app-product-carrousel></app-product-carrousel>
     </section>
-
+    
 </main>
 <app-footer></app-footer>
