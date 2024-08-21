@@ -1,0 +1,35 @@
+<div class="giant_carousel_main_container">
+
+    <p-carousel [value]="banners" [numVisible]="1" [numScroll]="1" [circular]="true" showNavigators="true"
+        autoplayInterval="3000" indicatorStyleClass="custom-indicator">
+
+        <ng-template let-product pTemplate="item">
+            <div class="banner_img_container">
+                @if (this.screenWidth < 480) {
+                    <img 
+                    src="{{product.presignedUrl_mob}}"
+                    alt="imagen del banner">
+                }
+                @else if (this.screenWidth >= 480 && this.screenWidth < 768) {
+                    <img 
+                    style="height: 400px;"
+                    src="{{product.presignedUrl}}"
+                    alt="imagen del banner">
+                }
+                @else if (this.screenWidth >= 768) {
+                    <img 
+                    src="{{product.presignedUrl}}"
+                    alt="imagen del banner">
+                }
+            </div>
+        </ng-template>
+
+
+        <ng-template pTemplate="previousicon">
+            <span class="custom-next-icon"><mat-icon>arrow_back_ios_new</mat-icon></span>
+        </ng-template>
+
+        <ng-template pTemplate="nexticon">
+            <span class="custom-next-icon"><mat-icon>arrow_forward_ios</mat-icon></span>
+        </ng-template>
+    </p-carousel>

@@ -4,4 +4,6 @@ export interface IBanner {
     category:     string;
     date:         Date;
     presignedUrl: string;
+    presignedUrl_mob?: string;
+    presignedUrl_tab?: string;
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
-import { ProductCardBigComponent } from "../cards/product-card-big/product-card-big.component";
-import { IProduct } from '../../../core/models/product';
-import { ProductService } from '../../../core/services/product_service/product.service';
 import BKProduct from 'app/core/models/BKProduct';
+import { ProductCardBigComponent } from '@shared/components/cards/product-card-big/product-card-big.component';
+import { ProductService } from 'app/core/services/product_service/product.service';
 
 
 @Component({

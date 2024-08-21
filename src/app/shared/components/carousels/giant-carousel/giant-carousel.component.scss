@@ -1,0 +1,74 @@
+@import 'styles.scss';
+
+.giant_carousel_main_container {
+    width: 100%;
+    height: fit-content;
+    // background-color: rgba(255, 0, 0, 0.186);
+    position: relative;
+
+    .banner_img_container {
+        position: relative;
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: auto; // Las imagenes determinaran el alto del elemento
+        }
+    }    
+    
+}
+
+:host ::ng-deep {
+    .custom-indicator {
+        background-color: rgba(158, 158, 158, 0.435);
+        border-radius: 2px;
+        margin: 1rem 4px 0;
+    }
+    
+    .p-carousel-indicator.p-highlight button{
+        background-color: $primary_main
+    }
+
+    // arrows
+    .p-carousel-prev,
+    .p-carousel-next {
+        // background-color: rgb(255, 255, 0);
+        position: absolute;
+        height: 4rem;
+        width: 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1; 
+        &:hover{
+            background-color: transparent;
+            color: $primary_main;
+        }
+    }
+
+    .p-carousel-prev {
+        left: 0rem;
+    }
+
+    .p-carousel-next {
+        right: 0rem;
+    }
+
+    .custom-prev-icon .mat-icon,
+    .custom-next-icon .mat-icon {
+        font-size: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        color: rgba(184, 184, 184, 0.04);
+        // background-color: aqua;
+        // color:red;
+    }
+
+
+
+    // .p-carousel-indicator.p-highlight {
+    //     background-color: rgb(255, 242, 0);
+    // }
+}

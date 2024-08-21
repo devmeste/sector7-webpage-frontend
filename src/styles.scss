@@ -1,6 +1,65 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('/assets/fonts/klavika/klavika-bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('/assets/fonts/klavika/klavika-bold-italic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('/assets/fonts/klavika/klavika-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('/assets/fonts/klavika/klavika-medium-italic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('/assets/fonts/klavika/klavika-regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('/assets/fonts/klavika/klavika-regular-italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('/assets/fonts/klavika/klavika-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('/assets/fonts/klavika/klavika-light-italic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+
+
 $background: #000;
 $background_alternative: #12181e;
 
@@ -72,20 +131,36 @@ $primary-s3: #80230f;
 
 
 
-//fonts
-$mobile-h1: 700 2rem/normal Klavika;
-$mobile-h1italic: bold italic 2rem/normal Klavika;
-$mobile-h2: 700 1.5rem/normal Klavika;
-$mobile-h2italic: bold italic 1.5rem/normal Klavika;
-$mobile-h3: 700 1.125rem/normal Klavika;
-$mobile-h3italic: bold italic 1.125rem/normal Klavika;
-$mobile-normal: 400 1rem/1.5rem Raleway;
-$mobilenormalmeddium: 500 1rem/normal Raleway;
-$mobilenormalsemi-bold: 600 1rem/normal Raleway;
-$mobilenormalbold: 700 1rem/normal Raleway;
-$mobilenormalextrabold: extrabold 1rem/normal Raleway;
-$mobile-h4: 700 1rem/normal Klavika;
-$mobile-small-text: 400 0.6875rem/normal Raleway;
+// //fonts
+// $mobile-h1: 700 2rem/normal Klavika;
+// $mobile-h1italic: bold italic 2rem/normal Klavika;
+// $mobile-h2: 700 1.5rem/normal "Klavika";
+// $mobile-h2italic: bold italic 1.5rem/normal Klavika;
+// $mobile-h3: 700 1.125rem/normal Klavika;
+// $mobile-h3italic: bold italic 1.125rem/normal Klavika;
+// $mobile-normal: 400 1rem/1.5rem Raleway;
+// $mobilenormalmeddium: 500 1rem/normal Raleway;
+// $mobilenormalsemi-bold: 600 1rem/normal Raleway;
+// $mobilenormalbold: 700 1rem/normal Raleway;
+// $mobilenormalextrabold: extrabold 1rem/normal Raleway;
+// $mobile-h4: 700 1rem/normal Klavika;
+// $mobile-small-text: 400 0.6875rem/normal Raleway;
+
+
+// fonts
+$mobile-h1: 700 2rem/normal 'Klavika', Arial, sans-serif;
+$mobile-h1italic: bold italic 2rem/normal 'Klavika', Arial, sans-serif;
+$mobile-h2: 700 1.5rem/normal 'Klavika', Arial, sans-serif;
+$mobile-h2italic: bold italic 1.5rem/normal 'Klavika', Arial, sans-serif;
+$mobile-h3: 700 1.125rem/normal 'Klavika', Arial, sans-serif;
+$mobile-h3italic: bold italic 1.125rem/normal 'Klavika', Arial, sans-serif;
+$mobile-normal: 400 1rem/1.5rem 'Raleway', Helvetica, sans-serif;
+$mobilenormalmeddium: 500 1rem/normal 'Raleway', Helvetica, sans-serif;
+$mobilenormalsemi-bold: 600 1rem/normal 'Raleway', Helvetica, sans-serif;
+$mobilenormalbold: 700 1rem/normal 'Raleway', Helvetica, sans-serif;
+$mobilenormalextrabold: extrabold 1rem/normal 'Raleway', Helvetica, sans-serif;
+$mobile-h4: 700 1rem/normal 'Klavika', Arial, sans-serif;
+$mobile-small-text: 400 0.6875rem/normal 'Raleway', Helvetica, sans-serif;
 
 
 $success-50: #e9feec;
@@ -131,18 +206,25 @@ $shadow_1_3 : 1px 3px 10px 4px rgba($primary_main, 0.50);
 
 h1 {
   font: $mobile-h1;
+  font-weight: bold;
 }
 
 h2 {
   font: $mobile-h2;
+  font-weight: bold;
+
 }
 
 h3 {
   font: $mobile-h3;
+  font-weight: bold;
+
 }
 
 h4 {
   font: $mobile-h4;
+  font-weight: bold;
+
 }
 
 small {

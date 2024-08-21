@@ -1,6 +1,5 @@
 @import '../../../../media-queries';
 @import '../../../../styles.scss';
-// @import '../../../../assets/images/temporales/hero-temporal-desktop.png';
 
 .home_container{
     display: flex;
@@ -10,6 +9,7 @@
     width: 100%;
     max-width: $max_width_container;
     margin: auto;
+    padding-top: 1rem;
 
     figure.logo{
         width: 245px;
@@ -44,14 +44,7 @@
         }  
     }
     section.main_banner{
-        // div{
-        //     background-image: url('../../../../assets/images/temporales/hero-temporal-mobile.png');
-            
-            
-        //     @include tablet{
-        //         background-image: url('../../../../assets/images/temporales/hero-temporal-desktop.png');
-        //     }
-        // }
+        background-color: rgba(0, 255, 255, 0.369) ;
     }
 
     section.carrousel_section{

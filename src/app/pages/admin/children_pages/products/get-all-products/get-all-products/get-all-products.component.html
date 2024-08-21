@@ -47,13 +47,16 @@
                 <td>
                     {{product.price | currency}}
                 </td>
-                <td class="td_text_center">
-                    {{product.viewStock}}
+                <td class="td_two_children_inside" colspan="2">
+                    <div class="td_children_container">
+                        <div  class="td_children">
+                            {{product.actualStock}}
+                        </div>
+                        <div class="td_children" >
+                            {{product.viewStock}}
+                        </div>
+                    </div>
                 </td>
-                <td class="td_text_center">
-                    {{product.actualStock}}
-                </td>
-
                 <td class="actions_buttons_container">
                     <div class="flex_container">
                         <button type="button" class="actions_button update_button"
