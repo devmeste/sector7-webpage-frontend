@@ -9,7 +9,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class ImageUploaderComponent {
 
-  @Output ( ) onFileUploaded = new EventEmitter<Int8Array>();
+  @Output ( ) onFileUploaded = new EventEmitter<number[]>();
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -21,7 +21,8 @@ export class ImageUploaderComponent {
       reader.readAsArrayBuffer(file);
       reader.onload = () => {
         const byteArray = new Int8Array(reader.result as ArrayBuffer);
-        this.onFileUploaded.emit(byteArray);
+        const byteArray2 = Array.from(byteArray);
+        this.onFileUploaded.emit(byteArray2);
       };
 
       reader.onerror = (error) => {

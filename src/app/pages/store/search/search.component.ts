@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import {  Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { IProduct } from '../../../core/models/product';
@@ -11,25 +11,27 @@ import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { BreadcrumbComponent } from "../../../shared/components/breadcrumb/breadcrumb.component";
 import BKProduct from 'app/core/models/BKProduct';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { SpinnerS7Component } from "../../../shared/components/spinners/spinner-s7/spinner-s7.component";
+import { SpinnerS7SmallComponent } from "../../../shared/components/spinners/spinner-s7-small/spinner-s7-small.component";
 
 @Component({
-    selector: 'app-search',
-    standalone: true,
-    templateUrl: './search.component.html',
-    styleUrls: ['./search.component.scss'],
-    imports: [FooterComponent,
-        MatDividerModule,
-        WideProductCardComponent,
-        MatIcon,
-        FormsModule,
-        NgClass,
-        RouterLink, BreadcrumbComponent]
+  selector: 'app-search',
+  standalone: true,
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss'],
+  imports: [FooterComponent,
+    MatDividerModule,
+    WideProductCardComponent,
+    MatIcon,
+    FormsModule,
+    NgClass,
+    RouterLink, BreadcrumbComponent,
+    InfiniteScrollModule, SpinnerS7Component, SpinnerS7SmallComponent]
 })
 
 export class SearchComponent {
 
-  serchBarClicked: boolean = false;
-  searchBarInputText: string = '';
   @ViewChild('searchInput') searchInput!: ElementRef;
 
   private _router: ActivatedRoute = inject(ActivatedRoute);
@@ -54,14 +56,17 @@ export class SearchComponent {
   ]
     ;
 
+  textToSearch: string = "";
 
-    textToSearch:string = "a";
+  // Infinite Scroll
+  page: number = 1;
+  totalPages : number = this.page+1;
+  loading: boolean = false;
 
-
-    // TODO: Mejorar esta logica
+  // TODO: Mejorar esta logica
   ngOnInit(): void {
     this._router.params.subscribe(params => {
-      if(params['textToSearch']){
+      if (params['textToSearch']) {
         this.textToSearch = params['textToSearch'];
       }
       this.updateProductsInfo();
@@ -69,22 +74,32 @@ export class SearchComponent {
     this.updateProductsInfo();
   }
 
-  updateProductsInfo(){
-    this._productService.search(this.textToSearch).subscribe(productResponse => {
-      this.products = productResponse.products;
+
+  updateProductsInfo() {
+    
+    this.loading = true;
+    this._productService.search(this.textToSearch, this.page).subscribe(productResponse => {
+      
+      this.totalPages = productResponse.pagination.totalPages;
+      
+      this.page = productResponse.pagination.currentPage;
+      
+      this.products = [...this.products, ...productResponse.products];
+        this.loading = false;
     });
   }
 
-  handleInputBlur() {
-    this.serchBarClicked = false;
-  }
-
-  closeSearchBar() {
-    this.searchBarInputText = '';
-    if (this.searchInput) {
-      this.searchInput.nativeElement.focus();
+  onScroll() {
+    if (!this.loading && this.page <= this.totalPages) {
+      this.page++;
+      this.updateProductsInfo();
     }
   }
+
+  trackByIndex(index: number, item: any) {
+    return index;
+  }
+
 
 
 

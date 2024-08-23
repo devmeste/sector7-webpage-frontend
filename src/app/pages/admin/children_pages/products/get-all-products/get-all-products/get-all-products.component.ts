@@ -20,7 +20,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
 import { SearchInputProductsComponent } from "../../../../../../shared/components/search-input-products/search-input-products.component";
-import { SpinnerS7Component } from "../../../../../../shared/components/spinner-s7/spinner-s7.component";
+import { SpinnerS7Component } from "../../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
+import { CustomCurrencyPipe } from "../../../../../../core/pipes/custom_currency/custom-currency.pipe";
 
 
 // import{} from ;
@@ -29,7 +30,7 @@ import { SpinnerS7Component } from "../../../../../../shared/components/spinner-
   standalone: true,
   templateUrl: './get-all-products.component.html',
   styleUrls: ['./get-all-products.component.scss', "../../../../../../shared/styles/admin_table.scss"],
-  imports: [FormsModule, FloatLabelModule, AutoCompleteModule, MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent, SearchInputProductsComponent, SpinnerS7Component]
+  imports: [FormsModule, FloatLabelModule, AutoCompleteModule, MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent, SearchInputProductsComponent, SpinnerS7Component, CustomCurrencyPipe]
 })
 export class GetAllProductsComponent {
 

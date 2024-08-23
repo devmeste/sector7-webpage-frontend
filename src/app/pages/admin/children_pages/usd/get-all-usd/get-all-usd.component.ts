@@ -9,13 +9,14 @@ import { Usd } from 'app/core/models/Usd';
 import { CustomDatePipe } from "../../../../../core/pipes/custom-date-pipe.pipe";
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { ConfirmPopUpComponent } from "../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
+import { CustomCurrencyPipe } from "../../../../../core/pipes/custom_currency/custom-currency.pipe";
 
 @Component({
   selector: 'app-get-all-usd',
   standalone: true,
   templateUrl: './get-all-usd.component.html',
   styleUrls: ['./get-all-usd.component.scss', "../../../../../shared/styles/admin_table.scss"],
-  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipe, MessagePopUpComponent, ConfirmPopUpComponent]
+  imports: [MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, CustomDatePipe, MessagePopUpComponent, ConfirmPopUpComponent, CustomCurrencyPipe]
 })
 
 export class GetAllUsdComponent {

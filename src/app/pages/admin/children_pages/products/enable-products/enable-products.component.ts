@@ -4,12 +4,13 @@ import { MatIcon } from '@angular/material/icon';
 import BKProduct from 'app/core/models/BKProduct';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { ProductDetailsPopUpComponent } from "../product-details-pop-up/product-details-pop-up.component";
+import { CustomCurrencyPipe } from "../../../../../core/pipes/custom_currency/custom-currency.pipe";
 @Component({
     selector: 'app-enable-products',
     standalone: true,
     templateUrl: './enable-products.component.html',
     styleUrls: ['./enable-products.component.scss', '../../../../../shared/styles/admin_table.scss'],
-    imports: [NgClass, MatIcon, CurrencyPipe, ProductDetailsPopUpComponent]
+    imports: [NgClass, MatIcon, CurrencyPipe, ProductDetailsPopUpComponent, CustomCurrencyPipe]
 })
 export class EnableProductsComponent {
 

@@ -1,11 +1,12 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CustomCurrencyPipe } from "../../../../core/pipes/custom_currency/custom-currency.pipe";
 
 @Component({
   selector: 'app-product-card-big',
   standalone: true,
-  imports: [CurrencyPipe,RouterLink],
+  imports: [CurrencyPipe, RouterLink, CustomCurrencyPipe],
   templateUrl: './product-card-big.component.html',
   styleUrl: './product-card-big.component.scss'
 })

@@ -4,11 +4,12 @@ import { CartService } from '../../../core/services/cart_service/cart-service.se
 import { IProduct_Cart } from '../../../core/models/product_cart';
 import { MatIcon } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
+import { CustomCurrencyPipe } from "../../../core/pipes/custom_currency/custom-currency.pipe";
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CurrencyPipe, MatIcon, RouterLink, ],
+  imports: [CurrencyPipe, MatIcon, RouterLink, CustomCurrencyPipe],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })

@@ -12,12 +12,13 @@ import { FillAddressPopUpComponent } from "../fill-address-pop-up/fill-address-p
 import { FooterComponent } from "../../../../shared/components/footer/footer.component";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MessagePopUpComponent } from "../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
+import { CustomCurrencyPipe } from "../../../../core/pipes/custom_currency/custom-currency.pipe";
 
 @Component({
   selector: 'app-choice-delivery-method',
   standalone: true,
   imports: [CurrencyPipe, ReactiveFormsModule,
-    FillAddressPopUpComponent, FooterComponent, NgClass, MatProgressSpinnerModule, NgStyle, MessagePopUpComponent],
+    FillAddressPopUpComponent, FooterComponent, NgClass, MatProgressSpinnerModule, NgStyle, MessagePopUpComponent, CustomCurrencyPipe],
   templateUrl: './choice-delivery-method.component.html',
   styleUrl: './choice-delivery-method.component.scss'
 })

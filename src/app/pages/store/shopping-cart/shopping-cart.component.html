@@ -20,7 +20,7 @@
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
-                <p class="shopping_cart_item_price">{{product.price | currency}}</p>
+                <p class="shopping_cart_item_price">{{product.price | customCurrency}}</p>
             </div>
         </div>
         }
@@ -40,17 +40,17 @@
             <div class="divider"></div>
             <div class="cart_summary_item">
                 <p class="total_products_in_cart ">Productos: ({{products.length}})</p>
-                <p>{{this.totalPrice | currency :'USD':'symbol':'1.0-0'}}</p>
+                <p>{{this.totalPrice |customCurrency}}</p>
             </div>
             @if(shipping){
                 <div class="shipping_container cart_summary_item">
                     <p>Envío: </p>
-                    <p class="shipping_price"> {{shippingValue | currency :'USD':'symbol':'1.0-0'}}</p>
+                    <p class="shipping_price"> {{shippingValue |customCurrency}}</p>
                 </div>
             }
             <div class="cart_summary_item cart_final_price">
                 <b class="total_price ">Total: </b>
-                <b class="total_price ">{{ (totalPrice + shippingValue) | currency :'USD':'symbol':'1.0-0' }}</b>
+                <b class="total_price ">{{ (totalPrice + shippingValue) |customCurrency }}</b>
             </div>
             <button class="primary_button" (click)="sendToChoiceDeliveryMethod()">Continuar compra</button>
         </div>

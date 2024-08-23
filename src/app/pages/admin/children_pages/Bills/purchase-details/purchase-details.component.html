@@ -31,7 +31,7 @@
                         <span> {{ this.purchase.fullname }}</span>
                     </td>
                     <td>
-                        <span> {{ this.purchase.totalAmount | currency }}</span>
+                        <span> {{ this.purchase.totalAmount | customCurrency }}</span>
                     </td>
                     <td>
                         @if(this.purchase.shipment){ {{this.purchase.shipment}}}@else{<span>"No tiene"</span>}
@@ -82,20 +82,20 @@
                         {{product.model}}
                     </td>
                     <td>
-                        {{product.price | currency}}
+                        {{product.price | customCurrency}}
                     </td>
                     <td>
                         {{product.quantity}}
                     </td>
                     <td>
-                        {{product.subtotal | currency}}
+                        {{product.subtotal | customCurrency}}
                     </td>
                 </tr>
                 }
 
                 <tr class="total_row">
                     <td  colspan="4">Total de la venta: </td>
-                    <td colspan="1">{{this.purchase.totalAmount | currency}}</td>
+                    <td colspan="1">{{this.purchase.totalAmount |  customCurrency}}</td>
                 </tr>
             </tbody>
         </table>

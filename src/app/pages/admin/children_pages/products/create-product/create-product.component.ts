@@ -20,10 +20,8 @@ import { ImageUploaderComponent } from "../../../../../shared/components/image-u
 })
 export class CreateProductComponent extends CustomForm implements OnInit {
 
-
-
   sockets!: string[];
-  photosByteArray: Int8Array[] = [];
+  photosByteArray: number[][]= [];
   photosByteArrayString: string[] = [];
 
   override initializeForm(): void {
@@ -44,14 +42,12 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     })
   }
 
-
   categories$ !: ICategory[];
   productWasCreatedSuccessfully = false;
   productHasError = false;
   errorMessage = '';
   @ViewChild('photoInput') photoInput!: ElementRef;
   private _adminService = inject(AdminService);
-
 
 
   // luego borrar este metodo
@@ -144,12 +140,20 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   }
 
   deletePhoto(i: number) {
-    // this.photosArray.removeAt(i);
     this.photosByteArray.splice(i, 1);
     this.photosByteArrayString.splice(i, 1);
   }
 
+
+  convertToBase64(){
+    return this.photosByteArray.map((photo) => {
+      const binaryString = String.fromCharCode(...photo);
+      return btoa(binaryString);
+    });
+  }
+
   override send() {
+
     let fields: any = {};
     (this.form.get('fieldsArray')?.value as Field[]).forEach((field: Field) => {
       fields[field.fieldName] = field.value;
@@ -160,6 +164,8 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     console.log(this.photosByteArray);
 
     // this.photosByteArray = [];
+    // const photos = this.convertToBase64();
+    // console.log(photos[0]);
 
     const newProduct: any = {
       id: this.form.get("id")?.value,
@@ -189,18 +195,23 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     });
   }
 
-  onFileUploaded($event: Int8Array) {
+  onFileUploaded($event: number[]) {
 
     this.photosByteArray.push($event);
 
-    const imageUrl = this.convertByteArrayToImage($event);
+    console.log(this.photosByteArray);
+
+    const imageUrl = this.convertNumberArrayToImage($event);
     this.photosByteArrayString.push(imageUrl);
 
   }
 
-  convertByteArrayToImage(byteArray: Int8Array): string {
+  convertNumberArrayToImage(numberArray: number[]) : string {
+     // Convierte el arreglo de números a un Uint8Array
+    const uint8Array = new Uint8Array(numberArray);
+
     // Crea un Blob a partir del byte array
-    const blob = new Blob([byteArray], { type: 'image/jpeg' }); // Ajusta el tipo de imagen si es necesario
+    const blob = new Blob([uint8Array], { type: 'image/jpeg' }); // Ajusta el tipo de imagen si es necesario
   
     // Genera una URL a partir del Blob
     const imageUrl = URL.createObjectURL(blob);

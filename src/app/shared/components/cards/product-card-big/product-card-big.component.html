@@ -5,7 +5,7 @@
     <div class="card_content">
         <h3 class="card_title">{{this.name}}</h3>
         <div class="card_footer">
-            <h3 class="card_price"> {{this.price | currency }} </h3>
+            <h3 class="card_price"> {{this.price | customCurrency }} </h3>
             <button class="primary_button card_button" [routerLink]="['/product-details', this.id]">
                 Ver Mas +
             </button>

@@ -1,17 +1,4 @@
 <main class="search_main_container">
-    <!-- <div class="search_bar_container ">
-        <div class="search_bar" [ngClass]=" serchBarClicked ? 'searchBarClicked':''" (click)="serchBarClicked=true">
-            <button class="search_icon_inside_bar_button search_icon">
-                <mat-icon mat-icon-button>search</mat-icon>
-            </button>
-            <input type="text" #searchInput [(ngModel)]="searchBarInputText" (blur)="handleInputBlur()">
-
-            <button class="search_icon_inside_bar_button close_icon">
-                <mat-icon (click)="closeSearchBar()">close</mat-icon>
-            </button>
-        </div>
-    </div> -->
-    <!-- <app-breadcrumb class="app-breadcrumb" text="Componentes > Notebooks > Amd"></app-breadcrumb> -->
 
     <div class="search_title_container">
         <h2>Resultados de la busqueda</h2>
@@ -30,13 +17,26 @@
         </div>
     </aside>
 
-    <section class="search_results_container">
+
+    <section class="search_results_container" infiniteScroll 
+        [infiniteScrollDistance]="2" 
+        [infiniteScrollThrottle]="100"
+        (scrolled)="onScroll()">
+
         @for (product of products; track $index) {
-            <app-wide-product-card id="{{product.id}}" name="{{product.title}}" img="{{product.photos[0]}}"
-            [price]="product.price"></app-wide-product-card>
+
+        <app-wide-product-card [id]="product.id" [name]="product.title" [img]="product.photos[0]"
+            [price]="product.price">
+        </app-wide-product-card>
+        }
+
+        @if(loading){
+            <div class="scroll_spinner_container">
+                <app-spinner-s7-small class="scroll_spinner"></app-spinner-s7-small>
+            </div>
         }
     </section>
 
-    
+
 </main>
 <app-footer></app-footer>

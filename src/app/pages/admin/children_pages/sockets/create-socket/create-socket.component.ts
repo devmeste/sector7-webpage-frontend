@@ -7,7 +7,7 @@ import { MessagePopUpComponent } from '@shared/components/pop_up/message-pop-up/
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { SpinnerS7Component } from "../../../../../shared/components/spinner-s7/spinner-s7.component";
+import { SpinnerS7Component } from "../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 
 @Component({
   selector: 'app-create-socket',

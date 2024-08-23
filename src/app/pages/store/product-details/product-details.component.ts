@@ -12,13 +12,14 @@ import { FooterComponent } from "../../../shared/components/footer/footer.compon
 import { BkCarouselComponent } from "../../../shared/components/carousels/bk-carousel/bk-carousel.component";
 import { BreadcrumbComponent } from "../../../shared/components/breadcrumb/breadcrumb.component";
 import BKProduct from 'app/core/models/BKProduct';
+import { CustomCurrencyPipe } from "../../../core/pipes/custom_currency/custom-currency.pipe";
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
-  imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent]
+  imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent, CustomCurrencyPipe]
 })
 export class ProductDetailsComponent implements OnInit {
 

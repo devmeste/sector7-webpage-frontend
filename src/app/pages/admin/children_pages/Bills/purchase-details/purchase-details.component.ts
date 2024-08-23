@@ -4,10 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IPurchase } from 'app/core/models/IPurchase';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
+import { CustomCurrencyPipe } from "../../../../../core/pipes/custom_currency/custom-currency.pipe";
 @Component({
   selector: 'app-purchase-details',
   standalone: true,
-  imports: [JsonPipe, InputDangerTextComponent ,CurrencyPipe],
+  imports: [JsonPipe, InputDangerTextComponent, CurrencyPipe, CustomCurrencyPipe],
   templateUrl: './purchase-details.component.html',
   styleUrls: ['./purchase-details.component.scss', '../../../../../shared/styles/admin_table.scss']
 })

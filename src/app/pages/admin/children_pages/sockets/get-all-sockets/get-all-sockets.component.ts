@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { ISocket } from 'app/core/models/ISocket';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
-import { SpinnerS7Component } from "../../../../../shared/components/spinner-s7/spinner-s7.component";
+import { SpinnerS7Component } from "../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { ConfirmPopUpComponent } from "../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";

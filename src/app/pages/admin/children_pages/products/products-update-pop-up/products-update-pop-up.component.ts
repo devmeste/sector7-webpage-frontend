@@ -38,10 +38,10 @@ export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpParentComp
       isApproved: this.form.get("isApproved")?.value,
       description: this.form.get("description")?.value,
       photos: this.splitPhotos(),
-
       isEnabled: this.form.get("isEnabled")?.value,
       fieldsJSON: newFieldJson
     }
+    
     this._adminService.updateProduct(p).subscribe({
       next: (v) => {
         this.itemWasUpdatedSuccesfully.emit();

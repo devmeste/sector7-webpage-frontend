@@ -90,7 +90,9 @@ export class ProductService {
   }
 
 
-  search(value: string): Observable<ProductResponse> {
+  search(value: string , page ?:number): Observable<ProductResponse> {
+    if(page) return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&page=${page}`);
+    
     return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&page=1`);
   }
 

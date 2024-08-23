@@ -5,7 +5,7 @@
     <div class="text_container">
         <small class="top_metric_text">{{text}}</small>
         @if(currency){
-            <p  class="top_metric_value">  {{ value | currency}}</p>
+            <p  class="top_metric_value">  {{ value | customCurrency}}</p>
         }
         @else{
             <p  class="top_metric_value">  {{ value }}</p>

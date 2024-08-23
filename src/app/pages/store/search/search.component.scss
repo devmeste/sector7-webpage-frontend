@@ -142,4 +142,15 @@
         // background-color: yellow;
 
     }
+
+    .scroll_spinner_container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .scroll_spinner{
+        width: 60px;
+        height: 60px;
+    }
 }

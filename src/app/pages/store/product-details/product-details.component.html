@@ -16,7 +16,7 @@
             </p-carousel>
         </div>
 
-        <p class="product_price"> {{product.price | currency}}</p>
+        <p class="product_price"> {{product.price | customCurrency}}</p>
         <div class="stock_available_container">
             <p class="stock_available">stock disponible</p>
             <p class="stock_available_quantity">cantidad: <span class="quantity_number">{{product.viewStock}}>
@@ -63,7 +63,7 @@
                 </h2>
                 <!-- <p>procesadores > Procedadores AMD</p> -->
 
-                <h2 class="product_price">{{product.price | currency}}</h2>
+                <h2 class="product_price">{{product.price | customCurrency}}</h2>
 
                 <div class="reasons_to_buy_div"><mat-icon>check</mat-icon> Stock disponble</div>
                 <div class="reasons_to_buy_div"><mat-icon>local_shipping</mat-icon> Envio a todo el pais</div>

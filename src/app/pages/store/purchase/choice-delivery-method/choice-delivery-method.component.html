@@ -61,7 +61,7 @@
                     Productos({{this.cartQuantity$}})
                 </div>
                 <div>
-                    {{this.total$ | currency: 'USD':'symbol':'1.0-0'}}
+                    {{this.total$ | customCurrency}}
                 </div>
             </div>
             @if(shipping){
@@ -70,7 +70,7 @@
                     Envío:
                 </div>
                 <div>
-                    {{this.shipping | currency: 'USD':'symbol':'1.0-0'}}
+                    {{this.shipping | customCurrency}}
                 </div>
             </div>}
             <div class="purchase_summary_content_element">
@@ -78,7 +78,7 @@
                     Pagás
                 </div>
                 <div>
-                    {{this.total$ | currency: 'USD':'symbol':'1.0-0'}}
+                    {{this.total$ | customCurrency}}
                 </div>
             </div>
         </section>

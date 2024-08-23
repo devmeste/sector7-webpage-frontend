@@ -28,14 +28,12 @@ export class BuildYourPcCardsContentComponent {
       this.section = params['section'];
       this.changeProducts();
     })
-
-
-
   }
   changeProducts() {
     const requirement = this.getRequirement();
     this._productsService.getAllProductsByCategory(this.section, requirement).subscribe(productsResponse => {
       this.products = productsResponse.products;
+      console.log(this.products);
     })
   }
 

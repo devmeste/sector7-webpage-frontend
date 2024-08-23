@@ -14,6 +14,23 @@
         display: flex;
         margin: none;
     }
+
+    .custom-panel-style{
+
+
+        width: 300px;
+        @include tablet{
+            width: 400px;
+        }
+
+        @include laptop{
+            width: 500px;
+        }
+        @include desktop{
+            width: 700px;
+        }
+
+    }
 }
 
 .search_input_component_container{
@@ -27,6 +44,8 @@
             transform: translate(-10px, -50%);
         }
     }
+
+    
 }
 
 
@@ -37,3 +56,4 @@
 .searchBarInputText{
     color: #000 !important;
 }
+
