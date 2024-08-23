@@ -23,7 +23,6 @@ export class BuildYourPcService {
     'Teclados' : 'teclado',
     'Mouses' : 'mouse',
   }
-  
 
   buildYourPcCart: BuildYourPcCartEntry[] = Object.entries(this.categories).map(([key, value]) => (
     { 
@@ -37,31 +36,26 @@ export class BuildYourPcService {
 
   buildYourPcCart$ = new BehaviorSubject<BuildYourPcCartEntry[]>(this.buildYourPcCart);
 
-  constructor() {
-    
-  }
-
  
   getBuildYourPcCart(): Observable<BuildYourPcCartEntry[]> {
-
+    console.log("paso por aca");
     this.createLocalStorageCartIfNotExists();
-
-    this.buildYourPcCart$.next(JSON.parse(localStorage.getItem('buildYourPcCart')!));
+    console.log(this.buildYourPcCart$.value);
+    this.buildYourPcCart$.next(this.getCartFromStorage()); 
+    console.log(this.buildYourPcCart$.value);
     return this.buildYourPcCart$;
   }
 
   updateBuildYourPcCart(newEntry: BuildYourPcCartEntry) {
-
     this.createLocalStorageCartIfNotExists();
 
     this.updateEntry(newEntry);
-
-    this.buildYourPcCart$.next(this.buildYourPcCart);
+    // this.buildYourPcCart$.next(this.buildYourPcCart);
     localStorage.setItem('buildYourPcCart', JSON.stringify(this.buildYourPcCart));
   }
 
 
-  getEntryBySection(section: string): string {
+  getTitleWordBySection(section: string): string {
     const entrysIndex = this.buildYourPcCart.findIndex(entry => entry.categoryName === section);
     if(entrysIndex) {
       return this.buildYourPcCart[entrysIndex].titleWords;
@@ -69,10 +63,17 @@ export class BuildYourPcService {
     return '';
   }
 
+  getEntryBySection(section: string): BuildYourPcCartEntry | null {
+    const entrysIndex = this.getCartFromStorage().findIndex(entry => entry.categoryName.toLowerCase() === section.toLowerCase());
+    if(entrysIndex>=0) {
+      return this.getCartFromStorage()[entrysIndex];
+    }
+    return null;
+  }
 
-
-
-
+  private getCartFromStorage(): BuildYourPcCartEntry[] {
+    return JSON.parse(localStorage.getItem('buildYourPcCart')!);
+  }
 
 
 

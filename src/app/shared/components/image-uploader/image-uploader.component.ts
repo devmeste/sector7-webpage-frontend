@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-image-uploader',
@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 })
 export class ImageUploaderComponent {
 
+  @Output ( ) onFileUploaded = new EventEmitter<Int8Array>();
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -19,8 +20,8 @@ export class ImageUploaderComponent {
 
       reader.readAsArrayBuffer(file);
       reader.onload = () => {
-        const byteArray = new Uint8Array(reader.result as ArrayBuffer);
-        this.downloadByteArrayAsText(byteArray);
+        const byteArray = new Int8Array(reader.result as ArrayBuffer);
+        this.onFileUploaded.emit(byteArray);
       };
 
       reader.onerror = (error) => {
@@ -29,15 +30,15 @@ export class ImageUploaderComponent {
     }
   }
 
-  downloadByteArrayAsText(byteArray: Uint8Array): void {
-    const byteArrayString = Array.from(byteArray).join(', '); // Convertir el byteArray a un string separado por comas
-    const blob = new Blob([byteArrayString], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'byteArray.txt';
-    a.click();
-    URL.revokeObjectURL(url); // Liberar el objeto URL
-  }
+  // downloadByteArrayAsText(byteArray: Uint8Array): void {
+  //   const byteArrayString = Array.from(byteArray).join(', '); // Convertir el byteArray a un string separado por comas
+  //   const blob = new Blob([byteArrayString], { type: 'text/plain' });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement('a');
+  //   a.href = url;
+  //   a.download = 'byteArray.txt';
+  //   a.click();
+  //   URL.revokeObjectURL(url); // Liberar el objeto URL
+  // }
 
 }

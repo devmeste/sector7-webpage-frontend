@@ -28,9 +28,7 @@ export class BuildYourPcComponent {
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params => {
       this.section = params['section'];
-      this.titleWord = this._buildYourPcService.getEntryBySection(this.section);
-      
-      console.log(this.titleWord);
+      this.titleWord = this._buildYourPcService.getTitleWordBySection(this.section);
     })
   }
 

@@ -5,10 +5,7 @@ $border_radius_inside_element: $border_radius_for_card - 3px;
 
 .two_colors_card {
     display: flex;
-    // justify-content: start;
-    // align-items: start;
     flex-direction: row;
-    // width: min( 90% , 400px);
     width: 100%;
     margin: auto;
     height: 140px; // despues cambiar
@@ -22,12 +19,11 @@ $border_radius_inside_element: $border_radius_for_card - 3px;
     }
 
     @include tablet {
-        flex-direction: column;
-        width: 100%;
-        height: 300px; // despues cambiar
-        justify-content: start;
-        align-items: center;
-        margin: 0;
+        // width: 100%;
+        // height: 400px; // despues cambiar
+        // justify-content: start;
+        // align-items: center;
+        // margin: 0;
     }
 
     .top_container {
@@ -44,35 +40,26 @@ $border_radius_inside_element: $border_radius_for_card - 3px;
             width: 80%;
             height: 80%;
             object-fit: contain;
-            
-            @include tablet{
-                width: 80%;
-                height: 80%;
-
-            }
         }
 
         @include tablet {
-            width: 100%;
-            height: 49%;
-            border-radius: $border_radius_inside_element  $border_radius_inside_element 0 0;
-
+            width: 35%;
+        }
+        @include laptop {
+            width: 30%;
         }
     }
 
     .divider {
-        @include gradient_orange_yellow_left_to_right;
-        width: 1%;
+        @include gradient_orange_yellow_top_L_to_botom_R;
+        width: 4px;
         height: 100%;
 
-        @include tablet{
-            width: 100%;
-        height: 1%;
-        }
+        
     }
 
     .bottom_container {
-        width: 60%;
+        flex: 1; 
         height: 100%;
         display: flex;
         justify-content: center;
@@ -83,9 +70,9 @@ $border_radius_inside_element: $border_radius_for_card - 3px;
 
         
         @include tablet {
-            width: 100%;
-            height: 50%;
-            border-radius: 0 0 $border_radius_inside_element $border_radius_inside_element;
+            // width: 100%;
+            // height: 50%;
+            // border-radius: 0 0 $border_radius_inside_element $border_radius_inside_element;
         }
         
         .product_price {

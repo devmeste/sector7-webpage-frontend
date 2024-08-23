@@ -88,14 +88,27 @@
                 text="La descripción del producto es requerida"></app-input-danger-text>
             }
 
-            <!-- Habilitado -->
+            <!-- habilitado -->
             <div class="custom-input row input_checkbox_container">
                 <label class="form-label checkbox_label ">Esta Habilitado: </label>
                 <input type="checkbox" formControlName="isEnabled" class="form-control checkbox">
             </div>
 
-            <!-- Fotos -->
-            <div class="custom-input">
+            <!-- fotos -->
+            <app-image-uploader (onFileUploaded)="onFileUploaded($event)" ></app-image-uploader>
+
+            <div class="photosContainer">
+            @for(photo of this.photosByteArrayString; track $index) {
+                <picture class="photo">
+                    <button type="button" class="delete_button_absolute" (click)="deletePhoto($index)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <img src="{{photo}}" alt="photo">
+                </picture>
+            }
+            </div>
+            <input #photoInput type="text" class="form-control" placeholder="link de la foto">
+            <!-- <div class="custom-input">
                 <label class="form-label">Fotos: </label>
 
                 <div class="add_photo_button_container">
@@ -112,7 +125,7 @@
                     </picture>
                     }
                 </div>
-            </div>
+            </div> -->
 
             <label class="form-label">Categoria:</label>
             <select name="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)"

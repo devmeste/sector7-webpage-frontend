@@ -435,8 +435,13 @@ $height_helper : $height_for_toolbar_no_fixed;
   background: linear-gradient(180deg , $gray_30 0%, rgb(20, 20, 20) 60%);
 }
 
+
+
 @mixin gradient_orange_yellow_left_to_right {
   background: linear-gradient(90deg , $primary-main 0%, rgb(255, 187, 0) 140%);
+}
+@mixin gradient_orange_yellow_top_L_to_botom_R {
+  background: linear-gradient(120deg , $primary-main 0%, rgb(255, 187, 0) 140%);
 }
 
 

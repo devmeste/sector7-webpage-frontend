@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, switchMap } from 'rxjs';
 import BKProduct from 'app/core/models/BKProduct';
 import { ProductService } from 'app/core/services/product_service/product.service';
+import { BuildYourPcService } from 'app/core/services/build_your_pc/build-your-pc.service';
 
 @Component({
   selector: 'app-build-your-pc-cards-content',
@@ -17,6 +18,7 @@ export class BuildYourPcCardsContentComponent {
   section: string = '';
   _activatedRoute = inject(ActivatedRoute);
   _productsService = inject(ProductService);
+  _buildYourPcService = inject(BuildYourPcService);
 
   products: BKProduct[] = [];
 
@@ -24,21 +26,47 @@ export class BuildYourPcCardsContentComponent {
 
     this._activatedRoute.params.subscribe(params => {
       this.section = params['section'];
-
-      this.changeProducts(this.section);
+      this.changeProducts();
     })
 
-    
+
+
   }
-  changeProducts(section: string) {
-    this._productsService.getAllProductsByCategory(this.section).subscribe(productsResponse => {
+  changeProducts() {
+    const requirement = this.getRequirement();
+    this._productsService.getAllProductsByCategory(this.section, requirement).subscribe(productsResponse => {
       this.products = productsResponse.products;
-      console.log(this.products);
     })
   }
 
+  getRequirement() {
+    switch (this.section.toLowerCase()) {
+      case 'procesadores':
+        const linea = this._buildYourPcService.getEntryBySection('linea')?.selectedProductName;
+        console.log(linea);
+        if (linea) {
+          return linea;
+        } else {
+          return '';
+        }
+      case 'mothers':
+        return 'socket'
+      case 'memorias':
+        return 'nose'
+      default:
+        return '';
+    }
+  }
 
-  // items = Array(12).fill(0); // later will be replaced by real data
+
+
+
+
+  //1. Llamamos a la api de productos por categoria
+  //2. pido el carrito
+  //3. dependiendo la pantalla en la que estoy, pido el atributo que necesite para filtrar
+  // 4.si en la pantalla que estoy, necesito algo de lo anterior, lo mando para atras
+
 
 
 }

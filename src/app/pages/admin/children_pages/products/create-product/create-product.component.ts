@@ -9,18 +9,22 @@ import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { ImageUploaderComponent } from "../../../../../shared/components/image-uploader/image-uploader.component";
 
 @Component({
   selector: 'app-create-product',
   standalone: true,
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss', '../../../../../shared/styles/admin_form.scss'],
-  imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent, MatSelectModule]
+  imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent, MatSelectModule, ImageUploaderComponent]
 })
 export class CreateProductComponent extends CustomForm implements OnInit {
 
 
+
   sockets!: string[];
+  photosByteArray: Int8Array[] = [];
+  photosByteArrayString: string[] = [];
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({
@@ -82,7 +86,6 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     return this.form.get("fieldsArray") as FormArray;
   }
 
-
   onCategoryChange($event: Event) {
 
     const categoryId = ($event.target as HTMLSelectElement).value;
@@ -141,7 +144,9 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   }
 
   deletePhoto(i: number) {
-    this.photosArray.removeAt(i);
+    // this.photosArray.removeAt(i);
+    this.photosByteArray.splice(i, 1);
+    this.photosByteArrayString.splice(i, 1);
   }
 
   override send() {
@@ -151,6 +156,10 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     });
 
     fields = JSON.stringify(fields);
+
+    console.log(this.photosByteArray);
+
+    // this.photosByteArray = [];
 
     const newProduct: any = {
       id: this.form.get("id")?.value,
@@ -163,9 +172,10 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       title: this.form.get("title")?.value,
       description: this.form.get("description")?.value,
       isEnabled: this.form.get("isEnabled")?.value,
-      photos: this.photosArray.value,
-      fieldsJSON: fields
+      fieldsJSON: fields,
+      photosByteArray: this.photosByteArray,
     }
+    // photos: this.photosArray.value,
 
     this._adminService.createProduct(newProduct).subscribe({
       next: (v) => {
@@ -179,6 +189,24 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     });
   }
 
+  onFileUploaded($event: Int8Array) {
+
+    this.photosByteArray.push($event);
+
+    const imageUrl = this.convertByteArrayToImage($event);
+    this.photosByteArrayString.push(imageUrl);
+
+  }
+
+  convertByteArrayToImage(byteArray: Int8Array): string {
+    // Crea un Blob a partir del byte array
+    const blob = new Blob([byteArray], { type: 'image/jpeg' }); // Ajusta el tipo de imagen si es necesario
+  
+    // Genera una URL a partir del Blob
+    const imageUrl = URL.createObjectURL(blob);
+  
+    return imageUrl;
+  }
 
 
   closeModal(option: string) {

@@ -94,7 +94,10 @@ export class ProductService {
     return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&page=1`);
   }
 
-  getAllProductsByCategory(category: string) {
+  getAllProductsByCategory(category: string , title ?: string) {
+
+    if(title) return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?category=${category}&title=${title}&page=1`);
+    
     return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?category=${category}&page=1`);
   }
 

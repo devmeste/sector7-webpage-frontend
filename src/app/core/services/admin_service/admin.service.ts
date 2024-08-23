@@ -107,7 +107,7 @@ export class AdminService {
     }
 
 
-    createProduct(product: any): Observable<BKProduct> {
+    createProduct(product: any): Observable<any> {
         return this._httpClient.post<any>(this.baseUrl + 'products', product);
     }
 

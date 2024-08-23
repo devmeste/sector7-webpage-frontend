@@ -14,63 +14,93 @@ $width_for_path_line_and_point : 40px;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: auto 1fr;
 
-    .build_your_pc_top_banner{
+    .build_your_pc_top_banner {
         grid-column: 1 / span 12;
         width: 100%;
         height: 115px;
         margin-bottom: 3rem;
-        img{
+        position: relative;        
+
+        .title_build_your_pc{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            @include tablet{
+                
+                font-size: 1.8rem;
+            }
+
+            @include desktop{
+                font-size: 2rem;
+            }
+            span{
+                color: $primary_main;
+            }
+        }
+
+        img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
     }
 
-    // .image_banner_container{
-        
-    // }
-
-
-    .path_desktop_container{
+    .path_desktop_container {
+        // background-color: red;
         grid-column: 1 / span 12;
         margin: 0 auto;
 
-        @include tablet{
+        @include tablet {
+            grid-column: 1 / span 4;
+            margin: 0;
+        }
+
+        @media screen and (min-width: 970px) {
             grid-column: 1 / span 3;
             margin: 0;
         }
     }
-    .content_container{
-        grid-column: 1 / span 12;
-        
 
-        @include tablet{
+    .content_container {
+        grid-column: 1 / span 12;
+
+        @include tablet {
             padding: 0 0rem;
 
         }
-        @include laptop{
+
+        @include laptop {
+            grid-column: 5 / span 8;
+            padding-right: 3rem;
+        }
+
+        @media screen and (min-width: 970px) {
             grid-column: 4 / span 9;
         }
+
+
     }
 
-    .cards_container{
+    .cards_container {
         height: fit-content;
     }
 
-    .title_choice_your_item{
+    .title_choice_your_item {
         margin: 0 0 0.5rem 0;
         @include gradient-text;
         // padding-left: 10px;
     }
 
-    .divider_gradient{
+    .divider_gradient {
         height: 4px;
         width: 100%;
         margin-bottom: 2rem;
         @include gradient_orange_yellow_left_to_right;
     }
 
-    .fourth_button_border{
+    .fourth_button_border {
         width: 100%;
         @include gradient_orange_yellow_left_to_right;
         width: 80%;
@@ -80,42 +110,46 @@ $width_for_path_line_and_point : 40px;
         max-width: 400px;
         margin-bottom: 2rem;
     }
+
     .fourth_button {
         // border: 4px solid;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        
+
         @include gradient_gray_to_black_top_to_bottom; // background
         // border-image: linear-gradient(to right, rgb(255, 72, 0), orange) 1;
         // border
         margin: auto;
         border-radius: 16px;
-        padding: 5px 7% ;
-        p{ 
+        padding: 5px 7%;
+
+        p {
             @include gradient-text; // text
             font-size: 1.2rem;
             font-weight: bolder;
             margin: 0;
-            
+
         }
-        .arrow_drop_down{
+
+        .arrow_drop_down {
             display: flex;
-            
+
             font-size: 2.5rem;
             @include gradient-text;
         }
     }
-    
+
 
     .path_mobile_container {
         position: absolute;
         top: 0;
         width: 100vw;
+
         @include laptop {
             display: none;
         }
     }
-    
+
 }
