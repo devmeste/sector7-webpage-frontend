@@ -40,14 +40,13 @@ export class AdminService {
     }
 
 
-    createCategory(name: string, component: boolean, fields: Field[]) {
+    createCategory(name: string, fields: Field[]) {
 
         let array_with_just_string_names: string[] = [];
         fields.forEach(field => array_with_just_string_names.push(field.name));
 
         let body = {
             name,
-            component,
             fields: array_with_just_string_names
         }
 
@@ -60,7 +59,7 @@ export class AdminService {
     }
 
 
-    updateCategory(id: string, name: string, component: boolean, fields: Field[]): Observable<ICategory> {
+    updateCategory(id: string, name: string, fields: Field[]): Observable<ICategory> {
 
         let array_with_just_string_names: string[] = fields.map(element => {
             return element.name;
@@ -69,7 +68,6 @@ export class AdminService {
 
         let body = {
             name,
-            component,
             fields: array_with_just_string_names
         }
 

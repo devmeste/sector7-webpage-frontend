@@ -83,7 +83,7 @@ export class SearchComponent {
       this.totalPages = productResponse.pagination.totalPages;
       
       this.page = productResponse.pagination.currentPage;
-      
+
       this.products = [...this.products, ...productResponse.products];
         this.loading = false;
     });
@@ -94,10 +94,6 @@ export class SearchComponent {
       this.page++;
       this.updateProductsInfo();
     }
-  }
-
-  trackByIndex(index: number, item: any) {
-    return index;
   }
 
 

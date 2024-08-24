@@ -25,12 +25,32 @@ export class BuildYourPcComponent {
   _activatedRoute = inject(ActivatedRoute);
   _buildYourPcService = inject(BuildYourPcService);
 
+  // ngOnInit(): void {
+  //   this._activatedRoute.params.subscribe(params => {
+  //     this.section = params['section'];
+  //     this.titleWord = this._buildYourPcService.getTitleWordBySection(this.section);
+  //   })
+  // }
+
+  _router = inject(Router);
+
   ngOnInit(): void {
-    this._activatedRoute.params.subscribe(params => {
-      this.section = params['section'];
-      this.titleWord = this._buildYourPcService.getTitleWordBySection(this.section);
-    })
+    // Escuchar cambios en la ruta completa
+    this._router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        // Obtener la ruta hija actual
+        const childRoute = this._activatedRoute.firstChild;
+        if (childRoute) {
+          childRoute.url.subscribe(urlSegment => {
+            const currentPath = urlSegment[0]?.path;
+            this.section = currentPath || ''; // 'procesadores', 'mothers', etc.
+            this.titleWord = this._buildYourPcService.getTitleWordBySection(this.section);
+          });
+        }
+      });
   }
+
 
 
   toggleMenu() {

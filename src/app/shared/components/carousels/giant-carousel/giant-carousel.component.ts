@@ -19,8 +19,8 @@ export class GiantCarouselComponent {
       category: "Promotion",
       date: new Date("2024-08-01"),
       presignedUrl: "../../../../../assets/images/carousel/Imagen1.png",
-      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen1.png",
-      presignedUrl_mob: "../../../../../assets/images/logos/Sector7LogoSmall.png"
+      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen1_tab.png",
+      presignedUrl_mob: "../../../../../assets/images/carousel/Imagen1_mob.png"
     },
     {
       id: "2",
@@ -28,8 +28,8 @@ export class GiantCarouselComponent {
       category: "Product",
       date: new Date("2024-08-10"),
       presignedUrl: "../../../../../assets/images/carousel/Imagen2.png",
-      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen1.png",
-      presignedUrl_mob: "../../../../../assets/images/logos/Sector7LogoSmall.png"
+      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen2_tab.png",
+      presignedUrl_mob: "../../../../../assets/images/carousel/Imagen2_mob.png"
     },
     {
       id: "3",
@@ -37,8 +37,8 @@ export class GiantCarouselComponent {
       category: "Event",
       date: new Date("2024-08-15"),
       presignedUrl: "../../../../../assets/images/carousel/Imagen3.png",
-      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen3.png",
-      presignedUrl_mob: "../../../../../assets/images/logos/Sector7LogoSmall.png"
+      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen3_tab.png",
+      presignedUrl_mob: "../../../../../assets/images/carousel/Imagen3_mob.png"
     }
   ];
 

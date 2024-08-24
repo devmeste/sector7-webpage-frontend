@@ -33,15 +33,17 @@ export class BuildYourPcCardsContentComponent {
     const requirement = this.getRequirement();
     this._productsService.getAllProductsByCategory(this.section, requirement).subscribe(productsResponse => {
       this.products = productsResponse.products;
-      console.log(this.products);
     })
+  }
+
+  addToCart( product : BKProduct ) {
+      
   }
 
   getRequirement() {
     switch (this.section.toLowerCase()) {
       case 'procesadores':
         const linea = this._buildYourPcService.getEntryBySection('linea')?.selectedProductName;
-        console.log(linea);
         if (linea) {
           return linea;
         } else {

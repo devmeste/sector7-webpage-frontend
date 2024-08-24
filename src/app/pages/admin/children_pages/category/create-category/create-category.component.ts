@@ -29,7 +29,6 @@ export class CreateCategoryComponent {
   form: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
     fields: ['', []],
-    component: ['', []],
   })
   categoryCreatedSuccessfully: boolean = false;
   categoryCreationFailed: boolean = false;
@@ -61,10 +60,9 @@ export class CreateCategoryComponent {
 
   send() {
     let name = this.form.get('name')?.value;
-    let component = (this.form.get('component')?.value) ? true : false;
     let fields = this.fields;
 
-    this._adminService.createCategory(name, component, fields).subscribe
+    this._adminService.createCategory(name,  fields).subscribe
       (
         {
           next: (v) => {

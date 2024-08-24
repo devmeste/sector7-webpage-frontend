@@ -1,0 +1,29 @@
+@import 'styles.scss';
+@import '_media-queries.scss';
+
+.build_your_pc_cards_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100px;
+    width: 100%;
+    // background-color: rgba(0, 255, 255, 0.378);
+    // background-color: rgba(0, 255, 255, 0.439);   
+    
+    @include laptop {
+        justify-content: start;
+    }
+
+    .cards {
+        width:  90%;
+        @include laptop {
+            width: 100%;
+        }
+        @include desktop {
+            width: 100%;
+        }
+    }
+}

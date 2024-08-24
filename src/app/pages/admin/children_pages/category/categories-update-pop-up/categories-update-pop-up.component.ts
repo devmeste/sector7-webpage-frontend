@@ -44,13 +44,13 @@ export class CategoriesUpdatePopUpComponent extends CustomFormPopUp {
         this.form = this.formBuilder.group({
           name: [`${this.category$.name}`, [Validators.required]],
           fields: ['', []],
-          component: [`${this.category$.component}`, []],
         })
 
         this.fields = category.fields.map(name => ({
           name: name
         }));
 
+        console.log(this.fields);
       });
     }
 
@@ -77,14 +77,13 @@ export class CategoriesUpdatePopUpComponent extends CustomFormPopUp {
 
   override send() {
     let name = this.form.get('name')?.value;
-    let component = this.form.get('component')?.value;
     if (this.fields.length == 0) {
       console.log(this.fields);
     }
     let fields = this.fields;
     let id = this.category_id;
 
-    this._adminService.updateCategory(id, name, component, fields).subscribe
+    this._adminService.updateCategory(id, name ,fields).subscribe
       (
         {
           next: (v) => this.categoryUpdatedSuccessfully = true,

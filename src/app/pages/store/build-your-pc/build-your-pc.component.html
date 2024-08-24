@@ -26,7 +26,6 @@
             <h1 class="title_choice_your_item">
                 Elegí tus {{titleWord}}
             </h1>
-
         }@else {
             <h1 class="title_choice_your_item">
                 Elegí tu {{titleWord}}
@@ -44,7 +43,8 @@
 
 
         <div class="cards_container">
-            <app-build-your-pc-cards-content>   </app-build-your-pc-cards-content>
+            <!-- <app-build-your-pc-cards-content>   </app-build-your-pc-cards-content> -->
+             <router-outlet></router-outlet>
         </div>
     </div>
 

@@ -38,11 +38,8 @@ export class BuildYourPcService {
 
  
   getBuildYourPcCart(): Observable<BuildYourPcCartEntry[]> {
-    console.log("paso por aca");
     this.createLocalStorageCartIfNotExists();
-    console.log(this.buildYourPcCart$.value);
     this.buildYourPcCart$.next(this.getCartFromStorage()); 
-    console.log(this.buildYourPcCart$.value);
     return this.buildYourPcCart$;
   }
 

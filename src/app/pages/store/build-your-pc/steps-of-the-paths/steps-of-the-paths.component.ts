@@ -24,14 +24,15 @@ export class StepsOfThePathsComponent {
   _buildYourPcCartService = inject(BuildYourPcService);
   cart$ !: BuildYourPcCartEntry[];
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     this._buildYourPcCartService.getBuildYourPcCart().subscribe(cart => {
       this.cart$ = cart;
     });
-    
-    this._activatedRoute.params.subscribe(params => {
-      this.section = params['section'];
-    })
+
+    this._activatedRoute.firstChild?.url.subscribe((urlSegment) => {
+      const currentPath = urlSegment[0]?.path.toLowerCase(); // Normaliza la ruta a minúsculas
+      this.section = currentPath || ''; // 'procesadores', 'mothers', etc.
+    });
   }
 
 
