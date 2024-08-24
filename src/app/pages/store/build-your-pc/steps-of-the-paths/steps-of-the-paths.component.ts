@@ -36,7 +36,6 @@ export class StepsOfThePathsComponent {
   }
 
 
-
   closeMenu() {
     this.show = false;
     this.close.emit();
