@@ -24,6 +24,24 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   photosByteArray: number[][]= [];
   photosByteArrayString: string[] = [];
 
+  // override initializeForm(): void {
+  //   this.form = this.formBuilder.group({
+  //     title: ['', [Validators.required]],
+  //     id: ['', [Validators.required]],
+  //     brand: ['', [Validators.required]],
+  //     model: ['', [Validators.required]],
+  //     price: ['', [Validators.required]],
+  //     actualStock: ['', [Validators.required]],
+  //     viewStock: ['', [Validators.required]],
+  //     description: ['', [Validators.required]],
+  //     isEnabled: [true, []],
+  //     photos: this.formBuilder.array([], []),
+  //     categoryId: ['', [Validators.required]],
+  //     fieldsJSON: ['', []],
+  //     fieldsArray: this.formBuilder.array([]),
+  //   })
+  // }
+
   override initializeForm(): void {
     this.form = this.formBuilder.group({
       title: ['asdasd', [Validators.required]],
@@ -115,7 +133,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       });
     })
 
-    console.log(this.form.value.fieldsArray);
+    console.log( "this.fieldsArray : " +  this.form.value.fieldsArray);
   }
 
   createNewFieldGroup(name: string): FormGroup<{ fieldName: FormControl<string | null>; value: FormControl<string | null>; }> {
@@ -154,18 +172,19 @@ export class CreateProductComponent extends CustomForm implements OnInit {
 
   override send() {
 
+
+    console.log(" Send ");
+
     let fields: any = {};
+
     (this.form.get('fieldsArray')?.value as Field[]).forEach((field: Field) => {
       fields[field.fieldName] = field.value;
     });
 
     fields = JSON.stringify(fields);
 
-    console.log(this.photosByteArray);
+    console.log(" photos Array : " +this.photosByteArray);
 
-    // this.photosByteArray = [];
-    // const photos = this.convertToBase64();
-    // console.log(photos[0]);
 
     const newProduct: any = {
       id: this.form.get("id")?.value,
@@ -181,7 +200,6 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       fieldsJSON: fields,
       photosByteArray: this.photosByteArray,
     }
-    // photos: this.photosArray.value,
 
     this._adminService.createProduct(newProduct).subscribe({
       next: (v) => {
@@ -199,7 +217,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
 
     this.photosByteArray.push($event);
 
-    console.log(this.photosByteArray);
+    console.log("onFileUploaded "+this.photosByteArray);
 
     const imageUrl = this.convertNumberArrayToImage($event);
     this.photosByteArrayString.push(imageUrl);

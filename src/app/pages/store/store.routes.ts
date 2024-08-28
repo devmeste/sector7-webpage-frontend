@@ -6,13 +6,13 @@ export const STORE_ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('./home/home.component').then(r => r.HomeComponent),
+        // loadComponent: () => import("./search/search.component").then(c => c.SearchComponent)
     },
     {
         path: 'build-your-pc',
         loadChildren: () =>
             import("./build-your-pc/build-your-pc.routes").then(r => r.BUILD_YOUR_PC_ROUTES)
     },
-
     {
         path: 'product-details/:id',
         loadComponent: () =>

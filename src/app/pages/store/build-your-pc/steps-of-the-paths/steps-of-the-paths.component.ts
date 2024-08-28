@@ -1,7 +1,7 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute, RouterLink, UrlSegment } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, UrlSegment } from '@angular/router';
 import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
 import { BuildYourPcService } from 'app/core/services/build_your_pc/build-your-pc.service';
 
@@ -23,19 +23,22 @@ export class StepsOfThePathsComponent {
 
   _buildYourPcCartService = inject(BuildYourPcService);
   cart$ !: BuildYourPcCartEntry[];
+  _router = inject(Router);
+
 
    ngOnInit(): void {
     this._buildYourPcCartService.getBuildYourPcCart().subscribe(cart => {
+      // console.log(cart);
       this.cart$ = cart;
     });
 
-    this._activatedRoute.firstChild?.url.subscribe((urlSegment) => {
-      const currentPath = urlSegment[0]?.path.toLowerCase(); // Normaliza la ruta a minúsculas
-      this.section = currentPath || ''; // 'procesadores', 'mothers', etc.
-    });
+    this._activatedRoute.params.subscribe(params => {
+      // console.log("params en el camino: "+ params['section'] + "  ");
+      this.section = params['section'] || '';
+    })
+
+
   }
-
-
   closeMenu() {
     this.show = false;
     this.close.emit();

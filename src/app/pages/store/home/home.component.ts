@@ -24,6 +24,7 @@ export class HomeComponent {
         this._storeService.getBanner('main').subscribe( (banner: IBanner) => {
             this.bannerMain = banner.presignedUrl;
         })
+        console.log("Home");
         // this._storeService.getBanner('secondary').subscribe( (banner: IBanner) => {
         //     this.bannerSecondary = banner.presignedUrl;
         // })

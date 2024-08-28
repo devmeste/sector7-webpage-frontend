@@ -69,9 +69,11 @@ export class SearchComponent {
       if (params['textToSearch']) {
         this.textToSearch = params['textToSearch'];
       }
+      // this.products = [];
+      
       this.updateProductsInfo();
     })
-    this.updateProductsInfo();
+    // this.updateProductsInfo();
   }
 
 

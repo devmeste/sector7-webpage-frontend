@@ -4,6 +4,8 @@ import BKProduct from 'app/core/models/BKProduct';
 import { BuildYourPcService } from 'app/core/services/build_your_pc/build-your-pc.service';
 import { ProductService } from 'app/core/services/product_service/product.service';
 import { TwoColorsCardComponent } from "../../../../../shared/components/cards/two-colors-card/two-colors-card.component";
+import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
+import { CardsChildrenAbstractComponent } from '../cards-children';
 
 @Component({
   selector: 'app-procesadores',
@@ -12,20 +14,12 @@ import { TwoColorsCardComponent } from "../../../../../shared/components/cards/t
   templateUrl: './procesadores.component.html',
   styleUrl: './procesadores.component.scss'
 })
-export class ProcesadoresComponent {
+export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
 
   section: string = 'procesadores';
-  _activatedRoute = inject(ActivatedRoute);
-  _productsService = inject(ProductService);
-  _buildYourPcService = inject(BuildYourPcService);
+  
 
-  products: BKProduct[] = [];
-
-  ngOnInit(): void {
-    this.changeProducts();
-  }
-
-  changeProducts() {
+  override changeProducts() {
     const requirement = this.getRequirement();
     this._productsService.getAllProductsByCategory(this.section, requirement).subscribe(productsResponse => {
       this.products = productsResponse.products;
@@ -33,8 +27,14 @@ export class ProcesadoresComponent {
     })
   }
 
-  addToCart(product: BKProduct) {
-
+  override addToCart(id:string) {
+    const newEntry :BuildYourPcCartEntry = {
+      categoryName: 'procesadores',
+      selectedProductName: id,
+      selectedProductQuantity: 1,
+    }
+    this._buildYourPcService.addToCart(newEntry);
+    this._router.navigate(['build-your-pc/mothers']);
   }
 
   getRequirement() {

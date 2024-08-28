@@ -1,5 +1,5 @@
 
-<div class="build_your_pc_cards_container">
+<div class="build_your_pc_cards_container cards_children_main">
         @for( product of products ; track $index){
             <app-two-colors-card 
             [selected]="product.id === '1'" class="cards"
@@ -7,6 +7,7 @@
             [price]="product.price"
             [photo]="product.photos[0]"
             [id]="product.id" 
+            (addToCart)="addToCart($event)"
             >
         </app-two-colors-card>
         }

@@ -1,57 +1,59 @@
 @if(this.show){
 
-    <section class="path_to_build_your_pc_container">
-        <div class=" close_mobile_button_container show_in_mobile_tablet">
-            <button type="button" class="primary_button show_in_mobile_tablet"
-                (click)="closeMenu()"><mat-icon>close</mat-icon></button>
-        </div>
+<section class="path_to_build_your_pc_container">
+    <div class=" close_mobile_button_container show_in_mobile_tablet">
+        <button type="button" class="primary_button show_in_mobile_tablet"
+            (click)="closeMenu()"><mat-icon>close</mat-icon></button>
+    </div>
 
 
-        <h3 class="highlight_text">
-            Forja Tu Camino
-        </h3>
-        <div class="path_points">
-
-            @for( entry of cart$ ; track $index){
-            <a [routerLink]="['/build-your-pc', entry.categoryName]">
-                <div class="path_element_container" [ngClass]="{'checked' : entry.selectedProductName} ">
-                    <div class="path_point_container">
-                        <div class="point_outside">
-                            <div class="point_inside " [ngClass]="{'checked' : entry.selectedProductName!=null }">
-                                @if(entry.selectedProductName==null){
-                                {{$index +1}}
-                                }
-                            </div>
-                        </div>
-                        <div class="path_line_container">
-                            <div class="path_line " [ngClass]="{'checked' : entry.selectedProductName!=null }">
-                                <div class="path_line_outside">
-                                    <div class="path_line_inside"
-                                        [ngClass]="{'checked' : entry.selectedProductName!=null }"></div>
-                                </div>
-                            </div>
+    <h3 class="highlight_text">
+        Forja Tu Camino
+    </h3>
+    @if(this.cart$!=null){
+    <div class="path_points">
+        @for( entry of cart$ ; track $index){
+        <a [routerLink]="['/build-your-pc', entry.categoryName]">
+            <div class="path_element_container" [ngClass]="{'checked' : entry.selectedProductName} ">
+                <div class="path_point_container">
+                    <div class="point_outside">
+                        <div class="point_inside " [ngClass]="{'checked' : entry.selectedProductName!=null }">
+                            @if(entry.selectedProductName==null){
+                            {{$index +1}}
+                            }
                         </div>
                     </div>
-                    <div class="text_container">
-                        <p class="path_point_text"
-                            [ngClass]="{'currentPath_highlight': entry.categoryName.toLowerCase() === section.toLocaleLowerCase()}">
-                            {{entry.categoryName}}
-                        </p>
-                        @if(entry.selectedProductName!=null){
-                        <div class="path_line_text_container">
-                            <p class="path_line_text">
-                                {{ entry.selectedProductName }}
-                            </p>
-                            <mat-icon class="check_icon">check</mat-icon>
+                    <div class="path_line_container">
+                        <div class="path_line " [ngClass]="{'checked' : entry.selectedProductName!=null }">
+                            <div class="path_line_outside">
+                                <div class="path_line_inside"
+                                    [ngClass]="{'checked' : entry.selectedProductName!=null }"></div>
+                            </div>
                         </div>
-                        }
                     </div>
                 </div>
-            </a>
-            }
-        </div>
-        <h3 class="highlight_text total">
-            Total: $10000
-        </h3>
+                <div class="text_container">
+                    <p class="path_point_text"
+                        [ngClass]="{'currentPath_highlight': entry.categoryName.toLowerCase() === section.toLocaleLowerCase()}">
+                        {{entry.categoryName}}
+                    </p>
+                    @if(entry.selectedProductName!=null){
+                    <div class="path_line_text_container">
+                        <p class="path_line_text">
+                            {{ entry.selectedProductName }}
+                        </p>
+                        <mat-icon class="check_icon">check</mat-icon>
+                    </div>
+                    }
+                </div>
+            </div>
+        </a>
+        }
+    </div>
+    <h3 class="highlight_text total">
+        Total: $10000
+    </h3>
+    }
+
 </section>
 }

@@ -102,6 +102,7 @@ export class AppComponent {
     this._authService.isAdminLoggedIn$().subscribe(isAdminLoggedIn => {
       this.adminMadeLogin = isAdminLoggedIn;
     })
+    console.log("App component");
   }
 
 

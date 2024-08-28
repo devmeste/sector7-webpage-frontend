@@ -11,5 +11,5 @@ import { FooterComponent } from "../../../../shared/components/footer/footer.com
   styleUrl: './build-your-pc-vs.component.scss'
 })
 export class BuildYourPcVsComponent {
-
+  
 }

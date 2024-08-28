@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import BKProduct from 'app/core/models/BKProduct';
 import { BuildYourPcService } from 'app/core/services/build_your_pc/build-your-pc.service';
 import { ProductService } from 'app/core/services/product_service/product.service';
@@ -11,6 +11,8 @@ import { ProductService } from 'app/core/services/product_service/product.servic
 export abstract class CardsChildrenAbstractComponent {
     abstract section: string ;
   
+  _activatedRoute = inject(ActivatedRoute);
+  _router = inject(Router);
   _productsService = inject(ProductService);
   _buildYourPcService = inject(BuildYourPcService);
 
@@ -24,11 +26,11 @@ export abstract class CardsChildrenAbstractComponent {
     const requirement = this.getRequirement();
     this._productsService.getAllProductsByCategory(this.section, requirement).subscribe(productsResponse => {
       this.products = productsResponse.products;
-      console.log(this.products);
+      // console.log(this.products);
     });
   }
 
-  abstract addToCart() : void ;
+  abstract addToCart(id:string) : void ;
 
   abstract getRequirement() : string;
 }

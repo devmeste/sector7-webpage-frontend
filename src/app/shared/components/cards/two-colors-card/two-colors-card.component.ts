@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CustomCurrencyPipe } from "../../../../core/pipes/custom_currency/custom-currency.pipe";
 
 @Component({
@@ -16,6 +16,7 @@ export class TwoColorsCardComponent {
   @Input({ required: true }) price!: number ;
   @Input({ required: true }) photo!: string ;
   @Input({ required: true }) id!: string ;
+  @Output() addToCart = new EventEmitter<string>();
   
   
 }

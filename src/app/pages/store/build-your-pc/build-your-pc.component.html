@@ -12,8 +12,7 @@
         <h1 class="title_build_your_pc">ARMA <span>TU PC</span></h1>
     </div>
 
-    <!-- left part in Desktop -->
-    <!-- menu with path in DESKTOP -->
+    <!-- left menu with path in DESKTOP -->
     <!-- @if(currentPath){ -->
         <div class="path_desktop_container show_in_laptop_desktop">
             <app-steps-of-the-paths  [show]="true" ></app-steps-of-the-paths>
@@ -43,8 +42,22 @@
 
 
         <div class="cards_container">
-            <!-- <app-build-your-pc-cards-content>   </app-build-your-pc-cards-content> -->
-             <router-outlet></router-outlet>
+             <!-- <router-outlet></router-outlet> -->
+              @switch(this.section.toLowerCase()){
+                @case ('procesadores') {<app-procesadores></app-procesadores>}
+                @case ('mothers') {<app-mothers></app-mothers>}
+                @case ('memorias') {<app-memorias></app-memorias>}
+                @case ('almacenamiento') {<app-almacenamiento></app-almacenamiento>}
+                @case ('fuentes') {<app-fuentes></app-fuentes>}
+                @case ('placas de video') {<app-placas-de-video></app-placas-de-video>}
+                @case ('refrigeracion') {<app-refrigeracion></app-refrigeracion>}
+                @case ('monitores') {<app-monitores></app-monitores>}
+                @case ('auriculares') {<app-auriculares></app-auriculares>}
+                @case ('gabinetes') { <app-gabinetes></app-gabinetes>}
+                @case('teclados'){<app-teclados></app-teclados>}
+                @case('mouses'){<app-mouses></app-mouses>}
+              }
+              
         </div>
     </div>
 

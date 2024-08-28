@@ -5,16 +5,27 @@ import { MatIcon } from '@angular/material/icon';
 import { StepsOfThePathsComponent } from "./steps-of-the-paths/steps-of-the-paths.component";
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { TwoColorsCardComponent } from "../../../shared/components/cards/two-colors-card/two-colors-card.component";
-import { filter, switchMap } from 'rxjs';
-import { BuildYourPcCardsContentComponent } from "./build-your-pc-cards-content/build-your-pc-cards-content.component";
+import { filter, Subscription, switchMap } from 'rxjs';
 import { BuildYourPcService } from 'app/core/services/build_your_pc/build-your-pc.service';
+import { ProcesadoresComponent } from "./cards-children/procesadores/procesadores.component";
+import { MemoriasComponent } from "./cards-children/memorias/memorias.component";
+import { MothersComponent } from "./cards-children/mothers/mothers.component";
+import { AlmacenamientoComponent } from "./cards-children/almacenamiento/almacenamiento.component";
+import { FuentesComponent } from "./cards-children/fuentes/fuentes.component";
+import { PlacasDeVideoComponent } from "./cards-children/placas-de-video/placas-de-video.component";
+import { MonitoresComponent } from "./cards-children/monitores/monitores.component";
+import { RefrigeracionComponent } from "./cards-children/refrigeracion/refrigeracion.component";
+import { TecladosComponent } from "../../../teclados/teclados.component";
+import { GabinetesComponent } from "./cards-children/gabinetes/gabinetes.component";
+import { MousesComponent } from "../../../mouses/mouses.component";
+import { AuricularesComponent } from "../../../auriculares/auriculares.component";
 
 @Component({
   selector: 'app-build-your-pc',
   standalone: true,
   templateUrl: './build-your-pc.component.html',
   styleUrl: './build-your-pc.component.scss',
-  imports: [FooterComponent, MatIcon, StepsOfThePathsComponent, RouterOutlet, TwoColorsCardComponent, BuildYourPcCardsContentComponent]
+  imports: [FooterComponent, MatIcon, StepsOfThePathsComponent, RouterOutlet, TwoColorsCardComponent, ProcesadoresComponent, MemoriasComponent, MothersComponent, AlmacenamientoComponent, FuentesComponent, PlacasDeVideoComponent, MonitoresComponent, RefrigeracionComponent, TecladosComponent, GabinetesComponent, MousesComponent, AuricularesComponent]
 })
 export class BuildYourPcComponent {
 
@@ -24,31 +35,27 @@ export class BuildYourPcComponent {
   titleWord = '';
   _activatedRoute = inject(ActivatedRoute);
   _buildYourPcService = inject(BuildYourPcService);
-
-  // ngOnInit(): void {
-  //   this._activatedRoute.params.subscribe(params => {
-  //     this.section = params['section'];
-  //     this.titleWord = this._buildYourPcService.getTitleWordBySection(this.section);
-  //   })
-  // }
-
+  subscriptios : Subscription[] = [];
   _router = inject(Router);
 
+
   ngOnInit(): void {
-    // Escuchar cambios en la ruta completa
-    this._router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        // Obtener la ruta hija actual
-        const childRoute = this._activatedRoute.firstChild;
-        if (childRoute) {
-          childRoute.url.subscribe(urlSegment => {
-            const currentPath = urlSegment[0]?.path;
-            this.section = currentPath || ''; // 'procesadores', 'mothers', etc.
-            this.titleWord = this._buildYourPcService.getTitleWordBySection(this.section);
-          });
+    // console.log("Build your pc component");
+    this._activatedRoute.params.subscribe(params=>{
+      if(params['section']){
+        this.titleWord = this._buildYourPcService.getTitleWordBySection(params['section']);
+        if(!this.titleWord){
+          this._router.navigate(['build-your-pc']);
+          return;
         }
-      });
+        this.section = params['section'];
+      }
+      else{
+        this._router.navigate(['build-your-pc','linea']);
+      }
+    });
+   
+
   }
 
 
@@ -56,5 +63,5 @@ export class BuildYourPcComponent {
   toggleMenu() {
     this.showMenuInMobile = !this.showMenuInMobile;
   }
-  
+
 }

@@ -8,8 +8,8 @@ export const userInterceptor: HttpInterceptorFn = (request, next) => {
 
   const _authService = inject(AuthService);
   const _router = inject(Router);
-
   let clonedRequest = request;
+  
   if (_authService.isUserLoggedIn$()) {
     const token = localStorage.getItem('token');
     if (token) {

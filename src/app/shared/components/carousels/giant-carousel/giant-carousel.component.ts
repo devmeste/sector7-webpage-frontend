@@ -12,6 +12,10 @@ import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 export class GiantCarouselComponent {
 
 
+  ngOnInit(): void {
+    
+  }
+  
   banners: IBanner[] = [
     {
       id: "1",

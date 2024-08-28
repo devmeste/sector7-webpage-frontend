@@ -106,7 +106,10 @@ export class AdminService {
 
 
     createProduct(product: any): Observable<any> {
-        return this._httpClient.post<any>(this.baseUrl + 'products', product);
+        console.log("Create Product en Admin Service: ", product);
+        return this._httpClient.post<any>(this.baseUrl + 'products', product).pipe(
+            tap(() => {"Se Ejecuto Locoooooo" }),
+        );
     }
 
     updateProduct(p: any) {

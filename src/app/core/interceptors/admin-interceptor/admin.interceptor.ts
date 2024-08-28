@@ -15,6 +15,8 @@ export const adminInterceptor: HttpInterceptorFn = (request, next) => {
   const _router = inject(Router);
 
   let clonedRequest = request;
+
+
   if (_authService.isAdminLoggedIn()) {
     const token = localStorage.getItem('admin_token');
     if (token) {
