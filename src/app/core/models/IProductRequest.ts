@@ -9,6 +9,7 @@ export interface IProductRequest {
     title:           string;
     description:     string;
     isEnabled:       boolean;
+    isApproved?:      boolean;
     fieldsJSON:      string;
     photosByteArray: Array<number[]>;
 }

@@ -109,19 +109,19 @@
 
 
 
-                        <!-- Fotos -->
+                        <!-- fotos -->
                         <div class="custom-input">
                             <label class="form-label">Fotos: </label>
 
-                            <div class="add_photo_button_container">
+                            <app-image-uploader (onFileUploaded)="addPhoto($event)"></app-image-uploader>
+
+                            <!-- <div class="add_photo_button_container">
                                 <input #photoInput type="text" class="form-control"
                                     placeholder="link de la foto">
 
-                                <button type="button" (click)="addPhoto()"
-                                    class="btn btn-success add_field_button">+</button>
-                            </div>
+                            </div> -->
                             <div class="photosContainer">
-                                @for (item of this.photosArray2.value ; track $index) {
+                                @for (item of photosArray ; track $index) {
 
                                 <picture class="photo">
                                     <button type="button" class="delete_button_absolute" (click)="deletePhoto($index)">
@@ -201,7 +201,9 @@
 
 
 
-
+                @if(loading){
+                    <app-spinner-s7></app-spinner-s7>
+                }
 
 
 

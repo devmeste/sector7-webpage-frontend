@@ -113,6 +113,7 @@ export class AdminService {
     }
 
     updateProduct(p: any) {
+        console.log("Update Product en Admin Service: ", p);
         return this._httpClient.put<any>(this.baseUrl + 'products/' + p.id, p);
     }
 

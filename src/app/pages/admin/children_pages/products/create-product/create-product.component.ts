@@ -10,7 +10,7 @@ import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/m
 import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { ImageUploaderComponent } from "../../../../../shared/components/image-uploader/image-uploader.component";
-
+import { convertNumberArrayToImage } from 'app/core/utils/CustomImageMannager';
 @Component({
   selector: 'app-create-product',
   standalone: true,
@@ -163,17 +163,14 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   }
 
 
-  convertToBase64(){
-    return this.photosByteArray.map((photo) => {
-      const binaryString = String.fromCharCode(...photo);
-      return btoa(binaryString);
-    });
-  }
+  // convertToBase64(){
+  //   return this.photosByteArray.map((photo) => {
+  //     const binaryString = String.fromCharCode(...photo);
+  //     return btoa(binaryString);
+  //   });
+  // }   
 
   override send() {
-
-
-    console.log(" Send ");
 
     let fields: any = {};
 
@@ -182,8 +179,6 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     });
 
     fields = JSON.stringify(fields);
-
-    console.log(" photos Array : " +this.photosByteArray);
 
 
     const newProduct: any = {
@@ -217,25 +212,13 @@ export class CreateProductComponent extends CustomForm implements OnInit {
 
     this.photosByteArray.push($event);
 
-    console.log("onFileUploaded "+this.photosByteArray);
-
-    const imageUrl = this.convertNumberArrayToImage($event);
+    const imageUrl = convertNumberArrayToImage($event);
+    
     this.photosByteArrayString.push(imageUrl);
 
   }
 
-  convertNumberArrayToImage(numberArray: number[]) : string {
-     // Convierte el arreglo de números a un Uint8Array
-    const uint8Array = new Uint8Array(numberArray);
-
-    // Crea un Blob a partir del byte array
-    const blob = new Blob([uint8Array], { type: 'image/jpeg' }); // Ajusta el tipo de imagen si es necesario
   
-    // Genera una URL a partir del Blob
-    const imageUrl = URL.createObjectURL(blob);
-  
-    return imageUrl;
-  }
 
 
   closeModal(option: string) {
