@@ -14,7 +14,7 @@ import { SpinnerS7Component } from '@shared/components/spinners/spinner-s7/spinn
 @Component({
   standalone: true,
   template: '',
-  imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon, ImageUploaderComponent,SpinnerS7Component]
+  imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon, ImageUploaderComponent, SpinnerS7Component]
 })
 export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopUp {
 
@@ -38,7 +38,7 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
   categoryName: string = '';
 
   // send
-  loading : boolean = false;
+  loading: boolean = false;
 
   override initializeForm(): void {
     if (this.product_id) {
@@ -76,101 +76,112 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
 
 
 
-  fillInitialPhotos(photos: string[]): void {
-    photos.forEach(photo => {
-      this.photosArray.push(photo); 
-      console.log(this.photosArray);
-    });
-  
+  async fillInitialPhotos(photos: string[]): Promise<void> {
+    for (const photo of photos) {
+      console.log(photo);
+      if(!photo.includes('default-product-photo.png')){
+        const byteArray = await convertImageUrlToByteArray(photo);
+        this.photosArray.push(photo);
+        this.photosByteArray.push(byteArray);
+        // console.log(this.photosArray);
+        // console.log(this.photosByteArray);
+      }
+    }
     setTimeout(() => {
       if (this.photoInput) {
         this.photoInput.nativeElement.value = '';
       }
     });
   }
-  
+
 
   get photosArray2(): FormArray {
-  if (this.form && this.form.controls["photos"]) {
-    return this.form.controls["photos"] as FormArray;
+    if (this.form && this.form.controls["photos"]) {
+      return this.form.controls["photos"] as FormArray;
+    }
+    return this.formBuilder.array([]);
   }
-  return this.formBuilder.array([]); 
-}
 
 
 
 
-addPhoto($event: number[]) {
-  const imageString = convertNumberArrayToImage($event);
-  this.photosArray.push(imageString);
-}
+  addPhoto($event: number[]) {
+    this.photosByteArray.push($event);
+    const imageString = convertNumberArrayToImage($event);
+    this.photosArray.push(imageString);
+    console.log(this.photosArray);
+    console.log(this.photosByteArray);
+  }
 
-deletePhoto(i: number) {
-  console.log(i);
-  this.photosArray.splice(i,1);
-}
+  deletePhoto(i: number) {
+    console.log(i);
+    this.photosArray.splice(i, 1);
+    this.photosByteArray.splice(i, 1);
+    console.log(this.photosArray);
+    console.log(this.photosByteArray);
+  }
 
-fillFieldsArray() {
-  const fields = JSON.parse(this.product$.fieldsJSON);
+  fillFieldsArray() {
+    const fields = JSON.parse(this.product$.fieldsJSON);
 
-  const keys = Object.keys(fields);
-  keys.forEach(key => {
+    const keys = Object.keys(fields);
+    keys.forEach(key => {
 
-    const newFieldGroup = this.formBuilder.group({
-      fieldName: [key],
-      value: [fields[key], Validators.required]
-    });
-    this.fieldsArray.push(newFieldGroup);
+      const newFieldGroup = this.formBuilder.group({
+        fieldName: [key],
+        value: [fields[key], Validators.required]
+      });
+      this.fieldsArray.push(newFieldGroup);
 
-  })
+    })
 
-}
+  }
 
   get fieldsArray() {
-  return this.form.controls["fieldsArray"] as FormArray;
-}
-
-
-  async splitPhotos(): Promise < number[][] > {
-  console.log(this.photosArray2.value);
-
-  const result = await Promise.all(
-    this.photosArray2.value.map((photo: string) => convertImageUrlToByteArray(photo))
-  );
-  return result;
-}
-
-//   async getPhotosArraysByUrls() {
-//   const result = await Promise.all(
-//     // this.photosArray2.value.map((photo: string) => convertImageUrlToByteArray(photo))
-//     this.photosArray.map((photo: string) => convertImageUrlToByteArray(photo))
-//   );
-//   console.log("result: " + result);
-//   return result;
-// }
-
-closeMessageModal(option: string) {
-  switch (option) {
-    case "productUpdatedSuccessfully": {
-      this.productUpdatedSuccessfully = false
-      this.closeUpdateModal();
-    };
-      break;
-    case "productUpdateFailed": {
-      this.productUpdateFailed = false
-      // this.closeUpdateModal();
-    };
-      break;
+    return this.form.controls["fieldsArray"] as FormArray;
   }
-}
 
-sockets: string[] = [];
-getSockets() {
-  this._adminService.getAllSockets().subscribe((sockets) => {
-    this.sockets = sockets.map(socket => socket.type);
-    console.log(this.sockets);
-  });
-}
+
+  async splitPhotos(): Promise<number[][]> {
+    console.log(this.photosArray2.value);
+
+    const result = await Promise.all(
+      this.photosArray2.value.map((photo: string) => convertImageUrlToByteArray(photo))
+    );
+    return result;
+  }
+
+  //   async getPhotosArraysByUrls() {
+  //   const result = await Promise.all(
+  //     // this.photosArray2.value.map((photo: string) => convertImageUrlToByteArray(photo))
+  //     this.photosArray.map((photo: string) => convertImageUrlToByteArray(photo))
+  //   );
+  //   console.log("result: " + result);
+  //   return result;
+  // }
+
+  closeMessageModal(option: string) {
+    switch (option) {
+      case "productUpdatedSuccessfully": {
+        this.productUpdatedSuccessfully = false
+        this.closeUpdateModal();
+      };
+        break;
+      case "productUpdateFailed": {
+        this.productUpdateFailed = false
+        // this.closeUpdateModal();
+      };
+        break;
+    }
+  }
+
+  sockets: string[] = [];
+  getSockets() {
+    this._adminService.getAllSockets().subscribe((sockets) => {
+      this.sockets = sockets.map(socket => socket.type);
+      console.log(this.sockets);
+    });
+  }
 
 }
 

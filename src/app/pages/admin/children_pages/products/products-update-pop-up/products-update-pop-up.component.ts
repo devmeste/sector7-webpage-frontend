@@ -31,11 +31,7 @@ export class ProductsUpdatePopUpComponent extends _ProductsUpdatePopUpParentComp
 
     let newFieldJson = JSON.stringify(fields);
 
-
     console.log(this.photosArray);
-    this.photosByteArray = await convert_all_strings_into_byte_arrays(this.photosArray);
-    
-    console.log(this.photosByteArray);
 
     const p: IProductRequest = {
       id: this.form.get("id")?.value,
