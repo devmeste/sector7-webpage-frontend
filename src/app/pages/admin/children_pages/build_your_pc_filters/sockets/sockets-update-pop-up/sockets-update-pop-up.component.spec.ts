@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SocketsUpdatePopUpComponent } from './sockets-update-pop-up.component';
+
 
 describe('SocketsUpdatePopUpComponent', () => {
   let component: SocketsUpdatePopUpComponent;

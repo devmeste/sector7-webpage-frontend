@@ -185,7 +185,6 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
 
 }
 
-
 export interface Field {
   fieldName: string;
   value: string;

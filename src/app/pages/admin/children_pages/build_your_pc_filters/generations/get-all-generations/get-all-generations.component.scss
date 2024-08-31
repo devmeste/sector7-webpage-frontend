@@ -1,6 +1,6 @@
 @import '@shared/styles/admin_table.scss';
 
-.admin_panel_table_main_container.main_socket_container{
+.admin_panel_table_main_container.main_getAll_container{
 
     @include desktop{
         width: 60%;
@@ -11,7 +11,4 @@
         width: 10rem;
     }
 
-    // .actions_buttons_container{
-    //     width: 5rem;
-    // }
 }

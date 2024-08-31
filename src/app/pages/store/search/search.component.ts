@@ -73,7 +73,8 @@ export class SearchComponent {
       
       this.updateProductsInfo();
     })
-    // this.updateProductsInfo();
+
+    // window.scrollTo(0, 0); // ?? probar sin esto, parece que anda
   }
 
 

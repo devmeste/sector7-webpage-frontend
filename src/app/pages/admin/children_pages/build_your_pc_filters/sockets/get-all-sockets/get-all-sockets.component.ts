@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { ISocket } from 'app/core/models/ISocket';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
-import { SpinnerS7Component } from "../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
-import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
-import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
-import { ConfirmPopUpComponent } from "../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
-import { SocketsUpdatePopUpComponent } from "../sockets-update-pop-up/sockets-update-pop-up.component";
+import { SpinnerS7Component } from "../../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
+import { InputDangerTextComponent } from "../../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
+import { MessagePopUpComponent } from "../../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
+import { ConfirmPopUpComponent } from "../../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
+import { SocketsUpdatePopUpComponent } from '../sockets-update-pop-up/sockets-update-pop-up.component';
 
 @Component({
   selector: 'app-get-all-sockets',
@@ -24,12 +24,10 @@ export class GetAllSocketsComponent {
   socketIdToDelete = "";
   update_id = "";
 
-
-
   _adminService: AdminService = inject(AdminService);
   sockets$ !: ISocket[];
   isLoading: boolean = false;
-  socketDeletedSuccessfully: any;
+  socketDeletedSuccessfully: boolean = false;
 
 
   ngOnInit(): void {
@@ -41,9 +39,6 @@ export class GetAllSocketsComponent {
     this.showUpdatePopUp = true;
     this.update_id = id;
   }
-
-
-
 
   updateSocketsState() {
     this.isLoading = true;
@@ -64,10 +59,11 @@ export class GetAllSocketsComponent {
     this.closeModal("showPopUpToConfirmDelete");
   }
 
+  
   deleteSocket(id: string) {
     this._adminService.deleteScocket(id).subscribe({
-      next: (success) => {
-        this.socketDeletedSuccessfully = success
+      next: () => {
+        this.socketDeletedSuccessfully = true
         this.updateSocketsState();
       },
       error: (e) => {
@@ -77,6 +73,8 @@ export class GetAllSocketsComponent {
     }
     );
   }
+
+  
 
   closeModal(option: string) {
     switch (option) {

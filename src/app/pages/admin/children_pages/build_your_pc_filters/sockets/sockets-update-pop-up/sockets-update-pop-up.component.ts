@@ -5,8 +5,8 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { ISocket } from 'app/core/models/ISocket';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.pop.up';
-import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
-import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
+import { InputDangerTextComponent } from "../../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
+import { MessagePopUpComponent } from "../../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 
 @Component({
   selector: 'app-sockets-update-pop-up',

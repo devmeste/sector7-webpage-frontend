@@ -31,11 +31,28 @@ export const ADMIN_ROUTES: Routes = [
             },
             {
                 path: 'sockets',
-                loadComponent: ()=> import('./children_pages/sockets/get-all-sockets/get-all-sockets.component').then(r => r.GetAllSocketsComponent)
+                loadComponent: ()=> import('./children_pages/build_your_pc_filters/sockets/get-all-sockets/get-all-sockets.component').then(r => r.GetAllSocketsComponent)
             },
             {
                 path: 'sockets/new',
-                loadComponent: () => import('./children_pages/sockets/create-socket/create-socket.component').then(r => r.CreateSocketComponent)
+                loadComponent: () => import('./children_pages/build_your_pc_filters/sockets/create-sockets/create-socket.component').then(r => r.CreateSocketComponent)
+            },
+            {
+                path: 'generations',
+                loadComponent: () => import('./children_pages/build_your_pc_filters/generations/get-all-generations/get-all-generations.component').then(r => r.GetAllGenerationsComponent)
+            },
+            {
+                path: 'generations/new',
+                loadComponent: () => import('./children_pages/build_your_pc_filters/generations/create-generations/create-generations.component').then(r => r.CreateGenerationsComponent)
+            },
+            {
+                path: 'memory-types',
+                loadComponent: () => import('./children_pages/build_your_pc_filters/memory_types/get-all-memory-types/get-all-memory-types.component').then(r => r.GetAllMemoryTypesComponent)
+            },
+
+            {
+                path: 'memory-types/new',
+                loadComponent: () => import('./children_pages/build_your_pc_filters/memory_types/create-memory-types/create-memory-types.component').then(r => r.CreateMemoryTypesComponent)
             },
             {
                 path: 'usd',

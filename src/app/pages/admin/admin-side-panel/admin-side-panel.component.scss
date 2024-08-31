@@ -15,6 +15,37 @@
         color: white;
         background-color: $gray_10;
     }
+
+    .category_toggle.build_your_pc_filters{
+
+        border-radius: 0;
+        background-color: $gray_15;
+
+        border-bottom: 2px solid $gray_30;
+
+        span{
+            padding: 0 0 0 0.5rem;
+        }
+
+        .mat-expanded {
+            // background-image: linear-gradient( to right, $gray_20 ,  $gray_10 );
+        }
+        .category_toggle{
+            background-color: $gray_15;
+            border-radius: 0;
+                    padding : 0 0 0  2rem;
+            .mat-expanded{
+                background-color: $gray_15;
+                font-weight: 700;
+                border-left: 10px solid $gray_30;
+               background-image: linear-gradient( to right, $gray_20 ,  $gray_10 );
+            }
+            ul{
+                border-left: 10px solid $gray_30;
+            }
+           
+        }
+    }
     
     .mat-expansion-panel{
         border-radius: 10px 10px 0 0;

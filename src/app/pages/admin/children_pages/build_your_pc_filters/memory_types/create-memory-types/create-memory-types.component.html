@@ -1,0 +1,38 @@
+<section class="create_socket_container">
+    <h2>Crear un nuevo {{this.elementToCreate}}</h2>
+
+    <section class="form_container" >
+        <form (ngSubmit)="send($event)" [formGroup]="form" class="form">
+
+            <div class="custom-input">
+                <label class="form-label">Tipo: </label>
+                <input type="text" formControlName="type" class="form-control"
+                    [ngClass]="{ 'is-invalid': hasErrors(this.form ,'type', 'required') }">
+            </div>
+            @if( hasErrors( this.form ,'type', 'required') ){
+            <app-input-danger-text text="Este campo es requerido"></app-input-danger-text>
+            }
+
+
+            @if (elementWasCreatedSuccessfully) {
+            <app-message-pop-up custom_message='{{this.elementToCreate + " creada correctamente"}}'
+                (close)="closeModal('elementWasCreatedSuccessfully')"> </app-message-pop-up>
+            }
+            @if (errorCreatingElement) {
+            <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('errorCreatingElement')">
+            </app-message-pop-up>
+            }
+
+            <div class="send_button_container">
+                <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
+                    [disabled]="disabledFormButton(this.form)" type="submit">Crear</button>
+            </div>
+        </form>
+    </section>
+
+</section>
+
+@if(isLoading){
+    
+    <app-spinner-s7></app-spinner-s7>
+}

@@ -2,8 +2,8 @@
     <mat-accordion>
         <!-- Categories -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header   >
-                <mat-panel-title >
+            <mat-expansion-panel-header>
+                <mat-panel-title>
                     Categorias
                 </mat-panel-title>
             </mat-expansion-panel-header>
@@ -19,28 +19,67 @@
                 <mat-panel-title>
                     Productos
                 </mat-panel-title>
-            </mat-expansion-panel-header>   
+            </mat-expansion-panel-header>
             <ul class="options_list">
+
                 <li [routerLink]="['products/new']">Crear Producto</li>
                 <li [routerLink]="['products']">Ver Todos</li>
                 <li [routerLink]="['products/enable']">Habilitar</li>
                 <li [routerLink]="['products/pendings']">Aprobar Pendientes</li>
+                <mat-expansion-panel class="category_toggle build_your_pc_filters" (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>Filtros Arma tu pc</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ul class="options_list">
+                        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Generacion
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <ul class="options_list">
+                                <li [routerLink]="['generations/new']">Crear generacion</li>
+                                <li [routerLink]="['generations']">Ver todas</li>
+                            </ul>
+                        </mat-expansion-panel>
+
+                        <!-- Sockets -->
+                        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Sockets
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <ul class="options_list">
+                                <li [routerLink]="['sockets/new']">Crear socket</li>
+                                <li [routerLink]="['sockets']">Ver todos</li>
+                            </ul>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Tipo de memoria
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <ul class="options_list">
+                                <li [routerLink]="['memory-types/new']">Crear tipo de memoria</li>
+                                <li [routerLink]="['memory-types']">Ver todos</li>
+                            </ul>
+                        </mat-expansion-panel>
+                    </ul>
+                </mat-expansion-panel>
+                <!-- Generacion, socket y tipo de memoria -->
             </ul>
         </mat-expansion-panel>
 
-        <!-- Sockets -->
-        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Sockets
-                </mat-panel-title>
-            </mat-expansion-panel-header>   
-            <ul class="options_list">
-                <li [routerLink]="['sockets/new']">Crear socket</li>
-                <li [routerLink]="['sockets']">Ver todos</li>
-            </ul>
-        </mat-expansion-panel>
-        
+
+
         <!-- Accounts -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -69,7 +108,7 @@
         </mat-expansion-panel>
 
 
-        
+
         <!-- Usd -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -84,7 +123,7 @@
         </mat-expansion-panel>
 
 
-        
+
         <!-- Billing -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -99,7 +138,7 @@
 
 
         <!--  -->
-        
+
         <!-- Reports -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -114,6 +153,6 @@
         </mat-expansion-panel>
 
 
-        
+
     </mat-accordion>
 </section>

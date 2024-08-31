@@ -13,15 +13,14 @@ import { IPurchase } from 'app/core/models/IPurchase';
 import { IPurchasesBetweenDatesResponse } from 'app/core/models/IPurchasesBetweenDatesResponse';
 import { environment } from 'app/core/environments/environment';
 import { ISocket } from 'app/core/models/ISocket';
+import { IGeneration } from 'app/core/models/IGeneration';
+import { IMemoryType } from 'app/core/models/IMemoryType';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class AdminService {
-
-
-
 
 
     // baseUrl: string = 'http://localhost:8001/api/v1/es/';
@@ -234,6 +233,32 @@ export class AdminService {
 
     deleteScocket(id: string) {
         return this._httpClient.delete<any>(this.baseUrl + 'socket/' + id);
+    }
+
+    // generations
+    createGeneration(type: string): Observable<IGeneration> {
+        return this._httpClient.post<IGeneration>(this.baseUrl + 'generation', { type });
+    }
+
+    getAllGenerations() : Observable<IGeneration[]> {
+        return this._httpClient.get<IGeneration[]>(this.baseUrl + 'generation');
+    }
+
+    deleteGeneration( id: string) {
+        return this._httpClient.delete<IGeneration>(this.baseUrl + 'generation/' + id);
+    }
+
+    // memory-types
+    createMemoryType(type: string): Observable<IMemoryType> {
+        return this._httpClient.post<IMemoryType>(this.baseUrl + 'memory', { type });
+    }
+
+    getAllMemoryTypes() : Observable<IMemoryType[]> {
+        return this._httpClient.get<IMemoryType[]>(this.baseUrl + 'memory');
+    }
+
+    deleteMemoryType( id: string) {
+        return this._httpClient.delete<IMemoryType>(this.baseUrl + 'memory/' + id);
     }
 
 }

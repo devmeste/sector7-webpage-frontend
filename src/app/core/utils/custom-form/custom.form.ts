@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     template: ''
 })
 export abstract class CustomForm  implements OnInit {
+    
     ngOnInit(): void {
         this.initializeForm();
     }

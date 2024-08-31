@@ -22,6 +22,7 @@ export class GiantCarouselComponent {
       title: "Summer Sale",
       category: "Promotion",
       date: new Date("2024-08-01"),
+      url: "https://www.google.com",
       presignedUrl: "../../../../../assets/images/carousel/Imagen1.png",
       presignedUrl_tab: "../../../../../assets/images/carousel/Imagen1_tab.png",
       presignedUrl_mob: "../../../../../assets/images/carousel/Imagen1_mob.png"
@@ -31,6 +32,7 @@ export class GiantCarouselComponent {
       title: "New Arrivals",
       category: "Product",
       date: new Date("2024-08-10"),
+      url: "https://www.google.com",
       presignedUrl: "../../../../../assets/images/carousel/Imagen2.png",
       presignedUrl_tab: "../../../../../assets/images/carousel/Imagen2_tab.png",
       presignedUrl_mob: "../../../../../assets/images/carousel/Imagen2_mob.png"
@@ -40,6 +42,7 @@ export class GiantCarouselComponent {
       title: "Gaming Week",
       category: "Event",
       date: new Date("2024-08-15"),
+      url: "https://www.google.com",
       presignedUrl: "../../../../../assets/images/carousel/Imagen3.png",
       presignedUrl_tab: "../../../../../assets/images/carousel/Imagen3_tab.png",
       presignedUrl_mob: "../../../../../assets/images/carousel/Imagen3_mob.png"

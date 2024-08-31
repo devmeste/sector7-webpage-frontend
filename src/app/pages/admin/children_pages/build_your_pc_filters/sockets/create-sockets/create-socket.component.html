@@ -1,5 +1,5 @@
 <section class="create_socket_container">
-    <h2>Crear un nuevo Socket</h2>
+    <h2>Crear un nuevo {{this.elementToCreate}}</h2>
 
     <section class="form_container" >
         <form (ngSubmit)="send($event)" [formGroup]="form" class="form">
@@ -15,7 +15,7 @@
 
 
             @if (elementWasCreatedSuccessfully) {
-            <app-message-pop-up custom_message='Socket creado exitosamente'
+            <app-message-pop-up custom_message='{{this.elementToCreate + " creado exitosamente"}}'
                 (close)="closeModal('elementWasCreatedSuccessfully')"> </app-message-pop-up>
             }
             @if (errorCreatingElement) {
@@ -24,7 +24,7 @@
             }
 
             <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
-                [disabled]="disabledFormButton(this.form)" type="submit">Enviar</button>
+                [disabled]="disabledFormButton(this.form)" type="submit">Crear</button>
         </form>
     </section>
 

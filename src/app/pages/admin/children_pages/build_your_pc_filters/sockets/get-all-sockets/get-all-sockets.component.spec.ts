@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GetAllSocketsComponent } from './get-all-sockets.component';
+
 
 describe('GetAllSocketsComponent', () => {
   let component: GetAllSocketsComponent;

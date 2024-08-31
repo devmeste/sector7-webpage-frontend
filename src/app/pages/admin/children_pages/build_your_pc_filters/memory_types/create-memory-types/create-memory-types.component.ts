@@ -1,36 +1,26 @@
-import { NgClass, NgSwitch } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InputDangerTextComponent } from '@shared/components/inputs/input-danger-text/input-danger-text.component';
 import { MessagePopUpComponent } from '@shared/components/pop_up/message-pop-up/message-pop-up.component';
-import { AdminService } from 'app/core/services/admin_service/admin.service';
-import { CustomForm } from 'app/core/utils/custom-form/custom.form';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { SpinnerS7Component } from "../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
+import { SpinnerS7Component } from '@shared/components/spinners/spinner-s7/spinner-s7.component';
+import { CreateForm } from 'app/core/utils/create-form/create-form';
 
 @Component({
-  selector: 'app-create-socket',
+  selector: 'app-create-memory-types',
   standalone: true,
   imports: [NgClass, InputDangerTextComponent, ReactiveFormsModule, MessagePopUpComponent, MatProgressSpinnerModule, SpinnerS7Component],
-  templateUrl: './create-socket.component.html',
-  styleUrl: './create-socket.component.scss'
+  templateUrl: './create-memory-types.component.html',
+  styleUrl: './create-memory-types.component.scss'
 })
-export class CreateSocketComponent extends CustomForm {
+export class CreateMemoryTypesComponent extends CreateForm {
 
+  override elementToCreate = 'Tipo de memoria'; 
+  successMessage = this.elementToCreate + ' creado correctamente';
 
-  _adminService = inject(AdminService);
-
-
-  // state of pop ups
-  elementWasCreatedSuccessfully: boolean = false;
-  errorCreatingElement: any;
-  errorMessage: any;
-  isLoading: boolean = false;
-
-
-
-  closeModal(option: string) {
+  override closeModal(option: string) {
 
     switch (option) {
       case 'errorCreatingElement': this.errorCreatingElement = false;
@@ -44,38 +34,28 @@ export class CreateSocketComponent extends CustomForm {
   }
 
 
-
-
   override initializeForm(): void {
     this.form = this.formBuilder.group({
       type: ['', [Validators.required]],
     })
   }
+
   override send($event: SubmitEvent): void {
     this.isLoading = true;
     const { type } = this.form.value;
 
-    this._adminService.createSocket(type).subscribe({
+    this._adminService.createMemoryType(type).subscribe({
       next: () => {
         this.elementWasCreatedSuccessfully = true;
         this.isLoading = false;
       },
       error: (err: HttpErrorResponse) => {
+        console.log(err);
         this.errorCreatingElement = true;
-        this.errorMessage = err.error
+        this.errorMessage = err.error.message
         this.isLoading = false;
       }
     })
   }
-
-//  @HostListener('document:click', ['$event'])
-//   clickout(event: any) {
-//     if(this.isLoading){
-//       this.isLoading = false;
-//       setTimeout(() => {
-//         this.elementWasCreatedSuccessfully = true;
-//       }, 200);
-//     }
-//   }
 
 }
