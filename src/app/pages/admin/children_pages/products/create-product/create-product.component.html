@@ -1,5 +1,5 @@
 <section class="create_product_container">
-    <h2>Crear un nuevo Producto</h2>
+    <h2>Crear un nuevo producto</h2>
 
     <section class="form_container">
         <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
@@ -17,7 +17,7 @@
 
             <!-- ID -->
             <div class="custom-input">
-                <label class="form-label">Codigo o Identificador: </label>
+                <label class="form-label">Numero de serie: </label>
                 <input type="text" formControlName="id" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'id', 'required') }">
             </div>
@@ -58,7 +58,7 @@
 
             <!-- Actual Stock -->
             <div class="custom-input">
-                <label class="form-label">Stock Real: </label>
+                <label class="form-label">Stock real: </label>
                 <input type="number" formControlName="actualStock" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'actualStock', 'required') }">
             </div>
@@ -68,7 +68,7 @@
 
             <!-- Stock Visual -->
             <div class="custom-input">
-                <label class="form-label">Stock Visual: </label>
+                <label class="form-label">Stock visual: </label>
                 <input type="number" formControlName="viewStock" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'viewStock', 'required') }">
             </div>
@@ -78,7 +78,7 @@
 
             <!-- Descipcion -->
             <div class="custom-input">
-                <label class="form-label">Descripcion: </label>
+                <label class="form-label">Descripción: </label>
                 <textarea name="description" formControlName="description" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'description', 'required') }">
                 </textarea>
@@ -95,6 +95,7 @@
             </div>
 
             <!-- fotos -->
+            <label class="form-label checkbox_label ">Fotos: </label>
             <app-image-uploader (onFileUploaded)="onFileUploaded($event)" ></app-image-uploader>
 
             <div class="photosContainer">
@@ -107,7 +108,6 @@
                 </picture>
             }
             </div>
-            <input #photoInput type="text" class="form-control" placeholder="link de la foto">
             <!-- <div class="custom-input">
                 <label class="form-label">Fotos: </label>
 

@@ -24,41 +24,41 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   photosByteArray: number[][]= [];
   photosByteArrayString: string[] = [];
 
-  // override initializeForm(): void {
-  //   this.form = this.formBuilder.group({
-  //     title: ['', [Validators.required]],
-  //     id: ['', [Validators.required]],
-  //     brand: ['', [Validators.required]],
-  //     model: ['', [Validators.required]],
-  //     price: ['', [Validators.required]],
-  //     actualStock: ['', [Validators.required]],
-  //     viewStock: ['', [Validators.required]],
-  //     description: ['', [Validators.required]],
-  //     isEnabled: [true, []],
-  //     photos: this.formBuilder.array([], []),
-  //     categoryId: ['', [Validators.required]],
-  //     fieldsJSON: ['', []],
-  //     fieldsArray: this.formBuilder.array([]),
-  //   })
-  // }
-
   override initializeForm(): void {
     this.form = this.formBuilder.group({
-      title: ['asdasd', [Validators.required]],
-      id: [this.generateRandomString(10), [Validators.required]],
-      brand: ['aaa', [Validators.required]],
-      model: ['aaa', [Validators.required]],
-      price: ['100', [Validators.required]],
-      actualStock: ['1234', [Validators.required]],
-      viewStock: ['1002', [Validators.required]],
-      description: ['asdasd', [Validators.required]],
+      title: ['', [Validators.required]],
+      id: ['', [Validators.required]],
+      brand: ['', [Validators.required]],
+      model: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      actualStock: ['', [Validators.required]],
+      viewStock: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       isEnabled: [true, []],
-      photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/teclado/teclado.png?raw=true'], []),
+      photos: this.formBuilder.array([], []),
       categoryId: ['', [Validators.required]],
       fieldsJSON: ['', []],
       fieldsArray: this.formBuilder.array([]),
     })
   }
+
+  // override initializeForm(): void {
+  //   this.form = this.formBuilder.group({
+  //     title: ['asdasd', [Validators.required]],
+  //     id: [this.generateRandomString(10), [Validators.required]],
+  //     brand: ['aaa', [Validators.required]],
+  //     model: ['aaa', [Validators.required]],
+  //     price: ['100', [Validators.required]],
+  //     actualStock: ['1234', [Validators.required]],
+  //     viewStock: ['1002', [Validators.required]],
+  //     description: ['asdasd', [Validators.required]],
+  //     isEnabled: [true, []],
+  //     photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/teclado/teclado.png?raw=true'], []),
+  //     categoryId: ['', [Validators.required]],
+  //     fieldsJSON: ['', []],
+  //     fieldsArray: this.formBuilder.array([]),
+  //   })
+  // }
 
   categories$ !: ICategory[];
   productWasCreatedSuccessfully = false;

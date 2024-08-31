@@ -6,7 +6,7 @@
 
             <!-- username -->
             <div class="custom-input">
-                <label class="form-label">Nombre de Usuario: </label>
+                <label class="form-label">Nombre de usuario: </label>
                 <input type="text" formControlName="username" class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'username', 'required') }">
                 @if( hasErrors( this.form,'username', 'required') ){

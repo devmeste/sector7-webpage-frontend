@@ -11,7 +11,7 @@
                         <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
                     
                             <div class="custom-input">
-                                <label class="form-label">Nombre de la categoría</label>
+                                <label class="form-label">Nombre de la categoría:</label>
                                 <input type="text" formControlName="name" required class="form-control"
                                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'name', 'required') }">
                             </div>

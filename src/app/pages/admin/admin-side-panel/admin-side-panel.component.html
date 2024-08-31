@@ -8,8 +8,8 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
-                <li [routerLink]="['category']">Ver Categorias</li>
-                <li [routerLink]="['category/new']">Crear Categoria</li>
+                <li [routerLink]="['category']">Ver categorias</li>
+                <li [routerLink]="['category/new']">Crear categoria</li>
             </ul>
         </mat-expansion-panel>
 
@@ -22,15 +22,15 @@
             </mat-expansion-panel-header>
             <ul class="options_list">
 
-                <li [routerLink]="['products/new']">Crear Producto</li>
-                <li [routerLink]="['products']">Ver Todos</li>
-                <li [routerLink]="['products/enable']">Habilitar</li>
+                <li [routerLink]="['products/new']">Crear producto</li>
+                <li [routerLink]="['products']">Ver todos</li>
+                <li [routerLink]="['products/enable']">Mostrar / Ocultar</li>
                 <li [routerLink]="['products/pendings']">Aprobar Pendientes</li>
                 <mat-expansion-panel class="category_toggle build_your_pc_filters" (opened)="panelOpenState = true"
                     (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <span>Filtros Arma tu pc</span>
+                            <span>Filtros arma tu pc</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <ul class="options_list">
@@ -38,11 +38,11 @@
                             (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    Generacion
+                                    Generación
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <ul class="options_list">
-                                <li [routerLink]="['generations/new']">Crear generacion</li>
+                                <li [routerLink]="['generations/new']">Crear generación</li>
                                 <li [routerLink]="['generations']">Ver todas</li>
                             </ul>
                         </mat-expansion-panel>
@@ -88,8 +88,8 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
-                <li [routerLink]="['accounts']">Ver Cuentas</li>
-                <li [routerLink]="['accounts/new']">Crear Cuenta</li>
+                <li [routerLink]="['accounts']">Ver cuentas</li>
+                <li [routerLink]="['accounts/new']">Crear cuenta</li>
             </ul>
         </mat-expansion-panel>
 
@@ -113,12 +113,12 @@
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Usd
+                    Cotizaciones
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
-                <li [routerLink]="['usd']">Ver Todos</li>
-                <li [routerLink]="['usd/new']">Nuevo Precio USD</li>
+                <li [routerLink]="['usd']">Ver todas</li>
+                <li [routerLink]="['usd/new']">Nueva cotización</li>
             </ul>
         </mat-expansion-panel>
 
@@ -128,11 +128,11 @@
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Facturacion
+                    Facturación
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
-                <li [routerLink]="['billing']">Ver Todas</li>
+                <li [routerLink]="['billing']">Ver todas</li>
             </ul>
         </mat-expansion-panel>
 
