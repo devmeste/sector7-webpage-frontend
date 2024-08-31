@@ -1,0 +1,43 @@
+<div class="overlay">
+    @if(this.element$){
+
+    <ng-container>
+        <div class="modal_container update_pop_up modal_form">
+            <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+            <div class="modal_info">
+
+                <!-- Form -->
+                <section class="form_container">
+                    <form (ngSubmit)="send($event)" [formGroup]="this.form" class="form form_pop_up">
+
+                        <!-- tipo -->
+                        <div class="custom-input">
+                            <label class="form-label">Nombre del tipo de memoria: </label>
+                            <input type="text" formControlName="type" required class="form-control"
+                                [ngClass]="{ 'is-invalid': hasErrors(this.form,'type', 'required') }">
+                            @if( hasErrors(this.form,'type', 'required') ){
+                            <app-input-danger-text 
+                                text="Este campo es requerido">
+                            </app-input-danger-text>
+                            }
+                        </div>
+                        @if (elementUpdatedSuccessfully) {
+                        <app-message-pop-up custom_message='Tipo de memoria Modificado Exitosamente'
+                            (close)="closeMessageModal('elementUpdatedSuccessfully')">
+                        </app-message-pop-up>
+                        }
+                        @if (elementUpdateFailed) {
+                        <app-message-pop-up custom_message='{{errorMessage}}'
+                            (close)="closeMessageModal('elementUpdateFailed')">
+                        </app-message-pop-up>
+                        }
+
+                        <button class="primary_button"
+                            [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
+                            [disabled]="disabledFormButton(this.form)" type="submit">Modificar</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </ng-container>
+    }

@@ -244,9 +244,19 @@ export class AdminService {
         return this._httpClient.get<IGeneration[]>(this.baseUrl + 'generation');
     }
 
+    getGenerationById(id: string) {
+        return this._httpClient.get<IGeneration>(this.baseUrl + 'generation/' + id);
+    }
+
     deleteGeneration( id: string) {
         return this._httpClient.delete<IGeneration>(this.baseUrl + 'generation/' + id);
     }
+
+    updateGeneration(id: string, type: string) : Observable<IGeneration> {
+        return this._httpClient.put<IGeneration>(this.baseUrl + 'generation/' + id, { type });
+    }
+
+
 
     // memory-types
     createMemoryType(type: string): Observable<IMemoryType> {
@@ -255,11 +265,21 @@ export class AdminService {
 
     getAllMemoryTypes() : Observable<IMemoryType[]> {
         return this._httpClient.get<IMemoryType[]>(this.baseUrl + 'memory');
+    
+    }
+
+    getMemoryTypeById(id: string) {
+        return this._httpClient.get<IMemoryType>(this.baseUrl + 'memory/' + id);
     }
 
     deleteMemoryType( id: string) {
         return this._httpClient.delete<IMemoryType>(this.baseUrl + 'memory/' + id);
     }
+
+    updateMemoryType(id: string, type: string) : Observable<IMemoryType> {
+        return this._httpClient.put<IMemoryType>(this.baseUrl + 'memory/' + id, { type });
+    }
+
 
 }
 

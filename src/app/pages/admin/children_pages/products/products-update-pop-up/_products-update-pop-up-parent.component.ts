@@ -151,14 +151,6 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
     return result;
   }
 
-  //   async getPhotosArraysByUrls() {
-  //   const result = await Promise.all(
-  //     // this.photosArray2.value.map((photo: string) => convertImageUrlToByteArray(photo))
-  //     this.photosArray.map((photo: string) => convertImageUrlToByteArray(photo))
-  //   );
-  //   console.log("result: " + result);
-  //   return result;
-  // }
 
   closeMessageModal(option: string) {
     switch (option) {

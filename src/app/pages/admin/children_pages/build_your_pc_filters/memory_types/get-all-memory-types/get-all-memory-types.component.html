@@ -63,7 +63,8 @@
 </section>
 
 @if(this.showUpdatePopUp){
-    <!-- <app-sockets-update-pop-up [socket_id]="this.update_id" (itemWasUpdatedSuccesfully)="this.updateElementsState()"
-        (close)="closeModal('showUpdatePopUp')">
-    </app-sockets-update-pop-up> -->
+   <app-update-memory-type [element_id]="this.update_id" 
+   (UpdateSuccesfullyEmmitter)="this.updateElementsState()" 
+   (close)="closeModal('showUpdatePopUp')">
+   </app-update-memory-type>
 }

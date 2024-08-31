@@ -7,11 +7,12 @@ import { SpinnerS7Component } from '@shared/components/spinners/spinner-s7/spinn
 import { MatIcon } from '@angular/material/icon';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { GetAllGeneric } from 'app/core/utils/get-all-generic/get-all-generic';
+import { UpdateGenerationComponent } from "../update-generation/update-generation.component";
 
 @Component({
   selector: 'app-get-all-generations',
   standalone: true,
-  imports: [MatIcon, SpinnerS7Component, InputDangerTextComponent, MessagePopUpComponent, ConfirmPopUpComponent, SocketsUpdatePopUpComponent],
+  imports: [MatIcon, SpinnerS7Component, InputDangerTextComponent, MessagePopUpComponent, ConfirmPopUpComponent, SocketsUpdatePopUpComponent, UpdateGenerationComponent],
   templateUrl: './get-all-generations.component.html',
   styleUrl: './get-all-generations.component.scss'
 })

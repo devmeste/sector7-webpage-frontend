@@ -7,11 +7,12 @@ import { InputDangerTextComponent } from "../../../../../../shared/components/in
 import { SpinnerS7Component } from "../../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 import { MatIcon } from '@angular/material/icon';
 import { NgClass } from '@angular/common';
+import { UpdateMemoryTypeComponent } from "../update-memory-type/update-memory-type.component";
 
 @Component({
   selector: 'app-get-all-memory-types',
   standalone: true,
-  imports: [MessagePopUpComponent, ConfirmPopUpComponent, InputDangerTextComponent, SpinnerS7Component, MatIcon],
+  imports: [MessagePopUpComponent, ConfirmPopUpComponent, InputDangerTextComponent, SpinnerS7Component, MatIcon, UpdateMemoryTypeComponent],
   templateUrl: './get-all-memory-types.component.html',
   styleUrl: './get-all-memory-types.component.scss'
 })
