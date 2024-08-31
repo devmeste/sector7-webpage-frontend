@@ -3,11 +3,11 @@
     <div class="enable_choice_container">
         <div class="disable_choice choice_element" [ngClass]="{'selected': selectedOption === 'disabled'}"
             (click)="changeProductsState('disabled')">
-            Deshabilitados
+            No visibles
         </div>
         <div class="enable_choice choice_element" [ngClass]="{'selected': selectedOption === 'enabled'}"
             (click)="changeProductsState('enabled')">
-            Habilitados
+            Visibles
         </div>
     </div>
 
@@ -15,8 +15,8 @@
 
 
 
-    <h2 class="title"> Productos {{selectedOption}} </h2>
-    <h4 class="subtitle"> Lista de los productos {{selectedOption}} de Sector 7</h4>
+    <h2 class="title"> Productos {{(selectedOption === 'enabled') ? 'visibles' : 'no visibles'}} </h2>
+    <h4 class="subtitle"> Lista de los productos {{(selectedOption === 'enabled') ? 'visibles' : 'no visibles'}} de Sector 7</h4>
 
     @if(products$ && products$.length > 0){
     <table>
@@ -26,21 +26,21 @@
                     Nombre
                 </td>
                 <td>
-                    precio
+                    Precio
                 </td>
                 <td class="td_two_children" colspan="2">
-                    stock 
+                    Stock 
                     <div class="td_children_container">
                         <div  class="td_children">
-                            real
+                            Real
                         </div>
                         <div class="td_children" >
-                            visual
+                            Visual
                         </div>
                     </div>
                 </td>
                 <td>
-                    habilitar / Dehabilitar
+                    {{(selectedOption === 'enabled') ? 'Ocultar' : 'Mostrar'}}
                 </td>
                 <td>
                     Ver
