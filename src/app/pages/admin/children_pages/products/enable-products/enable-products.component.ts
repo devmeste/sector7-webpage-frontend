@@ -21,7 +21,7 @@ export class EnableProductsComponent {
 
   selectedOption: string = 'enabled';
   products$: BKProduct[] = [];
-  checkbox_default_value: boolean = true;
+  checkbox_default_value: boolean = false;
 
   id_to_show_pop_up: string = '';
   price_to_show_pop_up: number= 0;
@@ -34,7 +34,7 @@ export class EnableProductsComponent {
   changeProductsState(option: string) {
     this.chargeProducts(option);
     this.selectedOption = option;
-    this.checkbox_default_value = option === 'enabled' ? true : false;
+    //this.checkbox_default_value = option === 'enabled' ? true : false;
   }
 
   chargeProducts(option: string) {
@@ -50,20 +50,12 @@ export class EnableProductsComponent {
 
   send() {
     let ids_to_send: string[] = [];
-    if (this.selectedOption === 'enabled') {
-      for (let product of this.products$) {
-        if (!product.isEnabled) {
-          ids_to_send.push(product.id);
-        }
+    for (let product of this.products$) {
+      if (product.isEnabled) {
+        ids_to_send.push(product.id);
       }
     }
-    else{
-      for (let product of this.products$) {
-        if (product.isEnabled) {
-          ids_to_send.push(product.id);
-        }
-      }
-    }
+
 
     this._adminService.sendUpdateEnableProducts(ids_to_send, this.selectedOption).subscribe({
       next:()=>{

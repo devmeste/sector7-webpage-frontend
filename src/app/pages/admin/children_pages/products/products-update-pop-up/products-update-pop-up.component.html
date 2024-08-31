@@ -22,7 +22,7 @@
 
                         <!-- Descipcion -->
                         <div class="custom-input">
-                            <label class="form-label">Descripcion: </label>
+                            <label class="form-label">Descripción: </label>
                             <textarea name="description" formControlName="description" required class="form-control"
                                 [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
                             </textarea>
@@ -57,7 +57,7 @@
 
                             <!-- Actual Stock -->
                             <div class="custom-input">
-                                <label class="form-label">Stock Real: </label>
+                                <label class="form-label">Stock real: </label>
                                 <input type="number" formControlName="actualStock" required class="form-control"
                                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'actualStock', 'required') }">
                                 @if( hasErrors(this.form,'actualStock', 'required') ){ <app-input-danger-text
@@ -68,7 +68,7 @@
 
                             <!-- Stock Visual -->
                             <div class="custom-input">
-                                <label class="form-label">Stock Visual: </label>
+                                <label class="form-label">Stock visual: </label>
                                 <input type="number" formControlName="viewStock" required class="form-control"
                                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'viewStock', 'required') }">
                                 @if( hasErrors(this.form,'viewStock', 'required') ){ <app-input-danger-text
