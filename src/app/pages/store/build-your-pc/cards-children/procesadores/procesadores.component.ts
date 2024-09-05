@@ -15,8 +15,9 @@ import { CardsChildrenAbstractComponent } from '../cards-children';
   styleUrl: './procesadores.component.scss'
 })
 export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
-
-  section: string = 'procesadores';
+  
+  override section: string = 'procesadores';
+  override pathToContinue: string = 'mothers';
   
 
   override changeProducts() {
@@ -27,11 +28,21 @@ export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
     })
   }
 
-  override addToCart(id:string) {
+  override addToCart( cartEntry :BuildYourPcCartEntry ) {
+
+    // Si no hay seleccion del componente que sigue.. 
+    // lo agrego de una
+
+    // si ya hay algo seleccionado en el siguiente 
+    
+
     const newEntry :BuildYourPcCartEntry = {
+      selectedProductID: cartEntry.selectedProductID,
       categoryName: 'procesadores',
-      selectedProductName: id,
+      selectedProductName: cartEntry.selectedProductName,
       selectedProductQuantity: 1,
+      selectedProductPrice: cartEntry.selectedProductPrice,
+      selectedProductPhoto: cartEntry.selectedProductPhoto
     }
     this._buildYourPcService.addToCart(newEntry);
     this._router.navigate(['build-your-pc/mothers']);
@@ -40,14 +51,11 @@ export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
   getRequirement() {
     const linea = this._buildYourPcService.getEntryBySection('linea')?.selectedProductName;
     if (linea) {
-      console.log("Linea : " + linea);
       return linea;
     } else {
       return '';
     }
   }
-
-
 
 
 

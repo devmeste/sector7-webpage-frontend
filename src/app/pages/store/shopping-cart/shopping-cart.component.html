@@ -55,4 +55,7 @@
             <button class="primary_button" (click)="sendToChoiceDeliveryMethod()">Continuar compra</button>
         </div>
     }
+    @if (showMustLoginPopUp) {
+        <app-confirm-pop-up [custom_message]="'Necesita estar logueado para realizar esta acción'" [buttonConfirmText]="'Iniciar Sesion'" (close)="closePopUp('showMustLoginPopUp')" (confirm)="sendToLogin()"></app-confirm-pop-up>
+    }
 </main>

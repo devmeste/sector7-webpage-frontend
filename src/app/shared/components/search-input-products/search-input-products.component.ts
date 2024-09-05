@@ -22,6 +22,7 @@ export class SearchInputProductsComponent {
 
   @Output() searchString = new EventEmitter<string>();
 
+
   isDropdownHidden = signal<boolean>(false);
   //  Search Bar 
   items: BKProduct[] | undefined;
@@ -48,6 +49,12 @@ export class SearchInputProductsComponent {
     });
   }
 
+
+    // Método para obtener el texto actual
+    getInputText(): string | undefined {
+      return this.inputText;
+    }
+  
   send(event?: AutoCompleteSelectEvent) {
     this.isDropdownHidden.set(false);
     this.searchString.emit(this.inputText);
@@ -75,5 +82,7 @@ export class SearchInputProductsComponent {
   onBlur() {
     this.inputHasFocus = false;
   }
+
+
 
 }

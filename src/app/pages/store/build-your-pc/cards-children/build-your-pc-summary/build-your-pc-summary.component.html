@@ -1,0 +1,30 @@
+
+<main>
+    <ul class="summary_list">
+    @for(entry of products; track $index) {
+            @if(entry.categoryName.toLowerCase() === 'linea'){
+                <li class="summary_item">
+                    <span >Linea: </span>
+                    <span class="quantity">{{entry.selectedProductName}} </span>
+                </li>
+            }
+            @else if(entry.selectedProductID == null){
+
+            }
+            @else {
+                <li class="summary_item">
+                    <span class="product_name">{{entry.selectedProductName}} </span>
+                    <span class="quantity">x {{entry.selectedProductQuantity}} </span>
+                </li>
+            }
+        }
+    </ul>
+
+    <div class="total_container">
+        <p class="total_price">Total: {{cartTotal$ | customCurrency  }}</p>
+    </div>
+
+    <div class="button_container">
+        <button class="primary_button" (click)="goToCart()">Listo! Llevame al carrito!</button>
+    </div>
+</main>

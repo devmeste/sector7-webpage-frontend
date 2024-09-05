@@ -16,22 +16,20 @@ import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
 })
 export class MothersComponent extends CardsChildrenAbstractComponent {
   
-  override getRequirement(): string {
-    return ''
-  }
+  override pathToContinue : string = 'memorias';
+  override section: string = 'mothers';
 
-  override addToCart(id:string) {
-    const newEntry : BuildYourPcCartEntry = {
-      categoryName: 'mothers',
-      selectedProductName: id,
-      selectedProductQuantity: 1,
+
+  getRequirement() {
+    const linea = this._buildYourPcService.getEntryBySection('linea')?.selectedProductName;
+    if (linea) {
+      console.log("Linea : " + linea);
+      return linea;
+    } else {
+      // Aca mostraria un pop up que le pide que primero elija una linea...
+      return '';
     }
-    this._buildYourPcService.addToCart(newEntry);
-    this._router.navigate(['build-your-pc/memorias']);
   }
-
-  section: string = 'mothers';
-
   
 
 

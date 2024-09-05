@@ -20,9 +20,31 @@ import { convertNumberArrayToImage } from 'app/core/utils/CustomImageMannager';
 })
 export class CreateProductComponent extends CustomForm implements OnInit {
 
-  sockets!: string[];
+
+
+
+
+  
+  private _adminService = inject(AdminService);
+  @ViewChild('photoInput') photoInput!: ElementRef;
+  categories$ !: ICategory[];
+  
+  //pop up variables 
+  productHasError = false;
+  productWasCreatedSuccessfully = false;
+  errorMessage = '';
+
+  // Elements that need getted from the backend
+  sockets !: string[];
+  generations !: string[];
+  memory_types !: string[];
+
+
   photosByteArray: number[][]= [];
   photosByteArrayString: string[] = [];
+
+
+
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({
@@ -60,12 +82,6 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   //   })
   // }
 
-  categories$ !: ICategory[];
-  productWasCreatedSuccessfully = false;
-  productHasError = false;
-  errorMessage = '';
-  @ViewChild('photoInput') photoInput!: ElementRef;
-  private _adminService = inject(AdminService);
 
 
   // luego borrar este metodo
@@ -88,7 +104,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.photoInput.nativeElement.value = '';
+    // this.photoInput.nativeElement.value = '';
   }
 
 
@@ -115,7 +131,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       const ArrayFieldsFromCategory = category.fields;
 
       this.fieldsArray.clear();
-
+      console.log(ArrayFieldsFromCategory);
       ArrayFieldsFromCategory.forEach(name => {
 
         if (name.toLowerCase() === 'socket') {
@@ -127,7 +143,30 @@ export class CreateProductComponent extends CustomForm implements OnInit {
               newFieldGroup.get('value')?.setValue(this.sockets[0]); // Set the first value
             }
           })
-        } else {
+        } 
+        else if(name.toLowerCase() === 'generación'){
+          this._adminService.getAllGenerations().subscribe(generations => {
+            console.log(generations);
+            this.generations = generations.map( generation => generation.type);
+            const newFieldGroup = this.createNewFieldGroup(name);
+            // Automatically set the first generation value
+            if (this.generations.length > 0) {
+              newFieldGroup.get('value')?.setValue(this.generations[0]); // Set the first value
+            }
+          })
+        }
+        else if (name.toLowerCase() === 'tipo de memoria') {
+          this._adminService.getAllMemoryTypes().subscribe(memory_types => {
+            console.log(memory_types);
+            this.memory_types = memory_types.map(memory_type => memory_type.type);
+            const newFieldGroup = this.createNewFieldGroup(name);
+            // Automatically set the first memory value
+            if (this.memory_types.length > 0) {
+              newFieldGroup.get('value')?.setValue(this.memory_types[0]); // Set the first value
+            }
+          })
+        }
+        else {
           this.createNewFieldGroup(name);
         }
       });
@@ -149,12 +188,12 @@ export class CreateProductComponent extends CustomForm implements OnInit {
 
   addPhoto() {
     // Todo este metodo volver
-    const p = this.photoInput.nativeElement.value;
-    if (p.trim().length == 0 || p == null) {
-      return;
-    }
-    this.photosArray.push(this.formBuilder.control(p, []));
-    this.photoInput.nativeElement.value = '';
+    // const p = this.photoInput.nativeElement.value;
+    // if (p.trim().length == 0 || p == null) {
+    //   return;
+    // }
+    // this.photosArray.push(this.formBuilder.control(p, []));
+    // this.photoInput.nativeElement.value = '';
   }
 
   deletePhoto(i: number) {

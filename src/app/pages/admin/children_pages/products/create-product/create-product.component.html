@@ -153,6 +153,26 @@
                            }
                         </select>
                     }
+                    @else if(formControl.value.fieldName == 'Generación'){
+                        <div><label for="Generation">Generación</label></div>
+                        <select 
+                        formControlName="value" 
+                        class="custom-select field">
+                           @for( generation of generations ; track $index) {
+                               <option value="{{generation}}" > {{generation}} </option>
+                           }
+                        </select>
+                    }
+                    @else if(formControl.value.fieldName == 'Tipo de memoria'){
+                        <div><label for="Tipo de memoria">Tipo de memoria</label></div>
+                        <select 
+                        formControlName="value" 
+                        class="custom-select field">
+                           @for( memory_type of memory_types ; track $index) {
+                               <option value="{{memory_type}}" > {{memory_type}} </option>
+                           }
+                        </select>
+                    }
                     @else {
                         <!-- any other field -->
                         <div class="custom-input">
@@ -162,6 +182,8 @@
                             </div>
                         </div>
                     }
+                    
+                    
 
                 </div>
             </div>

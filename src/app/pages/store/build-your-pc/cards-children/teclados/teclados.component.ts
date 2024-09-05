@@ -3,20 +3,18 @@ import { TwoColorsCardComponent } from "../../../../../shared/components/cards/t
 import { CardsChildrenAbstractComponent } from '../cards-children';
 
 @Component({
-  selector: 'app-refrigeracion',
+  selector: 'app-teclados',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './refrigeracion.component.html',
-  styleUrl: './refrigeracion.component.scss'
+  templateUrl: './teclados.component.html',
+  styleUrl: './teclados.component.scss'
 })
-export class RefrigeracionComponent  extends CardsChildrenAbstractComponent {
-  override section: string = 'refrigeracion';
-  override pathToContinue: string = 'monitores';
+export class TecladosComponent  extends CardsChildrenAbstractComponent {
+  override section: string = 'teclados';
+  override pathToContinue: string = 'mouses';
 
   override getRequirement(): string {
    return '';
   }
-
-
 
 }

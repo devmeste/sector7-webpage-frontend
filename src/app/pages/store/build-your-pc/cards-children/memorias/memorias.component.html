@@ -6,6 +6,7 @@
         [price]="product.price"
         [photo]="product.photos[0]"
         [id]="product.id" 
+        (addToCart)="addToCart($event)"
         >
     </app-two-colors-card>
     }

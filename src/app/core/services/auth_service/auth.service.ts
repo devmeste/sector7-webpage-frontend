@@ -85,6 +85,10 @@ export class AuthService {
     return this.isUserLoggedInSubject.asObservable();
   }
 
+  isUserLoggedIn(): boolean {
+    return this.isUserLoggedInSubject.getValue();
+  }
+
   //return an observable
   isAdminLoggedIn$(): Observable<boolean> {
     return this.isAdminLoggedInSubject.asObservable();

@@ -12,6 +12,7 @@ export abstract class ParentLoginComponent {
   LoginForm: FormGroup;
   requestHasError: boolean = false;    
   passwordVisible: string = 'password';
+  redirectTo  !: string;
 
   constructor(protected router:Router, protected auth_service: AuthService) {
     this.LoginForm = new FormGroup({

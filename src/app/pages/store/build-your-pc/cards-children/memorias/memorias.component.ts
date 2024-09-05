@@ -10,11 +10,11 @@ import { TwoColorsCardComponent } from "../../../../../shared/components/cards/t
   styleUrl: './memorias.component.scss'
 })
 export class MemoriasComponent extends CardsChildrenAbstractComponent {
-  override section: string = 'memorias';
 
-  override addToCart(): void {
-    
-  }
+  
+  override section: string = 'memorias';
+  override pathToContinue: string = 'almacenamiento';
+
 
   override getRequirement(): string {
     return '';

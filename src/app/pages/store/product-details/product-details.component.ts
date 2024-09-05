@@ -40,12 +40,13 @@ export class ProductDetailsComponent implements OnInit {
     }
   ];
 
-
   ngOnInit(): void {
     this._router.params.subscribe(params => {
       this.id = params['id'];
       this.updateProductDetails(this.id);
     })
+
+    window.scrollTo(0, 0);
 
   }
 
@@ -56,9 +57,7 @@ export class ProductDetailsComponent implements OnInit {
         this.product = product;
         if (product.photos) {
           this.mainImage.set(product.photos[0]);
-        } else {
-          //TODO: conseguir una foto por defecto
-        }
+        } 
       }
     );
     this._cartService.getCartQuantity().subscribe(quantity =>{

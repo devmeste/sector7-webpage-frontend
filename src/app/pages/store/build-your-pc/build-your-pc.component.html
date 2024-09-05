@@ -25,7 +25,13 @@
             <h1 class="title_choice_your_item">
                 Elegí tus {{titleWord}}
             </h1>
-        }@else {
+        }
+        @else if (this.section.toLocaleLowerCase() === 'build-your-pc-summary'){
+            <h1 class="title_choice_your_item">
+                Resumen del carrito
+            </h1>
+        }
+        @else {
             <h1 class="title_choice_your_item">
                 Elegí tu {{titleWord}}
             </h1>
@@ -56,6 +62,9 @@
                 @case ('gabinetes') { <app-gabinetes></app-gabinetes>}
                 @case('teclados'){<app-teclados></app-teclados>}
                 @case('mouses'){<app-mouses></app-mouses>}
+                @case('build-your-pc-summary'){<app-build-your-pc-summary></app-build-your-pc-summary>}
+                <!-- @default {<app-procesadores></app-procesadores>} -->
+
               }
               
         </div>

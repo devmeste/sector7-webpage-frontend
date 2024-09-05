@@ -1,3 +1,5 @@
+@import 'styles.scss';
+
 .modal_container{
 
     .buttons_container{
@@ -16,10 +18,17 @@
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.365);
     }
 
+    
     .primary_button.confirm_button:hover{
-        
         background-image: linear-gradient(red, red);
     }
+    
+    .primary_button.confirm_button.normal_button:hover{
+        background-image: linear-gradient(160deg, $primary-main 20%, $primary-l1 150%);
+    }
+    
+
+
     .primary_button.cancel_button:hover{
         
     }

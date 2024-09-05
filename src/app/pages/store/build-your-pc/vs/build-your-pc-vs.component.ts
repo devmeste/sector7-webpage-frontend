@@ -12,4 +12,8 @@ import { FooterComponent } from "../../../../shared/components/footer/footer.com
 })
 export class BuildYourPcVsComponent {
   
+
+  constructor() {
+    window.scrollTo(0, 0);
+  }
 }

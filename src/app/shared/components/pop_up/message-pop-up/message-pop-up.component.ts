@@ -21,6 +21,7 @@ export class MessagePopUpComponent {
   @Output() close = new EventEmitter<any>();
 
   @Input({ required: true }) custom_message !: string;
+  @Input() buttonConfirmText !: string;
 
   closeModal() {
     this.close.emit();
@@ -30,7 +31,6 @@ export class MessagePopUpComponent {
     // Dividir el mensaje en líneas usando '\n' como separador
     return this.custom_message.split('\n');
   }
-
 
 
   @HostListener('document:keydown.escape', ['$event'])

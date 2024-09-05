@@ -15,17 +15,18 @@ import { FuentesComponent } from "./cards-children/fuentes/fuentes.component";
 import { PlacasDeVideoComponent } from "./cards-children/placas-de-video/placas-de-video.component";
 import { MonitoresComponent } from "./cards-children/monitores/monitores.component";
 import { RefrigeracionComponent } from "./cards-children/refrigeracion/refrigeracion.component";
-import { TecladosComponent } from "../../../teclados/teclados.component";
+import { TecladosComponent } from "./cards-children/teclados/teclados.component";
 import { GabinetesComponent } from "./cards-children/gabinetes/gabinetes.component";
-import { MousesComponent } from "../../../mouses/mouses.component";
-import { AuricularesComponent } from "../../../auriculares/auriculares.component";
+import { MousesComponent } from "./cards-children/mouses/mouses.component";
+import { AuricularesComponent } from "./cards-children/auriculares/auriculares.component";
+import { BuildYourPcSummaryComponent } from "./cards-children/build-your-pc-summary/build-your-pc-summary.component";
 
 @Component({
   selector: 'app-build-your-pc',
   standalone: true,
   templateUrl: './build-your-pc.component.html',
   styleUrl: './build-your-pc.component.scss',
-  imports: [FooterComponent, MatIcon, StepsOfThePathsComponent, RouterOutlet, TwoColorsCardComponent, ProcesadoresComponent, MemoriasComponent, MothersComponent, AlmacenamientoComponent, FuentesComponent, PlacasDeVideoComponent, MonitoresComponent, RefrigeracionComponent, TecladosComponent, GabinetesComponent, MousesComponent, AuricularesComponent]
+  imports: [FooterComponent, MatIcon, StepsOfThePathsComponent, RouterOutlet, TwoColorsCardComponent, ProcesadoresComponent, MemoriasComponent, MothersComponent, AlmacenamientoComponent, FuentesComponent, PlacasDeVideoComponent, MonitoresComponent, RefrigeracionComponent, TecladosComponent, GabinetesComponent, MousesComponent, AuricularesComponent, BuildYourPcSummaryComponent]
 })
 export class BuildYourPcComponent {
 
@@ -42,9 +43,13 @@ export class BuildYourPcComponent {
   ngOnInit(): void {
     // console.log("Build your pc component");
     this._activatedRoute.params.subscribe(params=>{
+      
+      console.log("params: " + JSON.stringify(params));
+
       if(params['section']){
         this.titleWord = this._buildYourPcService.getTitleWordBySection(params['section']);
-        if(!this.titleWord){
+        
+        if(!this.titleWord && params['section'] !== 'build-your-pc-summary') {
           this._router.navigate(['build-your-pc']);
           return;
         }

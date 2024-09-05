@@ -37,6 +37,10 @@
                         [ngClass]="{'currentPath_highlight': entry.categoryName.toLowerCase() === section.toLocaleLowerCase()}">
                         {{entry.categoryName}}
                     </p>
+                    @if(entry.selectedProductPhoto){
+                        <img src="{{this.entry.selectedProductPhoto}}" alt="Imagen" class="hover-image" />
+                    }
+                    
                     @if(entry.selectedProductName!=null){
                     <div class="path_line_text_container">
                         <p class="path_line_text">
@@ -50,10 +54,23 @@
         </a>
         }
     </div>
-    <h3 class="highlight_text total">
-        Total: $10000
-    </h3>
+    <div class="bottom_container ">
+        <div class="buttons_container">
+            <button class="tertiary_button" (click)="askToClearCart()">
+                Vaciar
+            </button>
+            <button class="primary_button" (click)="Buy()">
+                Comprar
+            </button>
+        </div>
+        <h3 class="highlight_text total">
+            Total: ${{cartTotal$|async}}
+        </h3>
+    </div>
     }
 
+    @if (this.showConfirmClearCartPopUp) {
+        <app-confirm-pop-up [custom_message]="'¿Seguro que desea vaciar tu carrito?'" (confirm)="clearCart()" (close)="this.closePopUp('showConfirmClearCartPopUp')"></app-confirm-pop-up>
+    }
 </section>
 }

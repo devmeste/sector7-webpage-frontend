@@ -3,16 +3,16 @@ import { CardsChildrenAbstractComponent } from '../cards-children';
 import { TwoColorsCardComponent } from "../../../../../shared/components/cards/two-colors-card/two-colors-card.component";
 
 @Component({
-  selector: 'app-fuentes',
+  selector: 'app-auriculares',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './fuentes.component.html',
-  styleUrl: './fuentes.component.scss'
+  templateUrl: './auriculares.component.html',
+  styleUrl: './auriculares.component.scss'
 })
-export class FuentesComponent extends CardsChildrenAbstractComponent {
+export class AuricularesComponent  extends CardsChildrenAbstractComponent {
 
-  override section: string = 'fuentes';
-  override pathToContinue: string = 'placas de video';
+  override section: string = 'auriculares';
+  override pathToContinue: string = 'teclados';
 
   override getRequirement(): string {
    return '';

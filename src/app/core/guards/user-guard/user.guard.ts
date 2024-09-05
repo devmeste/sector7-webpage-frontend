@@ -4,6 +4,7 @@ import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { firstValueFrom } from 'rxjs';
 
 export const userGuard: CanActivateFn = async (route, state) => {
+  
   const authService = inject(AuthService);
   const router = inject(Router);
 

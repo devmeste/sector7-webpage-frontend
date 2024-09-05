@@ -1,10 +1,11 @@
 import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, viewChild } from '@angular/core';
 import { MessagePopUpComponent } from '../message-pop-up/message-pop-up.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-confirm-pop-up',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './confirm-pop-up.component.html',
   styleUrls: ['./confirm-pop-up.component.scss','../../../styles/pop-up-styles.scss']
 })

@@ -39,6 +39,9 @@ export class GetAllProductsComponent {
   _adminService: AdminService = inject(AdminService);
   products$!: BKProduct[];
 
+  @ViewChild('searchInputComponent') private searchInputComponent!: SearchInputProductsComponent;
+
+
   // MODAL POP-UPS 
   productDeletedSuccessfully = false;
   productDeletionFailed: boolean = false;
@@ -63,7 +66,7 @@ export class GetAllProductsComponent {
   // Spinner
   isLoading = false;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.updateProductsState();
   }
 
@@ -106,11 +109,21 @@ export class GetAllProductsComponent {
   }
 
   updateProductsState(text?: string) {
-    this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, text).subscribe(productResponse => {
-      this.products$ = productResponse.products;
-      this.totalPages = productResponse.pagination.totalPages;
-      this.totalItems = productResponse.pagination.totalElements;
-    })
+    const inputText = this.searchInputComponent.getInputText();
+    if(inputText){
+      this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, inputText).subscribe(productResponse => {
+        this.products$ = productResponse.products;
+        this.totalPages = productResponse.pagination.totalPages;
+        this.totalItems = productResponse.pagination.totalElements;
+      })
+    }else{
+      this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, text).subscribe(productResponse => {
+        this.products$ = productResponse.products;
+        this.totalPages = productResponse.pagination.totalPages;
+        this.totalItems = productResponse.pagination.totalElements;
+      })
+    }
+    
   }
 
   pageChanged(event: PageEvent) {
@@ -136,6 +149,8 @@ export class GetAllProductsComponent {
   search(value: string) {
     this.updateProductsState(value);
   }
+
+
 
 
 }

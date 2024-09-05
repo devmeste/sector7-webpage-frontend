@@ -40,6 +40,11 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
   // send
   loading: boolean = false;
 
+  // fields
+  sockets: string[] = [];
+  generations: string[] = [];
+  memory_types: string[] = [];
+
   override initializeForm(): void {
     if (this.product_id) {
       this._adminService.getProductById(this.product_id).subscribe(p => {
@@ -66,14 +71,21 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
 
         this._adminService.getCategoryById(this.product$.categoryId).subscribe(c => {
           this.categoryName = c.name;
-          if (this.categoryName == 'Procesadores' || this.categoryName == 'Mothers') {
+          if (this.categoryName == 'Procesadores') {
             this.getSockets();
+            this.getGenerations();  
+          }else if ( this.categoryName == 'Mothers' ){
+            this.getMemoryTypes();
+            this.getSockets();
+            this.getGenerations();
+          }
+          else if( this.categoryName == 'Memorias'){
+            this.getMemoryTypes();
           }
         })
       });
     }
   }
-
 
 
   async fillInitialPhotos(photos: string[]): Promise<void> {
@@ -102,23 +114,15 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
     return this.formBuilder.array([]);
   }
 
-
-
-
   addPhoto($event: number[]) {
     this.photosByteArray.push($event);
     const imageString = convertNumberArrayToImage($event);
     this.photosArray.push(imageString);
-    console.log(this.photosArray);
-    console.log(this.photosByteArray);
   }
 
   deletePhoto(i: number) {
-    console.log(i);
     this.photosArray.splice(i, 1);
     this.photosByteArray.splice(i, 1);
-    console.log(this.photosArray);
-    console.log(this.photosByteArray);
   }
 
   fillFieldsArray() {
@@ -143,8 +147,6 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
 
 
   async splitPhotos(): Promise<number[][]> {
-    console.log(this.photosArray2.value);
-
     const result = await Promise.all(
       this.photosArray2.value.map((photo: string) => convertImageUrlToByteArray(photo))
     );
@@ -167,15 +169,26 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
     }
   }
 
-  sockets: string[] = [];
+
   getSockets() {
     this._adminService.getAllSockets().subscribe((sockets) => {
       this.sockets = sockets.map(socket => socket.type);
-      console.log(this.sockets);
     });
   }
 
+  getGenerations() {
+    this._adminService.getAllGenerations().subscribe((generation) => {
+      this.generations  = generation.map(generation => generation.type);
+    });
+  }
+  getMemoryTypes() {
+    this._adminService.getAllMemoryTypes().subscribe((memory) => {
+      this.memory_types = memory.map(memory => memory.type);
+    });
+  }
 }
+
+
 
 export interface Field {
   fieldName: string;

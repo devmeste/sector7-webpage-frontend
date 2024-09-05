@@ -7,4 +7,8 @@
             <picture class="intel-logo-container"></picture>
         </div>
     </div>
+
+    @if(this.showChangeProcessorAlert){
+        <app-confirm-pop-up custom_message="La linea seleccionada no corresponde con el procesador previamente seleccionado, desea cambiarlo?" (confirm)="removeDependentComponents()" (close)="closeModal('showChangeProcessorAlert')"></app-confirm-pop-up>
+    }
 </div>
