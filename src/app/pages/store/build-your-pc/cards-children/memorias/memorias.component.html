@@ -10,4 +10,10 @@
         >
     </app-two-colors-card>
     }
+    @if(!this.thereIsPreviousStepSelected){
+        <div class="warning_text_container">
+            <p class="text-center">Para poder elegir una memoria, es necesario elegir una mother previamente.</p>
+            <p class="text-center"><a href="build-your-pc/Mothers" style="font-weight: bold;">Haz click aqui</a> para elegir tu mother.</p>
+        </div>
+    }
 </div>

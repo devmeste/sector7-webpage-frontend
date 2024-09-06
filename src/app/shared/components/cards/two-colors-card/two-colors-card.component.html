@@ -5,7 +5,7 @@
     </div>
     <div class="divider"></div>
     <div class="bottom_container">
-        <p class="product_name">{{this.title}}</p>
+        <p class="product_name"><a href="product-details/{{this.id}}">{{this.title}}</a></p>
         <p class="product_price">{{this.price | customCurrency}}</p>
         <div class="button_container">
             <button class="primary_button" (click)="sendProduct()" >Seleccionar</button>

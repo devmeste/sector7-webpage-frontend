@@ -5,11 +5,13 @@ import { HttpClient } from '@angular/common/http';
 import BKProduct from 'app/core/models/BKProduct';
 import { ProductResponse } from 'app/core/models/ProductResponse';
 import { environment } from 'app/core/environments/environment';
+import { ICondition } from 'app/core/models/ICondition';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
 
   
 
@@ -105,12 +107,15 @@ export class ProductService {
   }
 
   getAllProductsBySocketAndGeneration(category: string, socket: string, generation: string) {
-    console.log(category);
-    console.log(socket);
-    console.log(generation);
-    //              http://             localhost:8001/api/v1/es/products/category/Mothers/socket/LGA1700/generation/11
     return this._httpClient.get<ProductResponse>(`${this.baseUrl}products/category/${category}/socket/${socket}/generation/${generation}`);
   }
-  
+
+  getAllMemoriesByType(type: string) {
+    return this._httpClient.get<ProductResponse>(`${this.baseUrl}products/memories/${type}`);
+  }
+
+  checkCompatibility(firstID: string | null, secondID: string) : Observable<ICondition> {
+    return this._httpClient.get<ICondition>(`${this.baseUrl}products/check?ids=${firstID},${secondID}`);
+  }
 
 }

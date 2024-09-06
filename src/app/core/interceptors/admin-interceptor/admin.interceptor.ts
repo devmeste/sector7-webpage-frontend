@@ -41,7 +41,7 @@ export const adminInterceptor: HttpInterceptorFn = (request, next) => {
         catchError((error) => {
           if (error.status === 401 || error.status === 403) {
             _authService.logout();
-            _router.navigate(['/auth/admin']);
+            _router.navigate(['/admin-dashboard/login']);
           }
           return next(clonedRequest);
         })

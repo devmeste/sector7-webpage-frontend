@@ -25,4 +25,23 @@
             width: 100%;
         }
     }
+
+
+    .warning_text_container {
+        display: flex;
+        
+        justify-content: center;
+        align-items: center;
+        background-color: $warning_200;
+        border-radius: 3px;
+        padding:  2rem;
+        color: $warning_800;
+        
+        p{
+          margin: 0;
+        }
+        mat-icon{
+          height: fit-content;
+        }
+    }
 }

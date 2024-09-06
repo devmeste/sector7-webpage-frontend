@@ -11,4 +11,7 @@
             >
         </app-two-colors-card>
         }
+        @if( this.showPopUpToConfirmDeleteNextStep){
+            <app-confirm-pop-up  custom_message="El procesador seleccionado no corresponde con la mother previamente elegida, si continua, deberá cambiarla" (close)="closeModal('showPopUpToConfirmDeleteNextStep')" (confirm)="confirmDeleteAndContinue()"></app-confirm-pop-up>   
+        }
 </div>

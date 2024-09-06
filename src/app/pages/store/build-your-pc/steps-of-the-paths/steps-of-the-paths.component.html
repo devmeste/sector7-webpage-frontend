@@ -33,17 +33,17 @@
                     </div>
                 </div>
                 <div class="text_container">
-                    <p class="path_point_text"
+                    <p class="path_point_text" 
                         [ngClass]="{'currentPath_highlight': entry.categoryName.toLowerCase() === section.toLocaleLowerCase()}">
                         {{entry.categoryName}}
                     </p>
-                    @if(entry.selectedProductPhoto){
+                    <!-- @if(entry.selectedProductPhoto){
                         <img src="{{this.entry.selectedProductPhoto}}" alt="Imagen" class="hover-image" />
-                    }
+                    } -->
                     
                     @if(entry.selectedProductName!=null){
                     <div class="path_line_text_container">
-                        <p class="path_line_text">
+                        <p class="path_line_text" title="{{entry.selectedProductName}}">
                             {{ entry.selectedProductName }}
                         </p>
                         <mat-icon class="check_icon">check</mat-icon>

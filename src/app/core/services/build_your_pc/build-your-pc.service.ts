@@ -116,11 +116,8 @@ export class BuildYourPcService {
 
 
   removeEntryBySection(section: string) {
-
-
     const entrysIndex = this.getCartFromStorage().findIndex(entry => entry.categoryName.toLowerCase() === section.toLowerCase());
     
-
     const categoryName = this.capitalizeFirstLetter(section);
     const titleWord = this.getTitleWordBySection(section);
 
@@ -162,7 +159,6 @@ export class BuildYourPcService {
   // Auxiliary methods
   private createLocalStorageCartIfNotExists(): void {
     if (localStorage.getItem('buildYourPcCart') == null) {
-      console.log('LocalStorage not exist');
       localStorage.setItem('buildYourPcCart', JSON.stringify(this.buildYourPcCart));
     }
   }
@@ -170,7 +166,6 @@ export class BuildYourPcService {
   private updateEntry(newEntry: BuildYourPcCartEntry): void {
     // entrada existente
     const existingEntry = this.searchEntry(newEntry.categoryName);
-    console.log(existingEntry);
     if (existingEntry) {
       existingEntry.selectedProductName = newEntry.selectedProductName;
       existingEntry.selectedProductQuantity = newEntry.selectedProductQuantity;
@@ -191,7 +186,6 @@ export class BuildYourPcService {
   }
 
   private getCartFromStorage(): BuildYourPcCartEntry[] {
-    console.log(JSON.parse(localStorage.getItem('buildYourPcCart')!));
     return JSON.parse(localStorage.getItem('buildYourPcCart')!);
   }
 

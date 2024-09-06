@@ -10,4 +10,14 @@
         >
     </app-two-colors-card>
     }
+    @if( this.showPopUpToConfirmDeleteNextStep){
+        <app-confirm-pop-up  custom_message="La mother seleccionada no corresponde con la memoria previamente elegida, si continua, deberá cambiarla" (close)="closeModal('showPopUpToConfirmDeleteNextStep')" (confirm)="confirmDeleteAndContinue()"></app-confirm-pop-up>   
+    }
+    @if(!this.thereIsPreviousStepSelected){
+        <div class="warning_text_container">
+            <p class="text-center">Para poder elegir un mother, es necesario elegir un procesador previamente.</p>
+            <p class="text-center"><a href="build-your-pc/procesadores" style="font-weight: bold;">Haz click aqui</a> para elegir tu procesador.</p>
+            
+        </div>
+    }
 </div>

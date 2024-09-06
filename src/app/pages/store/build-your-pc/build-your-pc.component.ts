@@ -41,10 +41,8 @@ export class BuildYourPcComponent {
 
 
   ngOnInit(): void {
-    // console.log("Build your pc component");
     this._activatedRoute.params.subscribe(params=>{
       
-      console.log("params: " + JSON.stringify(params));
 
       if(params['section']){
         this.titleWord = this._buildYourPcService.getTitleWordBySection(params['section']);
