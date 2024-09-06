@@ -22,28 +22,30 @@ export class AmdVsIntelComponent {
   _router = inject(Router);
   _buildYourPcService = inject(BuildYourPcService);
 
+  selectedLine: string = '';
+
   showChangeProcessorAlert: boolean = false;
 
   toggleIntel() {
 
-    const line = this._buildYourPcService.getEntryBySection('linea');
-
-    
-    this.intelIsActive = true;
-    this.move = true;
-    this.move2 = true;
-    setTimeout(() => {
-      this.continueBuildingPc('Intel');
-    }, 2300);
+    if (this.canContinueToProcessors('Intel')) {
+      this.intelIsActive = true;
+      this.move = true;
+      this.move2 = true;
+      
+      setTimeout(() => {
+        this.continueBuildingPc('Intel');
+      }, 2300);
+    }else{
+       //( preguntar si limpiar procesador, mother y memoria RAM)
+       this.showChangeProcessorAlert = true;
+       this.selectedLine = 'Intel';
+    }   
   }
 
   toggleAmd() {
-
-    const line = this._buildYourPcService.getEntryBySection('linea');
-
-    // Pregunto si hay un procesador AMD seleccionado
-    if (line && line.selectedProductName === 'AMD' || line === null) {
-      // Si hay un procesador AMD seleccionado aviso y que confirmen que quiere cambiarlo    
+    // Pregunto si hay un procesador AMD seleccionado o si esta vacio
+    if (this.canContinueToProcessors('AMD')) {
       this.amdIsActive = true;
       this.move = true;
       this.move2 = true;
@@ -52,24 +54,41 @@ export class AmdVsIntelComponent {
       }, 2300);
     }
     else {
+       //( preguntar si limpiar procesador, mother y memoria RAM)
       this.showChangeProcessorAlert = true;
-      // limpiar procesador, mother y memoria RAM
+      this.selectedLine = 'AMD';
     }
   }
 
+  canContinueToProcessors(brandOfLine: string) {
+
+    const line = this._buildYourPcService.getEntryBySection('linea');
+    const processor = this._buildYourPcService.getEntryBySection('procesadores');
+
+    return line?.selectedProductName === brandOfLine 
+      || line?.selectedProductName === null
+      || processor?.selectedProductName === null
+  }
+
   removeDependentComponents() {
-    
+
     this.closeModal('showChangeProcessorAlert');
 
     this._buildYourPcService.removeEntryBySection('procesadores');
     this._buildYourPcService.removeEntryBySection('mothers');
     this._buildYourPcService.removeEntryBySection('memorias');
 
+    if(this.selectedLine === 'AMD'){
     this.amdIsActive = true;
+    }else{
+      this.intelIsActive = true;
+    }
+
+
     this.move = true;
     this.move2 = true;
     setTimeout(() => {
-      this.continueBuildingPc('AMD');
+      this.continueBuildingPc(this.selectedLine);
     }, 2300);
   }
 

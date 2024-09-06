@@ -112,8 +112,6 @@ export class BuildYourPcService {
 
   clearCart() {
     this.setAllEntrysByDefault();
-    // this.buildYourPcCart$.next(this.buildYourPcCart);
-    localStorage.removeItem('buildYourPcCart');
   }
 
 

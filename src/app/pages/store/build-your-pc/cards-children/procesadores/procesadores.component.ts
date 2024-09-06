@@ -20,6 +20,27 @@ export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
   override pathToContinue: string = 'mothers';
   
 
+  override ngOnInit(): void {
+    super.ngOnInit();
+
+    // Tengo que ver si el procesador es compatible con la linea 
+    // Cuando entran por URL en vez del flujo normal 
+    // Si no, los pateo a el VS .
+
+    // const entryToVerify =this._buildYourPcService.getEntryBySection('procesadores');
+    // const lineToVerify = this._buildYourPcService.getEntryBySection('linea');
+    // if (entryToVerify?.selectedProductName) {
+    //   if(!lineAndProcessorAreCompatible( entryToVerify , lineToVerify )){
+
+    //   }
+    // }
+  }
+
+  lineAndProcessorAreCompatible( entryToVerify :BuildYourPcCartEntry , lineToVerify :BuildYourPcCartEntry ) {
+    
+    return lineToVerify.selectedProductName === entryToVerify.selectedProductName;
+  }
+
   override changeProducts() {
     const requirement = this.getRequirement();
     this._productsService.getAllProductsByCategory(this.section, requirement).subscribe(productsResponse => {

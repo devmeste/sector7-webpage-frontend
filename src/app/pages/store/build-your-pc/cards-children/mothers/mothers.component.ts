@@ -15,22 +15,47 @@ import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
   styleUrl: './mothers.component.scss'
 })
 export class MothersComponent extends CardsChildrenAbstractComponent {
-  
-  override pathToContinue : string = 'memorias';
+
+  override pathToContinue: string = 'memorias';
   override section: string = 'mothers';
 
 
   getRequirement() {
-    const linea = this._buildYourPcService.getEntryBySection('linea')?.selectedProductName;
-    if (linea) {
-      console.log("Linea : " + linea);
-      return linea;
-    } else {
-      // Aca mostraria un pop up que le pide que primero elija una linea...
-      return '';
+    return '';
+  }
+
+
+
+
+  override changeProducts() {
+    const processorID = this._buildYourPcService.getEntryBySection('procesadores')?.selectedProductID;
+    let socket = '';
+    let generation = '';
+
+    if (processorID) {
+      const product = this._productsService.getProductById(processorID).subscribe(product => {
+
+        let fieldsJSON = JSON.parse(product?.fieldsJSON);
+        Object.keys(fieldsJSON).forEach(key => {
+          if (key === 'Socket') {
+            socket = fieldsJSON[key];
+          } else if (key === 'Generación') {
+            generation = fieldsJSON[key];
+          }
+        })
+
+        if (socket && generation) {
+
+          this._productsService.getAllProductsBySocketAndGeneration('Mothers', socket, generation).subscribe(productsResponse => {
+            this.products = productsResponse.products;
+          });
+
+        } 
+
+      }
+
+      );
     }
   }
-  
-
 
 }
