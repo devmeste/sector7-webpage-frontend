@@ -4,12 +4,12 @@
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Categorias
+                    Categorías
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
-                <li [routerLink]="['category']">Ver categorias</li>
-                <li [routerLink]="['category/new']">Crear categoria</li>
+                <li [routerLink]="['category']">Ver categorías</li>
+                <li [routerLink]="['category/new']">Crear categoría</li>
             </ul>
         </mat-expansion-panel>
 
@@ -22,8 +22,8 @@
             </mat-expansion-panel-header>
             <ul class="options_list">
 
+                <li [routerLink]="['products']">Ver productos</li>
                 <li [routerLink]="['products/new']">Crear producto</li>
-                <li [routerLink]="['products']">Ver todos</li>
                 <li [routerLink]="['products/enable']">Mostrar / Ocultar</li>
                 <li [routerLink]="['products/pendings']">Aprobar pendientes</li>
                 <mat-expansion-panel class="category_toggle build_your_pc_filters" (opened)="panelOpenState = true"
@@ -42,8 +42,8 @@
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <ul class="options_list">
+                                <li [routerLink]="['generations']">Ver generaciones</li>
                                 <li [routerLink]="['generations/new']">Crear generación</li>
-                                <li [routerLink]="['generations']">Ver todas</li>
                             </ul>
                         </mat-expansion-panel>
 
@@ -56,8 +56,8 @@
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <ul class="options_list">
+                                <li [routerLink]="['sockets']">Ver sockets</li>
                                 <li [routerLink]="['sockets/new']">Crear socket</li>
-                                <li [routerLink]="['sockets']">Ver todos</li>
                             </ul>
                         </mat-expansion-panel>
                         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true"
@@ -68,8 +68,8 @@
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <ul class="options_list">
+                                <li [routerLink]="['memory-types']">Ver tipos de memoria</li>
                                 <li [routerLink]="['memory-types/new']">Crear tipo de memoria</li>
-                                <li [routerLink]="['memory-types']">Ver todos</li>
                             </ul>
                         </mat-expansion-panel>
                     </ul>
@@ -104,6 +104,7 @@
             <ul class="options_list">
                 <!-- <li>Crear Producto</li>
                 <li>Ver Todos</li> -->
+                <li>En desarrollo</li>
             </ul>
         </mat-expansion-panel>
 
@@ -117,7 +118,7 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
-                <li [routerLink]="['usd']">Ver todas</li>
+                <li [routerLink]="['usd']">Ver cotizaciones</li>
                 <li [routerLink]="['usd/new']">Nueva cotización</li>
             </ul>
         </mat-expansion-panel>
@@ -132,7 +133,8 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
-                <li [routerLink]="['billing']">Ver todas</li>
+                <!-- <li [routerLink]="['billing']">Ver compras</li> -->
+                <li>En desarrollo</li>
             </ul>
         </mat-expansion-panel>
 
@@ -143,12 +145,13 @@
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Estadisticas
+                    Estadísticas
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <ul class="options_list">
                 <!-- <li>Crear Producto</li>
                 <li>Ver Todos</li> -->
+                <li>En desarrollo</li>
             </ul>
         </mat-expansion-panel>
 

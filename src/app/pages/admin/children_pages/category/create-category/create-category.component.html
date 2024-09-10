@@ -5,7 +5,7 @@
         <form (ngSubmit)="send()" [formGroup]="this.form" class="form">
 
             <div class="custom-input">
-                <label class="form-label">Nombre de la categoría</label>
+                <label class="form-label">Nombre de la categoría:</label>
                 <input type="text" formControlName="name" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors('name', 'required') }">
             </div>
@@ -40,15 +40,17 @@
 
 
             @if (this.categoryCreatedSuccessfully) {
-                <app-message-pop-up  custom_message='Categoría Creada Exitosamente' (close)="closeModal('categoryCreatedSuccessfully')" > </app-message-pop-up>
+                <app-message-pop-up  custom_message='Categoría creada exitosamente' (close)="closeModal('categoryCreatedSuccessfully')" > </app-message-pop-up>
             }
             @if (this.categoryCreationFailed) {
                 <app-message-pop-up  custom_message='{{errorMessage}}' (close)="closeModal('categoryCreationFailed')" > </app-message-pop-up>
             }
             
-            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}" [disabled]="disabledFormButton()"
-                type="submit">Enviar
-            </button>
+            <div class="send_button_container">
+                <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton()}" [disabled]="disabledFormButton()"
+                    type="submit">Enviar
+                </button>
+            </div>
         </form>
     </section>
 

@@ -8,10 +8,10 @@
         <thead>
             <tr>
                 <td>
-                    Username
+                    Nombre de usuario
                 </td>
                 <td>
-                    Habilitado
+                    Estado
                 </td>
                 <td>
                     Habilitar/Deshabilitar
@@ -51,9 +51,14 @@
     }
 
     @if (accountUpdatedSuccessfully) {
-    <app-message-pop-up custom_message='Cuenta fue modificada exitosamente'
-        (close)="closeModal('accountUpdatedSuccessfully')"> </app-message-pop-up>
+        @if(wasEnabled) {
+            <app-message-pop-up  custom_message='Cuenta deshabilitada exitosamente'
+            (close)="closeModal('accountUpdatedSuccessfully')"> </app-message-pop-up>}
+        @else {
+            <app-message-pop-up  custom_message='Cuenta habilitada exitosamente'
+            (close)="closeModal('accountUpdatedSuccessfully')"> </app-message-pop-up>}
     }
+    
     @if (accountUpdatedFailed) {
     <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('accountUpdatedFailed')">
     </app-message-pop-up>

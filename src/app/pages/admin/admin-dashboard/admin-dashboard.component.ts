@@ -31,14 +31,14 @@ export class AdminDashboardComponent {
             currency : true
         },
         {
-            text: "Total de Visitantes",
+            text: "Total de visitantes",
             value: 5325,
             icon: "group",
             color: "#059669",
             currency : false
         },
         {
-            text: "Pedidos Restantes",
+            text: "Pedidos restantes",
             value: 103,
             icon: "edit_note",
             color: "#e8401b",
