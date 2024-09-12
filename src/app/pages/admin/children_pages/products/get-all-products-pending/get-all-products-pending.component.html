@@ -75,11 +75,11 @@
     }
 
     @if (productUpdatedSuccessfully) {
-    <app-message-pop-up custom_message='Producto Aprobado Exitosamente'
+    <app-message-pop-up custom_message='Producto aprobado exitosamente'
         (close)="closeModal('productUpdatedSuccessfully')"> </app-message-pop-up>
     }
     @if (productDeletedSuccessfully) {
-    <app-message-pop-up custom_message='Producto Borrado Exitosamente'
+    <app-message-pop-up custom_message='Producto borrado exitosamente'
         (close)="closeModal('productDeletedSuccessfully')"> </app-message-pop-up>
     }
     @if (productUpdateFailed) {

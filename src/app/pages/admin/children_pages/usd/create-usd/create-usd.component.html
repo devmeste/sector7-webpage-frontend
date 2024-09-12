@@ -5,7 +5,7 @@
         <form (ngSubmit)="send()" [formGroup]="form" class="form">
 
             <div class="custom-input">
-                <label class="form-label">Nuevo Valor (USD)</label>
+                <label class="form-label">Nuevo valor de cotización:</label>
                 <input type="number" min="0" formControlName="price" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors('price', 'required') }">
             </div>
@@ -15,7 +15,7 @@
 
 
             @if (elementWasCreatedSuccessfully) {
-            <app-message-pop-up custom_message='Precio Creado Exitosamente'
+            <app-message-pop-up custom_message='Precio creado exitosamente'
                 (close)="closeModal('elementWasCreatedSuccessfully')"> </app-message-pop-up>
             }
             @if (thereWasAnErrorWhenCreateElement) {

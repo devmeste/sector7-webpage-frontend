@@ -17,7 +17,7 @@
 
             <!-- ID -->
             <div class="custom-input">
-                <label class="form-label">Numero de serie: </label>
+                <label class="form-label">Número de serie: </label>
                 <input type="text" formControlName="id" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'id', 'required') }">
             </div>
@@ -90,7 +90,7 @@
 
             <!-- habilitado -->
             <div class="custom-input row input_checkbox_container">
-                <label class="form-label checkbox_label ">Esta Habilitado: </label>
+                <label class="form-label checkbox_label ">Está Habilitado: </label>
                 <input type="checkbox" formControlName="isEnabled" class="form-control checkbox">
             </div>
 
@@ -127,7 +127,7 @@
                 </div>
             </div> -->
 
-            <label class="form-label">Categoria:</label>
+            <label class="form-label">Categoría:</label>
             <select name="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)"
                 class="custom-select">
                 <option value=""> </option>
@@ -190,7 +190,7 @@
 
 
             @if (productWasCreatedSuccessfully) {
-            <app-message-pop-up custom_message='Producto Creado Exitosamente'
+            <app-message-pop-up custom_message='Producto creado exitosamente'
                 (close)="closeModal('productWasCreatedSuccessfully')"> </app-message-pop-up>
             }
             @if (productHasError) {

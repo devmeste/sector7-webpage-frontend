@@ -22,6 +22,7 @@ export class GetAllAccountsComponent {
 
   accountUpdatedSuccessfully = false;
   accountUpdatedFailed = false;
+  wasEnabled!: boolean;
   errorMessage: any;
 
   showUpdatePopUp = false;
@@ -54,6 +55,7 @@ export class GetAllAccountsComponent {
     
     this._adminService.changeStateAccount(username, change).subscribe({
       next: () => {
+        this.wasEnabled = change;
         this.accountUpdatedSuccessfully = true;
         this.updateAllAccountsInView();
       },

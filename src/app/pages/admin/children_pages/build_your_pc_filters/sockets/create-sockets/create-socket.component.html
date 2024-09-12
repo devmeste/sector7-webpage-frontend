@@ -23,8 +23,10 @@
             </app-message-pop-up>
             }
 
-            <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
-                [disabled]="disabledFormButton(this.form)" type="submit">Crear</button>
+            <div class="send_button_container">
+                <button class="primary_button" [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
+                    [disabled]="disabledFormButton(this.form)" type="submit">Crear</button>
+            </div>
         </form>
     </section>
 

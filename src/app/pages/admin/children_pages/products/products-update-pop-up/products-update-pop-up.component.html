@@ -16,7 +16,7 @@
                             <input type="text" formControlName="title" required class="form-control"
                                 [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
                             @if( hasErrors(this.form,'title', 'required') ){ <app-input-danger-text
-                                text="El nombre del producto es requerida"></app-input-danger-text>
+                                text="El nombre del producto es requerido"></app-input-danger-text>
                             }
                         </div>
 
@@ -27,7 +27,7 @@
                                 [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
                             </textarea>
                             @if( hasErrors(this.form,'title', 'required') ){ <app-input-danger-text
-                                text="El nombre del producto es requerida"></app-input-danger-text>
+                                text="La descripción del producto es requerida"></app-input-danger-text>
                             }
                         </div>
 
@@ -51,7 +51,7 @@
                                 <input type="text" formControlName="model" required class="form-control"
                                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'model', 'required') }">
                                 @if( hasErrors(this.form,'model', 'required') ){ <app-input-danger-text
-                                    text="El modelo del producto es requerida"></app-input-danger-text>
+                                    text="El modelo del producto es requerido"></app-input-danger-text>
                                 }
                             </div>
 
@@ -61,7 +61,7 @@
                                 <input type="number" formControlName="actualStock" required class="form-control"
                                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'actualStock', 'required') }">
                                 @if( hasErrors(this.form,'actualStock', 'required') ){ <app-input-danger-text
-                                    text="El stock del producto es requerida"></app-input-danger-text>
+                                    text="El stock real del producto es requerido"></app-input-danger-text>
                                 }
                             </div>
 
@@ -72,7 +72,7 @@
                                 <input type="number" formControlName="viewStock" required class="form-control"
                                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'viewStock', 'required') }">
                                 @if( hasErrors(this.form,'viewStock', 'required') ){ <app-input-danger-text
-                                    text="El viewStock del producto es requerida"></app-input-danger-text>
+                                    text="El stock visual del producto es requerido"></app-input-danger-text>
                                 }
                             </div>
 
@@ -83,7 +83,7 @@
                                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'price', 'required') }">
 
                                 @if( hasErrors(this.form,'price', 'required') ){ <app-input-danger-text
-                                    text="El precio del producto es requerida"></app-input-danger-text>
+                                    text="El precio del producto es requerido"></app-input-danger-text>
                                 }
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                                
                                 <!-- Socket select -->
                                 @if(formControl.value.fieldName == 'Socket'){
-                                    <div><label for="Socket">Socket</label></div>
+                                    <div><label for="Socket">Socket:</label></div>
                                     <select 
                                     formControlName="value" 
                                     class="custom-select field">
@@ -166,7 +166,7 @@
                                     </select>
                                 }
                                 @else if(formControl.value.fieldName == 'Generación'){
-                                    <div><label for="Generation">Generación</label></div>
+                                    <div><label for="Generation">Generación:</label></div>
                                     <select 
                                     formControlName="value" 
                                     class="custom-select field">
@@ -176,7 +176,7 @@
                                     </select>
                                 }
                                 @else if(formControl.value.fieldName == 'Tipo de memoria'){
-                                    <div><label for="Tipo de memoria">Tipo de memoria</label></div>
+                                    <div><label for="Tipo de memoria">Tipo de memoria:</label></div>
                                     <select 
                                     formControlName="value" 
                                     class="custom-select field">
