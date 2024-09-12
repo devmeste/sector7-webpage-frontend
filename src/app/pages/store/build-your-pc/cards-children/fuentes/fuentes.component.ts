@@ -6,7 +6,7 @@ import { TwoColorsCardComponent } from "../../../../../shared/components/cards/t
   selector: 'app-fuentes',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './fuentes.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './fuentes.component.scss'
 })
 export class FuentesComponent extends CardsChildrenAbstractComponent {

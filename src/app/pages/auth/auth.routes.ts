@@ -17,4 +17,8 @@ export const AUTH_ROUTES: Routes = [
         path: 'recover-user',
         loadComponent: () => import('./recover-user/recover-user.component').then(r => r.RecoverUserComponent),
     },
+    {
+        path: 'cart/must-login',
+        loadComponent: () => import('./cart-login/cart-login.component').then(r => r.CartLoginComponent),
+    }
 ]

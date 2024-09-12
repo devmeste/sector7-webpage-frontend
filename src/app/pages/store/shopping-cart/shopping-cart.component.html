@@ -3,11 +3,11 @@
         @for (product of products; track $index) {
         <div class="shopping_cart_item_container">
             <picture class="product_image">
-                <img [src]="product.img" alt="producto: {{product.name}}">
+                <img [src]="product.photoUrl" alt="producto: {{product.title}}">
             </picture>
             <div class="side_text_container">
                 <div class="shopping_cart_item_name">
-                    <p>{{product.name}}</p>
+                    <p>{{product.title}}</p>
                 </div>
                 <button (click)="deleteProduct(product.id)" class="delete_button">Eliminar</button>
                 <div class="shopping_cart_item_quantity_container">
@@ -15,10 +15,13 @@
                         <mat-icon>remove</mat-icon>
                     </button>
     
-                    <div class="quantity_number"> {{product.quantityRequested}} </div>
+                    <div class="quantity_number"> {{product.quantity}} </div>
                     <button (click)="addQuantity(product)" class="quantity_button quantity_button_right ">
                         <mat-icon>add</mat-icon>
                     </button>
+                </div>
+                <div class="shopping_cart_item_stock">
+                    <span>{{product.stock}} disponibles</span>
                 </div>
                 <p class="shopping_cart_item_price">{{product.price | customCurrency}}</p>
             </div>

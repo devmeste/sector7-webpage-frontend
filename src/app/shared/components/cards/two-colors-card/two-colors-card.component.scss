@@ -4,6 +4,7 @@ $border_radius_for_card: 14px;
 $border_radius_inside_element: $border_radius_for_card - 3px;
 
 .two_colors_card {
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 90%;
@@ -12,12 +13,13 @@ $border_radius_inside_element: $border_radius_for_card - 3px;
     color: white;
     border-radius: $border_radius_for_card;
     cursor: pointer;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     // background-color: aqua;
     
 
     &.selected {
-        box-shadow: 2px 2px 2px 2px $primary-main;
+        // box-shadow: 2px 2px 2px 2px $primary-main;
+        border: 3px solid $primary-main;
     }
 
     @include tablet {
@@ -107,7 +109,27 @@ $border_radius_inside_element: $border_radius_for_card - 3px;
             display: flex;
             justify-content: end;
             align-items: center;
+
+            button{
+                margin-left: 0.5rem;
+            }
+            .primary_button{
+                // padding: 0;
+            }
         }
 
+    }
+
+    .selected_tag{
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0.3rem;
+        background-color: $primary-main;
+        border-radius: calc($border_radius_inside_element - 2px) 0 0 0 ;
+
+        @media screen and (max-width: 350px) {
+           font-size: 0.7rem;     
+        }
     }
 }

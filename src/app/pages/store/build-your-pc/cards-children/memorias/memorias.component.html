@@ -1,15 +1,46 @@
 <div class="build_your_pc_cards_container cards_children_main">
-    @for( product of products ; track $index){
-        <app-two-colors-card 
-        [selected]="product.id === '1'" class="cards"
-        [title]="product.title"
-        [price]="product.price"
-        [photo]="product.photos[0]"
-        [id]="product.id" 
-        (addToCart)="addToCart($event)"
+    @if(this.selectedProduct){ <!-- if there is a selected product -->
+        
+        <app-two-colors-card class="cards"
+            [selected]="this.selectedProduct.id === this.idProductSelected" 
+            (removeFromCart)="removeProductFromCart($event)"
+            [title]="this.selectedProduct.title"
+            [price]="this.selectedProduct.price"
+            [photo]="this.selectedProduct.photos[0]"
+            [id]="this.selectedProduct.id" 
+            (addToCart)="addToCart($event)"
         >
-    </app-two-colors-card>
-    }
+        </app-two-colors-card>
+
+        @for( product of products ; track $index){
+            @if(product.id !== this.selectedProduct.id){
+                <app-two-colors-card class="cards"
+                [selected]="product.id === this.idProductSelected" 
+                (removeFromCart)="removeProductFromCart($event)"
+                [title]="product.title"
+                [price]="product.price"
+                [photo]="product.photos[0]"
+                [id]="product.id" 
+                (addToCart)="addToCart($event)"
+                >
+            </app-two-colors-card>
+            }
+        }
+    }@else {  <!-- if there is no selected product -->
+        @for( product of products ; track $index){
+           <app-two-colors-card class="cards"
+           [selected]="product.id === this.idProductSelected" 
+           (removeFromCart)="removeProductFromCart($event)"
+           [title]="product.title"
+           [price]="product.price"
+           [photo]="product.photos[0]"
+           [id]="product.id" 
+           (addToCart)="addToCart($event)"
+           >
+       </app-two-colors-card>
+       }  
+   }
+
     @if(!this.thereIsPreviousStepSelected){
         <div class="warning_text_container">
             <p class="text-center">Para poder elegir una memoria, es necesario elegir una mother previamente.</p>

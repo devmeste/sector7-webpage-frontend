@@ -5,14 +5,13 @@ import { ITokenDto } from '../../models/ITokenDto';
 import { Router } from '@angular/router';
 import { IUser } from 'app/core/models/IUser';
 import { environment } from 'app/core/environments/environment';
+import { CartService } from '../cart_service/cart-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-
-
+ 
 
   private baseUrl: string = environment.apiUrl;
 
@@ -20,6 +19,7 @@ export class AuthService {
 
   private isUserLoggedInSubject: BehaviorSubject<boolean>;
   private isAdminLoggedInSubject: BehaviorSubject<boolean>;
+  private isAnyUserOrAdminLoggedInSubject : BehaviorSubject<boolean>;
 
   private _router: Router = inject(Router);
 
@@ -30,6 +30,8 @@ export class AuthService {
 
     this.isUserLoggedInSubject = new BehaviorSubject<boolean>(!!token);
     this.isAdminLoggedInSubject = new BehaviorSubject<boolean>(!!admin_token);
+    this.isAnyUserOrAdminLoggedInSubject = new BehaviorSubject<boolean>(!!token || !!admin_token);
+
   }
 
   login(username: string, password: string, specialCase?: string): Observable<ITokenDto> {
@@ -52,18 +54,22 @@ export class AuthService {
 
         if (response && response.token && specialCase == 'admin') {
           this.isAdminLoggedInSubject.next(true);
+          this.updateAnyUserOrAdminLoggedIn();
         }
         else if (response && response.token) {
           this.isUserLoggedInSubject.next(true);
+          this.updateAnyUserOrAdminLoggedIn();
         }
         else {
           this.isUserLoggedInSubject.next(false);
           this.isAdminLoggedInSubject.next(false);
+          this.updateAnyUserOrAdminLoggedIn();
         }
 
       }),
       catchError(err => {
         this.isUserLoggedInSubject.next(false);
+        this.updateAnyUserOrAdminLoggedIn();
         throw err;
       })
     );
@@ -79,6 +85,13 @@ export class AuthService {
     localStorage.removeItem('admin_token');
     this.isUserLoggedInSubject.next(false);
     this.isAdminLoggedInSubject.next(false);
+    this.updateAnyUserOrAdminLoggedIn();
+  }
+
+  //
+  private updateAnyUserOrAdminLoggedIn(): void {
+    const isAnyUserLoggedIn = this.isUserLoggedIn() || this.isAdminLoggedIn();
+    this.isAnyUserOrAdminLoggedInSubject.next(isAnyUserLoggedIn);
   }
 
   isUserLoggedIn$(): Observable<boolean> {
@@ -88,6 +101,15 @@ export class AuthService {
   isUserLoggedIn(): boolean {
     return this.isUserLoggedInSubject.getValue();
   }
+
+  isAnyUserOrAdminLoggedIn(): boolean {
+    return this.isUserLoggedIn() || this.isAdminLoggedIn();
+  }
+
+  isAnyUserOrAdminLoggedIn$(): Observable<boolean> {
+    return this.isAnyUserOrAdminLoggedInSubject.asObservable();
+  }
+
 
   //return an observable
   isAdminLoggedIn$(): Observable<boolean> {
@@ -146,6 +168,9 @@ export class AuthService {
   change_user_password(body: any) : Observable<ChangePasswordSuccessDTO> {
     return this._http.patch<ChangePasswordSuccessDTO>(this.baseUrl + 'user/change-password', body);
   }
+
+
+  
 }
 
 

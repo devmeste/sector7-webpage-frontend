@@ -6,7 +6,7 @@ import { TwoColorsCardComponent } from "../../../../../shared/components/cards/t
   selector: 'app-placas-de-video',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './placas-de-video.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './placas-de-video.component.scss'
 })
 export class PlacasDeVideoComponent extends CardsChildrenAbstractComponent {

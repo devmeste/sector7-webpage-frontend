@@ -110,7 +110,7 @@ main.shopping_cart_container {
             }
 
             .shopping_cart_item_quantity_container {
-                margin-bottom: 0.7rem;
+                margin-bottom: 0.3rem;
                 display: flex;
                 $color_for_quantity_element: #323232;
                 $border_color_for_quantity_element: #282828;
@@ -151,6 +151,12 @@ main.shopping_cart_container {
                     text-align: center;
                     background-color: $color_for_quantity_element;
                 }
+
+                
+            }
+            .shopping_cart_item_stock{
+                color: $gray_60;
+
             }
 
             .shopping_cart_item_price {

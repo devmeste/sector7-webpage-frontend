@@ -1,5 +1,8 @@
 
-<div class="two_colors_card">
+<div class="two_colors_card" [ngClass]="{'selected': this.selected}">
+
+    @if(this.selected){<div class="selected_tag"> <mat-icon>check</mat-icon> Seleccionado </div>}
+
     <div class="top_container">
         <img [src]="this.photo" alt="">
     </div>
@@ -8,7 +11,8 @@
         <p class="product_name"><a href="product-details/{{this.id}}">{{this.title}}</a></p>
         <p class="product_price">{{this.price | customCurrency}}</p>
         <div class="button_container">
-            <button class="primary_button" (click)="sendProduct()" >Seleccionar</button>
+           @if(this.selected){ <button class="tertiary_button" (click)="removeProduct()">Quitar</button>}
+            <button class="primary_button" (click)="sendProduct()">Seleccionar</button>
         </div>
     </div>
 </div>

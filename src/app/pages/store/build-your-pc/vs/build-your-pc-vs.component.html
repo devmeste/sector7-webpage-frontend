@@ -8,5 +8,11 @@
     </div>
     <div class="divider"></div>
     <app-amd-vs-intel></app-amd-vs-intel>
+
+    
+    @if(!this.isUserOrAdminLogged){
+        <app-message-pop-up custom_message="Esta sección es exclusiva para usuarios registrados, por favor inicia sesión" buttonConfirmText="Inicia sesión" (close)="redirectToLogin()" ></app-message-pop-up>
+    }
+    
 </main>
 <app-footer></app-footer>

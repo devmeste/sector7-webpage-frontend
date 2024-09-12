@@ -1,0 +1,1 @@
+export type CartQuantityAction = 'increase' | 'decrease';

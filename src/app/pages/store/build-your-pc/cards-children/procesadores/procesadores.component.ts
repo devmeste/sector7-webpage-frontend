@@ -17,10 +17,11 @@ import { ConfirmPopUpComponent } from "../../../../../shared/components/pop_up/c
 })
 export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
 
+
   override section: string = 'procesadores';
   override pathToContinue: string = 'mothers';
   showPopUpToConfirmDeleteNextStep = false;
-  newProcessorSelected !: BuildYourPcCartEntry ;
+  newProcessorSelected !: BuildYourPcCartEntry;
 
 
   lineAndProcessorAreCompatible(entryToVerify: BuildYourPcCartEntry, lineToVerify: BuildYourPcCartEntry) {
@@ -32,6 +33,8 @@ export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
     this._productsService.getAllProductsByCategory(this.section, requirement).subscribe(productsResponse => {
       this.products = productsResponse.products;
     })
+
+    this.setTheSelectedProductFirst();
   }
 
   override addToCart(cartEntry: BuildYourPcCartEntry) {
@@ -45,31 +48,11 @@ export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
           this.newProcessorSelected = cartEntry;
         }
         else {
-          // const newEntry: BuildYourPcCartEntry = {
-          //   selectedProductID: cartEntry.selectedProductID,
-          //   categoryName: 'procesadores',
-          //   selectedProductName: cartEntry.selectedProductName,
-          //   selectedProductQuantity: 1,
-          //   selectedProductPrice: cartEntry.selectedProductPrice,
-          //   selectedProductPhoto: cartEntry.selectedProductPhoto
-          // }
-          // this._buildYourPcService.addToCart(newEntry);
-          // this._router.navigate(['build-your-pc/mothers']);
           this.takeProductToCart(cartEntry);
         }
       })
 
     } else {
-      // const newEntry: BuildYourPcCartEntry = {
-      //   selectedProductID: cartEntry.selectedProductID,
-      //   categoryName: 'procesadores',
-      //   selectedProductName: cartEntry.selectedProductName,
-      //   selectedProductQuantity: 1,
-      //   selectedProductPrice: cartEntry.selectedProductPrice,
-      //   selectedProductPhoto: cartEntry.selectedProductPhoto
-      // }
-      // this._buildYourPcService.addToCart(newEntry);
-      // this._router.navigate(['build-your-pc/mothers']);
       this.takeProductToCart(cartEntry);
     }
 
@@ -77,7 +60,7 @@ export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
 
   }
 
-  takeProductToCart( entry : BuildYourPcCartEntry){
+  takeProductToCart(entry: BuildYourPcCartEntry) {
     const newEntry: BuildYourPcCartEntry = {
       selectedProductID: entry.selectedProductID,
       categoryName: 'Procesadores',
@@ -106,8 +89,8 @@ export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
     this._buildYourPcService.removeEntryBySection('memorias');
 
     this.takeProductToCart(this.newProcessorSelected);
-    
-    
+
+
   }
   closeModal(option: string) {
     switch (option) {
@@ -120,10 +103,6 @@ export class ProcesadoresComponent extends CardsChildrenAbstractComponent {
 
 
 
-  //1. Llamamos a la api de productos por categoria
-  //2. pido el carrito
-  //3. dependiendo la pantalla en la que estoy, pido el atributo que necesite para filtrar
-  // 4.si en la pantalla que estoy, necesito algo de lo anterior, lo mando para atras
 
 
 

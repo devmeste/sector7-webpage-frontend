@@ -51,9 +51,10 @@ export class MothersComponent extends CardsChildrenAbstractComponent {
         })
 
         if (socket && generation) {
-
           this._productsService.getAllProductsBySocketAndGeneration('Mothers', socket, generation).subscribe(productsResponse => {
             this.products = productsResponse.products;
+            this.setTheSelectedProductFirst();
+
           });
 
         } 

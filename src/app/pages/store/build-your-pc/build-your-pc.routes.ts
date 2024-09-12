@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { combinedGuard } from "app/core/guards/combined-guard/combined.guard";
 
 
 
@@ -10,7 +11,8 @@ export const BUILD_YOUR_PC_ROUTES: Routes = [
     },
     {
         path :':section', loadComponent: () =>
-            import("./build-your-pc.component").then(c => c.BuildYourPcComponent)
+            import("./build-your-pc.component").then(c => c.BuildYourPcComponent),
+        canActivate: [combinedGuard],
     },
     {
         path: '',

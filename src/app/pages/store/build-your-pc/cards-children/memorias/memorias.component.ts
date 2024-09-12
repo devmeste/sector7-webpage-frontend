@@ -30,7 +30,7 @@ export class MemoriasComponent extends CardsChildrenAbstractComponent {
     let type = '';
 
     if (motherChosenID) {
-      const memoryChosen = this._productsService.getProductById(motherChosenID).subscribe(memory => {
+        const memoryChosen = this._productsService.getProductById(motherChosenID).subscribe(memory => {
 
         let fieldsJSON = JSON.parse(memory?.fieldsJSON);
         console.log(fieldsJSON);
@@ -43,6 +43,8 @@ export class MemoriasComponent extends CardsChildrenAbstractComponent {
         if (type) {
           this._productsService.getAllMemoriesByType(type).subscribe(productsResponse => {
             this.products = productsResponse.products;
+            this.setTheSelectedProductFirst();
+
           });
 
         } 

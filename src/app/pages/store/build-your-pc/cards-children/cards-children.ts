@@ -13,16 +13,20 @@ export abstract class CardsChildrenAbstractComponent {
   
   abstract section: string ; // section where we are
   abstract pathToContinue : string ; // section to continue
-  
+  idProductSelected : string  = '';
+
   _activatedRoute = inject(ActivatedRoute);
   _router = inject(Router);
   _productsService = inject(ProductService);
   _buildYourPcService = inject(BuildYourPcService);
 
   products: BKProduct[] = [];
+  selectedProduct !: BKProduct;
 
   ngOnInit(): void {
     this.changeProducts();
+    const entry= this._buildYourPcService.getEntryBySection(this.section);
+    this.idProductSelected = entry?.selectedProductID || '';
   }
 
   changeProducts() {
@@ -30,6 +34,18 @@ export abstract class CardsChildrenAbstractComponent {
     this._productsService.getAllProductsByCategory(this.section, requirement).subscribe(productsResponse => {
       this.products = productsResponse.products;
     });
+
+    this.setTheSelectedProductFirst();
+  }
+
+  setTheSelectedProductFirst(){
+    const idSelected = this._buildYourPcService.getEntryBySection(this.section)?.selectedProductID;
+    if(idSelected) {
+      this._productsService.getProductById(idSelected).subscribe(product => {
+        this.selectedProduct = product;
+        this.products.unshift(product);
+      })
+    }
   }
 
   addToCart( cartEntry : BuildYourPcCartEntry) : void {
@@ -46,4 +62,10 @@ export abstract class CardsChildrenAbstractComponent {
   }
 
   abstract getRequirement() : string;
+
+  removeProductFromCart($event: BuildYourPcCartEntry) {
+    this._buildYourPcService.removeEntryBySection(this.section);
+    this.changeProducts();  
+    this.idProductSelected = '';
+  }
 }

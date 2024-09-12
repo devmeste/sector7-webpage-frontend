@@ -6,7 +6,7 @@ import { CardsChildrenAbstractComponent } from '../cards-children';
   selector: 'app-almacenamiento',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './almacenamiento.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './almacenamiento.component.scss'
 })
 export class AlmacenamientoComponent extends CardsChildrenAbstractComponent {

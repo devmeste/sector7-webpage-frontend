@@ -1,6 +1,4 @@
 import { CanActivateFn, Router, UrlTree } from '@angular/router';
-import { userGuard } from '../user-guard/user.guard';
-import { adminGuard } from '../admin-guard/admin-guard.guard';
 import { inject } from '@angular/core';
 import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { firstValueFrom } from 'rxjs';

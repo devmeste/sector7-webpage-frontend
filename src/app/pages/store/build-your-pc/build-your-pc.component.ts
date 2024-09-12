@@ -20,15 +20,18 @@ import { GabinetesComponent } from "./cards-children/gabinetes/gabinetes.compone
 import { MousesComponent } from "./cards-children/mouses/mouses.component";
 import { AuricularesComponent } from "./cards-children/auriculares/auriculares.component";
 import { BuildYourPcSummaryComponent } from "./cards-children/build-your-pc-summary/build-your-pc-summary.component";
+import { AuthService } from 'app/core/services/auth_service/auth.service';
+import { MessagePopUpComponent } from "../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 
 @Component({
   selector: 'app-build-your-pc',
   standalone: true,
   templateUrl: './build-your-pc.component.html',
   styleUrl: './build-your-pc.component.scss',
-  imports: [FooterComponent, MatIcon, StepsOfThePathsComponent, RouterOutlet, TwoColorsCardComponent, ProcesadoresComponent, MemoriasComponent, MothersComponent, AlmacenamientoComponent, FuentesComponent, PlacasDeVideoComponent, MonitoresComponent, RefrigeracionComponent, TecladosComponent, GabinetesComponent, MousesComponent, AuricularesComponent, BuildYourPcSummaryComponent]
+  imports: [FooterComponent, MatIcon, StepsOfThePathsComponent, RouterOutlet, TwoColorsCardComponent, ProcesadoresComponent, MemoriasComponent, MothersComponent, AlmacenamientoComponent, FuentesComponent, PlacasDeVideoComponent, MonitoresComponent, RefrigeracionComponent, TecladosComponent, GabinetesComponent, MousesComponent, AuricularesComponent, BuildYourPcSummaryComponent, MessagePopUpComponent]
 })
 export class BuildYourPcComponent {
+
 
   showMenuInMobile = false;
 
@@ -38,12 +41,11 @@ export class BuildYourPcComponent {
   _buildYourPcService = inject(BuildYourPcService);
   subscriptios : Subscription[] = [];
   _router = inject(Router);
+  _authService = inject(AuthService);
 
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params=>{
-      
-
       if(params['section']){
         this.titleWord = this._buildYourPcService.getTitleWordBySection(params['section']);
         
@@ -57,10 +59,9 @@ export class BuildYourPcComponent {
         this._router.navigate(['build-your-pc','linea']);
       }
     });
-   
+    
 
   }
-
 
 
   toggleMenu() {

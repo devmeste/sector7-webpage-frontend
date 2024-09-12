@@ -42,7 +42,9 @@
                 width: 100%;
             }
         }
-    }    
+    }   
+    
+
     .form_section{
         width: 50%;
         display: flex;
@@ -55,6 +57,10 @@
 
             @include laptop{
                 margin-top: 0;
+            }
+
+            span{
+                @include gradient-text;
             }
         }
         .login_form{

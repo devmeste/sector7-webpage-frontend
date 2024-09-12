@@ -1,42 +1,62 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { IProduct_Cart } from '../../models/product_cart';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'app/core/environments/environment';
+import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
+import { AuthService } from '../auth_service/auth.service';
+import { IProduct_Cart_Add_Entry_Request } from 'app/core/models/IProduct_Cart_Add_Entry_Request';
+import {CartQuantityAction} from '../../models/types/CartQuantityAction';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  cart: IProduct_Cart[] = [];
-  $cart: BehaviorSubject<IProduct_Cart[]> = new BehaviorSubject<IProduct_Cart[]>(this.cart);
+  private baseUrl: string = environment.apiUrl;
+  _authService = inject(AuthService);
+
+  _httpClient: HttpClient = inject(HttpClient);
+
+
+  cart: IProduct_Cart_Entry_BK[] = [];
+
+  private $cart: BehaviorSubject<IProduct_Cart_Entry_BK[]> = new BehaviorSubject<IProduct_Cart_Entry_BK[]>(this.cart);
   private $cartQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private $cartTotal: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
+
+
   constructor() {
-    const cartData = localStorage.getItem('cart');
-    if (cartData) {
-      this.cart = JSON.parse(cartData);
-      this.$cart.next(this.cart);
-      this.$cartQuantity.next(this.cart.length);
-      this.$cartTotal.next(this.calculateTotal());
-    }
+    this.getAllProducts();
+    this._authService.isAnyUserOrAdminLoggedIn$().subscribe((isLoggedIn) => {
+      if (!isLoggedIn) {
+        this.cartLogout();
+      }
+    })
   }
 
-  public addToCart(product: IProduct_Cart): void {
-    const index = this.findIndexIfProductIsAlreadyInCart(product.id);
-    if (index === -1) {
-      //if product not in cart, add it
-      product.quantityRequested = 1;
-      this.cart.push(product);
-      this.$cartQuantity.next(this.cart.length);
-      this.$cartTotal.next(this.calculateTotal());
-      this.saveCartInLocalStorage();
+
+  public addToCart(product: IProduct_Cart): Observable<IProduct_Cart_Entry_BK> {
+    const entry: IProduct_Cart_Add_Entry_Request = {
+      productId: product.id,
+      quantity: product.quantityRequested
     }
-    else {
-      //if product already in cart, add quantity
-      this.cart[index].quantityRequested = this.cart[index].quantityRequested + 1;
-      this.saveCartInLocalStorage();
-    }
+    return this._httpClient.post<IProduct_Cart_Entry_BK>(`${this.baseUrl}cart`, entry).pipe(
+      tap((newEntry: IProduct_Cart_Entry_BK) => {
+        this.cart.push(newEntry);
+        this.$cart.next(this.cart);
+        this.$cartQuantity.next(this.cart.length);
+        this.$cartTotal.next(this.calculateTotal());
+      })
+    );
+  }
+
+  logoutCart(): void {
+    this.cart = [];
+    this.$cart.next(this.cart);
+    this.$cartQuantity.next(0);
+    this.$cartTotal.next(0);
   }
 
   private saveCartInLocalStorage(): void {
@@ -45,7 +65,7 @@ export class CartService {
     if (localStorage.getItem('cart') !== null) {
       JSON.parse(localStorage.getItem('cart') as string);
     }
-    else{
+    else {
       console.log("Cart is empty");
     }
 
@@ -57,15 +77,35 @@ export class CartService {
     return this.cart.findIndex(item => item.id === idReceived);
   }
 
-  public getAllProducts(): Observable<IProduct_Cart[]> {
+  public getAllProducts(): Observable<IProduct_Cart_Entry_BK[]> {
+    this._httpClient.get<IProduct_Cart_Entry_BK[]>(`${this.baseUrl}cart`).subscribe(cart => {
+
+      this.cart = cart;
+      this.$cart.next(this.cart);
+      this.$cartQuantity.next(this.cart.length);
+      const totalCart = this.calculateTotal();
+      console.log('Total CArt!');
+      console.log(totalCart);
+      this.$cartTotal.next(totalCart);
+    })
+
     return this.$cart.asObservable();
   }
 
-  public clearCart(): void {
+  public cartLogout(): void {
     this.cart = [];
+    this.$cart.next(this.cart);
     this.$cartQuantity.next(0);
     this.$cartTotal.next(0);
-    this.saveCartInLocalStorage();
+  }
+
+  public clearCart(): void {
+    this._httpClient.delete<void>(`${this.baseUrl}cart`).subscribe(() => {
+      this.cart = [];
+      this.$cart.next(this.cart);
+      this.$cartQuantity.next(0);
+      this.$cartTotal.next(0);
+    })
   }
 
   public getCartTotal(): Observable<number> {
@@ -76,50 +116,58 @@ export class CartService {
     return this.$cartQuantity.asObservable();
   }
 
-  public deleteProduct(id: string): void {
-    const index = this.findIndexIfProductIsAlreadyInCart(id);
-    if (index !== -1) {
-      this.cart.splice(index, 1);
-      this.$cartQuantity.next(this.cart.length);
-      this.$cartTotal.next(this.calculateTotal());
-      this.saveCartInLocalStorage();
-    }
+  public deleteProduct(id: string): Observable<any> {
+    return this._httpClient.delete(this.baseUrl + 'cart/' + id);
   }
 
-  public getProductById(id: string): IProduct_Cart | undefined {
+  public getProductById(id: string): IProduct_Cart_Entry_BK | undefined {
     // Verificar si el producto existe? 
     return this.cart.find(product => product.id === id);
   }
 
-  //TODO: Verificar si este metodo funciona
-  public updateProductQuantity(product: IProduct_Cart, quantity: number): void {
-    const index = this.cart.indexOf(product);
-    if (index !== -1) {
-      this.cart[index].quantityRequested = quantity;
-      this.saveCartInLocalStorage();
-    }
+  public updateProductQuantity(product: IProduct_Cart_Entry_BK, quantity: number): void {
+    // const index = this.cart.indexOf(product);
+    // if (index !== -1) {
+    //   this.cart[index].quantityRequested = quantity;
+    //   this.saveCartInLocalStorage();
+    // }
   }
 
 
-  public updateProductQuantitySimple(product: IProduct_Cart, action: string): void {
-    const index = this.cart.indexOf(product);
-    if (index !== -1) {
-      let product = this.cart[index];
-      if (action === "increase" && product.quantityRequested < product.stock) {
-        this.cart[index].quantityRequested = this.cart[index].quantityRequested + 1;
-        this.$cartTotal.next(this.calculateTotal());
-        this.saveCartInLocalStorage();
-      }
-      else if (action === "decrease" && product.quantityRequested > 0) {
-        this.cart[index].quantityRequested += -1;
-        this.$cartTotal.next(this.calculateTotal());
-        this.saveCartInLocalStorage();
+  // Define el tipo para las acciones permitidas
+
+
+  public updateProductQuantitySimple(entry: IProduct_Cart_Entry_BK, action: CartQuantityAction): Observable<any> {
+
+    if (action === 'increase') {
+      if (entry.quantity < entry.stock) {
+        const quantity = entry.quantity + 1;
+        return this._httpClient.patch(this.baseUrl + 'cart/' + entry.id +'/'+ quantity , {}).pipe(
+          tap(() => {
+            this.getAllProducts();
+          })
+        );
       }
     }
+    else if (action === 'decrease') {
+      if (entry.quantity > 1) {
+        const quantity = entry.quantity - 1;
+        return this._httpClient.patch(this.baseUrl + 'cart/' + entry.id +'/'+ quantity , {}).pipe(
+          tap(() => {
+            this.getAllProducts();
+          })
+        );
+      }
+    }
+
+    throw new Error('Invalid quantity');
   }
 
   private calculateTotal(): number {
-    return this.cart.reduce((suma, item) => suma + item.price * item.quantityRequested, 0);
+    console.log(this.cart);
+
+    return this.cart.reduce((suma, item) => suma + item.price * item.quantity, 0);
   }
 
 }
+

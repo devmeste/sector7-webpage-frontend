@@ -6,7 +6,7 @@ import { TwoColorsCardComponent } from "../../../../../shared/components/cards/t
   selector: 'app-monitores',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './monitores.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './monitores.component.scss'
 })
 export class MonitoresComponent  extends CardsChildrenAbstractComponent {

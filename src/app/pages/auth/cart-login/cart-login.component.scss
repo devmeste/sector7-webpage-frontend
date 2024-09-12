@@ -1,0 +1,70 @@
+@import '../../../../styles.scss';
+@import '../../../../media-queries';
+@import '../../../shared/styles/input_styles.scss';
+
+.login_main_container.cart_login_container {
+    color: white;
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: calc(100vh - $height_helper);
+    padding: 3rem 0% 0;
+
+    @include laptop {
+        flex-direction: row;
+        padding: 5rem 10% 0;
+        align-items: start;
+    }
+
+    .title {
+        @include gradient-text;
+        text-align: center;
+        font-size: 2.5rem;
+    }
+
+    .logo_section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: black;
+        width: 80%;
+
+        @include laptop{
+            width: 50%;
+        }
+        .compressed_logo {
+            
+            width: 200px;
+
+            img {
+                width: 100%;
+            }
+
+            @include laptop {
+                width: min(100%, 250px);
+            }
+
+        }
+
+        .full_logo {
+            display: none;
+
+            @include laptop {
+                display: block;
+                margin-top: 1rem;
+                width: 200px;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+}
+
+.form_container {
+    width: 50%;
+}

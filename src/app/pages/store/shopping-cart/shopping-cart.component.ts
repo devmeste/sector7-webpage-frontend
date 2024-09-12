@@ -8,7 +8,7 @@ import { CustomCurrencyPipe } from "../../../core/pipes/custom_currency/custom-c
 import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { ConfirmPopUpComponent } from "../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
 import { MessagePopUpComponent } from "../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
-
+import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
@@ -22,7 +22,7 @@ export class ShoppingCartComponent implements OnInit {
   shippingValue !: number;
   totalPrice !: number;
   _router: Router = inject(Router);
-  products !: IProduct_Cart[];
+  products !: IProduct_Cart_Entry_BK[];
   _cartService: CartService = inject(CartService);
   _authService = inject(AuthService);
 
@@ -39,25 +39,43 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!this._authService.isAnyUserOrAdminLoggedIn()){
+      this._router.navigate(['auth/cart/must-login']);
+    }
+
     this._cartService.getAllProducts().subscribe(products => {
       this.products = products;
     })
   }
 
-  deleteProduct(id: string): void {
-    this._cartService.deleteProduct(id);
+  deleteProduct(entryID : string): void {
+    this._cartService.deleteProduct(entryID).subscribe({
+      next: (success) => {
+        this.updateProductsState();
+      }
+    });
+  }
+  updateProductsState() {
+    this._cartService.getAllProducts().subscribe(products => {
+      this.products = products;
+    })
   }
 
-  removeQuantity(p: IProduct_Cart) {
-    if (p.quantityRequested > 0) {
-      this._cartService.updateProductQuantitySimple(p, "decrease");
+  removeQuantity(entry: IProduct_Cart_Entry_BK) {
+    if (entry.quantity > 1) {
+      this._cartService.updateProductQuantitySimple(entry, "decrease").subscribe((response) => {});
     };
   }
-  addQuantity(p: IProduct_Cart) {
-    this._cartService.updateProductQuantitySimple(p, "increase");
+
+  addQuantity(entry: IProduct_Cart_Entry_BK) {
+    console.log(entry);
+    if(entry.quantity<entry.stock){
+      this._cartService.updateProductQuantitySimple(entry, "increase").subscribe((response) => {});
+    }
   }
+
   updateProductQuantity(product: IProduct_Cart, quantity: number): void {
-    this._cartService.updateProductQuantity(product, quantity);
+    // this._cartService.updateProductQuantity(product, quantity);
   }
 
   sendToChoiceDeliveryMethod() {

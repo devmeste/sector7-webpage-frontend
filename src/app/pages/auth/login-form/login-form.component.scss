@@ -1,0 +1,74 @@
+@import 'styles.scss';
+@import '_media-queries.scss';
+@import '../../../shared/styles/input_styles.scss';
+
+
+.form_section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h2{
+        margin-top: 3rem;
+
+        @include laptop{
+            margin-top: 0;
+        }
+    }
+    .login_form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        margin-bottom: 1.5rem;
+
+        input.input_text {
+            width: 80%;
+        }
+
+        input.primary_button{
+            width: 9rem;
+        }
+
+        .password_input_container{
+            position: relative;
+            width: 100%;
+        }
+        .password_visibility_button{
+            position: absolute;
+            right: 15%; 
+            top: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            color: black;
+        }
+        
+    }
+
+    input.primary_button , button.primary_button{
+        border-radius: 20px;
+        margin-top: 1rem;
+    }
+
+    button.primary_button{
+        width: 8rem;
+    }
+    
+
+    .question_for_forget_password{
+        cursor: pointer;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
+    .question_for_account{
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+    }
+}

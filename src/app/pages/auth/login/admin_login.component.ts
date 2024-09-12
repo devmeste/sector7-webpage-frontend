@@ -11,7 +11,7 @@ import { MatIcon } from '@angular/material/icon';
     selector: 'app-admin-login',
     standalone: true,
     imports: [ReactiveFormsModule, RouterLink, MatIcon],
-    templateUrl: './login.component.html',
+    templateUrl: './admin.login.component.html',
     styleUrl: './login.component.scss'
 })
 

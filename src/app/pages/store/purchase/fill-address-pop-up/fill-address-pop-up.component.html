@@ -1,12 +1,32 @@
 <div class="overlay">
     <ng-container>
-        <div class="modal_container modal_form">
+        <div class="modal_container update_pop_up modal_form">
             <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
             <div class="modal_info">
                 <section class="form_container">
                     
-                    <form [formGroup]="this.form" (ngSubmit)="send($event)" class="form">
+                    <form [formGroup]="this.form" (ngSubmit)="send($event)" class="form form_pop_up">
                         <div class="half_container">
+                            <div class="custom-input">
+                                <label for="province" class="form-label">
+                                    Provincia<span class="required_symbol"> *</span>
+                                </label>
+                                <input type="text" formControlName="province" class="form-control"
+                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'province', 'required') }">
+                                @if( hasErrors(this.form,'province', 'required') ){ <app-input-danger-text
+                                    text="Campo requerido"></app-input-danger-text>
+                                }
+                            </div>
+                            <div class="custom-input">
+                                <label for="city" class="form-label">
+                                    Ciudad<span class="required_symbol"> *</span>
+                                </label>
+                                <input type="text" formControlName="city" class="form-control"
+                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'city', 'required') }">
+                                @if( hasErrors(this.form,'city', 'required') ){ <app-input-danger-text
+                                    text="Campo requerido"></app-input-danger-text>
+                                }
+                            </div>
                             <div class="custom-input">
                                 <label for="streetName" class="form-label">
                                     Calle<span class="required_symbol"> *</span>
@@ -39,26 +59,8 @@
                                 <input type="text" formControlName="door" class="form-control">
                             </div>
 
-                            <div class="custom-input">
-                                <label for="city" class="form-label">
-                                    Ciudad<span class="required_symbol"> *</span>
-                                </label>
-                                <input type="text" formControlName="city" class="form-control"
-                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'city', 'required') }">
-                                @if( hasErrors(this.form,'city', 'required') ){ <app-input-danger-text
-                                    text="Campo requerido"></app-input-danger-text>
-                                }
-                            </div>
-                            <div class="custom-input">
-                                <label for="province" class="form-label">
-                                    Provincia<span class="required_symbol"> *</span>
-                                </label>
-                                <input type="text" formControlName="province" class="form-control"
-                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'province', 'required') }">
-                                @if( hasErrors(this.form,'province', 'required') ){ <app-input-danger-text
-                                    text="Campo requerido"></app-input-danger-text>
-                                }
-                            </div>
+                           
+                           
                             <div class="custom-input">
                                 <label for="zipCode" class="form-label">
                                     Código Postal

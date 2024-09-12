@@ -6,7 +6,7 @@ import { CardsChildrenAbstractComponent } from '../cards-children';
   selector: 'app-gabinetes',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './gabinetes.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './gabinetes.component.scss'
 })
 export class GabinetesComponent extends CardsChildrenAbstractComponent {

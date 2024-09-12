@@ -16,7 +16,7 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent extends ParentLoginComponent {
-
+  
   constructor(router:Router , auth_service : AuthService){
     super(router, auth_service);
   }

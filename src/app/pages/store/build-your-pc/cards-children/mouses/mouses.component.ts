@@ -6,7 +6,7 @@ import { TwoColorsCardComponent } from "../../../../../shared/components/cards/t
   selector: 'app-mouses',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './mouses.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './mouses.component.scss'
 })
 export class MousesComponent extends CardsChildrenAbstractComponent {

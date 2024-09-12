@@ -37,14 +37,15 @@ export class PurchaseService {
 
 
   makePurchase( address : Address | null): Observable<any> {
+
     return this._CartService.getAllProducts().pipe(
       
       switchMap(products => {
-        
+
         let jsonProducts: { [key: string]: number } = {};
 
         products.forEach(element => {
-          jsonProducts[element.id] = element.quantityRequested;
+          jsonProducts[element.productId] = element.quantity;
         });
 
         let localPickUp = address === null ? true : false; 
@@ -56,7 +57,6 @@ export class PurchaseService {
         };
 
         let body = JSON.stringify(jsonResponse);
-
         const headers = new HttpHeaders({
           "Accept": "application/json",
           'Content-Type': 'application/json',

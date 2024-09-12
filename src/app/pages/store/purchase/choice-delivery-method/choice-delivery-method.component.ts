@@ -13,6 +13,7 @@ import { FooterComponent } from "../../../../shared/components/footer/footer.com
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MessagePopUpComponent } from "../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { CustomCurrencyPipe } from "../../../../core/pipes/custom_currency/custom-currency.pipe";
+import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
 
 @Component({
   selector: 'app-choice-delivery-method',
@@ -30,7 +31,7 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
   _PurchaseService = inject(PurchaseService);
   _cartService = inject(CartService);
   mercadoPago !: MercadoPagoJS;
-  products$ !: IProduct_Cart[];
+  products$ !: IProduct_Cart_Entry_BK[];
   cartQuantity$ !: number;
   total$ !: number;
   addressFillOutByUser: Address | null = null;

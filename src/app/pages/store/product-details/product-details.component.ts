@@ -80,9 +80,9 @@ export class ProductDetailsComponent implements OnInit {
       img: product.photos?.[0] || '',
       price: product.price,
       stock: product.viewStock,
-      quantityRequested: 0
+      quantityRequested: 1
     }
 
-    this._cartService.addToCart(productToAdd);
+    this._cartService.addToCart(productToAdd).subscribe();
   }
 }

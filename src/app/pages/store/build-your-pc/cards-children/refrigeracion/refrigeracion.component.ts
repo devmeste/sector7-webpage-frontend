@@ -6,7 +6,7 @@ import { CardsChildrenAbstractComponent } from '../cards-children';
   selector: 'app-refrigeracion',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './refrigeracion.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './refrigeracion.component.scss'
 })
 export class RefrigeracionComponent  extends CardsChildrenAbstractComponent {

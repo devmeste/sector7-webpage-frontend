@@ -6,7 +6,7 @@ import { TwoColorsCardComponent } from "../../../../../shared/components/cards/t
   selector: 'app-auriculares',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './auriculares.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './auriculares.component.scss'
 })
 export class AuricularesComponent  extends CardsChildrenAbstractComponent {

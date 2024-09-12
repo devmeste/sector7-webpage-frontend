@@ -6,7 +6,7 @@ import { CardsChildrenAbstractComponent } from '../cards-children';
   selector: 'app-teclados',
   standalone: true,
   imports: [TwoColorsCardComponent],
-  templateUrl: './teclados.component.html',
+  templateUrl: '../common-cards-children.html',
   styleUrl: './teclados.component.scss'
 })
 export class TecladosComponent  extends CardsChildrenAbstractComponent {
