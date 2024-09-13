@@ -24,11 +24,11 @@ export class CreateProductComponent extends CustomForm implements OnInit {
 
 
 
-  
+
   private _adminService = inject(AdminService);
   @ViewChild('photoInput') photoInput!: ElementRef;
   categories$ !: ICategory[];
-  
+
   //pop up variables 
   productHasError = false;
   productWasCreatedSuccessfully = false;
@@ -40,10 +40,16 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   memory_types !: string[];
 
 
-  photosByteArray: number[][]= [];
+  photosByteArray: number[][] = [];
   photosByteArrayString: string[] = [];
 
+  // clear text of image input
+  clearFileNameSignal = false;
 
+  //handle the max number of photos
+  maxPhotos = 4;
+  disableImageInput = false;
+  disableText = 'El maximo de fotos permitidas es ' + this.maxPhotos;
 
 
   override initializeForm(): void {
@@ -64,36 +70,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     })
   }
 
-  // override initializeForm(): void {
-  //   this.form = this.formBuilder.group({
-  //     title: ['asdasd', [Validators.required]],
-  //     id: [this.generateRandomString(10), [Validators.required]],
-  //     brand: ['aaa', [Validators.required]],
-  //     model: ['aaa', [Validators.required]],
-  //     price: ['100', [Validators.required]],
-  //     actualStock: ['1234', [Validators.required]],
-  //     viewStock: ['1002', [Validators.required]],
-  //     description: ['asdasd', [Validators.required]],
-  //     isEnabled: [true, []],
-  //     photos: this.formBuilder.array(['https://github.com/JesusDiazDeveloper/sector_7_imgs/blob/main/teclado/teclado.png?raw=true'], []),
-  //     categoryId: ['', [Validators.required]],
-  //     fieldsJSON: ['', []],
-  //     fieldsArray: this.formBuilder.array([]),
-  //   })
-  // }
 
-
-
-  // luego borrar este metodo
-  generateRandomString(length: number = 10): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
 
 
   override ngOnInit(): void {
@@ -143,11 +120,11 @@ export class CreateProductComponent extends CustomForm implements OnInit {
               newFieldGroup.get('value')?.setValue(this.sockets[0]); // Set the first value
             }
           })
-        } 
-        else if(name.toLowerCase() === 'generación'){
+        }
+        else if (name.toLowerCase() === 'generación') {
           this._adminService.getAllGenerations().subscribe(generations => {
             console.log(generations);
-            this.generations = generations.map( generation => generation.type);
+            this.generations = generations.map(generation => generation.type);
             const newFieldGroup = this.createNewFieldGroup(name);
             // Automatically set the first generation value
             if (this.generations.length > 0) {
@@ -172,7 +149,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       });
     })
 
-    console.log( "this.fieldsArray : " +  this.form.value.fieldsArray);
+    console.log("this.fieldsArray : " + this.form.value.fieldsArray);
   }
 
   createNewFieldGroup(name: string): FormGroup<{ fieldName: FormControl<string | null>; value: FormControl<string | null>; }> {
@@ -186,28 +163,17 @@ export class CreateProductComponent extends CustomForm implements OnInit {
 
 
 
-  addPhoto() {
-    // Todo este metodo volver
-    // const p = this.photoInput.nativeElement.value;
-    // if (p.trim().length == 0 || p == null) {
-    //   return;
-    // }
-    // this.photosArray.push(this.formBuilder.control(p, []));
-    // this.photoInput.nativeElement.value = '';
-  }
-
   deletePhoto(i: number) {
     this.photosByteArray.splice(i, 1);
     this.photosByteArrayString.splice(i, 1);
+    if (this.photosByteArray.length == 0) {
+      this.clearFileNameSignal = true;
+    }
+    this.disableImageInput = false;
+
   }
 
 
-  // convertToBase64(){
-  //   return this.photosByteArray.map((photo) => {
-  //     const binaryString = String.fromCharCode(...photo);
-  //     return btoa(binaryString);
-  //   });
-  // }   
 
   override send() {
 
@@ -247,17 +213,23 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     });
   }
 
-  onFileUploaded($event: number[]) {
+  addPhoto($event: number[]) {
 
     this.photosByteArray.push($event);
 
     const imageUrl = convertNumberArrayToImage($event);
-    
+
     this.photosByteArrayString.push(imageUrl);
+
+    this.clearFileNameSignal = false;
+
+    if(this.photosByteArray.length == this.maxPhotos){
+      this.disableImageInput = true;
+    }
 
   }
 
-  
+
 
 
   closeModal(option: string) {

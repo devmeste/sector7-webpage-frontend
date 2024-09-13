@@ -1,3 +1,21 @@
-<div>
+<!-- <div>
     <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    
 </div>
+
+-->
+
+<div class="file-upload-container">
+    <button type="button" class="custom-file-upload" [ngClass]="{'disabled': disabled}"  (click)="triggerFileInput(fileInput)">
+      <mat-icon>upload</mat-icon>Seleccionar archivo
+    </button>
+    
+    <input type="file" #fileInput (change)="onFileSelected($event)"  [disabled]="disabled" accept="image/*" style="display: none">
+    
+    @if(selectedFileName){
+        <small style="color: white; text-align: left;">Archivo seleccionado: {{ selectedFileName }}</small>
+    }
+    @if(disabled && disabledText){
+        <p class="disabled_text" >{{ disabledText }} <mat-icon>check</mat-icon></p>
+    }
+  </div>

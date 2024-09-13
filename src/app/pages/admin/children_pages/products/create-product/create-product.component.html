@@ -96,7 +96,11 @@
 
             <!-- fotos -->
             <label class="form-label checkbox_label ">Fotos: </label>
-            <app-image-uploader (onFileUploaded)="onFileUploaded($event)" ></app-image-uploader>
+            <app-image-uploader (onFileUploaded)="addPhoto($event)" 
+                                 [clearFileNameSignal]="clearFileNameSignal" 
+                                 [disabled]="this.disableImageInput"
+                                 [disabledText]="this.disableText"
+            ></app-image-uploader>
 
             <div class="photosContainer">
             @for(photo of this.photosByteArrayString; track $index) {

@@ -26,8 +26,6 @@ export abstract class UpdateForm extends CustomFormPopUp {
     successMessage = '';
 
 
-    
-
     // Ej:
     // this.adminService.getSocketById(this.element_id, type);
     abstract getElementToUpdate(): Observable<any>;
@@ -53,5 +51,7 @@ export abstract class UpdateForm extends CustomFormPopUp {
                 break;
         }
     }
+
+    
 
 }

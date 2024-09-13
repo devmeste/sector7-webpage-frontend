@@ -22,6 +22,7 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
   @Input({ required: true }) product_USD_price !: number;
   @Output() itemWasUpdatedSuccesfully = new EventEmitter();
 
+
   @ViewChild('photoInput') photoInput !: ElementRef;
 
   protected _adminService = inject(AdminService);
@@ -45,6 +46,15 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
   generations: string[] = [];
   memory_types: string[] = [];
 
+
+  // clear text of image input
+  clearFileNameSignal = false;
+
+  //handle the max number of photos
+  maxPhotos = 4;
+  disableImageInput = false;
+  disableText = 'El maximo de fotos permitidas es ' + this.maxPhotos;
+
   override initializeForm(): void {
     if (this.product_id) {
       this._adminService.getProductById(this.product_id).subscribe(p => {
@@ -67,6 +77,8 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
         })
 
         this.fillInitialPhotos(this.product$.photos || []);
+
+
         this.fillFieldsArray();
 
         this._adminService.getCategoryById(this.product$.categoryId).subscribe(c => {
@@ -95,8 +107,7 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
         const byteArray = await convertImageUrlToByteArray(photo);
         this.photosArray.push(photo);
         this.photosByteArray.push(byteArray);
-        // console.log(this.photosArray);
-        // console.log(this.photosByteArray);
+        this.disableImageInput = this.photosByteArray.length == this.maxPhotos ;
       }
     }
     setTimeout(() => {
@@ -118,11 +129,21 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
     this.photosByteArray.push($event);
     const imageString = convertNumberArrayToImage($event);
     this.photosArray.push(imageString);
+    this.clearFileNameSignal=false;
+    if(this.photosArray.length == this.maxPhotos){
+      this.disableImageInput=true;
+    }
   }
 
   deletePhoto(i: number) {
     this.photosArray.splice(i, 1);
     this.photosByteArray.splice(i, 1);
+    if(this.photosByteArray.length == 0){
+      this.clearFileNameSignal=true;
+    }
+    if(this.disableImageInput ==true){
+      this.disableImageInput=false;
+    }
   }
 
   fillFieldsArray() {

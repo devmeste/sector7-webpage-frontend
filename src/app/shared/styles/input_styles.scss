@@ -1,11 +1,60 @@
-input.input_text{
+@import 'styles.scss';
+
+input.input_text {
     margin-bottom: 1rem;
     border-radius: 32px;
     height: 2rem;
     // width: 80%; // change it each time, depends on the size of the input
     padding-left: 1rem;
-    
+
     &:focus {
         outline-color: $primary-main;
     }
+}
+
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+    .custom-file-upload {
+        padding: 10px 20px;
+        background-color: $gray_20;
+        color: white;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        width: fit-content;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #828282;
+
+        
+
+        mat-icon {
+            padding-right: 4px;
+        }
+        
+        &.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+    .disabled_text{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        color: white; 
+        text-align: left;
+        margin: 0;
+        font-weight: bold;
+
+        mat-icon{
+            margin-left: 0.5rem;
+        }
+    }
+
 }

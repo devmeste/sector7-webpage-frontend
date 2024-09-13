@@ -1,11 +1,11 @@
 <section id="create_usd_container">
-    <h2>Crear una nueva categoría</h2>
+    <h2>Crear una nueva cotización</h2>
 
     <section class="form_container">
         <form (ngSubmit)="send()" [formGroup]="form" class="form">
 
             <div class="custom-input">
-                <label class="form-label">Nuevo valor de cotización:</label>
+                <label class="form-label">Nuevo valor:</label>
                 <input type="number" min="0" formControlName="price" required class="form-control"
                     [ngClass]="{ 'is-invalid': hasErrors('price', 'required') }">
             </div>

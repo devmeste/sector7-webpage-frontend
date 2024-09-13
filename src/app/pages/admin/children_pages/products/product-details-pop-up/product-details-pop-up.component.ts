@@ -27,6 +27,7 @@ export class ProductDetailsPopUpComponent extends CustomFormPopUp {
   photosToShow: string[] = [];
 
 
+
   override initializeForm(): void {
     if (this.product_id) {
       this._adminService.getProductById(this.product_id).subscribe(p => {

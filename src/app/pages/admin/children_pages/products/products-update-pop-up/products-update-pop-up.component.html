@@ -113,14 +113,13 @@
                         <div class="custom-input">
                             <label class="form-label">Fotos: </label>
 
-                            <app-image-uploader (onFileUploaded)="addPhoto($event)"></app-image-uploader>
+                            <app-image-uploader (onFileUploaded)="addPhoto($event)" 
+                                [clearFileNameSignal]="this.clearFileNameSignal"
+                                [disabled]="this.disableImageInput"
+                                [disabledText]="this.disableText"
+                            ></app-image-uploader>
 
-                            <!-- <div class="add_photo_button_container">
-                                <input #photoInput type="text" class="form-control"
-                                    placeholder="link de la foto">
-
-                            </div> -->
-                            <div class="photosContainer">
+                                   <div class="photosContainer">
                                 @for (item of photosArray ; track $index) {
 
                                 <picture class="photo">
