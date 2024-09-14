@@ -8,11 +8,13 @@ import { NgClass } from '@angular/common';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { convertImageUrlToByteArray, convertNumberArrayToImage } from 'app/core/utils/CustomImageMannager';
 import { ImageUploaderComponent } from "../../../../../shared/components/image-uploader/image-uploader.component";
+import { HttpErrorResponse } from '@angular/common/http';
+import { SpinnerS7Component } from "../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 
 @Component({
   selector: 'app-update-banners',
   standalone: true,
-  imports: [InputDangerTextComponent, MessagePopUpComponent, NgClass, ReactiveFormsModule, ImageUploaderComponent],
+  imports: [InputDangerTextComponent, MessagePopUpComponent, NgClass, ReactiveFormsModule, ImageUploaderComponent, SpinnerS7Component],
   templateUrl: './update-banners.component.html',
   styleUrl: './update-banners.component.scss'
 })
@@ -30,6 +32,7 @@ export class UpdateBannersComponent extends UpdateForm {
   photoPcString: string = '';
 
   category = '';
+  isLoading: boolean = false;
 
   override getElementToUpdate(): Observable<any> {
     return this._adminService.getBannerById(this.element_id);
@@ -98,7 +101,7 @@ export class UpdateBannersComponent extends UpdateForm {
   }
 
   override send($event: SubmitEvent): void {
-
+    this.isLoading = true;
     if (this.form.valid) {
       const banner: IBannerRequest = {
         title : this.form.get('title')?.value,
@@ -109,10 +112,18 @@ export class UpdateBannersComponent extends UpdateForm {
         photoCellphone : this.photoCellByteArray
       }
 
-      console.log(banner);
 
-      this._adminService.updateBanner(banner, this.element_id).subscribe(s => {
-        alert('Se actualizo correctamente');
+      this._adminService.updateBanner(banner, this.element_id).subscribe( {
+        
+        next: () => {
+          this.elementUpdatedSuccessfully = true;
+          this.isLoading = false;
+        },
+        error: (err: HttpErrorResponse) => {
+          this.elementUpdateFailed = true;
+          this.errorMessage = err.error.message;
+          this.isLoading = false;
+        }
       })
     }
   }

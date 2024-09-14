@@ -58,8 +58,7 @@ export class AppComponent {
   _cartService: CartService = inject(CartService);
   searchBarClicked: boolean = false;
   mobileBreackPoint: number = 480;
-  // showUserPanel: boolean = false;
-
+  user !: any ;
 
 
   @ViewChild('searchInputDesktop', { static: false }) searchInputDesktop!: ElementRef;
@@ -97,10 +96,18 @@ export class AppComponent {
   ngOnInit(): void {
     this._authService.isUserLoggedIn$().subscribe(isLoggedIn => {
       this.userMadeLogin = isLoggedIn;
+      // if(this.userMadeLogin){
+      //   this._authService.getUser('user').subscribe(user => {
+      //       this.user = user;
+      //   })
+      // }
     })
 
     this._authService.isAdminLoggedIn$().subscribe(isAdminLoggedIn => {
       this.adminMadeLogin = isAdminLoggedIn;
+    //   this._authService.getUser('admin').subscribe(user => {
+    //     this.user = user;
+    // })
     })
     console.log("App component");
   }
