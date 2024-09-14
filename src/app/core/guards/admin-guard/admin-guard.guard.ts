@@ -14,7 +14,7 @@ export const adminGuard : CanActivateFn = async (route, state) => {
     return true;
   }
   else{
-    const urlTree : UrlTree = router.createUrlTree(['auth']);
+    const urlTree : UrlTree = router.createUrlTree(['admin-dashboard/login']);
     return urlTree;
   }
 
