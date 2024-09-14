@@ -1,0 +1,33 @@
+@import '@shared/styles/admin_form.scss';
+@import '@shared/styles/pop-up-form.scss';
+
+.banner_photos_container{
+    height: fit-content;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    align-self: center;
+    margin: 2rem 0;
+}
+
+.banner_update_container.modal_container{
+    width: min(70%, 800px);
+}
+
+.banner_photos_container{
+
+    .banner_photo{
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 2rem ;
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}

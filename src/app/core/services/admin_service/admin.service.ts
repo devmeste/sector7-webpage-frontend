@@ -15,12 +15,14 @@ import { environment } from 'app/core/environments/environment';
 import { ISocket } from 'app/core/models/ISocket';
 import { IGeneration } from 'app/core/models/IGeneration';
 import { IMemoryType } from 'app/core/models/IMemoryType';
+import { IBanner, IBannerRequest } from 'app/core/models/IBanner';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class AdminService {
+
 
 
     // baseUrl: string = 'http://localhost:8001/api/v1/es/';
@@ -107,7 +109,7 @@ export class AdminService {
     createProduct(product: any): Observable<any> {
         console.log("Create Product en Admin Service: ", product);
         return this._httpClient.post<any>(this.baseUrl + 'products', product).pipe(
-            tap(() => {"Se Ejecuto Locoooooo" }),
+            tap(() => { "Se Ejecuto Locoooooo" }),
         );
     }
 
@@ -240,7 +242,7 @@ export class AdminService {
         return this._httpClient.post<IGeneration>(this.baseUrl + 'generation', { type });
     }
 
-    getAllGenerations() : Observable<IGeneration[]> {
+    getAllGenerations(): Observable<IGeneration[]> {
         return this._httpClient.get<IGeneration[]>(this.baseUrl + 'generation');
     }
 
@@ -248,11 +250,11 @@ export class AdminService {
         return this._httpClient.get<IGeneration>(this.baseUrl + 'generation/' + id);
     }
 
-    deleteGeneration( id: string) {
+    deleteGeneration(id: string) {
         return this._httpClient.delete<IGeneration>(this.baseUrl + 'generation/' + id);
     }
 
-    updateGeneration(id: string, type: string) : Observable<IGeneration> {
+    updateGeneration(id: string, type: string): Observable<IGeneration> {
         return this._httpClient.put<IGeneration>(this.baseUrl + 'generation/' + id, { type });
     }
 
@@ -263,23 +265,35 @@ export class AdminService {
         return this._httpClient.post<IMemoryType>(this.baseUrl + 'memory', { type });
     }
 
-    getAllMemoryTypes() : Observable<IMemoryType[]> {
+    getAllMemoryTypes(): Observable<IMemoryType[]> {
         return this._httpClient.get<IMemoryType[]>(this.baseUrl + 'memory');
-    
+
     }
 
     getMemoryTypeById(id: string) {
         return this._httpClient.get<IMemoryType>(this.baseUrl + 'memory/' + id);
     }
 
-    deleteMemoryType( id: string) {
+    deleteMemoryType(id: string) {
         return this._httpClient.delete<IMemoryType>(this.baseUrl + 'memory/' + id);
     }
 
-    updateMemoryType(id: string, type: string) : Observable<IMemoryType> {
+    updateMemoryType(id: string, type: string): Observable<IMemoryType> {
         return this._httpClient.put<IMemoryType>(this.baseUrl + 'memory/' + id, { type });
     }
 
+
+    // banners
+    getAllBanners(): Observable<IBanner[]> {
+        return this._httpClient.get<IBanner[]>(this.baseUrl + 'banners');
+    }
+    getBannerById(element_id: string) {
+        return this._httpClient.get<IBanner>(this.baseUrl + 'banners/' + element_id);
+    }
+
+    updateBanner(banner: IBannerRequest, element_id: string) {
+        return this._httpClient.put<IBannerRequest>(this.baseUrl + 'banners/' + element_id, banner);
+    }
 
 }
 

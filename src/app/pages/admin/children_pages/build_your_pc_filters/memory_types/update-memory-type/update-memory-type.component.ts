@@ -15,7 +15,7 @@ import { MessagePopUpComponent } from "../../../../../../shared/components/pop_u
   styleUrl: './update-memory-type.component.scss'
 })
 export class UpdateMemoryTypeComponent extends UpdateForm {
-
+  
   override element$: any;
 
   override initializeForm(): void {

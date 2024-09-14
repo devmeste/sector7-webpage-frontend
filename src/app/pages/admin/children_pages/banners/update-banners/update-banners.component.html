@@ -1,0 +1,101 @@
+<div class="overlay">
+    @if(this.element$){
+
+    <ng-container>
+        <div class="modal_container update_pop_up modal_form banner_update_container">
+            <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+            <div class="modal_info">
+
+                <!-- Form -->
+                <section class="form_container">
+                    <form (ngSubmit)="send($event)" [formGroup]="this.form" class="form form_pop_up">
+
+                        <!-- title -->
+                        <div class="custom-input">
+                            <label class="form-label">Nombre: </label>
+                            <input type="text" formControlName="title" required class="form-control"
+                                [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
+                            @if( hasErrors(this.form,'title', 'required') ){
+                            <app-input-danger-text text="Este campo es requerido">
+                            </app-input-danger-text>
+                            }
+                        </div>
+
+                        <!-- category -->
+                        <div class="custom-input">
+                            <label class="form-label">Categoría: </label>
+                            <input [disabled]="true" type="text" formControlName="category" required
+                                class="form-control disabled_input_text"
+                                [ngClass]="{ 'is-invalid': hasErrors(this.form,'category', 'required') }">
+                            @if( hasErrors(this.form,'category', 'required') ){
+                            <app-input-danger-text text="Este campo es requerido">
+                            </app-input-danger-text>
+                            }
+                        </div>
+
+                        <!-- date -->
+                        <div class="custom-input">
+                            <label class="form-label">Fecha: </label>
+                            <input [disabled]="true" type="text" formControlName="date" required
+                                class="form-control disabled_input_text"
+                                [ngClass]="{ 'is-invalid': hasErrors(this.form,'date', 'required') }">
+                            @if( hasErrors(this.form,'date', 'required') ){
+                            <app-input-danger-text text="Este campo es requerido">
+                            </app-input-danger-text>
+                            }
+                        </div>
+
+                        <!-- routeUrl -->
+                        <div class="custom-input">
+                            <label class="form-label">Url de destino: </label>
+                            <input [disabled]="true" type="text" formControlName="routeUrl" required
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': hasErrors(this.form,'routeUrl', 'required') }">
+                            @if( hasErrors(this.form,'routeUrl', 'required') ){
+                            <app-input-danger-text text="Este campo es requerido">
+                            </app-input-danger-text>
+                            }
+                        </div>
+
+
+                        <div class="banner_photos_container">
+                            <div>
+                                <p>Escritorio</p>
+                                <div class="banner_photo"> <img src="{{photoPcString}}" alt=""></div>
+                                <app-image-uploader  style="margin-top: 1rem;" (onFileUploaded)="updatePhoto($event, 'pc')" ></app-image-uploader>
+                            </div>
+                            <div>
+                                <p>Tablet</p>
+                                <div class="banner_photo"> <img src="{{photoTabletString}}" alt=""></div>
+                                <app-image-uploader style="margin-top: 1rem;" (onFileUploaded)="updatePhoto($event, 'tablet')" ></app-image-uploader>
+                            </div>
+                            <div>
+                                <p>Celular</p>
+                                <div class="banner_photo"> <img src="{{photoCellString}}" alt=""></div>
+                                <app-image-uploader style="margin-top: 1rem;" (onFileUploaded)="updatePhoto($event, 'cellphone')" ></app-image-uploader>
+
+                            </div>
+                        </div>
+
+                       
+
+                        @if (elementUpdatedSuccessfully) {
+                            <app-message-pop-up custom_message='Banner Modificado Exitosamente'
+                                (close)="closeMessageModal('elementUpdatedSuccessfully')">
+                            </app-message-pop-up>
+                        }
+                        @if (elementUpdateFailed) {
+                            <app-message-pop-up custom_message='{{errorMessage}}'
+                                (close)="closeMessageModal('elementUpdateFailed')">
+                            </app-message-pop-up>
+                        }
+
+                        <button class="primary_button"
+                            [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
+                            [disabled]="disabledFormButton(this.form)" type="submit">Modificar</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </ng-container>
+    }

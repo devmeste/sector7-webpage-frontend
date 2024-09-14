@@ -28,20 +28,16 @@ export class GetAllGenerationsComponent extends GetAllGeneric {
     })
   }
 
-  getArrayElementsFromService(): Observable<any> {
+  override getArrayElementsFromService(): Observable<any> {
     return this._adminService.getAllGenerations();
   }
 
-  override deleteElement(id: string): void {
-    // this method is not used in this component but exists in the parent.  
-    return;
-  }
 
-  daleteElementById(id: string): Observable<any> {
-    // this method is not used in this component but exists in the parent.
+  
+  override daleteElementById(id: string): Observable<any> {
     return this._adminService.deleteGeneration(id);
   }
-
+ 
 
 
 }

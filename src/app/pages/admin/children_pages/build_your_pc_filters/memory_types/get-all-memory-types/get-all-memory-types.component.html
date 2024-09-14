@@ -4,7 +4,7 @@
     <h4 class="subtitle">Lista de todos los tipos de memoria de Sector 7</h4>
 
     @if(this.elements$ && this.elements$.length > 0 ) {
-        
+
     <table>
         <thead>
             <tr>
@@ -28,6 +28,10 @@
                             (click)="showUpdatePopUpMethod(element.id)">
                             <mat-icon>edit</mat-icon>
                         </button>
+                        <button type="button" class="actions_button delete_button"
+                            (click)="askToConfirmDelete(element.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </div>
                 </td>
             </tr>
@@ -35,20 +39,20 @@
         </tbody>
     </table>
 
-    <!-- @if (elementDeletedSuccessfully) {
+    @if (elementDeletedSuccessfully) {
     <app-message-pop-up custom_message='Generacion Eliminado Exitosamente'
         (close)="closeModal('elementDeletedSuccessfully')"> </app-message-pop-up>
-    } -->
+    }
 
-    <!-- @if (elementDeletionFailed) {
+    @if (elementDeletionFailed) {
     <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('elementDeletionFailed')">
     </app-message-pop-up>
-    } -->
+    }
 
-    <!-- @if(showPopUpToConfirmDelete){
+    @if(showPopUpToConfirmDelete){
     <app-confirm-pop-up custom_message="¿Realmente desea eliminar esta generacion?" (confirm)="confirmDeleteAction()"
         (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
-    } -->
+    }
 
     }
     @else {
@@ -63,8 +67,7 @@
 </section>
 
 @if(this.showUpdatePopUp){
-   <app-update-memory-type [element_id]="this.update_id" 
-   (UpdateSuccesfullyEmmitter)="this.updateElementsState()" 
-   (close)="closeModal('showUpdatePopUp')">
-   </app-update-memory-type>
+<app-update-memory-type [element_id]="this.update_id" (UpdateSuccesfullyEmmitter)="this.updateElementsState()"
+    (close)="closeModal('showUpdatePopUp')">
+</app-update-memory-type>
 }

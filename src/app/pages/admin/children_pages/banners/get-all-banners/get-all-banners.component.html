@@ -1,15 +1,24 @@
 <section class="admin_panel_table_main_container main_getAll_container">
 
-    <h2 class="title"> Generaciones </h2>
-    <h4 class="subtitle">Lista de todas las generaciones de Sector 7</h4>
+    <h2 class="title"> Banners </h2>
+    <h4 class="subtitle">Lista de todos los banners de Sector 7</h4>
 
     @if(this.elements$ && this.elements$.length > 0 ) {
 
-    <table>
+    <table class="get_all_banners_table">
         <thead>
             <tr>
                 <td>
-                    Tipo
+                    Foto
+                </td>
+                <td>
+                    Categoría
+                </td>
+                <td>
+                    Titulo
+                </td>
+                <td>
+                    Ruta
                 </td>
                 <td>
                     Acciones
@@ -20,7 +29,18 @@
             @for(element of elements$ ; track element.id){
             <tr>
                 <td>
-                    {{element.type}}
+                    <div class="table_image_container">
+                        <img class="table_image" src="{{element.presignedUrlCellphone}}" alt="banner's photo">
+                    </div>
+                </td>
+                <td>
+                    {{element.category}}
+                </td>
+                <td>
+                    {{element.title}}
+                </td>
+                <td>
+                    {{element.routeUrl}}
                 </td>
                 <td class="actions_buttons_container">
                     <div class="flex_container">
@@ -28,10 +48,10 @@
                             (click)="showUpdatePopUpMethod(element.id)">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button type="button" class="actions_button delete_button"
+                        <!-- <button type="button" class="actions_button delete_button"
                             (click)="askToConfirmDelete(element.id)">
                         <mat-icon>delete</mat-icon>
-                    </button>
+                    </button> -->
                     </div>
                 </td>
             </tr>
@@ -39,7 +59,7 @@
         </tbody>
     </table>
 
-    @if (elementDeletedSuccessfully) {
+    <!-- @if (elementDeletedSuccessfully) {
     <app-message-pop-up custom_message='Generacion Eliminado Exitosamente'
         (close)="closeModal('elementDeletedSuccessfully')"> </app-message-pop-up>
     }
@@ -51,7 +71,7 @@
     @if(showPopUpToConfirmDelete){
     <app-confirm-pop-up custom_message="¿Realmente desea eliminar esta generacion?" (confirm)="confirmDeleteAction()"
         (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
-    }
+    } -->
 
     }
     @else {
@@ -59,16 +79,19 @@
     <app-spinner-s7></app-spinner-s7>
     }
     @else {
-    <app-input-danger-text text="No hay generaciones"></app-input-danger-text>
+    <app-input-danger-text text="No hay Banners para mostrar"></app-input-danger-text>
     }
     }
 
 </section>
 
 @if(this.showUpdatePopUp){
-    <app-update-generation 
-        [element_id]="this.update_id" 
-        (UpdateSuccesfullyEmmitter)="this.updateElementsState()" 
-        (close)="closeModal('showUpdatePopUp')">
-    </app-update-generation>
+<!-- <app-update-generation [element_id]="this.update_id" (UpdateSuccesfullyEmmitter)="this.updateElementsState()"
+    (close)="closeModal('showUpdatePopUp')">
+</app-update-generation> -->
+
+<app-update-banners [element_id]="this.update_id" 
+                    (UpdateSuccesfullyEmmitter)="this.updateElementsState()" 
+                    (close)="closeModal('showUpdatePopUp')"
+></app-update-banners>
 }

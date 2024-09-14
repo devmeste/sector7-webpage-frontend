@@ -9,14 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class StoreService {
 
-
-  
+ 
   private baseUrl: string = environment.apiUrl;
   _httpClient: HttpClient = inject(HttpClient);
 
 
-  getBanner(option:string) : Observable<IBanner>{
-    return this._httpClient.get<IBanner>(`${this.baseUrl}banners/category/${option}`);
+  getBannersByCategory(option:string) : Observable<IBanner[]>{
+    return this._httpClient.get<IBanner[]>(`${this.baseUrl}banners/category/${option}`);
   }
 
 }

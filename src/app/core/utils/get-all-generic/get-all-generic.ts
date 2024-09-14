@@ -44,7 +44,8 @@ export abstract class GetAllGeneric {
         }
     }
 
-
+    //this method is herited by the child components, an its use an abstract method 
+    // to customize the delete action (deleteElementById)
     deleteElement(id: string) {
         this.daleteElementById(id).subscribe({
             next: () => {
@@ -60,12 +61,7 @@ export abstract class GetAllGeneric {
     }
 
 
-    // Ej:
-    // getElementById(id: string): Observable<any> {
-    //     return this._adminService.deleteScocket(id);
-    // }
-    abstract daleteElementById(id: string): Observable<any>;
-
+   
 
     updateElementsState(): void {
         this.isLoading = true;
@@ -75,11 +71,7 @@ export abstract class GetAllGeneric {
         })
     }
 
-    //Ej: 
-    // getArrayElementsFromService() : Observable<any> {
-    //     return this._adminService.getAllGenerations();
-    //}
-    abstract getArrayElementsFromService(): Observable<any>;
+   
 
     ngOnInit(): void {
         this.updateElementsState();
@@ -99,4 +91,17 @@ export abstract class GetAllGeneric {
         this.deleteElement(this.elementIdToDelete);
         this.closeModal("showPopUpToConfirmDelete");
     }
+
+     // Ej:
+    // getElementById(id: string): Observable<any> {
+    //     return this._adminService.deleteScocket(id);
+    // }
+    abstract daleteElementById(id: string): Observable<any>;
+
+
+     //Ej: 
+    // getArrayElementsFromService() : Observable<any> {
+    //     return this._adminService.getAllGenerations();
+    //}
+    abstract getArrayElementsFromService(): Observable<any>;
 }

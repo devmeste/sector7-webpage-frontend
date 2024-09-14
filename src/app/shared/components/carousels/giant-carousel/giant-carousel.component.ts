@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { IBanner } from 'app/core/models/IBanner';
+import { StoreService } from 'app/core/services/store_service/store.service';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 @Component({
   selector: 'app-giant-carousel',
@@ -11,43 +12,24 @@ import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 })
 export class GiantCarouselComponent {
 
+  @Input () category = '';
+  _storeService : StoreService= inject(StoreService);
 
-  ngOnInit(): void {
+
+  banners: IBanner[] = [
     
+  ];
+  
+  ngOnInit(): void {
+      this._storeService.getBannersByCategory(this.category).subscribe(
+        banners =>{ 
+          this.banners = banners;
+          console.log(banners);
+        }
+      );
   }
   
-  banners: IBanner[] = [
-    {
-      id: "1",
-      title: "Summer Sale",
-      category: "Promotion",
-      date: new Date("2024-08-01"),
-      url: "https://www.google.com",
-      presignedUrl: "../../../../../assets/images/carousel/Imagen1.png",
-      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen1_tab.png",
-      presignedUrl_mob: "../../../../../assets/images/carousel/Imagen1_mob.png"
-    },
-    {
-      id: "2",
-      title: "New Arrivals",
-      category: "Product",
-      date: new Date("2024-08-10"),
-      url: "https://www.google.com",
-      presignedUrl: "../../../../../assets/images/carousel/Imagen2.png",
-      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen2_tab.png",
-      presignedUrl_mob: "../../../../../assets/images/carousel/Imagen2_mob.png"
-    },
-    {
-      id: "3",
-      title: "Gaming Week",
-      category: "Event",
-      date: new Date("2024-08-15"),
-      url: "https://www.google.com",
-      presignedUrl: "../../../../../assets/images/carousel/Imagen3.png",
-      presignedUrl_tab: "../../../../../assets/images/carousel/Imagen3_tab.png",
-      presignedUrl_mob: "../../../../../assets/images/carousel/Imagen3_mob.png"
-    }
-  ];
+ 
 
 
   responsiveOptions: CarouselResponsiveOptions[] = [

@@ -6,16 +6,10 @@
         <h2 class="texto_logo">Todo en tecnología</h2>
     </div> -->
 
-    <!-- <section class="main_banner banner " >
-        <div>
-            <img [src]="bannerMain" alt="imagen del banner">
-        </div>
-    </section> -->
-
     
     
     <section style="width: 90%; margin-bottom: 6rem;">
-        <app-giant-carousel></app-giant-carousel>
+        <app-giant-carousel [category]="'home-primary'"></app-giant-carousel>
     </section>
     
     <section class="carrousel_section">
@@ -26,7 +20,7 @@
     <section class="carrousel_section">
         <h2>Novedades</h2>
         <div class="carrousel_divider"></div>
-        <app-product-carrousel></app-product-carrousel>
+        <app-product-carrousel ></app-product-carrousel>
     </section>
     
     <!-- <section class="technical_service_banner banner">
@@ -36,7 +30,7 @@
     </section> -->
 
     <section style="width: 90%; margin-bottom: 6rem;">
-        <app-giant-carousel></app-giant-carousel>
+        <app-giant-carousel [category]="'home-secondary'"></app-giant-carousel>
     </section>
     
     <section class="carrousel_section">

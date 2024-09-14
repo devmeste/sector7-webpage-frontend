@@ -17,12 +17,12 @@ import { SpinnerS7SmallComponent } from "../../../shared/components/spinners/spi
 export class HomeComponent {
     
     _storeService : any = inject(StoreService);
-    bannerMain: string ='';
+    // bannerMain: string ='';
     // bannerSecondary: string = '';
     
-    ngOnInit(): void {
-        this._storeService.getBanner('main').subscribe( (banner: IBanner) => {
-            this.bannerMain = banner.presignedUrl;
-        })
-    }
+    // ngOnInit(): void {
+    //     this._storeService.getBanner('home-primary').subscribe( (banner: IBanner) => {
+    //         this.bannerMain = banner.presignedUrlPc;
+    //     })
+    // }
 }

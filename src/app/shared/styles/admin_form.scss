@@ -59,12 +59,16 @@
 
   }
 
+  .form-control.disabled_input_text{
+    opacity: 0.5;
+  }
+
   .is-invalid {
     border: 2px solid $danger_500;
     // border-color: #dc3545;
   }
 
-
+  
 
   .warning_text_container {
     display: flex;

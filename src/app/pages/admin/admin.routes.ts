@@ -78,6 +78,12 @@ export const ADMIN_ROUTES: Routes = [
                 path: 'billing/:id',
                 loadComponent: () => import('./children_pages/Bills/purchase-details/purchase-details.component').then(r => r.PurchaseDetailsComponent)
             },
+            {
+                path: 'banners',
+                loadComponent: () => import('./children_pages/banners/get-all-banners/get-all-banners.component').then(r => r.GetAllBannersComponent)
+            }
+
+
 
         ]
 
