@@ -31,7 +31,7 @@
         <div class="empty_cart_message_container">
             <div class="empty_cart_message">
                 <p>No hay productos en el carrito</p>
-                <button class="primary_button" routerLink="/store">Quiero Elegir</button>
+                <button class="primary_button" routerLink="/search">Quiero Elegir</button>
             </div>
         </div>
         }
@@ -59,6 +59,6 @@
         </div>
     }
     @if (showMustLoginPopUp) {
-        <app-confirm-pop-up [custom_message]="'Necesita estar logueado para realizar esta acción'" [buttonConfirmText]="'Iniciar Sesion'" (close)="closePopUp('showMustLoginPopUp')" (confirm)="sendToLogin()"></app-confirm-pop-up>
+        <app-confirm-pop-up [custom_message]="'Necesita estar logueado para realizar esta acción'" [buttonConfirmText]="'Iniciar Sesión'" (close)="closePopUp('showMustLoginPopUp')" (confirm)="sendToLogin()"></app-confirm-pop-up>
     }
 </main>

@@ -57,14 +57,15 @@ export class RegisterComponent extends CustomForm {
           lastname: this.form.get('lastname')?.value,
           email: this.form.get('email')?.value,
           areaCode: this.form.get('area_Code')?.value,
-          cellphoneNumber: this.form.get('phone')?.value
+          cellphoneNumber: this.form.get('phone')?.value,
+          photo: []
         }
       };
 
       this._authService.register(newUser).subscribe({
         next: response => {
           let res = JSON.parse(response);
-          this.successMessage = res.message + "\n \nVerifica tu cuenta y luego podras ingresar";
+          this.successMessage = res.message + "\n \nVerifica tu cuenta y luego podrás ingresar";
           // TODO : Mostrar un pop up
           this.showSuccessPopUp = true;
           this.form.reset();

@@ -19,7 +19,7 @@ import { CreateForm } from 'app/core/utils/create-form/create-form';
 })
 export class CreateSocketComponent extends CreateForm {
 
-  override elementToCreate: string = 'socket';
+  override elementToCreate: string = 'Socket';
 
 
 

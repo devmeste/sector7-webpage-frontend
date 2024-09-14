@@ -15,7 +15,7 @@
 
 
             @if (elementWasCreatedSuccessfully) {
-            <app-message-pop-up  custom_message='{{this.elementToCreate + " creada correctamente"}}'
+            <app-message-pop-up  custom_message='{{this.elementToCreate + " creada exitosamente"}}'
                 (close)="closeModal('elementWasCreatedSuccessfully')"> </app-message-pop-up>
             }
             @if (errorCreatingElement) {

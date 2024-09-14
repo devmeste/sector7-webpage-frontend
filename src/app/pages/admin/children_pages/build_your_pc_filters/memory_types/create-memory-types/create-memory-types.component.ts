@@ -18,7 +18,7 @@ import { CreateForm } from 'app/core/utils/create-form/create-form';
 export class CreateMemoryTypesComponent extends CreateForm {
 
   override elementToCreate = 'Tipo de memoria'; 
-  successMessage = this.elementToCreate + ' creado correctamente';
+  successMessage = this.elementToCreate + ' creado exitosamente';
 
   override closeModal(option: string) {
 
