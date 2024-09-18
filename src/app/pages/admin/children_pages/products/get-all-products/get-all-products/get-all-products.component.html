@@ -41,7 +41,7 @@
         <tbody>
             @for(product of products$ ; track product.id){
             <tr>
-                <td>
+                <td (click)="navigateTo(product.id)" style="cursor: pointer;">
                     {{product.title}}
                 </td>
                 <td>

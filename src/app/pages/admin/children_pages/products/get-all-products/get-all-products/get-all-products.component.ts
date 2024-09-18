@@ -150,9 +150,9 @@ export class GetAllProductsComponent {
     this.updateProductsState(value);
   }
 
-
-
-
+  navigateTo(value: string) {
+    window.open('/product-details/' + value, '_blank');
+  }
 }
 
 interface AutoCompleteCompleteEvent {
