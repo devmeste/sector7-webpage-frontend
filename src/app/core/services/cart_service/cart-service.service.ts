@@ -6,7 +6,7 @@ import { environment } from 'app/core/environments/environment';
 import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
 import { AuthService } from '../auth_service/auth.service';
 import { IProduct_Cart_Add_Entry_Request } from 'app/core/models/IProduct_Cart_Add_Entry_Request';
-import {CartQuantityAction} from '../../models/types/CartQuantityAction';
+import { CartQuantityAction } from '../../models/types/CartQuantityAction';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +28,14 @@ export class CartService {
 
 
   constructor() {
-    this.getAllProducts();
+
     this._authService.isAnyUserOrAdminLoggedIn$().subscribe((isLoggedIn) => {
-      if (!isLoggedIn) {
+      if (isLoggedIn) {
+        this.getAllProducts();
+      }
+      else {
         this.cartLogout();
+
       }
     })
   }
@@ -77,15 +81,13 @@ export class CartService {
     return this.cart.findIndex(item => item.id === idReceived);
   }
 
+  // just use it if Admin or User is logged in
   public getAllProducts(): Observable<IProduct_Cart_Entry_BK[]> {
     this._httpClient.get<IProduct_Cart_Entry_BK[]>(`${this.baseUrl}cart`).subscribe(cart => {
-
       this.cart = cart;
       this.$cart.next(this.cart);
       this.$cartQuantity.next(this.cart.length);
       const totalCart = this.calculateTotal();
-      console.log('Total CArt!');
-      console.log(totalCart);
       this.$cartTotal.next(totalCart);
     })
 
@@ -142,7 +144,7 @@ export class CartService {
     if (action === 'increase') {
       if (entry.quantity < entry.stock) {
         const quantity = entry.quantity + 1;
-        return this._httpClient.patch(this.baseUrl + 'cart/' + entry.id +'/'+ quantity , {}).pipe(
+        return this._httpClient.patch(this.baseUrl + 'cart/' + entry.id + '/' + quantity, {}).pipe(
           tap(() => {
             this.getAllProducts();
           })
@@ -152,7 +154,7 @@ export class CartService {
     else if (action === 'decrease') {
       if (entry.quantity > 1) {
         const quantity = entry.quantity - 1;
-        return this._httpClient.patch(this.baseUrl + 'cart/' + entry.id +'/'+ quantity , {}).pipe(
+        return this._httpClient.patch(this.baseUrl + 'cart/' + entry.id + '/' + quantity, {}).pipe(
           tap(() => {
             this.getAllProducts();
           })
@@ -164,8 +166,6 @@ export class CartService {
   }
 
   private calculateTotal(): number {
-    console.log(this.cart);
-
     return this.cart.reduce((suma, item) => suma + item.price * item.quantity, 0);
   }
 

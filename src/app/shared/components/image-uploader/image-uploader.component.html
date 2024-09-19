@@ -6,9 +6,12 @@
 -->
 
 <div class="file-upload-container">
-    <button type="button" class="custom-file-upload" [ngClass]="{'disabled': disabled}"  (click)="triggerFileInput(fileInput)">
-      <mat-icon>upload</mat-icon>Seleccionar archivo
-    </button>
+
+    @if(isNecesaryOpenFileButton){
+        <button type="button" class="custom-file-upload" [ngClass]="{'disabled': disabled}"  (click)="triggerFileInput()">
+            <mat-icon>upload</mat-icon>Seleccionar archivo
+        </button>
+    }
     
     <input type="file" #fileInput (change)="onFileSelected($event)"  [disabled]="disabled" accept="image/*" style="display: none">
     

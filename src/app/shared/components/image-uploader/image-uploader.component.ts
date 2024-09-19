@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -14,6 +14,8 @@ export class ImageUploaderComponent {
   //show the last image name that was uploaded
   selectedFileName: string = '';
 
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
   @Output() onFileUploaded = new EventEmitter<number[]>();
   @Input() clearFileNameSignal!: boolean;
 
@@ -21,6 +23,9 @@ export class ImageUploaderComponent {
   @Input() disabled: boolean = false;
   @Input() disabledText: string = '';
 
+  //
+  @Input() openInputFromOutsideSignal : boolean = false;
+  @Input( {required: true}) isNecesaryOpenFileButton !: boolean  ;
 
   onFileSelected(event: Event): void {
 
@@ -38,6 +43,7 @@ export class ImageUploaderComponent {
       reader.onload = () => {
         const byteArray = new Int8Array(reader.result as ArrayBuffer);
         const byteArray2 = Array.from(byteArray);
+        this.openInputFromOutsideSignal = false;
         this.onFileUploaded.emit(byteArray2);
       };
 
@@ -47,13 +53,18 @@ export class ImageUploaderComponent {
     }
   }
 
-  triggerFileInput(fileInput: HTMLInputElement): void {
-    fileInput.click();
+  triggerFileInput(): void {
+    this.fileInput.nativeElement.click();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['clearFileNameSignal'] && changes['clearFileNameSignal'].currentValue) {
       this.selectedFileName = '';
+    }
+
+    if (changes['openInputFromOutsideSignal'] && changes['openInputFromOutsideSignal'].currentValue) {
+      this.triggerFileInput();
+
     }
   }
 

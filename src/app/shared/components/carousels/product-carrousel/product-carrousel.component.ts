@@ -19,7 +19,6 @@ export class ProductCarrouselComponent implements OnInit {
   products !: BKProduct [] ;
 
   ngOnInit(): void {
-    console.log("Product Carrousel ");
     this._productService.getProducts().subscribe( productResponse => {
       this.products = productResponse.products;
     })

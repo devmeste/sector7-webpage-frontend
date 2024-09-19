@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from 
 import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { filter } from 'rxjs';
 import { UserProfileComponent } from "../user-profile/user-profile.component";
+import { IUserResponse } from 'app/core/models/IUserResponse';
 
 @Component({
   selector: 'app-user-account',
@@ -17,6 +18,8 @@ export class UserAccountComponent {
   _activatedRoute = inject(ActivatedRoute)
   _router = inject(Router);
   isDashboardView: boolean = true;
+
+  user !: IUserResponse;
   
   ngOnInit(): void {
 
@@ -25,6 +28,10 @@ export class UserAccountComponent {
     ).subscribe(() => {
       this.checkRoute();
     });
+    
+    this._authservice.getUser().subscribe(user => {
+      this.user = user;
+    })
 
     this.checkRoute();
   }
@@ -33,6 +40,7 @@ export class UserAccountComponent {
     const url = this._router.url;
     this.isDashboardView = url === '/user-account';
   }
+  
 
 
   logout() {

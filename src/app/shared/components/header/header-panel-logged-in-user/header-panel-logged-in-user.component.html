@@ -1,13 +1,29 @@
 <div class="header_panel_container">
     <div class="header_panel_logo_container">
         <picture class="header_panel_logo_image">
-            <img src="assets/images/temporales/Avatar.svg" alt="logo">
+            @if(isUserLoggedIn){
+                <div class="image_container">
+                    <img [src]=" isUserLoggedIn ? user.presignedUrlPhoto : 'assets/images/logos/Sector7LogoSmall.png'" alt="logo">
+                </div>
+            }
+            @else {
+                <div class="image_container">
+                    <img src="assets/images/logos/Sector7LogoSmall.png" alt="logo">
+                </div>
+            }
         </picture>
-        <p class="header_panel_user_name">Pepe</p>
-            
+
+        @if(isUserLoggedIn){
+            <p class="header_panel_user_name">{{user.firstname}}</p>
+        }
+        @else {
+            <p class="header_panel_user_name">Sector 7</p>
+        }
+
     </div>
+    
     <div class="header_panel_user_container">
         <p class="my_account_section" [routerLink]="['user-account']"><mat-icon>account_circle</mat-icon> Mi Cuenta</p>
-        <p class="my_account_section" [routerLink]="['cart']" ><mat-icon>shopping_cart</mat-icon> Mi Carrito</p>
+        <p class="my_account_section" [routerLink]="['cart']"><mat-icon>shopping_cart</mat-icon> Mi Carrito</p>
         <p class="my_account_section" (click)="logout()"><mat-icon>logout</mat-icon> Cerrar Sesion</p>
     </div>

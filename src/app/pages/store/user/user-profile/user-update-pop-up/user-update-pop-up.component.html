@@ -1,0 +1,96 @@
+<div class="overlay">
+    @if(this.element$){
+
+    <ng-container>
+        <div class="modal_container update_pop_up modal_form user_update_container">
+            <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+            <div class="modal_info">
+
+                <!-- Form -->
+                <section class="form_container">
+                    <form (ngSubmit)="send($event)" [formGroup]="this.form" class="form form_pop_up">
+                        @if(photoString){
+                            <div class="custom-input">
+                                <div class="change_photo_container">
+                                    <div class="user_image_container" (click)="openInputImage = true" >
+                                        <img src="{{photoString}}" alt="user photo" >
+                                    </div>
+    
+                                    <app-image-uploader [isNecesaryOpenFileButton]="false" [openInputFromOutsideSignal]="this.openInputImage" (onFileUploaded)="updatePhoto($event)"></app-image-uploader>
+                                </div>
+                                <div></div>
+                            </div>
+                        
+                        }
+                        <div class="half_container">
+
+                            <!-- firstName -->
+                            <div class="custom-input">
+                                <label class="form-label">Nombre: </label>
+                                <input type="text" formControlName="firstName" required class="form-control"
+                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'firstName', 'required') }">
+                                @if( hasErrors(this.form,'firstName', 'required') ){
+                                <app-input-danger-text text="Este campo es requerido">
+                                </app-input-danger-text>
+                                }
+                            </div>
+
+                            <!-- lastName -->
+                            <div class="custom-input">
+                                <label class="form-label">Apellido: </label>
+                                <input type="text" formControlName="lastName" required class="form-control"
+                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'lastName', 'required') }">
+                                @if( hasErrors(this.form,'lastName', 'required') ){
+                                <app-input-danger-text text="Este campo es requerido">
+                                </app-input-danger-text>
+                                }
+                            </div>
+                            <!-- areaCode -->
+                            <div class="custom-input">
+                                <label class="form-label">Código de área: </label>
+                                <input type="number" formControlName="areaCode" required class="form-control"
+                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'areaCode', 'required') }">
+                                @if( hasErrors(this.form,'areaCode', 'required') ){
+                                <app-input-danger-text text="Este campo es requerido">
+                                </app-input-danger-text>
+                                }
+                            </div>
+                            <!-- cellphoneNumber -->
+                            <div class="custom-input">
+                                <label class="form-label">Teléfono: </label>
+                                <input type="number" formControlName="cellphoneNumber" required class="form-control"
+                                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'cellphoneNumber', 'required') }">
+                                @if( hasErrors(this.form,'cellphoneNumber', 'required') ){
+                                <app-input-danger-text text="Este campo es requerido">
+                                </app-input-danger-text>
+                                }
+                            </div>
+
+
+                           
+                        </div>
+
+
+                        @if (elementUpdatedSuccessfully) {
+                        <app-message-pop-up custom_message='{{this.successMessage}}'
+                            (close)="closeMessageModal('elementUpdatedSuccessfully')">
+                        </app-message-pop-up>
+                        }
+                        @if (elementUpdateFailed) {
+                        <app-message-pop-up custom_message='{{errorMessage}}'
+                            (close)="closeMessageModal('elementUpdateFailed')">
+                        </app-message-pop-up>
+                        }
+
+                        <button class="primary_button"
+                            [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}"
+                            [disabled]="disabledFormButton(this.form)" type="submit">Modificar</button>
+                    </form>
+                </section>
+            </div>
+            @if (isLoading) {
+                <app-spinner-s7></app-spinner-s7>
+            }
+        </div>
+    </ng-container>
+    }

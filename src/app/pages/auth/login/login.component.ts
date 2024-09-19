@@ -21,8 +21,7 @@ export class LoginComponent extends ParentLoginComponent {
     super(router, auth_service);
   }
   
-   override saveTokenAndRedirect(token:string): void {
-    localStorage.setItem('token', token);
+   override Redirect(): void {
     this.router.navigate([`/`]);
   }
 

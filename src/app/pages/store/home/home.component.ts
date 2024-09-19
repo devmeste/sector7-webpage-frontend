@@ -16,13 +16,5 @@ import { SpinnerS7SmallComponent } from "../../../shared/components/spinners/spi
 })
 export class HomeComponent {
     
-    _storeService : any = inject(StoreService);
-    // bannerMain: string ='';
-    // bannerSecondary: string = '';
-    
-    // ngOnInit(): void {
-    //     this._storeService.getBanner('home-primary').subscribe( (banner: IBanner) => {
-    //         this.bannerMain = banner.presignedUrlPc;
-    //     })
-    // }
+  
 }

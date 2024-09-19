@@ -37,7 +37,9 @@ export class SearchComponent {
   private _router: ActivatedRoute = inject(ActivatedRoute);
   private _productService = inject(ProductService);
 
+  
   products: BKProduct[] = [];
+
 
   features: IFeature[] = [
     {
@@ -52,7 +54,6 @@ export class SearchComponent {
       title: "Marca",
       filters: ["AMD", "Intel", "Otra Marca", "Otra Marca"]
     },
-
   ]
     ;
 
@@ -68,18 +69,18 @@ export class SearchComponent {
     this._router.params.subscribe(params => {
       if (params['textToSearch']) {
         this.textToSearch = params['textToSearch'];
+        window.scrollTo(0, 0); 
       }
       // this.products = [];
       
       this.updateProductsInfo();
     })
-
-    // window.scrollTo(0, 0); // ?? probar sin esto, parece que anda
+    window.scrollTo(0, 0); 
   }
 
 
   updateProductsInfo() {
-    
+
     this.loading = true;
     this._productService.search(this.textToSearch, this.page).subscribe(productResponse => {
       

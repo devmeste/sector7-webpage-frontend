@@ -5,11 +5,13 @@
         <!-- top section -->
         <section class="user_account_top_section">
             <picture class="image_container">
-                <img src="assets/images/temporales/Avatar.svg" alt="logo">
+                @if(user){
+                    <img [src]="user.presignedUrlPhoto" alt="user photo">
+                }
             </picture>
             <div>
                 <p>Hola, </p>
-                <h3>Pepe</h3>
+               @if(user){<h3>{{user.firstname}}</h3>}
             </div>
         </section>
 

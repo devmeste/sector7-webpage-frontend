@@ -10,5 +10,5 @@ export interface UserData {
     email:           string;
     areaCode:        string;
     cellphoneNumber: string;
-    photo:           [];
+    photo:           [] | number [];
 }

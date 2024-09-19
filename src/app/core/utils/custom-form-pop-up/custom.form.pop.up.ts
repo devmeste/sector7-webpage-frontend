@@ -9,7 +9,7 @@ import { CustomForm } from '../custom-form/custom.form';
 })
 export abstract class CustomFormPopUp extends CustomForm implements ICustomModal {
     
-    @Output() close :EventEmitter<any> = new EventEmitter();
+    @Output() close:EventEmitter<any> = new EventEmitter();
 
     @HostListener('document:keydown.escape', ['$event'])
     handleEscapeKey(event: KeyboardEvent) {

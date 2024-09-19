@@ -24,7 +24,6 @@ export class GiantCarouselComponent {
       this._storeService.getBannersByCategory(this.category).subscribe(
         banners =>{ 
           this.banners = banners;
-          console.log(banners);
         }
       );
   }

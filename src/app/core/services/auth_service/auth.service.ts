@@ -3,15 +3,18 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, firstValueFrom, map, of, tap, throwError } from 'rxjs';
 import { ITokenDto } from '../../models/ITokenDto';
 import { Router } from '@angular/router';
-import { IUser } from 'app/core/models/IUser';
+import { IUser, UserData } from 'app/core/models/IUser';
 import { environment } from 'app/core/environments/environment';
-import { CartService } from '../cart_service/cart-service.service';
+import {IUserResponse} from '../../models/IUserResponse';
+import { OneMessageResponse } from 'app/core/models/OneMessageResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
- 
+
+
+
 
   private baseUrl: string = environment.apiUrl;
 
@@ -19,7 +22,7 @@ export class AuthService {
 
   private isUserLoggedInSubject: BehaviorSubject<boolean>;
   private isAdminLoggedInSubject: BehaviorSubject<boolean>;
-  private isAnyUserOrAdminLoggedInSubject : BehaviorSubject<boolean>;
+  private isAnyUserOrAdminLoggedInSubject: BehaviorSubject<boolean>;
 
   private _router: Router = inject(Router);
 
@@ -57,10 +60,12 @@ export class AuthService {
           this.updateAnyUserOrAdminLoggedIn();
         }
         else if (response && response.token) {
+          localStorage.setItem('token', response.token);
           this.isUserLoggedInSubject.next(true);
           this.updateAnyUserOrAdminLoggedIn();
         }
         else {
+          localStorage.setItem('admin_token', response.token);
           this.isUserLoggedInSubject.next(false);
           this.isAdminLoggedInSubject.next(false);
           this.updateAnyUserOrAdminLoggedIn();
@@ -76,11 +81,12 @@ export class AuthService {
   }
 
   logout() {
+    console.log("hola");
     this.resetTokens();
     this._router.navigate(['/']);
   }
 
-  resetTokens(){
+  resetTokens() {
     localStorage.removeItem('token');
     localStorage.removeItem('admin_token');
     this.isUserLoggedInSubject.next(false);
@@ -148,14 +154,14 @@ export class AuthService {
   }
 
   recoverPassword(username: string, email: string) {
-    let body= { username, email };
-    return this._http.post(this.baseUrl + 'user/recover-password', body , { responseType: 'text' }).pipe(
+    let body = { username, email };
+    return this._http.post(this.baseUrl + 'user/recover-password', body, { responseType: 'text' }).pipe(
       catchError(error => this.transformTextResponseToJson(error))
     );
   }
 
   private transformTextResponseToJson(error: any): Observable<ParsedError> {
-    let parsedError : ParsedError;
+    let parsedError: ParsedError;
     try {
       parsedError = JSON.parse(error.error);
     } catch (jsonError) {
@@ -165,20 +171,30 @@ export class AuthService {
   }
 
 
-  change_user_password(body: any) : Observable<ChangePasswordSuccessDTO> {
+  change_user_password(body: any): Observable<ChangePasswordSuccessDTO> {
     return this._http.patch<ChangePasswordSuccessDTO>(this.baseUrl + 'user/change-password', body);
   }
 
 
-  
+
+  getUser(): Observable<IUserResponse> {
+    return this._http.get<IUserResponse>(this.baseUrl + 'user/data');
+  }
+
+  updateUser( userData: UserData): Observable<OneMessageResponse> {
+    return this._http.put<OneMessageResponse>(this.baseUrl + 'user/edit', userData);
+   
+  }
+
 }
+
 
 
 interface ParsedError {
   message: string;
-  originalError ?: string;
+  originalError?: string;
 }
 
-export interface ChangePasswordSuccessDTO{
+export interface ChangePasswordSuccessDTO {
   message: string
 }

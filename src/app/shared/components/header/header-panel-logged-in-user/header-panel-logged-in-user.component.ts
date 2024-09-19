@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth_service/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { IUserResponse } from 'app/core/models/IUserResponse';
 
 @Component({
   selector: 'app-header-panel-logged-in-user',
@@ -15,11 +16,31 @@ export class HeaderPanelLoggedInUserComponent {
   _authService = inject(AuthService);
   _router = inject(Router);
 
-  logout() {
-    this._authService.logout();
-    this._router.navigate(['/']);
+  user !: IUserResponse;
+  isUserLoggedIn: boolean = false;
+
+  ngOnInit(): void {
+    this._authService.isUserLoggedIn$().subscribe(isUserLoggedIn => {
+      if (isUserLoggedIn) {
+        this._authService.getUser().subscribe(user => {
+          this.user = user;
+          this.isUserLoggedIn = isUserLoggedIn;
+        })
+      }
+     
+    })
+
+    // if(this._authService.isUserLoggedIn()) {
+    //   this._authService.getUser().subscribe(user => {
+    //     this.user = user;
+    //   })    
+    // }
   }
 
-  
+  logout() {
+    this._authService.logout();
+  }
+
+
 
 }

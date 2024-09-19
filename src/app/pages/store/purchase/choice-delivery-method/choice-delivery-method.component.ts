@@ -67,6 +67,9 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
 
   override send($event: SubmitEvent): void {
     $event.preventDefault();
+
+    // Aca deberia recibir el paymentMethod y manejarlo hacia el makePurchase
+    
     let choice = this.form.get('deliveryMethod')?.value;
     this.isDisabledButton = true;
     if (choice === 'in_local') {
@@ -85,9 +88,18 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
 
 
   makePurchase(address: Address | null) {
+    // Aca yo deberia recibir un atributo 
+
+    // paymentMethod es el atributo que recbe el meste
     this._PurchaseService.makePurchase(address).subscribe({
       next: mpCode => {
-        this.createMpButton(mpCode);
+        if(mpCode != null){
+          this.createMpButton(mpCode);
+        }
+        else{
+          // Mostrar pop up de exito de compra, y avisarle que le mandamos el 
+          // comprobante al email.
+        }
       },
       error: error => {
         console.error('Error making purchase', error);

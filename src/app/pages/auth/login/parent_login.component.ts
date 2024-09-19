@@ -22,12 +22,13 @@ export abstract class ParentLoginComponent {
   }
 
   login() {
+    // console.log("login");
     const { username, password } = this.LoginForm.value;
     const specialPath = this.getSpecialPath();
     this.auth_service.login(username, password , specialPath).subscribe({
       next: (response) => {
         this.requestHasError = false;
-        this.saveTokenAndRedirect(response.token);
+        this.Redirect();
       },
       error: (e : IErrorResponse) => {
         this.requestHasError = true;
@@ -37,7 +38,7 @@ export abstract class ParentLoginComponent {
 
   abstract getSpecialPath () :string ;
 
-  abstract saveTokenAndRedirect(token: string): void;
+  abstract Redirect(): void;
 
   changePasswordVisibility() {
     if (this.passwordVisible === 'password') {

@@ -118,21 +118,24 @@
                     </div>
                     <button mat-icon-button [matMenuTriggerFor]="menu" class="corner_navbar_icon">
                         <div class="user_photo">
-                            @if(userMadeLogin || adminMadeLogin){
-                                <img src="assets/images/temporales/Avatar.svg" alt="user photo">
+                            @if(userMadeLogin){
+                                <img [src]="userImage" alt="user photo">
+                            }
+                            @else if (adminMadeLogin) {
+                                <img src="assets/images/logos/Sector7LogoSmall.png" alt="admin photo">
                             }
                             @else{
-                                <img src="assets/images/utils/user_empty.png" alt="user photo">
+                                <img src="assets/images/utils/user_empty.svg" alt   ="user photo">
                             }
                         </div>
                     </button>
 
                     <mat-menu #menu="matMenu" class="account_panel_menu">
                         @if(userMadeLogin || adminMadeLogin){
-                        <app-header-panel-logged-in-user class="account_panel"></app-header-panel-logged-in-user>
+                            <app-header-panel-logged-in-user class="account_panel"></app-header-panel-logged-in-user>
                         }
                         @else if(!userMadeLogin){
-                        <app-header-panel-general class="account_panel"></app-header-panel-general>
+                            <app-header-panel-general class="account_panel"></app-header-panel-general>
                         }
                     </mat-menu>
                 </div>

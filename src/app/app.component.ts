@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, QueryList, ViewChild, ViewChildren, inject, viewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, QueryList, Signal, ViewChild, ViewChildren, inject, viewChildren } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,6 +19,7 @@ import BKProduct from './core/models/BKProduct';
 import { ProductResponse } from './core/models/ProductResponse';
 import { Observable, of } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { IUserResponse } from './core/models/IUserResponse';
 
 @Component({
   selector: 'app-root',
@@ -47,30 +48,36 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 })
 export class AppComponent {
 
-
-
-
-  menuOpened: boolean = false;
-  searchBarOpened: boolean = false;
-  screenWidth: number;
-  navbarfixed: boolean = false;
-  totalProductsInCart: number = 9;
+  _authService: AuthService = inject(AuthService);
+  _productService: ProductService = inject(ProductService);
+  _router = inject(Router);
   _cartService: CartService = inject(CartService);
-  searchBarClicked: boolean = false;
-  mobileBreackPoint: number = 480;
-  user !: any ;
-
 
   @ViewChild('searchInputDesktop', { static: false }) searchInputDesktop!: ElementRef;
   @ViewChild('searchInputMobile', { static: false }) searchInputMobile!: ElementRef;
 
+
+  screenWidth: number;
+  menuOpened: boolean = false;
+  navbarfixed: boolean = false;
+  mobileBreackPoint: number = 480;
+
+
+  searchBarOpened: boolean = false;
+  totalProductsInCart: number = 0;
+  searchBarClicked: boolean = false;
   searchBarInputText: string = '';
+
+
   userMadeLogin: boolean = false;
   adminMadeLogin: boolean = false;
-  _authService: AuthService = inject(AuthService);
-  _productService: ProductService = inject(ProductService);
-  _router = inject(Router);
+
+
   productsBySearch$!: Observable<ProductResponse>;
+
+
+  user !: IUserResponse;
+  userImage!: string;
 
   constructor() {
     // set screenWidth on page load
@@ -95,22 +102,28 @@ export class AppComponent {
 
   ngOnInit(): void {
     this._authService.isUserLoggedIn$().subscribe(isLoggedIn => {
-      this.userMadeLogin = isLoggedIn;
-      // if(this.userMadeLogin){
-      //   this._authService.getUser('user').subscribe(user => {
-      //       this.user = user;
-      //   })
-      // }
+      if (isLoggedIn){
+        this._authService.getUser().subscribe(user => {
+          this.user = user;
+          this.userImage = user.presignedUrlPhoto;
+          this.userMadeLogin = isLoggedIn;
+        })
+      }
+      else{
+        this.userMadeLogin = isLoggedIn;
+      }
     })
-
     this._authService.isAdminLoggedIn$().subscribe(isAdminLoggedIn => {
       this.adminMadeLogin = isAdminLoggedIn;
-    //   this._authService.getUser('admin').subscribe(user => {
-    //     this.user = user;
-    // })
-    })
-    console.log("App component");
+    }
+  )
+
+
   }
+
+
+
+
 
 
   // method to determined the change navbar styles (navbar fixed animation and height change)
@@ -197,7 +210,7 @@ export class AppComponent {
     } else if ($event.key === 'ArrowUp') {
       this.moveSelection(-1);
     } else if ($event.key === 'Enter') {
-        this.goToSearchComponentWithTextWirted();
+      this.goToSearchComponentWithTextWirted();
     }
   }
 
@@ -213,8 +226,8 @@ export class AppComponent {
 
   goToSearchComponentWithTextWirted() {
     if (this.searchBarInputText !== "") {
-     this._router.navigate(['/search', this.searchBarInputText]);
-     this.closeSearchBar();
+      this._router.navigate(['/search', this.searchBarInputText]);
+      this.closeSearchBar();
     }
   }
 }

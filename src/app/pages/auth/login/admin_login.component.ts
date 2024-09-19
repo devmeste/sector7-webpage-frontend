@@ -28,8 +28,8 @@ export class AdminLoginComponent extends ParentLoginComponent {
         return 'admin';
     }
             
-    override saveTokenAndRedirect(token: string): void {
-        localStorage.setItem('admin_token', token);
+    override Redirect(): void {
+        // localStorage.setItem('admin_token', token);
         this.router.navigate([`/admin-dashboard`]);
     }
 

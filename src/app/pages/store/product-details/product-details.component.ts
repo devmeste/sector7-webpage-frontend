@@ -44,6 +44,7 @@ export class ProductDetailsComponent implements OnInit {
     this._router.params.subscribe(params => {
       this.id = params['id'];
       this.updateProductDetails(this.id);
+      window.scrollTo(0, 0);
     })
 
     window.scrollTo(0, 0);
