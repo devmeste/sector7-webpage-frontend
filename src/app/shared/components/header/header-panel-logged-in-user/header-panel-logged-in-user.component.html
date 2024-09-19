@@ -2,7 +2,7 @@
     <div class="header_panel_logo_container">
         <picture class="header_panel_logo_image">
             @if(isUserLoggedIn){
-                <div class="image_container">
+                <div class="image_container" id="user_menu_user_photo_container">
                     <img [src]=" isUserLoggedIn ? user.presignedUrlPhoto : 'assets/images/logos/Sector7LogoSmall.png'" alt="logo">
                 </div>
             }
