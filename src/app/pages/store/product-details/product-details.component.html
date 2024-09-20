@@ -65,18 +65,23 @@
 
                 <h2 class="product_price">{{product.price | customCurrency}}</h2>
 
-                <div class="reasons_to_buy_div"><mat-icon>check</mat-icon> Stock disponble</div>
+                @if(product.viewStock > 0){
+                    <div class="reasons_to_buy_div"><mat-icon>check</mat-icon> Stock disponble</div>
+                    <div class="reasons_to_buy_div"><mat-icon>check</mat-icon> Cantidad: {{product.viewStock}}</div>
+                } @else{
+                    <div class="reasons_to_buy_div"><mat-icon>error_outline</mat-icon> Sin stock</div>
+                }
                 <div class="reasons_to_buy_div"><mat-icon>local_shipping</mat-icon> Envio a todo el pais</div>
                 <div class="reasons_to_buy_div"><mat-icon>shield</mat-icon>Garantia Oficial</div>
 
-                @if(product){
                 <div class="add_to_cart_button_container">
+                @if(product.viewStock > 0){
                     <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agrega al
                         carrito</button>
                     <!-- TODO: Modal para avisar que fue crado un producto -->
-                    <button class="tertiary_button ">Agrega a favoritos</button>
-                </div>
                 }
+                <button class="tertiary_button ">Agrega a favoritos</button>
+                </div>
             </div>
         </picture>
 

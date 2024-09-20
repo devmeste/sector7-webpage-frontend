@@ -189,7 +189,7 @@
                                 @else {
                                     <!-- any other field -->
                                     <div class="custom-input">
-                                        <label class="form-label">{{formControl.value.fieldName}}</label>
+                                        <label class="form-label">{{formControl.value.fieldName}}:</label>
                                         <div class="add_field_button_container">
                                             <input formControlName="value" type="text" class="form-control" placeholder=" ">
                                         </div>
@@ -202,7 +202,7 @@
 
 
                         @if (productUpdatedSuccessfully) {
-                        <app-message-pop-up custom_message='Producto Modificado Exitosamente'
+                        <app-message-pop-up custom_message='Producto modificado exitosamente'
                             (close)="closeMessageModal('productUpdatedSuccessfully')">
                         </app-message-pop-up>
                         }
