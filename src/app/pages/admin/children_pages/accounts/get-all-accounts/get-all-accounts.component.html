@@ -14,7 +14,7 @@
                     Estado
                 </td>
                 <td>
-                    Habilitar/Deshabilitar
+                    Acciones
                 </td>
             </tr>
         </thead>
@@ -30,9 +30,23 @@
                 </td>
                 <td class="actions_buttons_container">
                     <div class="flex_container">
-                        <button type="button" class="actions_button update_button" title="Cambiar"
-                            (click)="updateStateAccount(account.username , account.enabled)">
-                            <mat-icon>sync</mat-icon>
+                        @if(account.enabled){
+                            <button type="button" class="actions_button update_button" title="Deshabilitar"
+                                (click)="updateStateAccount(account.username , account.enabled)">
+                                <mat-icon>sync</mat-icon>
+                            </button>
+                        }
+                        @else{
+                            <button type="button" class="actions_button update_button" title="Habilitar"
+                                (click)="updateStateAccount(account.username , account.enabled)">
+                                <mat-icon>sync</mat-icon>
+                            </button>
+                        }
+                    </div>
+                    <div class="flex_container">
+                        <button type="button" class="actions_button delete_button" title="Eliminar"
+                            (click)="deleteAccount(account.username)">
+                            <mat-icon>delete</mat-icon>
                         </button>
                     </div>
                 </td>
@@ -58,11 +72,21 @@
             <app-message-pop-up  custom_message='Cuenta habilitada exitosamente'
             (close)="closeModal('accountUpdatedSuccessfully')"> </app-message-pop-up>}
     }
+
+    @if (accountDeletedSuccessfully) {
+        <app-message-pop-up  custom_message='Cuenta eliminada exitosamente'
+        (close)="closeModal('accountDeletedSuccessfully')"> </app-message-pop-up>
+    }
     
     @if (accountUpdatedFailed) {
     <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('accountUpdatedFailed')">
     </app-message-pop-up>
     }
+
+    @if (accountDeletedFailed) {
+        <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('accountDeletedFailed')">
+        </app-message-pop-up>
+        }
 </section>
 
 <!-- @if(this.showUpdatePopUp){

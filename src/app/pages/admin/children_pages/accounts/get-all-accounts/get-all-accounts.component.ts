@@ -21,7 +21,9 @@ export class GetAllAccountsComponent {
   _router = inject(Router);
 
   accountUpdatedSuccessfully = false;
+  accountDeletedSuccessfully = false;
   accountUpdatedFailed = false;
+  accountDeletedFailed = false;
   wasEnabled!: boolean;
   errorMessage: any;
 
@@ -45,10 +47,13 @@ export class GetAllAccountsComponent {
     switch (option) {
       case "accountUpdatedSuccessfully": this.accountUpdatedSuccessfully = false;
         break;
+      case "accountDeletedSuccessfully": this.accountDeletedSuccessfully = false;
+        break;
       case "accountUpdatedFailed": this.accountUpdatedFailed = false;
         break;
+      case "accountDeletedFailed": this.accountDeletedFailed = false;
+        break;
     }
-    this.updateAllAccountsInView();
   }
 
   updateStateAccount( username: string, change: boolean) {
@@ -66,4 +71,16 @@ export class GetAllAccountsComponent {
     })
   }
 
+  deleteAccount(username: string){
+    this._adminService.deleteAccount(username).subscribe({
+      next: () => {
+        this.accountDeletedSuccessfully = true;
+        this.updateAllAccountsInView();
+      },
+      error: (e) => {
+        this.accountDeletedFailed = true;
+        this.errorMessage = e.error.message;
+      }
+    })
+  }
 }

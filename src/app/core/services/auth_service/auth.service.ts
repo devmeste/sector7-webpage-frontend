@@ -54,8 +54,8 @@ export class AuthService {
 
     return this._http.post<ITokenDto>(url, body, { headers: headers }).pipe(
       tap((response: ITokenDto) => {
-
         if (response && response.token && specialCase == 'admin') {
+          localStorage.setItem('admin_token', response.token);
           this.isAdminLoggedInSubject.next(true);
           this.updateAnyUserOrAdminLoggedIn();
         }
@@ -65,7 +65,6 @@ export class AuthService {
           this.updateAnyUserOrAdminLoggedIn();
         }
         else {
-          localStorage.setItem('admin_token', response.token);
           this.isUserLoggedInSubject.next(false);
           this.isAdminLoggedInSubject.next(false);
           this.updateAnyUserOrAdminLoggedIn();

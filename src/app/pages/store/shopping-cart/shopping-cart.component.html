@@ -7,7 +7,7 @@
             </picture>
             <div class="side_text_container">
                 <div class="shopping_cart_item_name">
-                    <p>{{product.title}}</p>
+                    <p [routerLink]="['/product-details', product.productId]">{{product.title}}</p>
                 </div>
                 <button (click)="deleteProduct(product.id)" class="delete_button">Eliminar</button>
                 <div class="shopping_cart_item_quantity_container">

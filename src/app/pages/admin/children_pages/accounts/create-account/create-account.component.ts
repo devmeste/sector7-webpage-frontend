@@ -8,6 +8,7 @@ import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/m
 import { MatIcon } from '@angular/material/icon';
 import { timeout } from 'rxjs';
 import { IAccountReq } from 'app/core/models/IAccount';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -18,6 +19,9 @@ import { IAccountReq } from 'app/core/models/IAccount';
 })
 export class CreateAccountComponent extends CustomForm {
 
+  constructor(private router: Router){
+    super();
+  }
 
   accountWasCreatedSuccessfully = false;
   accountHasError = false;
@@ -49,6 +53,8 @@ export class CreateAccountComponent extends CustomForm {
     switch (option) {
       case 'accountWasCreatedSuccessfully':
         this.accountWasCreatedSuccessfully = false;
+        this.form.reset();
+        this.router.navigate(['/admin-dashboard/accounts']);
         break;
       case 'accountHasError':
         this.accountHasError = false;
@@ -63,7 +69,4 @@ export class CreateAccountComponent extends CustomForm {
       this.passwordVisible = 'password';
     }
   }
-
-
-
 }
