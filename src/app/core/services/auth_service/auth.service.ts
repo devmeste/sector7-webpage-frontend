@@ -56,6 +56,7 @@ export class AuthService {
       tap((response: ITokenDto) => {
         if (response && response.token && specialCase == 'admin') {
           localStorage.setItem('admin_token', response.token);
+          localStorage.setItem('admin_category', (response.admin) ? 'admin': 'seller');
           this.isAdminLoggedInSubject.next(true);
           this.updateAnyUserOrAdminLoggedIn();
         }
@@ -80,7 +81,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log("hola");
     this.resetTokens();
     this._router.navigate(['/']);
   }
@@ -88,6 +88,7 @@ export class AuthService {
   resetTokens() {
     localStorage.removeItem('token');
     localStorage.removeItem('admin_token');
+    localStorage.removeItem('is_admin');
     this.isUserLoggedInSubject.next(false);
     this.isAdminLoggedInSubject.next(false);
     this.updateAnyUserOrAdminLoggedIn();

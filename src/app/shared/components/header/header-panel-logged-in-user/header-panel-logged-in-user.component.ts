@@ -27,20 +27,18 @@ export class HeaderPanelLoggedInUserComponent {
           this.isUserLoggedIn = isUserLoggedIn;
         })
       }
-     
     })
-
-    // if(this._authService.isUserLoggedIn()) {
-    //   this._authService.getUser().subscribe(user => {
-    //     this.user = user;
-    //   })    
-    // }
   }
 
   logout() {
     this._authService.logout();
   }
 
+  isAdmin(){
+    return (localStorage.getItem("admin_token")) ? true: false;
+  }
 
-
+  isAdminCategory(){
+    return (localStorage.getItem("admin_category") === 'admin') ? true: false;
+  }
 }
