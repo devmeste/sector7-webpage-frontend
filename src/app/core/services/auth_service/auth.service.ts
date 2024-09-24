@@ -88,7 +88,7 @@ export class AuthService {
   resetTokens() {
     localStorage.removeItem('token');
     localStorage.removeItem('admin_token');
-    localStorage.removeItem('is_admin');
+    localStorage.removeItem('admin_category');
     this.isUserLoggedInSubject.next(false);
     this.isAdminLoggedInSubject.next(false);
     this.updateAnyUserOrAdminLoggedIn();
