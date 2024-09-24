@@ -26,6 +26,9 @@
         @if(!isAdmin()){
             <p class="my_account_section" [routerLink]="['user-account']"><mat-icon>account_circle</mat-icon> Mi Cuenta</p>
         }
+        @else{
+            <p class="my_account_section" [routerLink]="['/admin-dashboard']"><mat-icon>dashboard</mat-icon> Panel de administración</p>
+        }
         <p class="my_account_section" [routerLink]="['cart']"><mat-icon>shopping_cart</mat-icon> Mi Carrito</p>
         <p class="my_account_section" (click)="logout()"><mat-icon>logout</mat-icon> Cerrar Sesion</p>
     </div>

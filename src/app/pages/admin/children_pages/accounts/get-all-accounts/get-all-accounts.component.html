@@ -45,7 +45,7 @@
                     </div>
                     <div class="flex_container">
                         <button type="button" class="actions_button delete_button" title="Eliminar"
-                            (click)="deleteAccount(account.username)">
+                            (click)="askToConfirmDelete(account.username)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
@@ -86,6 +86,11 @@
     @if (accountDeletedFailed) {
         <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('accountDeletedFailed')">
         </app-message-pop-up>
+        }
+
+    @if(this.showPopUpToConfirmDelete){
+        <app-confirm-pop-up custom_message="¿Desea eliminar este usuario?" (confirm)="confirmDeleteAction()"
+            (close)="closeModal('showPopUpToConfirmDelete')"></app-confirm-pop-up>
         }
 </section>
 
