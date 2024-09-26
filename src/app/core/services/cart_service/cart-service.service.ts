@@ -7,6 +7,7 @@ import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
 import { AuthService } from '../auth_service/auth.service';
 import { IProduct_Cart_Add_Entry_Request } from 'app/core/models/IProduct_Cart_Add_Entry_Request';
 import { CartQuantityAction } from '../../models/types/CartQuantityAction';
+import { ISaveAll } from 'app/core/models/cart/ISaveAll';
 
 @Injectable({
   providedIn: 'root'
@@ -60,8 +61,8 @@ export class CartService {
   }
 
 
-  public addAllToCart(productsArray: IProduct_Cart_Add_Entry_Request[]) {
-    return this._httpClient.post(`${this.baseUrl}cart/build-pc`, productsArray).pipe(
+  public addAllToCart(cart: ISaveAll) {
+    return this._httpClient.post(`${this.baseUrl}cart/build-pc`, cart).pipe(
       tap((Response) => {
           console.log(Response);
       }

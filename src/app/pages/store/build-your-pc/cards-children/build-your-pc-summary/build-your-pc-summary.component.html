@@ -19,9 +19,20 @@
             }
         }
     </ul>
-
+    <div class="checks_container">
+        <p>Servicios adicionales: </p>
+        <div class="custom-checkbox">
+            <input id="assembled" type="checkbox" [(ngModel)]="assembled">
+            <label for="assembled" (click)="sum()">Ensamblado ({{assembledPrice}}) </label>
+        </div>
+        <div class="custom-checkbox">
+            <input id="installed" type="checkbox" [(ngModel)]="installed">
+            <label for="installed" (click)="sum()" >Instalación ({{installedPrice}})</label>
+        </div>
+      </div>
+      
     <div class="total_container">
-        <p class="total_price">Total: {{cartTotal$ | customCurrency  }}</p>
+        <p class="total_price">Total: {{sumaTotal | customCurrency  }} </p>
     </div>
 
     <div class="button_container">
