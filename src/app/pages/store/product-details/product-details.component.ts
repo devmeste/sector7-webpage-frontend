@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IProduct } from '../../../core/models/product';
 import { ProductService } from '../../../core/services/product_service/product.service';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
@@ -23,7 +23,8 @@ import { CustomCurrencyPipe } from "../../../core/pipes/custom_currency/custom-c
 })
 export class ProductDetailsComponent implements OnInit {
 
-  private _router: ActivatedRoute = inject(ActivatedRoute);
+  private _activatedRouter: ActivatedRoute = inject(ActivatedRoute);
+  private _router : Router = inject(Router);
   private _productService = inject(ProductService);
   private _cartService = inject(CartService);
   cantidad !: number;
@@ -41,7 +42,7 @@ export class ProductDetailsComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this._router.params.subscribe(params => {
+    this._activatedRouter.params.subscribe(params => {
       this.id = params['id'];
       this.updateProductDetails(this.id);
       window.scrollTo(0, 0);
@@ -53,14 +54,20 @@ export class ProductDetailsComponent implements OnInit {
 
 
   updateProductDetails(id: string) {
-    this._productService.getProductById(this.id).subscribe(
-      product => {
+    this._productService.getProductById(this.id).subscribe({
+      next:product => {
         this.product = product;
         if (product.photos) {
           this.mainImage.set(product.photos[0]);
         } 
-      }
-    );
+      },
+      error: error => {
+        if(error.status == 404){  
+          this._router.navigate(['/error'])
+        }
+    }
+      
+  });
     this._cartService.getCartQuantity().subscribe(quantity =>{
       this.cantidad = quantity
     })

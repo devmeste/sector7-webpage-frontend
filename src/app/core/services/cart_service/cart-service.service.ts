@@ -13,6 +13,7 @@ import { CartQuantityAction } from '../../models/types/CartQuantityAction';
 })
 export class CartService {
 
+
   private baseUrl: string = environment.apiUrl;
   _authService = inject(AuthService);
 
@@ -42,10 +43,12 @@ export class CartService {
 
 
   public addToCart(product: IProduct_Cart): Observable<IProduct_Cart_Entry_BK> {
+
     const entry: IProduct_Cart_Add_Entry_Request = {
       productId: product.id,
       quantity: product.quantityRequested
     }
+
     return this._httpClient.post<IProduct_Cart_Entry_BK>(`${this.baseUrl}cart`, entry).pipe(
       tap((newEntry: IProduct_Cart_Entry_BK) => {
         this.cart.push(newEntry);
@@ -54,6 +57,15 @@ export class CartService {
         this.$cartTotal.next(this.calculateTotal());
       })
     );
+  }
+
+
+  public addAllToCart(productsArray: IProduct_Cart_Add_Entry_Request[]) {
+    return this._httpClient.post(`${this.baseUrl}cart/build-pc`, productsArray).pipe(
+      tap((Response) => {
+          console.log(Response);
+      }
+    ));
   }
 
   logoutCart(): void {

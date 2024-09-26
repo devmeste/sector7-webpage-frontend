@@ -7,6 +7,7 @@ import { CustomCurrencyPipe } from "../../../../../core/pipes/custom_currency/cu
 import { CartService } from 'app/core/services/cart_service/cart-service.service';
 import { IProduct_Cart } from 'app/core/models/product_cart';
 import { Router } from '@angular/router';
+import { IProduct_Cart_Add_Entry_Request } from 'app/core/models/IProduct_Cart_Add_Entry_Request';
 
 @Component({
   selector: 'app-build-your-pc-summary',
@@ -36,28 +37,31 @@ export class BuildYourPcSummaryComponent {
   }
 
   goToCart() {
-    
+
     // Add to cart List Product Cart
 
 
-    for(let product of this.products){
-      if(product.selectedProductID != null 
-        && product.selectedProductName != null 
-        && product.categoryName.toLocaleLowerCase() != 'linea'
-      ){
-        const p : IProduct_Cart = {
-          id: product.selectedProductID,
-          name: product.selectedProductName,
-          img: product.selectedProductPhoto,
-          price: product.selectedProductPrice,
-          stock: product.selectedProductQuantity,
-          quantityRequested: product.selectedProductQuantity
+    let productsArray: IProduct_Cart_Add_Entry_Request[] = [];
+    for (let product of this.products) {
+
+      if (product.selectedProductID != null
+        && product.selectedProductName != null
+        && product.categoryName.toLocaleLowerCase() != 'linea') {
+        let p: IProduct_Cart_Add_Entry_Request = {
+          productId: product.selectedProductID,
+          quantity: product.selectedProductQuantity
         }
-        this._cartService.addToCart(p);
+
+        productsArray.push(p);
       }
     }
+    this._cartService.addAllToCart(productsArray).subscribe(() => {
 
-    this._buildYourPcService.clearCart();
-    this._router.navigate(['/cart']);
+      this._buildYourPcService.clearCart();
+      this._router.navigate(['/cart']);
+
+    });
+
+
   }
 }

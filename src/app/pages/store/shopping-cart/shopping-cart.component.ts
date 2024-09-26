@@ -68,7 +68,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   addQuantity(entry: IProduct_Cart_Entry_BK) {
-    console.log(entry);
     if(entry.quantity<entry.stock){
       this._cartService.updateProductQuantitySimple(entry, "increase").subscribe((response) => {});
     }
@@ -79,11 +78,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   sendToChoiceDeliveryMethod() {
-    console.log("En sendToChoiceDeliveryMethod");
-    console.log(this._authService.isUserLoggedIn());
-    console.log(this._authService.isAdminLoggedIn());
     if (this._authService.isUserLoggedIn() || this._authService.isAdminLoggedIn()) {
-      console.log("hola");
       this._router.navigate(['buying/delivery-method']);
     }
     else {

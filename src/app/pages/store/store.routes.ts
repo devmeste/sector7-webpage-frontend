@@ -64,4 +64,9 @@ export const STORE_ROUTES: Routes = [
             }
         ]
     },
+    {
+        path: 'error',
+        loadComponent: () =>
+            import("../../shared/components/an-error-has-ocurred/an-error-has-ocurred.component").then(c => c.AnErrorHasOcurredComponent)   
+    }
 ]
