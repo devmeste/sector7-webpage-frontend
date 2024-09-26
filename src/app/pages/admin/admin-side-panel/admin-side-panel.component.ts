@@ -10,4 +10,10 @@ import { RouterLink } from '@angular/router';
 })
 export class AdminSidePanelComponent {
   panelOpenState = false;
+
+  isAdmin(){
+    let adminCategory = localStorage.getItem('admin_category');
+
+    return (adminCategory != null && adminCategory === 'admin') ? true: false;
+  }
 }

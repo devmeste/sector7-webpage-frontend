@@ -199,11 +199,14 @@ export class AdminService {
     changeStateAccount(username: string, change: boolean) {
         let body = {
             username,
-            status: !change
+            enabled: !change
         }
         return this._httpClient.patch(this.baseUrl + 'admin/change-status', body);
     }
 
+    deleteAccount(username: string){
+        return this._httpClient.delete(this.baseUrl + `admin/${username}`);
+    }
 
     // purchases
     getAllPurchases() {

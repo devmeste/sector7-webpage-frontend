@@ -1,17 +1,19 @@
 <section class="admin_side_panel_content">
     <mat-accordion>
-        <!-- Categories -->
-        <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Categorías
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ul class="options_list">
-                <li [routerLink]="['category']">Ver categorías</li>
-                <li [routerLink]="['category/new']">Crear categoría</li>
-            </ul>
-        </mat-expansion-panel>
+        @if(isAdmin()){
+             <!-- Categories -->
+             <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                 <mat-expansion-panel-header>
+                     <mat-panel-title>
+                         Categorías
+                     </mat-panel-title>
+                 </mat-expansion-panel-header>
+                 <ul class="options_list">
+                     <li [routerLink]="['category']">Ver categorías</li>
+                     <li [routerLink]="['category/new']">Crear categoría</li>
+                 </ul>
+             </mat-expansion-panel>
+         }
 
         <!-- Products -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -24,6 +26,7 @@
 
                 <li [routerLink]="['products']">Ver productos</li>
                 <li [routerLink]="['products/new']">Crear producto</li>
+                @if(isAdmin()){
                 <li [routerLink]="['products/enable']">Mostrar / Ocultar</li>
                 <li [routerLink]="['products/pendings']">Aprobar pendientes</li>
                 <mat-expansion-panel class="category_toggle build_your_pc_filters" (opened)="panelOpenState = true"
@@ -74,12 +77,14 @@
                         </mat-expansion-panel>
                     </ul>
                 </mat-expansion-panel>
+                }
                 <!-- Generacion, socket y tipo de memoria -->
             </ul>
         </mat-expansion-panel>
 
 
 
+        @if(isAdmin()){
         <!-- Accounts -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -92,7 +97,7 @@
                 <li [routerLink]="['accounts/new']">Crear cuenta</li>
             </ul>
         </mat-expansion-panel>
-
+        
 
         <!-- Views -->
         <mat-expansion-panel class="category_toggle" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -152,7 +157,7 @@
                 <li>En desarrollo</li>
             </ul>
         </mat-expansion-panel>
-
+        }
 
 
     </mat-accordion>

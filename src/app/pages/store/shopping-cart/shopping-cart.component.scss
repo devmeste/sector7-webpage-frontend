@@ -87,6 +87,7 @@ main.shopping_cart_container {
                     margin-bottom: 0.7rem;
                     text-overflow: ellipsis;
                     overflow: hidden;
+                    cursor: pointer;
 
                     display: -webkit-box;
                         -webkit-line-clamp: 2; /* Número máximo de líneas */

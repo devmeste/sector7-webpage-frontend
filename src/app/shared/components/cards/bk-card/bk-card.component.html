@@ -5,6 +5,6 @@
     <div class="bk_card_text">
         <p class="bk_card_price">{{this.price | customCurrency}}</p>
         <small class="bk_card_product_name">{{this.name}}</small>
-        <button class="primary_button">Agregar</button>
+        <button class="primary_button" [routerLink]="['/product-details', this.id]">Ver más +</button>
     </div>
 </div>
