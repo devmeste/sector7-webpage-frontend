@@ -44,7 +44,7 @@ export class SearchComponent {
   features: IFeature[] = [
     {
       title: "Memoria Ram",
-      filters: ["12 a 19 GB", "20 a 39 GB", "40 GB o más"]
+      filters: ["8 GB", "16 GB", "32 GB"]
     },
     {
       title: "Precio",
@@ -52,7 +52,7 @@ export class SearchComponent {
     },
     {
       title: "Marca",
-      filters: ["AMD", "Intel", "Otra Marca", "Otra Marca"]
+      filters: ["AMD", "Intel", "Razer", "Corsair"]
     },
   ]
     ;
