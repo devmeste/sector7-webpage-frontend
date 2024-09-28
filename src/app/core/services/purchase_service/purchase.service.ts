@@ -53,7 +53,8 @@ export class PurchaseService {
         let jsonResponse = {
           "products": jsonProducts,
           "address": address,
-          "localPickUp": localPickUp 
+          "localPickUp": localPickUp,
+          "paymentMethod": "En el local"
         };
 
         let body = JSON.stringify(jsonResponse);

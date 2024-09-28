@@ -102,7 +102,7 @@ export class AdminService {
 
 
     getProductById(id: string): Observable<BKProduct> {
-        return this._httpClient.get<BKProduct>(this.baseUrl + 'products/' + id);
+        return this._httpClient.get<BKProduct>(this.baseUrl + 'products/actual/' + id);
     }
 
 
