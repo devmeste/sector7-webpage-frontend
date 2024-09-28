@@ -26,32 +26,3 @@ export const BUILD_YOUR_PC_ROUTES: Routes = [
 ];
 
 
-
-// Processor / Procesadores
-
-// Motherboard / Mothers
-
-// Memory RAM / Memoria RAM
-
-// Storage device / Almacenamiento
-
-// Power suply / Fuentes
-
-// Video card / Placas de video
-
-// Cooling system / Refrigeracion
-
-// Monitor / Monitores
-
-// Headset / Auriculares
-
-// Case / Gabinetes
-
-// Keyboard / Teclados
-
-// Mouse / Mouses
-
-// const urlsChildren = ['procesadores','mothers'];
-// const childrens = () => urlsChildren.map(url => ({
-//     path: url, loadComponent: loadMainView
-// }))

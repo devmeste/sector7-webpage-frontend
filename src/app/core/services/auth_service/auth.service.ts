@@ -82,6 +82,7 @@ export class AuthService {
 
   logout() {
     this.resetTokens();
+    localStorage.removeItem('buildYourPcCart');
     this._router.navigate(['/']);
   }
 

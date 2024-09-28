@@ -6,17 +6,18 @@ $heigh_path_line_checked: $heigh_path_line+25px;
 $width_for_path_line_and_point : 40px;
 
 
-
-
 .path_to_build_your_pc_container {
     // max-width: 500px;
     color: white;
     background-color: $background;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    position: fixed;
+    position: absolute;
+    z-index: 1000;
     top: 75px;
     padding-left: 1rem;
+
+    margin-bottom: 1rem;
 
     @include laptop {
         padding-left: 3rem;
@@ -44,12 +45,88 @@ $width_for_path_line_and_point : 40px;
 
 
     .bottom_container {
-        background-color: $gray_15;
+        // background-color: $gray_15;
+        border-radius: 5px 5px 0 0;
+        background-image: linear-gradient(to bottom left, rgb(69, 69, 69) -20%, rgb(0, 0, 0));
+        // background-image: linear-gradient(to bottom , rgb(0, 0, 0) 0%, rgb(41, 41, 41));
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        
         .buttons_container {
             display: flex;
+            // border: 2px solid $primary-main;
             justify-content: space-between;
             padding: 0.5rem 1rem;
+            @include tablet{
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 0.5 1rem;
+            }
+            @include laptop {
+                justify-content: space-between;
+            }
+            @include desktop {
+                justify-content: center;
+            }
+
+            @media screen and (min-width: 970px) and (max-width: 1106px) {
+                padding: 0 0 0 0;
+                flex-direction: column;
+                align-items: center;
+            }
         }
+
+        
+        .primary_button {
+            width: 50%;
+            @include tablet{
+                width: 30%;
+            }
+
+            @include laptop {
+                width: fit-content;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            @media screen and (min-width: 970px) and (max-width: 1106px) {
+                order: 1;
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+            
+        }
+
+        .tertiary_button {
+            width: 50%;
+
+            @include tablet{
+                width: 30%;
+            }
+
+            @include laptop {
+                width: fit-content;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            @media screen and (min-width: 970px) and (max-width: 1106px) {
+                order: 2;
+                width: 100%;
+                padding-top: 0;
+            }
+            @include desktop{
+                margin-right: 1rem;
+            }
+
+        }
+
     }
 
     .currentPath_highlight {
@@ -60,11 +137,16 @@ $width_for_path_line_and_point : 40px;
     }
 
     .highlight_text {
+        padding-left: 0.7rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
         @include gradient_orange_to_black_right_to_left;
     }
 
     .highlight_text.total {
         margin-bottom: 0;
+        height: 3rem;
     }
 
     .path_points {

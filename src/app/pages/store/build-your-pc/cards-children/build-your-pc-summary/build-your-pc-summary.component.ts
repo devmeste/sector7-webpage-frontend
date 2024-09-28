@@ -45,8 +45,6 @@ export class BuildYourPcSummaryComponent {
   goToCart() {
 
     // Add to cart List Product Cart
-
-
     let productsArray: IProduct_Cart_Add_Entry_Request[] = [];
     for (let product of this.products) {
 
@@ -80,14 +78,33 @@ export class BuildYourPcSummaryComponent {
 
   }
 
+  
+
   suma = 0;
   sumaTotal= 0;
-  sum(){
-    if(this.assembled ){
-      this.sumaTotal = this.sumaTotal + 300;
+
+  addCost(type: string, isChecked: boolean){
+    console.log(type, isChecked);
+    console.log(this.sumaTotal);
+    switch (type) {
+      case 'assembled':
+        if (isChecked) {
+          this.sumaTotal += this.assembledPrice;
+          console.log(this.sumaTotal);
+
+        } else {
+          this.sumaTotal -= this.assembledPrice;
+          console.log(this.sumaTotal);
+
+        }
+        break;
+      case 'installed':
+        if (isChecked) {
+          this.sumaTotal += this.installedPrice;
+        } else {
+          this.sumaTotal -= this.installedPrice;
+        }
+        break;
+      }
     }
-    if(this.installed){
-      this.sumaTotal = this.sumaTotal + 300;
-    }
-  }
 }

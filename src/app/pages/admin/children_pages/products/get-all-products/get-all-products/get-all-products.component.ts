@@ -11,14 +11,9 @@ import { MessagePopUpComponent } from "../../../../../../shared/components/pop_u
 import { ProductsUpdatePopUpComponent } from "../../products-update-pop-up/products-update-pop-up.component";
 import { ConfirmPopUpComponent } from "../../../../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
 
-
-import { ProductService } from 'app/core/services/product_service/product.service';
-
-
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
 import { SearchInputProductsComponent } from "../../../../../../shared/components/search-input-products/search-input-products.component";
 import { SpinnerS7Component } from "../../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 import { CustomCurrencyPipe } from "../../../../../../core/pipes/custom_currency/custom-currency.pipe";
@@ -33,8 +28,6 @@ import { CustomCurrencyPipe } from "../../../../../../core/pipes/custom_currency
   imports: [FormsModule, FloatLabelModule, AutoCompleteModule, MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent, SearchInputProductsComponent, SpinnerS7Component, CustomCurrencyPipe]
 })
 export class GetAllProductsComponent {
-
-
 
   _adminService: AdminService = inject(AdminService);
   products$!: BKProduct[];

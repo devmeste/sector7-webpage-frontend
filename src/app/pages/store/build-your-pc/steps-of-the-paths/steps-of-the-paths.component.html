@@ -1,76 +1,80 @@
 @if(this.show){
 
-<section class="path_to_build_your_pc_container">
-    <div class=" close_mobile_button_container show_in_mobile_tablet">
-        <button type="button" class="primary_button show_in_mobile_tablet"
-            (click)="closeMenu()"><mat-icon>close</mat-icon></button>
-    </div>
+    <section class="path_to_build_your_pc_container" >
+        <div class=" close_mobile_button_container show_in_mobile_tablet">
+            <button type="button" class="primary_button show_in_mobile_tablet"
+                (click)="closeMenu()"><mat-icon>close</mat-icon></button>
+        </div>
 
 
-    <h3 class="highlight_text">
-        Forja Tu Camino
-    </h3>
-    @if(this.cart$!=null){
-    <div class="path_points">
-        @for( entry of cart$ ; track $index){
-        <a [routerLink]="['/build-your-pc', entry.categoryName]">
-            <div class="path_element_container" [ngClass]="{'checked' : entry.selectedProductName} ">
-                <div class="path_point_container">
-                    <div class="point_outside">
-                        <div class="point_inside " [ngClass]="{'checked' : entry.selectedProductName!=null }">
-                            @if(entry.selectedProductName==null){
-                            {{$index +1}}
-                            }
+        <h3 class="highlight_text">
+            Forja Tu Camino
+        </h3>
+        @if(this.cart$!=null){
+        <div class="path_points">
+            @for( entry of cart$ ; track $index){
+            <a [routerLink]="['/build-your-pc', entry.categoryName]">
+                <div class="path_element_container" [ngClass]="{'checked' : entry.selectedProductName} ">
+                    <div class="path_point_container">
+                        <div class="point_outside">
+                            <div class="point_inside " [ngClass]="{'checked' : entry.selectedProductName!=null }">
+                                @if(entry.selectedProductName==null){
+                                {{$index +1}}
+                                }
+                            </div>
                         </div>
-                    </div>
-                    <div class="path_line_container">
-                        <div class="path_line " [ngClass]="{'checked' : entry.selectedProductName!=null }">
-                            <div class="path_line_outside">
-                                <div class="path_line_inside"
-                                    [ngClass]="{'checked' : entry.selectedProductName!=null }"></div>
+                        <div class="path_line_container">
+                            <div class="path_line " [ngClass]="{'checked' : entry.selectedProductName!=null }">
+                                <div class="path_line_outside">
+                                    <div class="path_line_inside"
+                                        [ngClass]="{'checked' : entry.selectedProductName!=null }"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="text_container">
-                    <p class="path_point_text" 
-                        [ngClass]="{'currentPath_highlight': entry.categoryName.toLowerCase() === section.toLocaleLowerCase()}">
-                        {{entry.categoryName}}
-                    </p>
-                    <!-- @if(entry.selectedProductPhoto){
+                    <div class="text_container">
+                        <p class="path_point_text"
+                            [ngClass]="{'currentPath_highlight': entry.categoryName.toLowerCase() === section.toLocaleLowerCase()}">
+                            {{entry.categoryName}}
+                        </p>
+                        <!-- @if(entry.selectedProductPhoto){
                         <img src="{{this.entry.selectedProductPhoto}}" alt="Imagen" class="hover-image" />
                     } -->
-                    
-                    @if(entry.selectedProductName!=null){
-                    <div class="path_line_text_container">
-                        <p class="path_line_text" title="{{entry.selectedProductName}}">
-                            {{ entry.selectedProductName }}
-                        </p>
-                        <mat-icon class="check_icon">check</mat-icon>
-                    </div>
-                    }
-                </div>
-            </div>
-        </a>
-        }
-    </div>
-    <div class="bottom_container ">
-        <div class="buttons_container">
-            <button class="tertiary_button" (click)="askToClearCart()">
-                Vaciar
-            </button>
-            <button class="primary_button" (click)="Buy()">
-                Comprar
-            </button>
-        </div>
-        <h3 class="highlight_text total">
-            Total: ${{cartTotal$|async}}
-        </h3>
-    </div>
-    }
 
-    @if (this.showConfirmClearCartPopUp) {
-        <app-confirm-pop-up [custom_message]="'¿Seguro que desea vaciar tu carrito?'" (confirm)="clearCart()" (close)="this.closePopUp('showConfirmClearCartPopUp')"></app-confirm-pop-up>
-    }
-</section>
+                        @if(entry.selectedProductName!=null){
+                        <div class="path_line_text_container">
+                            <p class="path_line_text" title="{{entry.selectedProductName}}">
+                                {{ entry.selectedProductName }}
+                            </p>
+                            <mat-icon class="check_icon">check</mat-icon>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </a>
+            }
+        </div>
+        <div class="bottom_container ">
+            <div class="buttons_container">
+                <button class="tertiary_button" (click)="askToClearCart()"
+                    style="display: flex; justify-content: center;">
+                    Vaciar
+                    <mat-icon style="padding: 0 0 0 5px;">delete</mat-icon>
+                </button>
+                <button class="primary_button" (click)="Buy()" style="display: flex; justify-content: center;">
+                    Comprar
+                    <mat-icon style="padding: 0 0 0 5px;">shopping_cart</mat-icon>
+                </button>
+            </div>
+            <h3 class="highlight_text total">
+                Total: ${{cartTotal$|async}}
+            </h3>
+        </div>
+        }
+
+        @if (this.showConfirmClearCartPopUp) {
+        <app-confirm-pop-up [custom_message]="'¿Seguro que desea vaciar tu carrito?'" (confirm)="clearCart()"
+            (close)="this.closePopUp('showConfirmClearCartPopUp')"></app-confirm-pop-up>
+        }
+    </section>
 }
