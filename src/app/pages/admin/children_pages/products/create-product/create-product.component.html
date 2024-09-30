@@ -79,18 +79,20 @@
             <!-- Descipcion -->
             <div class="custom-input">
                 <label class="form-label">Descripción: </label>
-                <textarea name="description" formControlName="description" required class="form-control"
-                    [ngClass]="{ 'is-invalid': hasErrors(this.form,'description', 'required') }">
+                <textarea name="description" formControlName="description"  class="form-control"
+                   
+                    
+                    >
                 </textarea>
 
             </div>
-            @if( hasErrors(this.form,'description', 'required') ){ <app-input-danger-text
+            <!-- @if( hasErrors(this.form,'description', 'required') ){ <app-input-danger-text
                 text="La descripción del producto es requerida"></app-input-danger-text>
-            }
+            } -->
 
             <!-- habilitado -->
             <div class="custom-input row input_checkbox_container">
-                <label class="form-label checkbox_label ">Está Habilitado: </label>
+                <label class="form-label checkbox_label ">Visible: </label>
                 <input type="checkbox" formControlName="isEnabled" class="form-control checkbox">
             </div>
 
@@ -113,24 +115,7 @@
                 </picture>
             }
             </div>
-            <!-- <div class="custom-input">
-                <label class="form-label">Fotos: </label>
-
-                <div class="add_photo_button_container">
-                    <input #photoInput type="text" class="form-control" placeholder="link de la foto">
-                    <button type="button" (click)="addPhoto()" class="btn btn-success add_field_button">+</button>
-                </div>
-                <div class="photosContainer">
-                    @for (photoUrl of this.photosArray.value ; track $index) {
-                    <picture class="photo">
-                        <button type="button" class="delete_button_absolute" (click)="deletePhoto($index)">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                        <img src="{{photoUrl}}" alt="photo">
-                    </picture>
-                    }
-                </div>
-            </div> -->
+            
 
             <label class="form-label">Categoría:</label>
             <select name="categoryId" formControlName="categoryId" (change)="onCategoryChange($event)"
@@ -211,6 +196,10 @@
 
         </form>
     </section>
+
+    @if (isLoading) {
+        <app-spinner-s7></app-spinner-s7>
+    }
 
 
 </section>

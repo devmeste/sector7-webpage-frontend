@@ -8,12 +8,45 @@
 
     .banner_img_container {
         position: relative;
-        img {
-            object-fit: cover;
-            width: 100%;
-            height: auto; // Las imagenes determinaran el alto del elemento
+        background-color: gray;
+        overflow: hidden;
+        width: 100%;
+        // height: 550px;
+        aspect-ratio: 480 / 550;
+
+        @include tablet{
+            aspect-ratio: 780 / 550;
         }
+
+        @include laptop{
+            aspect-ratio: 1440 / 550;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
     }    
+
+    .banner_img_container_mobile{
+
+        background-color: aqua;
+        overflow: hidden;
+    }
+
+    .banner_img_container_tablet{
+        // width: 780px;
+       
+
+    }
+
+    .banner_img_container_mobile{
+        // width: 1440px;
+        width: 100%;
+        height: 550px;
+        overflow: hidden;
+    }
     
 }
 

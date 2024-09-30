@@ -297,7 +297,6 @@ export class AdminService {
     updateBanner(banner: IBannerRequest, element_id: string) {
         return this._httpClient.put<IBannerRequest>(this.baseUrl + 'banners/' + element_id, banner);
     }
-
 }
 
 

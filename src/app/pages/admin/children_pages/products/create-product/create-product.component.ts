@@ -11,18 +11,15 @@ import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { ImageUploaderComponent } from "../../../../../shared/components/image-uploader/image-uploader.component";
 import { convertNumberArrayToImage } from 'app/core/utils/CustomImageMannager';
+import { SpinnerS7Component } from "../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 @Component({
   selector: 'app-create-product',
   standalone: true,
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss', '../../../../../shared/styles/admin_form.scss'],
-  imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent, MatSelectModule, ImageUploaderComponent]
+  imports: [[NgClass], ReactiveFormsModule, MatIcon, InputDangerTextComponent, MatListModule, JsonPipe, AsyncPipe, NgFor, MessagePopUpComponent, MatSelectModule, ImageUploaderComponent, SpinnerS7Component]
 })
 export class CreateProductComponent extends CustomForm implements OnInit {
-
-
-
-
 
 
   private _adminService = inject(AdminService);
@@ -50,6 +47,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
   maxPhotos = 4;
   disableImageInput = false;
   disableText = 'El maximo de fotos permitidas es ' + this.maxPhotos;
+  isLoading: boolean = false;
 
 
   override initializeForm(): void {
@@ -61,7 +59,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       price: ['', [Validators.required]],
       actualStock: ['', [Validators.required]],
       viewStock: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      description: ['', []],
       isEnabled: [true, []],
       photos: this.formBuilder.array([], []),
       categoryId: ['', [Validators.required]],
@@ -70,18 +68,11 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     })
   }
 
-
-
-
   override ngOnInit(): void {
     super.ngOnInit();
     this._adminService.getAllCategories().subscribe(c => {
       this.categories$ = c;
     });
-  }
-
-  ngAfterViewInit(): void {
-    // this.photoInput.nativeElement.value = '';
   }
 
 
@@ -177,6 +168,9 @@ export class CreateProductComponent extends CustomForm implements OnInit {
 
   override send() {
 
+    this.isLoading = true;
+
+    
     let fields: any = {};
 
     (this.form.get('fieldsArray')?.value as Field[]).forEach((field: Field) => {
@@ -195,7 +189,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
       actualStock: parseInt(this.form.get("actualStock")?.value),
       viewStock: parseInt(this.form.get("viewStock")?.value),
       title: this.form.get("title")?.value,
-      description: this.form.get("description")?.value,
+      description: this.form.get("description")?.value || '',
       isEnabled: this.form.get("isEnabled")?.value,
       fieldsJSON: fields,
       photosByteArray: this.photosByteArray,
@@ -204,9 +198,16 @@ export class CreateProductComponent extends CustomForm implements OnInit {
     this._adminService.createProduct(newProduct).subscribe({
       next: (v) => {
         this.productWasCreatedSuccessfully = true
+
+        this.photosByteArrayString = [];
+        this.photosByteArray = [];
+        this.photosArray.clear();
+        this.clearFileNameSignal = true;
         this.form.reset();
+        this.isLoading = false;
       },
       error: (error) => {
+        this.isLoading = false;
         this.errorMessage = error.error.message;
         this.productHasError = true;
       }

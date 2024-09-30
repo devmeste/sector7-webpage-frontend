@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CardsChildrenAbstractComponent } from '../cards-children';
 import { TwoColorsCardComponent } from "../../../../../shared/components/cards/two-colors-card/two-colors-card.component";
+import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
 
 @Component({
   selector: 'app-mouses',
@@ -16,6 +17,19 @@ export class MousesComponent extends CardsChildrenAbstractComponent {
 
   override getRequirement(): string {
    return '';
+  }
+
+  override   addToCart( cartEntry : BuildYourPcCartEntry) : void {
+    const newEntry : BuildYourPcCartEntry = {
+      categoryName: this.section,
+      selectedProductName: cartEntry.selectedProductName,
+      selectedProductQuantity: 1,
+      selectedProductID: cartEntry.selectedProductID,
+      selectedProductPrice: cartEntry.selectedProductPrice,
+      selectedProductPhoto: cartEntry.selectedProductPhoto
+    }
+    this._buildYourPcService.addToCart(newEntry);
+    window.location.reload();
   }
 
 }

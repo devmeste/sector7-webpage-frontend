@@ -60,6 +60,7 @@ export class ImageUploaderComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['clearFileNameSignal'] && changes['clearFileNameSignal'].currentValue) {
       this.selectedFileName = '';
+      this.fileInput.nativeElement.value = '';
     }
 
     if (changes['openInputFromOutsideSignal'] && changes['openInputFromOutsideSignal'].currentValue) {

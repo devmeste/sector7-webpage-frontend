@@ -75,7 +75,7 @@
     </table>
     <div class="paginator-container">
         <mat-paginator id="myPaginator" #paginator [showFirstLastButtons]="true" [length]="totalItems"
-            [pageIndex]="currentPage" [pageSize]="pageSize" [hidePageSize]="true" [pageSizeOptions]="pageSizeOptions"
+            [pageIndex]="this.currentPage" [pageSize]="pageSize" [hidePageSize]="true" [pageSizeOptions]="pageSizeOptions"
             (page)="pageChanged($event)" aria-label="Select page">
         </mat-paginator>
     </div>

@@ -104,6 +104,7 @@ export class GetAllProductsComponent {
   updateProductsState(text?: string) {
     const inputText = this.searchInputComponent.getInputText();
     if(inputText){
+      this.currentPage = 0;
       this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, inputText).subscribe(productResponse => {
         this.products$ = productResponse.products;
         this.totalPages = productResponse.pagination.totalPages;

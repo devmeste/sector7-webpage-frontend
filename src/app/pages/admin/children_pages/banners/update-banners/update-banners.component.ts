@@ -102,6 +102,9 @@ export class UpdateBannersComponent extends UpdateForm {
 
   override send($event: SubmitEvent): void {
     this.isLoading = true;
+
+   
+
     if (this.form.valid) {
       const banner: IBannerRequest = {
         title : this.form.get('title')?.value,
@@ -112,6 +115,18 @@ export class UpdateBannersComponent extends UpdateForm {
         photoCellphone : this.photoCellByteArray
       }
 
+      console.log("PC");
+      console.log(this.photoPcByteArray);
+      console.log("---------------------------------------------------------------------");
+      console.log("Tablet");
+      console.log(this.photoTabletByteArray);
+      console.log("---------------------------------------------------------------------");
+      console.log("Celular");
+      console.log(this.photoCellByteArray);
+
+      console.log("---------------------------------------------------------------------");
+      console.log("Banner");
+      console.log(banner);
 
       this._adminService.updateBanner(banner, this.element_id).subscribe( {
         

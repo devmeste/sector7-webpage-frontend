@@ -4,19 +4,39 @@
         autoplayInterval="3000" indicatorStyleClass="custom-indicator">
 
         <ng-template let-banner pTemplate="item">
+            <!-- <div style="width: 100%; height: 300px;">
+                <div>
+                    <img src="{{banner.presignedUrlCellphone}}">
+                </div>
+                <div>
+                    <img src="{{banner.presignedUrlTablet}}">
+                </div>
+                <div>
+                    <img src="{{banner.presignedUrlPc}}">
+                </div>
+            </div> -->
             <div class="banner_img_container">
-                @if (this.screenWidth < 480) { <a href="{{banner.routeUrl}}"><img src="{{banner.presignedUrlCellphone}}"
-                        alt="imagen del banner"></a>
+                @if (this.screenWidth < 480) { 
+                    <a href="{{banner.routeUrl}} " target=_blank>
+                        
+                        <img src="{{banner.presignedUrlCellphone}}" 
+                        alt="imagen del banner">
+                    </a>
                     }
-                    @else if (this.screenWidth >= 480 && this.screenWidth < 768) { <a href="{{banner.routeUrl}}">
-                        <img src="{{banner.presignedUrlTablet}}" alt="imagen del banner">
+                    @else if (this.screenWidth >= 480 && this.screenWidth < 768) { 
+                        <a href="{{banner.routeUrl}}"
+                         target=_blank>
+
+                            <img src="{{banner.presignedUrlTablet}}" 
+                            alt="imagen del banner">
                         </a>
-                        }
-                        @else if (this.screenWidth >= 768) {
-                        <a href="{{banner.routeUrl}}">
+                    }
+                    @else if (this.screenWidth >= 768) {
+
+                        <a href="{{banner.routeUrl}}" target=_blank>
                             <img src="{{banner.presignedUrlPc}}" alt="imagen del banner">
                         </a>
-                        }
+                    }
             </div>
         </ng-template>
 

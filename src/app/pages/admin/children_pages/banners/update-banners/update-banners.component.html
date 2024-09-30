@@ -60,38 +60,43 @@
 
                         <div class="banner_photos_container">
                             <div>
-                                <p style="margin-bottom: 0;">Escritorio</p> <p> ( 1440 x 550 ) </p>
-                                
+                                <p style="margin-bottom: 0;">Escritorio</p>
+                                <p> ( 1440 x 550 ) </p>
+
                                 <div class="banner_photo"> <img src="{{photoPcString}}" alt=""></div>
-                                <app-image-uploader  style="margin-top: 1rem;" (onFileUploaded)="updatePhoto($event, 'pc')" 
-                                [isNecesaryOpenFileButton]="true"></app-image-uploader>
+                                <app-image-uploader style="margin-top: 1rem;"
+                                    (onFileUploaded)="updatePhoto($event, 'pc')"
+                                    [isNecesaryOpenFileButton]="true"></app-image-uploader>
                             </div>
                             <div>
-                                <p style="margin-bottom: 0;">Tablet</p> <p> ( 780 x 550 ) </p>
+                                <p style="margin-bottom: 0;">Tablet</p>
+                                <p> ( 780 x 550 ) </p>
                                 <div class="banner_photo"> <img src="{{photoTabletString}}" alt=""></div>
-                                <app-image-uploader style="margin-top: 1rem;" (onFileUploaded)="updatePhoto($event, 'tablet')" 
-                                [isNecesaryOpenFileButton]="true"></app-image-uploader>
+                                <app-image-uploader style="margin-top: 1rem;"
+                                    (onFileUploaded)="updatePhoto($event, 'tablet')"
+                                    [isNecesaryOpenFileButton]="true"></app-image-uploader>
                             </div>
                             <div>
-                                <p style="margin-bottom: 0;">Celular</p> <p> ( 480 x 550 ) </p>
+                                <p style="margin-bottom: 0;">Celular</p>
+                                <p> ( 480 x 550 ) </p>
                                 <div class="banner_photo"> <img src="{{photoCellString}}" alt=""></div>
-                                <app-image-uploader style="margin-top: 1rem;" (onFileUploaded)="updatePhoto($event, 'cellphone')"
-                                    [isNecesaryOpenFileButton]="true"
-                                ></app-image-uploader>
+                                <app-image-uploader style="margin-top: 1rem;"
+                                    (onFileUploaded)="updatePhoto($event, 'cellphone')"
+                                    [isNecesaryOpenFileButton]="true"></app-image-uploader>
 
                             </div>
                         </div>
 
 
                         @if (elementUpdatedSuccessfully) {
-                            <app-message-pop-up custom_message='Banner Modificado Exitosamente'
-                                (close)="closeMessageModal('elementUpdatedSuccessfully')">
-                            </app-message-pop-up>
+                        <app-message-pop-up custom_message='Banner Modificado Exitosamente'
+                            (close)="closeMessageModal('elementUpdatedSuccessfully')">
+                        </app-message-pop-up>
                         }
                         @if (elementUpdateFailed) {
-                            <app-message-pop-up custom_message='{{errorMessage}}'
-                                (close)="closeMessageModal('elementUpdateFailed')">
-                            </app-message-pop-up>
+                        <app-message-pop-up custom_message='{{errorMessage}}'
+                            (close)="closeMessageModal('elementUpdateFailed')">
+                        </app-message-pop-up>
                         }
 
                         <button class="primary_button"
@@ -101,7 +106,7 @@
                 </section>
             </div>
             @if(isLoading){
-                <app-spinner-s7></app-spinner-s7>
+            <app-spinner-s7></app-spinner-s7>
             }
         </div>
 
