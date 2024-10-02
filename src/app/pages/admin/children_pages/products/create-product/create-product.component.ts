@@ -108,7 +108,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
             const newFieldGroup = this.createNewFieldGroup(name);
             // Automatically set the first socket value
             if (this.sockets.length > 0) {
-              newFieldGroup.get('value')?.setValue(this.sockets[0]); // Set the first value
+              //newFieldGroup.get('value')?.setValue(this.sockets[0]); // Set the first value
             }
           })
         }
@@ -119,7 +119,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
             const newFieldGroup = this.createNewFieldGroup(name);
             // Automatically set the first generation value
             if (this.generations.length > 0) {
-              newFieldGroup.get('value')?.setValue(this.generations[0]); // Set the first value
+              //newFieldGroup.get('value')?.setValue(this.generations[0]); // Set the first value
             }
           })
         }
@@ -130,7 +130,7 @@ export class CreateProductComponent extends CustomForm implements OnInit {
             const newFieldGroup = this.createNewFieldGroup(name);
             // Automatically set the first memory value
             if (this.memory_types.length > 0) {
-              newFieldGroup.get('value')?.setValue(this.memory_types[0]); // Set the first value
+             // newFieldGroup.get('value')?.setValue(this.memory_types[0]); // Set the first value
             }
           })
         }

@@ -7,7 +7,10 @@
 
     <!-- TODO: Cambiar los br -->
     <br>
-    <app-search-input-products #searchInputComponent (searchString)="search($event)"></app-search-input-products>
+    <div style="display: flex;">
+        <app-search-input-products [placeHolderValue]="getAllSearchPlaceholder" #searchInputComponent (searchString)="search($event)"></app-search-input-products>
+        <app-search-input-products [placeHolderValue]="getBySerialPlaceholder" #searchBySerialInputComponent (searchString)="searchBySerialNumber($event)"></app-search-input-products>
+    </div>
     <br>
     <br>
 
@@ -108,6 +111,6 @@
 
 @if(this.showUpdatePopUp){
 <app-products-update-pop-up [product_id]="this.update_id" [product_USD_price]="this.product_USD_price"
-    (itemWasUpdatedSuccesfully)="this.updateProductsState()" (close)="closeModal('showUpdatePopUp')">
+    (itemWasUpdatedSuccesfully)="this.updateProductsState(true, '')" (close)="closeModal('showUpdatePopUp')">
 </app-products-update-pop-up>
 }

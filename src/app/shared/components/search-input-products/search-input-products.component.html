@@ -14,7 +14,7 @@
              [panelStyle]="isDropdownHidden() ? { 'display': 'none' } : { 'display': 'block' }"
              [panelStyleClass]="'custom-panel-style'"
            /> 
-         <label class="float-label" [ngClass]="{'focused': inputHasFocus}" for="float-label">Buscar productos</label>
+         <label class="float-label" [ngClass]="{'focused': inputHasFocus}" for="float-label">{{this.placeHolderValue}}</label>
      </p-floatLabel>
   </div>
       

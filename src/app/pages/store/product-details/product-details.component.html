@@ -29,15 +29,14 @@
             }
         </div>
     
-    
+        
         <div class="description_container">
-            <h2>Descripción del producto</h2>
-            <p>{{product.description}}</p>
+            @if(descriptionEmpty(product.description)){
+                <h2>Descripción del producto</h2>
+                <p>{{product.description}}</p>
+            }
             <app-features-table [fieldJSON]="product.fieldsJSON"></app-features-table>
         </div>
-
-    
-    
     </div>
 
 
@@ -86,11 +85,12 @@
         </picture>
 
         <div class="description_container">
-            <h2>Descripción del producto</h2>
-            <p>{{product.description}}</p>
+            @if(descriptionEmpty(product.description)){
+                <h2>Descripción del producto</h2>
+                <p>{{product.description}}</p>
+            }
             <app-features-table [fieldJSON]="product.fieldsJSON"></app-features-table>
         </div>
-
     </div>
     }
 

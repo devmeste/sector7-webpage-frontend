@@ -73,6 +73,10 @@ export class ProductDetailsComponent implements OnInit {
     })
   }
 
+  descriptionEmpty(description: String){
+    return description.length !== 0;
+  }
+
   
 
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, inject, Output, signal, Signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, Output, signal, Signal, ViewChild } from '@angular/core';
 import { AutoComplete, AutoCompleteCompleteEvent, AutoCompleteSelectEvent, AutoCompleteUnselectEvent } from 'primeng/autocomplete';
 import { debounceTime, distinctUntilChanged, Subject, switchMap, takeUntil } from 'rxjs';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -19,7 +19,7 @@ import { NgClass } from '@angular/common';
 export class SearchInputProductsComponent {
 
 
-
+  @Input({ required: true }) placeHolderValue !: string;
   @Output() searchString = new EventEmitter<string>();
 
 

@@ -31,8 +31,11 @@ export class GetAllProductsComponent {
 
   _adminService: AdminService = inject(AdminService);
   products$!: BKProduct[];
+  getAllSearchPlaceholder:string = "Buscar por titulo";
+  getBySerialPlaceholder:string = "Buscar por numero de serie";
 
   @ViewChild('searchInputComponent') private searchInputComponent!: SearchInputProductsComponent;
+  @ViewChild('searchBySerialInputComponent') private searchBySerialInputComponent!: SearchInputProductsComponent;
 
 
   // MODAL POP-UPS 
@@ -60,14 +63,14 @@ export class GetAllProductsComponent {
   isLoading = false;
 
   ngAfterViewInit(): void {
-    this.updateProductsState();
+    this.updateProductsState(true);
   }
 
   deleteProduct(id: string) {
     this._adminService.deleteProduct(id).subscribe({
       next: (success) => {
         this.productDeletedSuccessfully = success
-        this.updateProductsState();
+        this.updateProductsState(true);
       },
       error: (e) => {
         this.productDeletionFailed = true
@@ -101,28 +104,40 @@ export class GetAllProductsComponent {
     this.product_USD_price = price;
   }
 
-  updateProductsState(text?: string) {
-    const inputText = this.searchInputComponent.getInputText();
-    if(inputText){
+  updateProductsState(byTitle: boolean, text: string = '') {
+    if(byTitle){
+      const inputText = this.searchInputComponent.getInputText();
+      if(inputText){
+        this.currentPage = 0;
+        this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, inputText).subscribe(productResponse => {
+          this.products$ = productResponse.products;
+          this.totalPages = productResponse.pagination.totalPages;
+          this.totalItems = productResponse.pagination.totalElements;
+        })
+      }else{
+        this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, text).subscribe(productResponse => {
+          this.products$ = productResponse.products;
+          this.totalPages = productResponse.pagination.totalPages;
+          this.totalItems = productResponse.pagination.totalElements;
+        })
+      }
+    } else{
+      const inputText = this.searchBySerialInputComponent.getInputText();
+      console.log("lo que quiero buscar:" + text);
       this.currentPage = 0;
-      this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, inputText).subscribe(productResponse => {
-        this.products$ = productResponse.products;
-        this.totalPages = productResponse.pagination.totalPages;
-        this.totalItems = productResponse.pagination.totalElements;
-      })
-    }else{
-      this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, text).subscribe(productResponse => {
-        this.products$ = productResponse.products;
-        this.totalPages = productResponse.pagination.totalPages;
-        this.totalItems = productResponse.pagination.totalElements;
-      })
+      this.products$ = [];
+      this._adminService.getProductById(text).subscribe(productResponse => {
+        this.products$.push(productResponse);
+        this.totalPages = 1;
+        this.totalItems = 1;
+      });
     }
-    
   }
+
 
   pageChanged(event: PageEvent) {
     this.currentPage = event.pageIndex;
-    this.updateProductsState();
+    this.updateProductsState(true);
   }
 
 
@@ -135,13 +150,19 @@ export class GetAllProductsComponent {
 
   confirmDeleteAction() {
     this.deleteProduct(this.productIdToDelete);
-    this.updateProductsState();
+    this.updateProductsState(true);
     this.closeModal("showPopUpToConfirmDelete");
   }
 
 
   search(value: string) {
-    this.updateProductsState(value);
+    console.log("por titulo");
+    this.updateProductsState(true, value);
+  }
+
+  searchBySerialNumber(value: string){
+    console.log("por numero de serie")
+    this.updateProductsState(false, value);
   }
 
   navigateTo(value: string) {
