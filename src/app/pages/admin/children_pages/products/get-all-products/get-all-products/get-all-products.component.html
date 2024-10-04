@@ -1,4 +1,7 @@
-<section class="admin_panel_table_main_container">
+<section class="admin_panel_table_main_container" infiniteScroll 
+    [infiniteScrollDistance]="2" 
+    [infiniteScrollThrottle]="100"
+    (scrolled)="onScroll()">
 
     <h2 class="title"> Productos </h2>
     <h4 class="subtitle">Lista de todos los productos de Sector 7</h4>
@@ -16,7 +19,7 @@
 
     <!-- tabla de productos -->
     @if(products$ && products$.length > 0 ) {
-    <table>
+    <table >
         <thead>
             <tr>
                 <td style="max-width: 400px;">
@@ -41,7 +44,7 @@
                 </td>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
             @for(product of products$ ; track product.id){
             <tr>
                 <td (click)="navigateTo(product.id)" style="cursor: pointer; max-width: 400px;" >
@@ -76,12 +79,6 @@
             }
         </tbody>
     </table>
-    <div class="paginator-container">
-        <mat-paginator id="myPaginator" #paginator [showFirstLastButtons]="true" [length]="totalItems"
-            [pageIndex]="this.currentPage" [pageSize]="pageSize" [hidePageSize]="true" [pageSizeOptions]="pageSizeOptions"
-            (page)="pageChanged($event)" aria-label="Select page">
-        </mat-paginator>
-    </div>
 
 
     }

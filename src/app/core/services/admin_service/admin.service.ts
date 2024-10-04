@@ -89,7 +89,7 @@ export class AdminService {
         return this._httpClient.get<ProductResponse>(this.baseUrl + 'products');
     }
 
-    getAllProductsForAdmin(currentPage: number, pageSize: number, text?: string): Observable<ProductResponse> {
+    getAllProductsForAdmin(currentPage: number,  text?: string): Observable<ProductResponse> {
 
         let url = `${this.baseUrl}products/actual?page=${currentPage}`
 

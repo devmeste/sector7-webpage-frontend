@@ -37,7 +37,6 @@ export class SearchInputProductsComponent {
   inputHasFocus: boolean = false;
 
   search(event: AutoCompleteCompleteEvent) {
-    console.log("InputText en search: " + this.inputText);
     this.searchSubject.next(event.query);
   }
 

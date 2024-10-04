@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchInputProductsComponent } from "../../../../../../shared/components/search-input-products/search-input-products.component";
 import { SpinnerS7Component } from "../../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 import { CustomCurrencyPipe } from "../../../../../../core/pipes/custom_currency/custom-currency.pipe";
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 // import{} from ;
@@ -25,12 +26,18 @@ import { CustomCurrencyPipe } from "../../../../../../core/pipes/custom_currency
   standalone: true,
   templateUrl: './get-all-products.component.html',
   styleUrls: ['./get-all-products.component.scss', "../../../../../../shared/styles/admin_table.scss"],
-  imports: [FormsModule, FloatLabelModule, AutoCompleteModule, MatPaginatorModule, MatTableModule, MatIcon, CurrencyPipe, InputDangerTextComponent, MessagePopUpComponent, ProductsUpdatePopUpComponent, ConfirmPopUpComponent, SearchInputProductsComponent, SpinnerS7Component, CustomCurrencyPipe]
+  imports: [FormsModule, FloatLabelModule, 
+    AutoCompleteModule, MatPaginatorModule, 
+    MatTableModule, MatIcon, CurrencyPipe, 
+    InputDangerTextComponent, MessagePopUpComponent, 
+    ProductsUpdatePopUpComponent, ConfirmPopUpComponent, 
+    SearchInputProductsComponent, SpinnerS7Component, 
+    CustomCurrencyPipe, InfiniteScrollModule]
 })
 export class GetAllProductsComponent {
 
   _adminService: AdminService = inject(AdminService);
-  products$!: BKProduct[];
+  products$: BKProduct[] = [];
   getAllSearchPlaceholder:string = "Buscar por titulo";
   getBySerialPlaceholder:string = "Buscar por numero de serie";
 
@@ -47,11 +54,11 @@ export class GetAllProductsComponent {
   product_USD_price!: number;
 
   // PAGINATOR
-  pageSizeOptions: number[] | readonly number[] = [5, 10, 25, 50];
-  totalItems = 0;
-  pageSize = 10;
-  currentPage = 0;
-  totalPages = 0;
+  // pageSizeOptions: number[] | readonly number[] = [5, 10, 25, 50];
+  // totalItems = 0;
+  // pageSize = 10;
+  // currentPage = 0;
+  // totalPages = 0;
 
   // Confirm Delete 
   userConfirmDelete = false;
@@ -104,42 +111,80 @@ export class GetAllProductsComponent {
     this.product_USD_price = price;
   }
 
-  updateProductsState(byTitle: boolean, text: string = '') {
+  updateProductsState(
+      byTitle: boolean = true, 
+      text: string = '', 
+      isFirstSearch: boolean = false) {
+
+    this.isOnScrollAllowed = true;
+    console.log(`Aca: ${byTitle}, ${text}`);
+
     if(byTitle){
       const inputText = this.searchInputComponent.getInputText();
+
+      
       if(inputText){
-        this.currentPage = 0;
-        this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, inputText).subscribe(productResponse => {
-          this.products$ = productResponse.products;
+
+        if(isFirstSearch){
+          this.page = 0;
+          this.products$= [];
+        }
+        console.log("lo que quiero buscar:" + inputText );
+        // this.page = 0;
+        console.log("esto es el page antes de entrar:" + this.page );
+        // this.products$= [];
+
+        this._adminService.getAllProductsForAdmin(this.page + 1,  inputText).subscribe(productResponse => {
+          console.log(productResponse);
+          
           this.totalPages = productResponse.pagination.totalPages;
-          this.totalItems = productResponse.pagination.totalElements;
+      
+          this.page = productResponse.pagination.currentPage;
+    
+          this.products$ = [...this.products$, ...productResponse.products];
+          this.loading = false;
+        
+        
+          // this.products$ = productResponse.products;
+          // this.totalPages = productResponse.pagination.totalPages;
+          // this.totalItems = productResponse.pagination.totalElements;
         })
       }else{
-        this._adminService.getAllProductsForAdmin(this.currentPage + 1, this.pageSize, text).subscribe(productResponse => {
-          this.products$ = productResponse.products;
+        console.log("No tiene texto" );
+        this._adminService.getAllProductsForAdmin(this.page + 1,  text).subscribe(productResponse => {
+          console.log("primera vez");
           this.totalPages = productResponse.pagination.totalPages;
-          this.totalItems = productResponse.pagination.totalElements;
+          console.log("Total de paginas:" + this.totalPages);
+          this.page = productResponse.pagination.currentPage;
+
+          console.log("esto es el page:" + this.page );
+    
+          this.products$ = [...this.products$, ...productResponse.products];
+          // console.log("Array de productos: " + JSON.stringify(this.products$));
+          this.loading = false;
+          console.log("Array de productos length : " + this.products$.length);
         })
       }
     } else{
-      const inputText = this.searchBySerialInputComponent.getInputText();
-      console.log("lo que quiero buscar:" + text);
-      this.currentPage = 0;
+      const inputTextIDCase = this.searchBySerialInputComponent.getInputText() || '';
+      console.log("lo que quiero buscar:" + inputTextIDCase);
+      this.page = 0;
       this.products$ = [];
-      this._adminService.getProductById(text).subscribe(productResponse => {
-        this.products$.push(productResponse);
-        this.totalPages = 1;
-        this.totalItems = 1;
-      });
+      
+      // este if es por si limpiaron el input, entonces, deberia llamar al get all products comun
+      // y limpiar los productos.. (en el else, en el if trae el elemento por el ID)
+      if(inputTextIDCase){
+        this._adminService.getProductById(inputTextIDCase).subscribe(productResponse => {
+          this.products$.push(productResponse);
+          this.totalPages = 1;
+          this.isOnScrollAllowed=false;
+        });
+      }else{
+        this.updateProductsState(true, '', true);
+      }
+      
     }
   }
-
-
-  pageChanged(event: PageEvent) {
-    this.currentPage = event.pageIndex;
-    this.updateProductsState(true);
-  }
-
 
 
 
@@ -157,7 +202,7 @@ export class GetAllProductsComponent {
 
   search(value: string) {
     console.log("por titulo");
-    this.updateProductsState(true, value);
+    this.updateProductsState(true, value , true);
   }
 
   searchBySerialNumber(value: string){
@@ -168,6 +213,27 @@ export class GetAllProductsComponent {
   navigateTo(value: string) {
     window.open('/product-details/' + value, '_blank');
   }
+
+
+
+    // Infinite Scroll
+    page: number = 0;
+    totalPages : number = this.page+1;
+    loading: boolean = false;
+
+    isOnScrollAllowed: boolean = true;
+
+
+    onScroll() {
+      console.log(!this.loading);
+      console.log(this.page);
+      console.log(this.totalPages);
+      if (!this.loading && this.page <= this.totalPages && this.isOnScrollAllowed) {
+        // this.page++;
+        console.log("Page ++ en onScroll(): " + this.page);
+        this.updateProductsState(true);
+      }
+    }
 }
 
 interface AutoCompleteCompleteEvent {
