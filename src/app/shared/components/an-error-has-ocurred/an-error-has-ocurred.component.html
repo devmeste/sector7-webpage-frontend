@@ -2,7 +2,11 @@
     <picture class="an_error_has_ocurred_image">
         <img src="assets/images/utils/an_error_has_ocurred.svg" alt="error icon">
     </picture>
-    <h2 class="an_error_has_ocurred_title">Ups! Parece que ha ocurrido un error</h2>
+    @if(message){
+        <h2 class="an_error_has_ocurred_title">{{message}}</h2>    
+    }@else {
+        <h2 class="an_error_has_ocurred_title">Ups! Parece que ha ocurrido un error</h2>
+    }
     <p class="an_error_has_ocurred_text">Por favor, intentelo de nuevo mas tarde</p>
     <a class="an_error_has_ocurred_button" [routerLink]="['/']">Volver al inicio</a>
 

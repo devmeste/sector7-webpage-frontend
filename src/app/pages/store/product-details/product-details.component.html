@@ -19,8 +19,12 @@
         <p class="product_price"> {{product.price | customCurrency}}</p>
         <div class="stock_available_container">
             <p class="stock_available">stock disponible</p>
-            <p class="stock_available_quantity">cantidad: <span class="quantity_number">{{product.viewStock}}>
-                    class="stock_available_quantity_text">(+50 disponibles)</span></p>
+            <p class="stock_available_quantity">cantidad: 
+                <span class="quantity_number">{{product.viewStock}}</span>
+                <span class="stock_available_quantity_text">
+                    (+50 disponibles)
+                </span>
+            </p>
         </div>
         <div class="add_to_cart_button_container">
             @if(product !== undefined){

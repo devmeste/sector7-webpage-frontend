@@ -187,6 +187,9 @@ export class AuthService {
    
   }
 
+  verifyAccount( code : string ){
+    return this._http.get(this.baseUrl + 'user/verify?code=' + code );
+  }
 }
 
 

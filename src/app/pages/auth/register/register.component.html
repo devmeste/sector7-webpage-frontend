@@ -37,9 +37,10 @@
         </form>
     </section>
 
-
+    @if(isLoading){
+        <app-spinner-s7></app-spinner-s7>   
+    }
     @if(showSuccessPopUp){
-
         <app-message-pop-up custom_message='{{successMessage}}' (close)="closeModal('showSuccessPopUp')">
         </app-message-pop-up>
     }

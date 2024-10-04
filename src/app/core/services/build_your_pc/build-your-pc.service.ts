@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { environment } from 'app/core/environments/environment';
 import { BuildYourPcCartEntry } from 'app/core/models/BuildYourPcCartEntry';
+import { IProduct } from 'app/core/models/product';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -7,6 +10,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class BuildYourPcService {
 
+  _http : HttpClient = inject(HttpClient); 
+  private baseUrl: string = environment.apiUrl;
 
   categories: Object = {
     'Linea': 'linea',
@@ -27,7 +32,7 @@ export class BuildYourPcService {
   buildYourPcCart!: BuildYourPcCartEntry[];
   buildYourPcCart$ = new BehaviorSubject<BuildYourPcCartEntry[]>(this.buildYourPcCart);
   cartTotal$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  
+
 
   constructor() {
     if (!localStorage.getItem('buildYourPcCart')) {
@@ -117,7 +122,7 @@ export class BuildYourPcService {
 
   removeEntryBySection(section: string) {
     const entrysIndex = this.getCartFromStorage().findIndex(entry => entry.categoryName.toLowerCase() === section.toLowerCase());
-    
+
     const categoryName = this.capitalizeFirstLetter(section);
     const titleWord = this.getTitleWordBySection(section);
 
@@ -190,10 +195,25 @@ export class BuildYourPcService {
   }
 
 
-  private capitalizeFirstLetter(str : string) {
+  private capitalizeFirstLetter(str: string) {
     if (!str) return ''; // Manejo de cadenas vacías
     return str.charAt(0).toUpperCase() + str.slice(1);
-}
+  }
+
+// servicio-armado-pc
+// servicio-instalacion-pc
+
+  getInstalledPrice() : Observable<IProduct> {
+    //  products/service/servicio-armado-pc
+      return this._http.get<IProduct>(this.baseUrl  + 'products/service/servicio-instalacion-pc');
+      // return this._http.get<IProduct>(this.baseUrl  + 'products/serial-id-00012');
+  }
+  
+  getAssembledPrice() {
+    return this._http.get<IProduct>(this.baseUrl + 'products/service/servicio-armado-pc');
+    // return this._http.get<IProduct>(this.baseUrl + 'products/serial-id-00012');
+  }
+
 }
 
 

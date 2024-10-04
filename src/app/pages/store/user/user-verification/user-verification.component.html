@@ -1,0 +1,16 @@
+@if( this.userVerificationSuccess){
+    <main class="user_verification_main_container">
+        <div class="banner_container" >
+            <img src="../../../../../assets/images/banners/rc2vqo48ic6c1.jpg" alt="">
+        </div>
+        <h1 class="title">¡Tu cuenta ha sido registrada con éxito, que comience el juego!</h1>
+        <p >Inicia sesión y equipate con todo lo necesario para llevar tu aventura al siguiente nivel!</p>
+    
+        <div class="primary_button_container">
+            <button class="primary_button" (click)="redirectToLogin()">Inicia sesión</button>
+        </div>
+    </main>
+}
+@else if (this.showUserVerificationErrorPage){
+    <app-an-error-has-ocurred [message]=this.errorMessage  ></app-an-error-has-ocurred>
+}

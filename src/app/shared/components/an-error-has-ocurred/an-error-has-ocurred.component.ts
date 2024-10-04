@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FooterComponent } from "../footer/footer.component";
 
@@ -11,4 +11,6 @@ import { FooterComponent } from "../footer/footer.component";
 })
 export class AnErrorHasOcurredComponent {
 
+  @Input () message: string = '';
+  
 }

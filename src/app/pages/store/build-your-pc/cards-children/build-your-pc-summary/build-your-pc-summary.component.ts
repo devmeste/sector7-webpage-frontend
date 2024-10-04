@@ -26,8 +26,8 @@ export class BuildYourPcSummaryComponent {
 
   assembled: boolean = false;
   installed: boolean = false;
-  installedPrice : number = 1200;
-  assembledPrice : number = 300;
+  installedPrice : number = 0;
+  assembledPrice : number = 0;
 
   ngOnInit(): void {
     this._buildYourPcService.buildYourPcCart$.subscribe(products => {
@@ -38,6 +38,15 @@ export class BuildYourPcSummaryComponent {
       this.cartTotal$ = total;
       this.sumaTotal = this.cartTotal$;
     });
+
+    this._buildYourPcService.getAssembledPrice().subscribe(product => {
+      console.log(product);
+      this.assembledPrice = product.price;
+    })
+
+    this._buildYourPcService.getInstalledPrice().subscribe(product => {
+      this.installedPrice =  product.price;
+    })
 
     window.scrollTo(0, 0);
   }

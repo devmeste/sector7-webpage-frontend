@@ -36,6 +36,11 @@ export const STORE_ROUTES: Routes = [
             import("./shopping-cart/shopping-cart.component").then(c => c.ShoppingCartComponent)
     },
     {
+        path: 'user-account/verify',
+        loadComponent: () =>
+            import("./user/user-verification/user-verification.component").then(c => c.UserVerificationComponent)
+    },
+    {
         path: 'buying/delivery-method',
         loadComponent: () =>
             import("./purchase/choice-delivery-method/choice-delivery-method.component").then(c => c.ChoiceDeliveryMethodComponent),

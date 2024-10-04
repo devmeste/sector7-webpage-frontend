@@ -47,6 +47,7 @@ export class BuildYourPcComponent {
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params=>{
       if(params['section']){
+
         this.titleWord = this._buildYourPcService.getTitleWordBySection(params['section']);
         
         if(!this.titleWord && params['section'] !== 'build-your-pc-summary') {

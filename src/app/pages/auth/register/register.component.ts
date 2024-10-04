@@ -6,13 +6,14 @@ import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { IUser } from 'app/core/models/IUser';
 import { Router } from '@angular/router';
 import { MessagePopUpComponent } from "../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
+import { SpinnerS7Component } from "../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 
 @Component({
   selector: 'app-register',
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  imports: [ReactiveFormsModule, FooterComponent, MessagePopUpComponent]
+  imports: [ReactiveFormsModule, FooterComponent, MessagePopUpComponent, SpinnerS7Component]
 })
 export class RegisterComponent extends CustomForm {
 
@@ -23,6 +24,7 @@ export class RegisterComponent extends CustomForm {
   showFailedPopUp: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
+  isLoading: boolean = false;
 
 
 
@@ -45,9 +47,8 @@ export class RegisterComponent extends CustomForm {
   }
 
 
-
   override send(): void {
-
+    this.isLoading = true;
     if (this.form.valid) {
       const newUser: IUser = {
         username: this.form.get('username')?.value,
@@ -61,17 +62,17 @@ export class RegisterComponent extends CustomForm {
           photo: []
         }
       };
-
       this._authService.register(newUser).subscribe({
         next: response => {
+          this.isLoading = false;
           let res = JSON.parse(response);
           this.successMessage = res.message + "\n \nVerifica tu cuenta y luego podrás ingresar";
           // TODO : Mostrar un pop up
           this.showSuccessPopUp = true;
           this.form.reset();
-
         },
         error: err => {
+          this.isLoading = false;
           this.showFailedPopUp = true;
           this.errorMessage = JSON.parse(err.error).message;
           console.log(JSON.parse(err.error).message); // TODO: Cambiar cuando el meste lo haya cambiado
