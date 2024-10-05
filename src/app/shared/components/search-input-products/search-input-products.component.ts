@@ -82,6 +82,9 @@ export class SearchInputProductsComponent {
     this.inputHasFocus = false;
   }
 
-
+  clearInput() {
+    this.inputText = ''; // Limpiar el input principal
+    this.suggestions = []; // Limpiar las sugerencias, si es necesario
+  }
 
 }

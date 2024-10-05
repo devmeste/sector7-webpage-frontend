@@ -1,4 +1,10 @@
-<section class="enable_products_container admin_panel_table_main_container">
+<section class="enable_products_container admin_panel_table_main_container" 
+
+infiniteScroll 
+    [infiniteScrollDistance]="2" 
+    [infiniteScrollThrottle]="100"
+    (scrolled)="onScroll()"
+ >
 
     <div class="enable_choice_container">
         <div class="disable_choice choice_element" [ngClass]="{'selected': selectedOption === 'disabled'}"
@@ -18,6 +24,14 @@
     <h2 class="title"> Productos {{(selectedOption === 'enabled') ? 'visibles' : 'no visibles'}} </h2>
     <h4 class="subtitle"> Lista de los productos {{(selectedOption === 'enabled') ? 'visibles' : 'no visibles'}} de Sector 7</h4>
 
+
+    <div style="display: flex; justify-content: start; align-items: start; width: 100%; margin-bottom: 2rem;">
+        <app-search-input-products [placeHolderValue]="getAllSearchPlaceholder" #searchInputComponent (searchString)="search($event)"></app-search-input-products>
+        <app-search-input-products [placeHolderValue]="getBySerialPlaceholder" #searchBySerialInputComponent (searchString)="searchBySerialNumber($event)"></app-search-input-products>
+        <button class="clear_search_button" (click)="clearSearchInputs()"><mat-icon>delete</mat-icon> </button>
+    </div>
+
+    
     @if(products$ && products$.length > 0){
     <table>
         <thead>

@@ -13,6 +13,7 @@
     <div style="display: flex;">
         <app-search-input-products [placeHolderValue]="getAllSearchPlaceholder" #searchInputComponent (searchString)="search($event)"></app-search-input-products>
         <app-search-input-products [placeHolderValue]="getBySerialPlaceholder" #searchBySerialInputComponent (searchString)="searchBySerialNumber($event)"></app-search-input-products>
+        <button class="clear_search_button" (click)="clearSearchInputs()"><mat-icon>delete</mat-icon> </button>
     </div>
     <br>
     <br>

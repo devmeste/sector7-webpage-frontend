@@ -44,7 +44,6 @@ export class GetAllProductsComponent {
   @ViewChild('searchInputComponent') private searchInputComponent!: SearchInputProductsComponent;
   @ViewChild('searchBySerialInputComponent') private searchBySerialInputComponent!: SearchInputProductsComponent;
 
-
   // MODAL POP-UPS 
   productDeletedSuccessfully = false;
   productDeletionFailed: boolean = false;
@@ -223,7 +222,6 @@ export class GetAllProductsComponent {
 
     isOnScrollAllowed: boolean = true;
 
-
     onScroll() {
       console.log(!this.loading);
       console.log(this.page);
@@ -233,6 +231,14 @@ export class GetAllProductsComponent {
         console.log("Page ++ en onScroll(): " + this.page);
         this.updateProductsState(true);
       }
+    }
+
+    clearSearchInputs() {
+      this.searchInputComponent.clearInput();
+      this.searchBySerialInputComponent.clearInput();
+      this.products$ = [];
+      this.page = 0;
+      this.updateProductsState(true, '', true);
     }
 }
 

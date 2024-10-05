@@ -125,7 +125,7 @@ export class AdminService {
         );
     }
 
-    getAllEnabledProducts(option: string): Observable<ProductResponse> {
+    getAllEnabledProducts(option: string , page : number = 1 , text?: string): Observable<ProductResponse> {
         if (option === 'enabled') {
             option = '1';
         }
@@ -136,7 +136,11 @@ export class AdminService {
             return throwError(() => new Error('Invalid option'))
         }
 
-        return this._httpClient.get<ProductResponse>(this.baseUrl + 'products/visible/' + option);
+        if (text) {
+            return this._httpClient.get<ProductResponse>(this.baseUrl + 'products/visible/' + option + '?page=' + page + '&title=' + text);
+        }
+
+        return this._httpClient.get<ProductResponse>(this.baseUrl + 'products/visible/' + option + '?page=' + page);
     }
 
 
