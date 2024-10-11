@@ -28,8 +28,8 @@
         </div>
         <div class="add_to_cart_button_container">
             @if(product !== undefined){
-            <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agrega al carrito</button>
-            <button class="tertiary_button ">Agrega a favoritos</button>
+            <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agregar al carrito</button>
+            <!-- <button class="tertiary_button ">Agregar a favoritos</button> -->
             }
         </div>
     
@@ -79,11 +79,11 @@
 
                 <div class="add_to_cart_button_container">
                 @if(product.viewStock > 0){
-                    <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agrega al
+                    <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agregar al
                         carrito</button>
-                    <!-- TODO: Modal para avisar que fue crado un producto -->
+                    <!-- TODO: Modal para avisar que fue creado un producto -->
                 }
-                <button class="tertiary_button ">Agrega a favoritos</button>
+                <!-- <button class="tertiary_button ">Agregar a favoritos</button> -->
                 </div>
             </div>
         </picture>
@@ -98,7 +98,16 @@
     </div>
     }
 
-
+    @if(showPopUpInvitingToRegister){
+        <app-message-pop-up custom_message="Para utilizar el carrito, debes estar logueado. "
+         buttonConfirmText="Inicia sesión" 
+         (close)="redirectToLogin()" 
+         
+         [crossIconMustRedirectDiferently]=true
+         (crossIconEmitter)="redirectToHome()"
+         
+         ></app-message-pop-up>
+    }
 
 </main>
 <section class="similar_products_section_background">
@@ -111,4 +120,5 @@
         </div>
     </div>
 </section>
+
 <app-footer></app-footer>

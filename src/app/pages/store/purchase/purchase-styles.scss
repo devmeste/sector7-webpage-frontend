@@ -1,0 +1,183 @@
+@import "styles.scss";
+
+.choice_delivery_method_main_container {
+    color: white;
+    background-color: $background_alternative;
+    min-height: 50vh;
+
+    @include tablet {
+        padding: 3rem 15% 3rem;
+    }
+
+    .form_container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr;
+
+        @include laptop {
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr;
+            padding-right: 2rem;
+        }
+
+        background: linear-gradient(140deg, $gray_5 30%, $gray_10 50%, $gray_5 70%);
+
+    }
+
+
+
+    .delivery_method_container {
+
+        grid-row: 2/span 1;
+        padding: 1rem;
+
+        @include tablet {
+            padding: 2rem;
+        }
+
+        @include laptop {
+            grid-row: 1/span 1;
+        }
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+
+
+        .form  , .confirm_button_container , .final_purchase_container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+
+            .delivery_method_title_alternative {
+                cursor: pointer;
+                color: $primary-l1;
+            }
+
+            .divider {
+                height: 2px;
+                background-color: $gray_20;
+                width: 100%;
+                margin: 1rem 0rem;
+            }
+
+            .choice_container , .final_purchase_summary_container{
+                border: 2px solid $gray_20;
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: center;
+                background-color: $gray_10;
+                width: 100%;
+                border-radius: 8px;
+                margin-bottom: 2rem;
+                padding: 1rem;
+                @include tablet{
+
+                    padding: 2rem;
+                }
+                h3{
+                    margin-bottom: 0;
+                }
+
+            }
+
+            .submit_button_container {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                height: 80px;
+            }
+            .primary_button_container{
+                display: flex;
+                justify-content: end;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+            }
+
+            .wallet_displayed{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @include laptop{
+                    justify-content: end;
+                    align-items: center;
+                }
+            }
+            
+            .wallet_not_displayed{
+                display: none;
+            }
+        }
+
+
+    }
+
+    .purchase_summary_container {
+
+        grid-row: 1/span 1;
+        padding: 2rem;
+
+        @include laptop {
+            grid-row: 1/span 1;
+            padding: 2rem 0;
+        }
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+
+        // background-color: $gray_5;   
+        .purchase_summary_content_element {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1rem 0;
+        }
+
+        .divider {
+            height: 2px;
+            background-color: $gray_20;
+            width: 100%;
+            margin: 1rem 0rem;
+        }
+
+       
+        
+    }
+    .spinner_container{
+        display: flex;
+        // justify-content: center;
+        align-items: center;          
+        padding-right: 3rem;  
+    }
+}
+
+.input_icon{
+    width: 30px;
+    height: 30px;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+
+::ng-deep {
+    .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{
+        stroke: $primary-main !important;
+    }
+}
+

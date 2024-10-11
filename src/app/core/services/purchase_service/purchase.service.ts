@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Address, IMakePurchase, Product_QuantityRequested, } from 'app/core/models/IMakePurchase';
 import { MercadoPagoJS } from 'assets/js/MercadoPagoJS.js';
 import { CartService } from '../cart_service/cart-service.service';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, of, switchMap, tap } from 'rxjs';
 import { environment } from 'app/core/environments/environment';
 
 @Injectable({
@@ -36,35 +36,67 @@ export class PurchaseService {
 
 
 
-  makePurchase( address : Address | null): Observable<any> {
+  makePurchaseInService( address : Address | null , paymentMethodNumber : number , products : Product_QuantityRequested): Observable<any> {
 
-    return this._CartService.getAllProducts().pipe(
-      
-      switchMap(products => {
-
-        let jsonProducts: { [key: string]: number } = {};
-
-        products.forEach(element => {
-          jsonProducts[element.productId] = element.quantity;
-        });
+        // 1 . mercado pago 
+        // 2 . en el local
 
         let localPickUp = address === null ? true : false; 
 
         let jsonResponse = {
-          "products": jsonProducts,
+          "products": products,
           "address": address,
           "localPickUp": localPickUp,
-          "paymentMethod": "En el local"
+          "paymentMethod": paymentMethodNumber
         };
 
         let body = JSON.stringify(jsonResponse);
+
         const headers = new HttpHeaders({
           "Accept": "application/json",
           'Content-Type': 'application/json',
         });
 
+
         return this._httpClient.post(this.baseUrl + "purchase/make", body,  { headers, responseType: 'text' });
-      })
-    );
+      
   }
+
+  // return this._CartService.getAllProducts().pipe(
+  //   map(products => {
+  //     console.log("service: primer control");
+  //     console.log(products);
+
+  //     let jsonProducts: { [key: string]: number } = {};
+  //     products.forEach(element => {
+  //       jsonProducts[element.productId] = element.quantity;
+  //     });
+
+  //     let localPickUp = address === null;
+  //     let jsonResponse = {
+  //       "products": jsonProducts,
+  //       "address": address,
+  //       "localPickUp": localPickUp,
+  //       "paymentMethod": paymentMethodNumber
+  //     };
+
+  //     console.log(jsonResponse);
+  //     let body = JSON.stringify(jsonResponse);
+
+  //     const headers = new HttpHeaders({
+  //       "Accept": "application/json",
+  //       'Content-Type': 'application/json',
+  //     });
+
+  //     // Retorna la llamada HTTP como observable
+  //     return this._httpClient.post(this.baseUrl + "purchase/make", body, { headers, responseType: 'text' });
+  //   }),
+  //   switchMap(httpResponse => {
+  //     // Procesa la respuesta HTTP si es necesario
+  //     console.log(httpResponse);
+  //     return of(httpResponse);  // Retorna la respuesta envuelta en un observable
+  //   })
+  // );
+  
 }
+

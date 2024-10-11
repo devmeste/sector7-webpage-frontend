@@ -47,6 +47,25 @@ export const STORE_ROUTES: Routes = [
         canActivate: [combinedGuard]
     },
     {
+        path: 'buying/:deliveryMethod/payment-method',
+        loadComponent: () =>
+            import("./purchase/payment-method/payment-method.component").then(c => c.PaymentMethodComponent),
+        canActivate: [combinedGuard]
+    },
+    {
+        path:'purchase-success',
+        loadComponent: () =>
+            import("./purchase/purchase-success/purchase-success.component").then(c => c.PurchaseSuccessComponent),
+        canActivate: [combinedGuard]
+
+    },
+    {
+        path: 'buying/:deliveryMethod/payment-method/:paymentMethod/confirm-purchase',
+        loadComponent: () =>
+            import("./purchase/confirm-purchase/confirm-purchase.component").then(c => c.ConfirmPurchaseComponent),
+        canActivate: [combinedGuard]
+    },
+    {
         path: 'user-account',
         loadComponent: () => import("./user/user-account/user-account.component").then(c => c.UserAccountComponent),
         canActivate: [userGuard],

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
+import { Carousel, CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { ProductService } from '../../../../core/services/product_service/product.service';
 import { IProduct } from '../../../../core/models/product';
 import { ProductCardBigComponent } from '../../cards/product-card-big/product-card-big.component';
@@ -19,6 +19,10 @@ export class BkCarouselComponent {
 
   _productService: ProductService = inject(ProductService);
   products !: BKProduct[];
+
+  constructor () { 
+    Carousel.prototype.onTouchMove = () => { };
+  }
 
   ngOnInit(): void {
     this._productService.getProducts().subscribe(productResponse => {

@@ -11,7 +11,14 @@
 
     
     @if(!this.isUserOrAdminLogged){
-        <app-message-pop-up custom_message="Esta sección es exclusiva para usuarios registrados, por favor inicia sesión" buttonConfirmText="Inicia sesión" (close)="redirectToLogin()" ></app-message-pop-up>
+        <app-message-pop-up custom_message="Esta sección es exclusiva para usuarios registrados, por favor inicia sesión"
+         buttonConfirmText="Inicia sesión" 
+         (close)="redirectToLogin()" 
+         
+         [crossIconMustRedirectDiferently]=true
+         (crossIconEmitter)="redirectToHome()"
+         
+         ></app-message-pop-up>
     }
     
 </main>

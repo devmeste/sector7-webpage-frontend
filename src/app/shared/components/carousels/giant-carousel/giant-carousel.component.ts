@@ -2,7 +2,7 @@ import { Component, HostListener, inject, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { IBanner } from 'app/core/models/IBanner';
 import { StoreService } from 'app/core/services/store_service/store.service';
-import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
+import { Carousel, CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 @Component({
   selector: 'app-giant-carousel',
   standalone: true,
@@ -15,7 +15,10 @@ export class GiantCarouselComponent {
   @Input () category = '';
   _storeService : StoreService= inject(StoreService);
 
-
+  constructor() {
+    Carousel.prototype.onTouchMove = () => { };
+  }
+  
   banners: IBanner[] = [
     
   ];

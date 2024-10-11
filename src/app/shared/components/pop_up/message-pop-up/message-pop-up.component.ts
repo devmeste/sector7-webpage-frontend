@@ -19,9 +19,13 @@ import { ICustomModal } from 'app/core/utils/custom-modal/custom-modal';
 export class MessagePopUpComponent {
 
   @Output() close = new EventEmitter<any>();
-
+  
   @Input({ required: true }) custom_message !: string;
   @Input() buttonConfirmText !: string;
+  
+  // if this input is true, the cross icon will redirect emit the crossIconEmmitter
+  @Input() crossIconMustRedirectDiferently !: boolean;
+  @Output() crossIconEmitter = new EventEmitter<any>();
 
   closeModal() {
     this.close.emit();
@@ -42,4 +46,10 @@ export class MessagePopUpComponent {
   handleEnterKey(event: KeyboardEvent) {
     this.closeModal();
   }
+
+
+  closeModalWithCrossIcon() {
+    this.crossIconEmitter.emit()
+  }
+
 }

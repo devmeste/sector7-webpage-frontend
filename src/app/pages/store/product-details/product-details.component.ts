@@ -13,25 +13,32 @@ import { BkCarouselComponent } from "../../../shared/components/carousels/bk-car
 import { BreadcrumbComponent } from "../../../shared/components/breadcrumb/breadcrumb.component";
 import BKProduct from 'app/core/models/BKProduct';
 import { CustomCurrencyPipe } from "../../../core/pipes/custom_currency/custom-currency.pipe";
+import { MessagePopUpComponent } from "../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
+import { AuthService } from 'app/core/services/auth_service/auth.service';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
-  imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent, CustomCurrencyPipe]
+  imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent, CustomCurrencyPipe, MessagePopUpComponent]
 })
 export class ProductDetailsComponent implements OnInit {
 
+
   private _activatedRouter: ActivatedRoute = inject(ActivatedRoute);
-  private _router : Router = inject(Router);
+  private _router: Router = inject(Router);
   private _productService = inject(ProductService);
   private _cartService = inject(CartService);
+  private _authService = inject(AuthService);
+
   cantidad !: number;
 
   id !: string;
   product!: BKProduct;
   mainImage = signal<string>('');
+
+  showPopUpInvitingToRegister = false;
 
   responsiveOptions: CarouselResponsiveOptions[] = [
     {
@@ -55,29 +62,29 @@ export class ProductDetailsComponent implements OnInit {
 
   updateProductDetails(id: string) {
     this._productService.getProductById(this.id).subscribe({
-      next:product => {
+      next: product => {
         this.product = product;
         if (product.photos) {
           this.mainImage.set(product.photos[0]);
-        } 
+        }
       },
       error: error => {
-        if(error.status == 404){  
+        if (error.status == 404) {
           this._router.navigate(['/error'])
         }
-    }
-      
-  });
-    this._cartService.getCartQuantity().subscribe(quantity =>{
+      }
+
+    });
+    this._cartService.getCartQuantity().subscribe(quantity => {
       this.cantidad = quantity
     })
   }
 
-  descriptionEmpty(description: String){
+  descriptionEmpty(description: String) {
     return description.length !== 0;
   }
 
-  
+
 
 
   changeMainImage(img: string) {
@@ -86,15 +93,34 @@ export class ProductDetailsComponent implements OnInit {
 
 
   addToCart(product: BKProduct) {
-    const productToAdd: IProduct_Cart = {
-      id: product.id,
-      name: product.title,
-      img: product.photos?.[0] || '',
-      price: product.price,
-      stock: product.viewStock,
-      quantityRequested: 1
+
+    if(!this._authService.isAnyUserOrAdminLoggedIn()){
+      this.showPopUpInvitingToRegister= true;
+    }else{
+
+      const productToAdd: IProduct_Cart = {
+        id: product.id,
+        name: product.title,
+        img: product.photos?.[0] || '',
+        price: product.price,
+        stock: product.viewStock,
+        quantityRequested: 1
+      }
+  
+      this._cartService.addToCart(productToAdd).subscribe();
+
     }
 
-    this._cartService.addToCart(productToAdd).subscribe();
+
+    
+  }
+
+
+  redirectToLogin() {
+    this._router.navigate(['auth']);
+  }
+
+  redirectToHome() {
+    this.showPopUpInvitingToRegister = false;
   }
 }

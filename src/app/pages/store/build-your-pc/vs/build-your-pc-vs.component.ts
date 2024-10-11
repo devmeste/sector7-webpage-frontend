@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './build-your-pc-vs.component.scss'
 })
 export class BuildYourPcVsComponent {
+
   
   isUserOrAdminLogged : boolean = false;
   _authService = inject(AuthService);
@@ -32,4 +33,8 @@ export class BuildYourPcVsComponent {
     this._router.navigate(['auth']);
     }
 
+    redirectToHome() {
+      console.log("Holaaa");
+      this._router.navigate(['']);
+    }
 }

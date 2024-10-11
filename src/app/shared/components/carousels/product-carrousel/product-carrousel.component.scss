@@ -5,10 +5,15 @@
     justify-content: center;
     width: 100%;
     height: auto;
+
+    touch-action: pan-y; /* Esto permite el desplazamiento vertical en móviles */
+
 }
 
 :host ::ng-deep {
     
+
+
     p-carousel.p-element{
         width: min(100% , 1440px); 
     }

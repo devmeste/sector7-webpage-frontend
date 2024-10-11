@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 import { IProduct_Cart } from '../../models/product_cart';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'app/core/environments/environment';
@@ -8,6 +8,7 @@ import { AuthService } from '../auth_service/auth.service';
 import { IProduct_Cart_Add_Entry_Request } from 'app/core/models/IProduct_Cart_Add_Entry_Request';
 import { CartQuantityAction } from '../../models/types/CartQuantityAction';
 import { ISaveAll } from 'app/core/models/cart/ISaveAll';
+import { IProductCart } from 'app/core/models/IProductCart';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,6 @@ export class CartService {
   private $cart: BehaviorSubject<IProduct_Cart_Entry_BK[]> = new BehaviorSubject<IProduct_Cart_Entry_BK[]>(this.cart);
   private $cartQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private $cartTotal: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-
 
 
   constructor() {
@@ -96,16 +96,33 @@ export class CartService {
 
   // just use it if Admin or User is logged in
   public getAllProducts(): Observable<IProduct_Cart_Entry_BK[]> {
-    this._httpClient.get<IProduct_Cart_Entry_BK[]>(`${this.baseUrl}cart`).subscribe(cart => {
-      this.cart = cart;
+
+    this._httpClient.get<IProductCart>(`${this.baseUrl}cart`).subscribe(cart => {
+      this.cart = cart.cartLines;
       this.$cart.next(this.cart);
       this.$cartQuantity.next(this.cart.length);
       const totalCart = this.calculateTotal();
       this.$cartTotal.next(totalCart);
+
     })
 
     return this.$cart.asObservable();
   }
+
+
+  public getAllProducts2(): Observable<IProduct_Cart_Entry_BK[]> {
+    return this._httpClient.get<IProductCart>(`${this.baseUrl}cart`).pipe(
+      tap(cart => {
+        this.cart = cart.cartLines;
+        this.$cart.next(this.cart);
+        this.$cartQuantity.next(this.cart.length);
+        const totalCart = this.calculateTotal();
+        this.$cartTotal.next(totalCart);
+      }),
+      map(cart => cart.cartLines) // Retornamos solo las líneas del carrito como observable
+    );
+  }
+
 
   public cartLogout(): void {
     this.cart = [];
@@ -180,6 +197,7 @@ export class CartService {
 
   private calculateTotal(): number {
     return this.cart.reduce((suma, item) => suma + item.price * item.quantity, 0);
+    // return 0;
   }
 
 }

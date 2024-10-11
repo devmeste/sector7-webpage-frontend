@@ -1,0 +1,69 @@
+<main class="choice_delivery_method_main_container">
+
+    <div class="form_container">
+        <section class="delivery_method_container">
+            <h2>Elegí como pagar</h2>
+
+            <form class="form" [formGroup]="this.form" (submit)="send($event)">
+                <label class="choice_container">
+                    <h3><input type="radio" formControlName="paymentMethod" value="mercado_pago"
+                            > Mercado Pago
+                    </h3>
+                    
+
+                </label>
+
+                <label class="choice_container">
+
+                    <h3> <input type="radio" formControlName="paymentMethod" value="in_local"
+                            >Pago en el Local
+                    </h3>
+                </label>
+                <div class="submit_button_container">
+                    <div class="primary_button_container" [ngStyle]="{'display' : this.showMPButton ? 'none' : 'flex'}" >
+                        <button type="submit" 
+                        class="primary_button" >Continuar</button>
+
+                      
+                    </div>
+
+                </div>
+            </form>
+
+        </section>
+
+        <section class="purchase_summary_container">
+            <h2 class="purchase_summary_title">
+                Resumen de compra
+            </h2>
+            <div class="divider"></div>
+            <div class="purchase_summary_content_element">
+                <div>
+                    Productos({{this.cartQuantity$}})
+                </div>
+                <div>
+                    {{this.total$ | customCurrency}}
+                </div>
+            </div>
+            @if(shipping){
+            <div class="purchase_summary_content_element">
+                <div>
+                    Envío:
+                </div>
+                <div>
+                    {{this.shipping | customCurrency}}
+                </div>
+            </div>}
+            <div class="purchase_summary_content_element">
+                <div>
+                    Pagás
+                </div>
+                <div>
+                    {{this.total$ | customCurrency}}
+                </div>
+            </div>
+        </section>
+    </div>
+
+</main>
+<app-footer></app-footer>

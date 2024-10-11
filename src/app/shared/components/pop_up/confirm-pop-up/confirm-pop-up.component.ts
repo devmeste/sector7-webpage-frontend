@@ -13,7 +13,7 @@ export class ConfirmPopUpComponent extends MessagePopUpComponent {
   
   @Output() confirm = new EventEmitter<any>();
   @ViewChild('confirmButton') confirmButton!: ElementRef<HTMLButtonElement>;
-
+  
   confirmAction() {
     this.confirm.emit();
   }
