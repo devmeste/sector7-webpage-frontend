@@ -185,9 +185,9 @@ export class AdminService {
 
     // fields
 
-    getAllFields(): Observable<IField[]> {
-        return this._httpClient.get<IField[]>(this.baseUrl + 'fields');
-    }
+    // getAllFields(): Observable<IField[]> {
+    //     return this._httpClient.get<IField[]>(this.baseUrl + 'fields');
+    // }
 
 
     // accounts

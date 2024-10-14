@@ -103,10 +103,11 @@ export class CartService {
       this.$cartQuantity.next(this.cart.length);
       const totalCart = this.calculateTotal();
       this.$cartTotal.next(totalCart);
-
+      
     })
-
+    
     return this.$cart.asObservable();
+
   }
 
 

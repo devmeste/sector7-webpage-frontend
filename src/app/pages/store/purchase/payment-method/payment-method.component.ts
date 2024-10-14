@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, signal, Signal, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'app/core/models/IMakePurchase';
 import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
@@ -13,11 +13,12 @@ import { NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from "../../../../shared/components/footer/footer.component";
+import { AnErrorHasOcurredComponent } from "../../../../shared/components/an-error-has-ocurred/an-error-has-ocurred.component";
 
 @Component({
   selector: 'app-payment-method',
   standalone: true,
-  imports: [MessagePopUpComponent, FillAddressPopUpComponent, MatProgressSpinnerModule, CustomCurrencyPipe, NgClass, NgStyle, ReactiveFormsModule, FooterComponent],
+  imports: [MessagePopUpComponent, FillAddressPopUpComponent, MatProgressSpinnerModule, CustomCurrencyPipe, NgClass, NgStyle, ReactiveFormsModule, FooterComponent, AnErrorHasOcurredComponent],
   templateUrl: './payment-method.component.html',
   styleUrl: './payment-method.component.scss'
 })
@@ -48,6 +49,9 @@ export class PaymentMethodComponent  extends CustomForm {
   showErrorPopUp: boolean = false;
   errorMessage: string = '';
 
+  showErrorPage = signal<boolean>(false);
+
+
   override initializeForm(): void {
     this.form = this.formBuilder.group({
       paymentMethod: ['in_local']
@@ -62,7 +66,7 @@ export class PaymentMethodComponent  extends CustomForm {
         this.delivery_method = params['deliveryMethod'];
       }
       else{
-        this._router.navigate(['buying/local/payment-method']);
+        this.showErrorPage.set(true);
       }
     })
 

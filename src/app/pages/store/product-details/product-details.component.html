@@ -27,10 +27,13 @@
             </p>
         </div>
         <div class="add_to_cart_button_container">
-            @if(product !== undefined){
-            <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agregar al carrito</button>
-            <!-- <button class="tertiary_button ">Agregar a favoritos</button> -->
+            @if (this.isLoadingAddToCart()) {
+                <mat-spinner [diameter]="40"  strokeWidth="7"></mat-spinner>
+            }@else {
+                <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agregar al carrito</button>
+                <!-- <button class="tertiary_button ">Agregar a favoritos</button> -->
             }
+
         </div>
     
         
@@ -78,12 +81,16 @@
                 <div class="reasons_to_buy_div"><mat-icon>shield</mat-icon>Garantia Oficial</div>
 
                 <div class="add_to_cart_button_container">
-                @if(product.viewStock > 0){
-                    <button class="primary_button add_to_cart_button" (click)="addToCart(product)">Agregar al
-                        carrito</button>
-                    <!-- TODO: Modal para avisar que fue creado un producto -->
-                }
-                <!-- <button class="tertiary_button ">Agregar a favoritos</button> -->
+                    @if(this.isLoadingAddToCart()){
+                        <mat-spinner [diameter]="40"  strokeWidth="7"></mat-spinner>
+
+                    }@else if(product !== undefined &&  product.viewStock > 0 ){ 
+                        <button class="primary_button add_to_cart_button" (click)="addToCart(product)">
+                                Agregar al
+                                carrito
+                        </button>
+                    }
+
                 </div>
             </div>
         </picture>
@@ -107,6 +114,22 @@
          (crossIconEmitter)="redirectToHome()"
          
          ></app-message-pop-up>
+    }
+
+    @if(this.productAddedToCart()){
+        <app-message-pop-up custom_message="Se agrego el producto al carrito. "
+        buttonConfirmText="Ir al carrito" 
+        (close)="redirectToCart()" 
+        
+        [crossIconMustRedirectDiferently]=true
+        (crossIconEmitter)="this.productAddedToCart.set(false)"
+        
+        ></app-message-pop-up>
+    }
+
+    @if(this.thereWasAnError()){
+        <app-message-pop-up custom_message="{{errorMessage()}}" buttonConfirmText="Entendido" 
+        (close)="this.thereWasAnError.set(false)"></app-message-pop-up>
     }
 
 </main>

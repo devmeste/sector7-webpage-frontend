@@ -1,6 +1,6 @@
 @import "styles.scss";
 
-.choice_delivery_method_main_container {
+.choice_delivery_method_main_container , .purchase_common_main_container {
     color: white;
     background-color: $background_alternative;
     min-height: 50vh;
@@ -27,7 +27,7 @@
 
 
 
-    .delivery_method_container {
+    .delivery_method_container , .select_method_container , .show_choices_container {
 
         grid-row: 2/span 1;
         padding: 1rem;
@@ -55,7 +55,11 @@
 
             .delivery_method_title_alternative {
                 cursor: pointer;
-                color: $primary-l1;
+                color: $gray_80;
+
+                &:hover {
+                    color: $primary-l1;
+                }
             }
 
             .divider {

@@ -1,128 +1,121 @@
-<main class="choice_delivery_method_main_container">
 
-    <div class="form_container">
-        <section class="delivery_method_container">
-            <h2>El Resumen de tu compra</h2>
-        <div class="final_purchase_container">
+@if(this.anyParamNecessaryIsMissing()){
+    <app-an-error-has-ocurred [message]="'Ups! Parece que ha ocurrido un error'"></app-an-error-has-ocurred>
+}@else {
+    <main class="purchase_common_main_container">
 
-
-            @if(this.shippingInfo){
-                <div class="final_purchase_summary_container">
-                    <small>Detalles del envío</small>
-                    <p> {{this.shippingInfo?.streetName}} {{this.shippingInfo?.streetNumber}}</p>
-                    <small>CP: {{this.shippingInfo?.zipCode}} - {{this.shippingInfo?.city}}, {{this.shippingInfo?.province}}</small>
-                </div>
-            }
-            @else {
-                <div class="final_purchase_summary_container">
-                    <small>Retiras en nuestro local</small>
-                    <p>Alem 1126 </p>
-                    <small>CP: 7000 - Tandil, Buenos Aires</small>
-
-                </div>
-            }
-
-
-
-
-            @if(this.paymentMethod === 'mercado_pago') {
-                <div class="final_purchase_summary_container">
-                    <small>Abonas con</small>
-                    <p>Mercado Pago</p>
-                </div>
-            }
-            @else if(this.paymentMethod === 'in_local') {
-                <div class="final_purchase_summary_container">
-                    <small>Abonas con</small>
-                    <p>Efectivo en nuestro local</p>
-                </div>
-            }
-
-
-
-        </div>
-
-
-
-
-
-        <!-- <form (submit)="send($event)" > -->
-
-            <div class="confirm_button_container">
-                <div class="submit_button_container">
-                    <div class="primary_button_container" [ngStyle]="{'display' : this.showMPButton ? 'none' : 'flex'}" >
+        <div class="form_container">
+            <section class="show_choices_container">
+                <h2>El Resumen de tu compra</h2>
+            <div class="final_purchase_container">
     
-                        <button  class="primary_button" #primaryButton
-                            [ngClass]="{'primary_button_disabled' :  this.isDisabledButton}"
-                            [disabled]="this.isDisabledButton"
-                            type="submit"
-                            (click)="send()"
-                            >Confirmar</button>
+    
+                @if(this.shippingInfo){
+                    <div class="final_purchase_summary_container">
+                        <small>Detalles del envío</small>
+                        <p> {{this.shippingInfo.streetName}} {{this.shippingInfo.streetNumber}}</p>
+                        <small>CP: {{this.shippingInfo.zipCode}} - {{this.shippingInfo.city}}, {{this.shippingInfo.province}}</small>
                     </div>
+                }
+                @else {
+                    <div class="final_purchase_summary_container">
+                        <small>Retiras en nuestro local</small>
+                        <p>Alem 1126 </p>
+                        <small>CP: 7000 - Tandil, Buenos Aires</small>
+                    </div>
+                }
     
-                    @if(this.isLoadingRequest){
-                        <div class="spinner_container">
-                            <mat-spinner [diameter]="40"  strokeWidth="7"></mat-spinner>
+    
+                @if(this.paymentMethod === 'mercado_pago') {
+                    <div class="final_purchase_summary_container">
+                        <small>Abonas con</small>
+                        <p>Mercado Pago</p>
+                    </div>
+                }
+                @else if(this.paymentMethod === 'in_local') {
+                    <div class="final_purchase_summary_container">
+                        <small>Abonas con</small>
+                        <p>Efectivo en nuestro local</p>
+                    </div>
+                }
+    
+    
+    
+            </div>
+    
+    
+        
+                <div class="confirm_button_container">
+                    <div class="submit_button_container">
+                        <div class="primary_button_container" [ngStyle]="{'display' : this.showMPButton ? 'none' : 'flex'}" >
+        
+                            <button  class="primary_button" #primaryButton
+                                [ngClass]="{'primary_button_disabled' :  this.isDisabledButton}"
+                                [disabled]="this.isDisabledButton"
+                                type="submit"
+                                (click)="send()"
+                                >Confirmar</button>
                         </div>
-                    }
-                    <div [ngClass]="[isLoadingRequest ? 'wallet_not_displayed' : '' , 
-                                    this.showMPButton  ? 'wallet_displayed' : 'wallet_not_displayed'] " >
-                        <div id="wallet-container"></div>
+        
+                        @if(this.isLoadingRequest){
+                            <div class="spinner_container">
+                                <mat-spinner [diameter]="40"  strokeWidth="7"></mat-spinner>
+                            </div>
+                        }
+                        <div [ngClass]="[isLoadingRequest ? 'wallet_not_displayed' : '' , 
+                                        this.showMPButton  ? 'wallet_displayed' : 'wallet_not_displayed'] " >
+                            <div id="wallet-container"></div>
+                        </div>
+        
                     </div>
+                </div>
     
+    
+               
+    
+            </section>
+    
+            <section class="purchase_summary_container">
+                <h2 class="purchase_summary_title">
+                    Resumen de compra
+                </h2>
+                <div class="divider"></div>
+                <div class="purchase_summary_content_element">
+                    <div>
+                        Productos({{this.cartQuantity$}})
+                    </div>
+                    <div>
+                        {{this.total$ | customCurrency}}
+                    </div>
                 </div>
-            </div>
+                @if(shipping){
+                <div class="purchase_summary_content_element">
+                    <div>
+                        Envío:
+                    </div>
+                    <div>
+                        {{this.shipping | customCurrency}}
+                    </div>
+                </div>}
+                <div class="purchase_summary_content_element">
+                    <div>
+                        Pagás
+                    </div>
+                    <div>
+                        {{this.total$ | customCurrency}}
+                    </div>
+                </div>
+            </section>
+        </div>
+    
+        @if (showErrorPopUp) {
+            <app-message-pop-up custom_message='{{errorMessage}}'
+                (close)="closeModal('purchaseFailed')">
+            </app-message-pop-up>
+            }
+    
+    </main>
+    <app-footer></app-footer>
+    
+}
 
-        <!-- </form> -->
-
-           
-
-        </section>
-
-        <section class="purchase_summary_container">
-            <h2 class="purchase_summary_title">
-                Resumen de compra
-            </h2>
-            <div class="divider"></div>
-            <div class="purchase_summary_content_element">
-                <div>
-                    Productos({{this.cartQuantity$}})
-                </div>
-                <div>
-                    {{this.total$ | customCurrency}}
-                </div>
-            </div>
-            @if(shipping){
-            <div class="purchase_summary_content_element">
-                <div>
-                    Envío:
-                </div>
-                <div>
-                    {{this.shipping | customCurrency}}
-                </div>
-            </div>}
-            <div class="purchase_summary_content_element">
-                <div>
-                    Pagás
-                </div>
-                <div>
-                    {{this.total$ | customCurrency}}
-                </div>
-            </div>
-        </section>
-    </div>
-
-    @if (showErrorPopUp) {
-        <app-message-pop-up custom_message='{{errorMessage}}'
-            (close)="closeModal('purchaseFailed')">
-        </app-message-pop-up>
-        }
-
-    <!-- @if(showFillAddressPopUp){ -->
-    <!-- <app-fill-address-pop-up 
-        (formFilledEvent)="receiveAddressFromForm($event)"
-        (close)="this.closeModal('showFillAddressPopUp')"
-        [address]="this.addressFillOutByUser"></app-fill-address-pop-up>
-    } -->
-</main>
-<app-footer></app-footer>

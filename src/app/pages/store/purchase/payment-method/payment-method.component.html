@@ -1,7 +1,8 @@
-<main class="choice_delivery_method_main_container">
+@if(!this.showErrorPage()){
+<main class="purchase_common_main_container">
 
     <div class="form_container">
-        <section class="delivery_method_container">
+        <section class="select_method_container">
             <h2>Elegí como pagar</h2>
 
             <form class="form" [formGroup]="this.form" (submit)="send($event)">
@@ -64,6 +65,10 @@
             </div>
         </section>
     </div>
-
+    
 </main>
 <app-footer></app-footer>
+}
+@else if(this.showErrorPage()){
+    <app-an-error-has-ocurred [message]="'Ups! Parece que ha ocurrido un error'"></app-an-error-has-ocurred>
+}

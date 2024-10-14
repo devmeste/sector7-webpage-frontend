@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'app/core/models/IMakePurchase';
 import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
@@ -13,11 +13,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from "../../../../shared/components/footer/footer.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { of, switchMap } from 'rxjs';
+import { AnErrorHasOcurredComponent } from "../../../../shared/components/an-error-has-ocurred/an-error-has-ocurred.component";
 
 @Component({
   selector: 'app-confirm-purchase',
   standalone: true,
-  imports: [ MessagePopUpComponent, MatProgressSpinnerModule, CustomCurrencyPipe, NgClass, NgStyle, FooterComponent, ReactiveFormsModule],
+  imports: [MessagePopUpComponent, MatProgressSpinnerModule, CustomCurrencyPipe, NgClass, NgStyle, FooterComponent, ReactiveFormsModule, AnErrorHasOcurredComponent],
   templateUrl: './confirm-purchase.component.html',
   styleUrl: './confirm-purchase.component.scss'
 })
@@ -48,11 +49,8 @@ export class ConfirmPurchaseComponent {
   paymentMethod: string = '';
   shippingInfo ?: Address ;
 
-  // override initializeForm(): void {
-  //   this.form = this.formBuilder.group({
-  //     deliveryMethod: ['in_local']
-  //   })
-  // }
+  thereWasAnError = signal<boolean>(false);
+  anyParamNecessaryIsMissing = signal<boolean>(false);
 
    ngOnInit(): void {
     this._cartService.getAllProducts().subscribe(products => {
@@ -77,7 +75,7 @@ export class ConfirmPurchaseComponent {
         this.deliveryMethod = params['deliveryMethod'];
         this.paymentMethod = params['paymentMethod'];
       }else{
-        throw new Error ('Mandar al ups en Confirm Purchase');
+        this.anyParamNecessaryIsMissing.set(true);
       }
 
 
@@ -107,24 +105,17 @@ export class ConfirmPurchaseComponent {
   }
 
 
-  // send($event: SubmitEvent): void {
   send(): void{
-  console.log("----------------------------------------- Se disparo --------------------------------------------");
-    // $event.preventDefault();
-
     this.isDisabledButton = true;
     
     if (this.deliveryMethod === 'local') {
-      console.log("Aca paso 1 vez (confirm purchase)");
       this.makePurchase(null , this.paymentMethod);
     }
     else if (this.deliveryMethod === 'shipping' && this.shippingInfo) {
-      console.log("Aca paso 1 vez (confirm purchase) pero en el shipping");
       this.makePurchase(this.shippingInfo , this.paymentMethod);
     }
     else{
-      // this._router.navigate(['buying/' + this.deliveryMethod + '/payment-method']);
-      throw new Error('Invalid option');
+      this.anyParamNecessaryIsMissing.set(true);
     }
 
   }
@@ -132,23 +123,19 @@ export class ConfirmPurchaseComponent {
 
 
   makePurchase(address: Address | null , paymentMethod: string) {
-
-    // 1 . mercado pago 
-    // 2 . en el local
-    console.log(paymentMethod);
-
     let paymentMethodNumber : number = 0;
     if(paymentMethod === 'mercado_pago'){
       paymentMethodNumber = 1;
     }else if (paymentMethod === 'in_local'){
       paymentMethodNumber = 2;
     }else{
-      // Mandar al ups
+
       throw new Error('Mandar al ups en el confirm purchase');
+
     }
 
    // Usamos pipe y switchMap para encadenar los observables
-  this._cartService.getAllProducts2().pipe(
+  this._cartService.getAllProducts().pipe(
     
     switchMap(products => {
       
@@ -170,9 +157,7 @@ export class ConfirmPurchaseComponent {
       }
     },
     error: (error) => {
-      
-      console.log("Error en la compra", error);
-    }
+          }
   });
  
 

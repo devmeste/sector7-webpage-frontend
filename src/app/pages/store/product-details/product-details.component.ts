@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, Signal, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IProduct } from '../../../core/models/product';
 import { ProductService } from '../../../core/services/product_service/product.service';
@@ -15,15 +15,20 @@ import BKProduct from 'app/core/models/BKProduct';
 import { CustomCurrencyPipe } from "../../../core/pipes/custom_currency/custom-currency.pipe";
 import { MessagePopUpComponent } from "../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { AuthService } from 'app/core/services/auth_service/auth.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
-  imports: [CarouselModule, CarouselModule, TagModule, RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent, CustomCurrencyPipe, MessagePopUpComponent]
+  imports: [CarouselModule, CarouselModule, TagModule, MatProgressSpinnerModule,RouterLink, MatIconModule, FeaturesTableComponent, FooterComponent, BkCarouselComponent, BreadcrumbComponent, CustomCurrencyPipe, MessagePopUpComponent]
 })
 export class ProductDetailsComponent implements OnInit {
+  
+redirectToCart() {
+this._router.navigate(['cart']);
+}
 
 
   private _activatedRouter: ActivatedRoute = inject(ActivatedRoute);
@@ -31,6 +36,11 @@ export class ProductDetailsComponent implements OnInit {
   private _productService = inject(ProductService);
   private _cartService = inject(CartService);
   private _authService = inject(AuthService);
+
+  productAddedToCart = signal<boolean>(false);
+  isLoadingAddToCart = signal<boolean>(false);
+  thereWasAnError= signal<boolean>(false);
+  errorMessage = signal<string>('');
 
   cantidad !: number;
 
@@ -94,8 +104,14 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart(product: BKProduct) {
 
+    this.isLoadingAddToCart.set(true);
+    console.log("isLoading: "+this.isLoadingAddToCart());
+
     if(!this._authService.isAnyUserOrAdminLoggedIn()){
+      this.isLoadingAddToCart.set(false);
       this.showPopUpInvitingToRegister= true;
+      console.log("isLoading: "+this.isLoadingAddToCart());
+
     }else{
 
       const productToAdd: IProduct_Cart = {
@@ -107,7 +123,20 @@ export class ProductDetailsComponent implements OnInit {
         quantityRequested: 1
       }
   
-      this._cartService.addToCart(productToAdd).subscribe();
+      this._cartService.addToCart(productToAdd).subscribe({
+        next: () => {
+          this.isLoadingAddToCart.set(false)
+          console.log("isLoading: "+this.isLoadingAddToCart());
+          this.productAddedToCart.set(true);
+        },
+        error: (error) => {
+          this.isLoadingAddToCart.set(false);
+          this.errorMessage.set(error.error.message);
+          this.thereWasAnError.set(true);
+
+        }
+      }
+      );
 
     }
 
