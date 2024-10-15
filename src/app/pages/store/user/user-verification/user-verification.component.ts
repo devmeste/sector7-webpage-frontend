@@ -24,7 +24,9 @@ export class UserVerificationComponent {
 
 
   ngOnInit(): void {
+
     this._activatedRoute.queryParamMap.subscribe(params => {
+
       if (params.get('code')) {
         this.code = params.get('code') || '';
 

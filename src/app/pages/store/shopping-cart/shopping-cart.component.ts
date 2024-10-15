@@ -34,6 +34,7 @@ export class ShoppingCartComponent implements OnInit {
     this.shipping = true; //TODO: handle the this envio
     this.shippingValue = 0; //TODO: handle the this envio
     this._cartService.getCartTotal().subscribe(total => {
+      console.log(total); 
       this.totalPrice = total;
     })
   }
@@ -44,6 +45,7 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     this._cartService.getAllProducts().subscribe(products => {
+      console.log(products);
       this.products = products;
     })
   }
@@ -55,21 +57,30 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
   }
+  
   updateProductsState() {
     this._cartService.getAllProducts().subscribe(products => {
       this.products = products;
     })
   }
 
-  removeQuantity(entry: IProduct_Cart_Entry_BK) {
+  removeQuantity(entry: IProduct_Cart_Entry_BK , index: number) {
     if (entry.quantity > 1) {
-      this._cartService.updateProductQuantitySimple(entry, "decrease").subscribe((response) => {});
+      this._cartService.updateProductQuantitySimple(entry, "decrease").subscribe((response) => {
+        this.products[index].quantity-=1;
+      });
     };
   }
 
-  addQuantity(entry: IProduct_Cart_Entry_BK) {
+  addQuantity(entry: IProduct_Cart_Entry_BK , index: number) {
+
     if(entry.quantity<entry.stock){
-      this._cartService.updateProductQuantitySimple(entry, "increase").subscribe((response) => {});
+      this._cartService.updateProductQuantitySimple(entry, "increase").subscribe({
+        next: (response) => {
+          this.products[index].quantity+=1;
+        }
+
+      });
     }
   }
 

@@ -12,6 +12,7 @@ export const userInterceptor: HttpInterceptorFn = (request, next) => {
   
   if (_authService.isUserLoggedIn$()) {
     const token = localStorage.getItem('token');
+    
     if (token) {
       if (clonedRequest.headers.get('skip') == 'true') {
         return next(clonedRequest);

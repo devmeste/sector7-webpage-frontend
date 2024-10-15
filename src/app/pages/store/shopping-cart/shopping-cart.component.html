@@ -11,15 +11,16 @@
                 </div>
                 <button (click)="deleteProduct(product.id)" class="delete_button">Eliminar</button>
                 <div class="shopping_cart_item_quantity_container">
-                    <button (click)="removeQuantity(product)" class="quantity_button quantity_button_left">
+                    <button (click)="removeQuantity(product , $index)" class="quantity_button quantity_button_left">
                         <mat-icon>remove</mat-icon>
                     </button>
     
                     <div class="quantity_number"> {{product.quantity}} </div>
-                    <button (click)="addQuantity(product)" class="quantity_button quantity_button_right ">
+
+                    <button (click)="addQuantity(product , $index)" class="quantity_button quantity_button_right ">
                         <mat-icon>add</mat-icon>
                     </button>
-                </div>
+                </div>  
                 <div class="shopping_cart_item_stock">
                     <span>{{product.stock}} disponibles</span>
                 </div>
@@ -37,7 +38,7 @@
         }
     </div>
 
-    @if (products.length > 0) {
+    @if (products && products.length > 0) {
         <div class="cart_summary_container">
             <h3>Resumen de compra</h3>
             <div class="divider"></div>

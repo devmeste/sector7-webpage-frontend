@@ -9,6 +9,8 @@
                 Registrate Hoy!
             </h3>
 
+            <!-- <div class="text_error">Campo requerido *</div> -->
+
             <input type="text" formControlName="username" placeholder="Nombre de usuario" class="input_text_style">
             @if(hasErrors(this.form, 'username', 'required')){<small class="text-danger text_error"> el nombre de usuario es
                 requerido</small>}
@@ -32,8 +34,13 @@
             <input type="number" formControlName="phone" placeholder="Telefono" class="input_text_style">
             @if(hasErrors(this.form, 'phone', 'required')){<small class="text-danger text_error">el telefono es requerido</small>}
 
-            <input type="submit" class="primary_button" value="Registrarse">
+            <input type="submit" class="primary_button" value="Registrarse" [disabled]="!form.valid" 
+            [ngClass]="{'primary_button_disabled' : this.form.invalid}"
+            >
 
+           
+            
+            
         </form>
     </section>
 
@@ -48,6 +55,7 @@
         <app-message-pop-up custom_message='{{errorMessage}}' (close)="closeModal('showFailedPopUp')">
         </app-message-pop-up>
     }
+    
 
 </main>
 <app-footer></app-footer>

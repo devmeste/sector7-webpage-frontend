@@ -95,23 +95,23 @@ export class CartService {
   }
 
   // just use it if Admin or User is logged in
-  public getAllProducts(): Observable<IProduct_Cart_Entry_BK[]> {
+  // public getAllProducts(): Observable<IProduct_Cart_Entry_BK[]> {
 
-    this._httpClient.get<IProductCart>(`${this.baseUrl}cart`).subscribe(cart => {
-      this.cart = cart.cartLines;
-      this.$cart.next(this.cart);
-      this.$cartQuantity.next(this.cart.length);
-      const totalCart = this.calculateTotal();
-      this.$cartTotal.next(totalCart);
+  //   this._httpClient.get<IProductCart>(`${this.baseUrl}cart`).subscribe(cart => {
+  //     this.cart = cart.cartLines;
+  //     this.$cart.next(this.cart);
+  //     this.$cartQuantity.next(this.cart.length);
+  //     const totalCart = this.calculateTotal();
+  //     this.$cartTotal.next(totalCart);
       
-    })
+  //   })
     
-    return this.$cart.asObservable();
+  //   return this.$cart.asObservable();
 
-  }
+  // }
 
 
-  public getAllProducts2(): Observable<IProduct_Cart_Entry_BK[]> {
+  public getAllProducts(): Observable<IProduct_Cart_Entry_BK[]> {
     return this._httpClient.get<IProductCart>(`${this.baseUrl}cart`).pipe(
       tap(cart => {
         this.cart = cart.cartLines;
@@ -167,7 +167,6 @@ export class CartService {
   }
 
 
-  // Define el tipo para las acciones permitidas
 
 
   public updateProductQuantitySimple(entry: IProduct_Cart_Entry_BK, action: CartQuantityAction): Observable<any> {
@@ -177,7 +176,7 @@ export class CartService {
         const quantity = entry.quantity + 1;
         return this._httpClient.patch(this.baseUrl + 'cart/' + entry.id + '/' + quantity, {}).pipe(
           tap(() => {
-            this.getAllProducts();
+            this.getAllProducts().subscribe();
           })
         );
       }
@@ -187,7 +186,7 @@ export class CartService {
         const quantity = entry.quantity - 1;
         return this._httpClient.patch(this.baseUrl + 'cart/' + entry.id + '/' + quantity, {}).pipe(
           tap(() => {
-            this.getAllProducts();
+            this.getAllProducts().subscribe();
           })
         );
       }

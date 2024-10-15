@@ -148,28 +148,31 @@ export class AuthService {
   // recover user
 
   recoverUser(email: string) {
-    return this._http.post(this.baseUrl + 'user/recover-user', { email }, { responseType: 'text' }).pipe(
-      catchError(error => this.transformTextResponseToJson(error))
-    );
+    return this._http.post(this.baseUrl + 'user/recover-user', { email });
+    // .pipe(
+    //   catchError(error => this.transformTextResponseToJson(error))
+    // );
 
   }
 
-  recoverPassword(username: string, email: string) {
+  recoverPassword(username: string, email: string) : Observable<OneMessageResponse> {
     let body = { username, email };
-    return this._http.post(this.baseUrl + 'user/recover-password', body, { responseType: 'text' }).pipe(
-      catchError(error => this.transformTextResponseToJson(error))
-    );
+    return this._http.post<OneMessageResponse>(this.baseUrl + 'user/recover-password', body);
+
+    // .pipe(
+    //   catchError(error => this.transformTextResponseToJson(error))
+    // );
   }
 
-  private transformTextResponseToJson(error: any): Observable<ParsedError> {
-    let parsedError: ParsedError;
-    try {
-      parsedError = JSON.parse(error.error);
-    } catch (jsonError) {
-      parsedError = { message: 'Error parsing response to JSON', originalError: error.error };
-    }
-    return throwError(() => parsedError);
-  }
+  // private transformTextResponseToJson(error: any): Observable<ParsedError> {
+  //   let parsedError: ParsedError;
+  //   try {
+  //     parsedError = JSON.parse(error.error);
+  //   } catch (jsonError) {
+  //     parsedError = { message: 'Error parsing response to JSON', originalError: error.error };
+  //   }
+  //   return throwError(() => parsedError);
+  // }
 
 
   change_user_password(body: any): Observable<ChangePasswordSuccessDTO> {

@@ -7,13 +7,14 @@ import { IUser } from 'app/core/models/IUser';
 import { Router } from '@angular/router';
 import { MessagePopUpComponent } from "../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { SpinnerS7Component } from "../../../shared/components/spinners/spinner-s7/spinner-s7.component";
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  imports: [ReactiveFormsModule, FooterComponent, MessagePopUpComponent, SpinnerS7Component]
+  imports: [ReactiveFormsModule, FooterComponent, MessagePopUpComponent, SpinnerS7Component, NgClass]
 })
 export class RegisterComponent extends CustomForm {
 
@@ -48,6 +49,7 @@ export class RegisterComponent extends CustomForm {
 
 
   override send(): void {
+    console.log("this.form.valid: " + this.form.valid);
     this.isLoading = true;
     if (this.form.valid) {
       const newUser: IUser = {
@@ -81,6 +83,8 @@ export class RegisterComponent extends CustomForm {
 
       })
 
+    }else{
+      this.isLoading = false;
     }
   }
 

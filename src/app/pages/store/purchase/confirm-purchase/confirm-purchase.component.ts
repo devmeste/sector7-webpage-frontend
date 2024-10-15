@@ -150,14 +150,17 @@ export class ConfirmPurchaseComponent {
   ).subscribe({
     next: (response) => {
       if(response) {
-        console.log("response", response);
+        this._cartService.getAllProducts().subscribe();
         this.createMpButton(response);
+
       }else{
+        this._cartService.getAllProducts().subscribe();
         this._router.navigate(['purchase-success'])
       }
     },
     error: (error) => {
-          }
+      
+    }
   });
  
 

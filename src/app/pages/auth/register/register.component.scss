@@ -10,8 +10,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    height: 700px;
+    padding: 3rem 0;
+    min-height: fit-content;
 
     @include desktop{
         padding: 3rem 0;

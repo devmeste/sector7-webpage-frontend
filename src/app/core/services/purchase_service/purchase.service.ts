@@ -40,7 +40,6 @@ export class PurchaseService {
 
         // 1 . mercado pago 
         // 2 . en el local
-
         let localPickUp = address === null ? true : false; 
 
         let jsonResponse = {
@@ -57,7 +56,8 @@ export class PurchaseService {
           'Content-Type': 'application/json',
         });
 
-
+        console.log("Se ejecuto el servicio de Purchase");
+        
         return this._httpClient.post(this.baseUrl + "purchase/make", body,  { headers, responseType: 'text' });
       
   }
