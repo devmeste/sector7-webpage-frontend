@@ -106,27 +106,107 @@
             @include laptop {
                 display: flex;
                 flex-direction: column;
+                padding: 1rem 1rem;
             }
 
+            @include desktop {
+                padding: 1rem 2rem;
+            }
+
+            .clear_filters_button_container{
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 1rem;
+
+                button{
+                    background-color: $danger_500;
+                    color: white;
+                    border: 0;
+                    padding: 0.2rem 0.7rem;
+                    border-radius: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    mat-icon{
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+
+            .feature_title {
+                color: black;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                border-bottom: 2px solid rgb(161, 161, 161);
+            }
+
+            .each_feature_container {
+                margin-bottom: 2rem;
+            }
+
+            .input_price_container {
+                display: flex;
+                gap: 0.5rem;
+                .since_and_until_price_inputs_container {
+                    width: 85%;
+                    display: flex;
+                    gap: 0.5rem;
+                }
+
+                .price_button {
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: $primary-main;
+                    color: white;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: $primary-l1;
+                    }
+
+
+                }
+
+                input {
+                    width: 45%;
+                    height: 25px;
+                    border-radius: 5px;
+                    padding-left: 5px;
+
+                    &:focus {
+                        outline-color: $primary-main;
+                    }
+                }
+            }
+
+
+
+            .feature_element {
+                display: flex;
+                font-size: 14px;
+                margin-bottom: 8px;
+                font-weight: 500;
+                cursor: pointer;
+
+                &.active {
+                    color: $primary-main;
+                    font-weight: bold;
+                    text-decoration: underline;
+                    text-underline-offset: 4px;
+
+                }
+            }
         }
 
-        .feature_title {
-            color: black;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
 
-        .each_feature_container {
-            margin-bottom: 2rem;
-        }
-
-        p {
-            color: black;
-            font-weight: 500;
-        }
     }
 
-    .search_results_container { // TODO: Channge name to this container
+    .search_results_container {
+        // TODO: Channge name to this container
         grid-column-start: 1;
         grid-column-end: 13;
         grid-row-start: 4;
@@ -143,14 +223,32 @@
 
     }
 
-    .scroll_spinner_container{
+    .scroll_spinner_container {
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .scroll_spinner{
+    .scroll_spinner {
         width: 60px;
         height: 60px;
+    }
+}
+
+.parragraph_message_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding: 2rem 0;
+    background-color: $warning_100;
+    color: $warning_800;
+    border: 2px solid $warning_600;
+    border-radius: 20px;
+
+    p{  
+        margin: 0;
     }
 }

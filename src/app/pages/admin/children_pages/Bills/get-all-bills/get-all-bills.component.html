@@ -16,6 +16,12 @@
             </div>
         </form>
 
+        <div >
+            <div>
+                <input type="radio" formControlName="shipment" value="true">
+                Pagadas
+            </div>
+        </div>
         <button type="button" class="primary_button" (click)="clearFilters()">Limpiar filtros</button>
 
         @if(this.purchases$ && this.purchases$.length > 0){
@@ -23,11 +29,12 @@
             <thead>
                 <tr>
                     <td>
-                        Cliente
+                        Orden de compra
                     </td>
                     <td>
-                        Cant. Prod.
+                        Cliente
                     </td>
+
                     <td>
                         Fecha
                     </td>
@@ -47,10 +54,10 @@
                 @for(purchase of purchases$ ; track $index ){
                 <tr>
                     <td>
-                        {{purchase.fullname}}
+                        {{purchase.id}}
                     </td>
                     <td>
-                        {{purchase.products.length}}
+                        {{purchase.fullname}}
                     </td>
                     <td>
                         {{purchase.purchaseDate | customDatePipe}}

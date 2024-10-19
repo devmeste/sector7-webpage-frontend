@@ -6,14 +6,43 @@
     </div>
     <aside class="product_features_filters_container">
         <div class="product_features_filters_content">
-            @for (feature of features; track $index) {
-            <div class="each_feature_container">
-                <h4 class="feature_title">{{feature.title}}</h4>
-                @for (filter of feature.filters; track $index) {
-                <p>{{filter}}</p>
-                }
+            <div class="clear_filters_button_container">
+                <button (click)="clearFilters()"> <mat-icon>autorenew</mat-icon> </button>
             </div>
-            }
+            <div class="each_feature_container">
+                <h4 class="feature_title">Precio</h4>
+                <div class="input_price_container">
+                    <div class="since_and_until_price_inputs_container">
+                        <input type="number" placeholder="Desde"  [(ngModel)]="sincePrice" >
+                        <input type="number" placeholder="Hasta" [(ngModel)]="untilPrice" >
+                    </div>
+                    <button (click)="applyPriceFilter()" class="price_button">
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="each_feature_container">
+                <h4 class="feature_title">Marca</h4>
+
+                @for( brand of brands; track $index){
+                        <small (click)="setElementToFilter('brand' ,brand)" class="feature_element" 
+                        [ngClass]="brand == this.brandSelected() ? 'active' : ''"
+                        >{{brand}}</small>
+                }
+                
+            </div>
+
+            <div class="each_feature_container">
+                <h4 class="feature_title">Categoría</h4>
+                @for( category of categories; track $index){
+                    <small class="feature_element" (click)="setElementToFilter('category' , category.name)" 
+                    [ngClass]="category.name == this.categorySelected() ? 'active' : ''"
+                    >{{category.name}}</small>
+                }
+                
+            </div>
+           
         </div>
     </aside>
 
@@ -23,11 +52,20 @@
         [infiniteScrollThrottle]="100"
         (scrolled)="onScroll()">
 
-        @for (product of products; track $index) {
-
-        <app-wide-product-card [id]="product.id" [name]="product.title" [img]="product.photos[0]"
-            [price]="product.price">
-        </app-wide-product-card>
+        @if(products && products.length > 0 ){
+            @for (product of products; track $index) {
+    
+            <app-wide-product-card [id]="product.id" [name]="product.title" [img]="product.photos[0]"
+                [price]="product.price">
+            </app-wide-product-card>
+            }
+        }
+        @else {
+            @if(!loading){
+                <div class="parragraph_message_container">
+                    <p>Parece que no se encontraron resultados para esa busqueda</p>
+                </div>
+            }
         }
 
         @if(loading){

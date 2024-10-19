@@ -23,7 +23,6 @@ export class RecoverPasswordComponent  extends CustomForm{
   errorMessage: string = '';
   successMessage: string = '';
   isLoading: boolean = false;
-  // newPasswordWasGenerated = signal <boolean>(false);
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({

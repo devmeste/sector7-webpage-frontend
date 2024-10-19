@@ -19,16 +19,7 @@ export const STORE_ROUTES: Routes = [
             import("./product-details/product-details.component").then(c => c.ProductDetailsComponent)
     },
 
-    {
-        path: 'search',
-        loadComponent: () =>
-            import("./search/search.component").then(c => c.SearchComponent)
-    },
-    {
-        path: 'search/:textToSearch',
-        loadComponent: () =>
-            import("./search/search.component").then(c => c.SearchComponent)
-    },
+
     
     {
         path: 'cart',
@@ -92,5 +83,15 @@ export const STORE_ROUTES: Routes = [
         path: 'error',
         loadComponent: () =>
             import("../../shared/components/an-error-has-ocurred/an-error-has-ocurred.component").then(c => c.AnErrorHasOcurredComponent)   
-    }
+    },
+    {
+        path: 'search',
+        loadComponent: () =>
+            import("./search/search.component").then(c => c.SearchComponent)
+    },
+    {
+        path: 'search/:textToSearch',
+        loadComponent: () =>
+            import("./search/search.component").then(c => c.SearchComponent)
+    },
 ]

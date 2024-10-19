@@ -1,16 +1,20 @@
 import { inject, Injectable } from '@angular/core';
 import { IProduct } from '../../models/product';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import BKProduct from 'app/core/models/BKProduct';
 import { ProductResponse } from 'app/core/models/ProductResponse';
 import { environment } from 'app/core/environments/environment';
 import { ICondition } from 'app/core/models/ICondition';
+import { IGetAllBrandsResponse } from 'app/core/models/htpp_responses/IGetAllBrandsResponses';
+import { IFiltersForSearch } from 'app/core/models/filters/IFiltersForSearch';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
+
 
 
   
@@ -93,7 +97,16 @@ export class ProductService {
   }
 
 
-  search(value: string , page ?:number): Observable<ProductResponse> {
+  search(value: string , page ?:number , brand ?: string): Observable<ProductResponse> {
+
+    // if(page && brand) {
+    //   return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&page=${page}&brand=${brand}`)
+    // };
+
+    // if(brand) {
+    //   return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&brand=${brand}`);
+    // }
+    
     if(page) return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&page=${page}`);
     
     return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?title=${value}&page=1`);
@@ -118,4 +131,55 @@ export class ProductService {
     return this._httpClient.get<ICondition>(`${this.baseUrl}products/check?ids=${firstID},${secondID}`);
   }
 
+  getAllProducts( sincePrice ?: number, untilPrice ?: number) {
+
+    if(sincePrice && untilPrice){
+      return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?price=min:${sincePrice},max:${untilPrice}`);
+    }else if (sincePrice) {
+      return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?price=min:${sincePrice}`);
+    }else if (untilPrice) {
+      return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?price=max:${untilPrice}`);
+    }
+    return this._httpClient.get<ProductResponse>(`${this.baseUrl}products`);
+
+  }
+
+
+  // Filters
+
+  getAllBrands() : Observable<IGetAllBrandsResponse> {
+    return this._httpClient.get<IGetAllBrandsResponse>(`${this.baseUrl}products/brands`);
+  }
+
+
+
+  // TODO: Refactor this method to have just one getAll Products
+  getAllProducts2(page: number, filters: IFiltersForSearch) {
+
+    let params = new HttpParams().set('page', page.toString())
+
+    if(filters.brand){
+      params = params.set('brand', filters.brand);
+    }
+
+    if(filters.category){
+      params = params.set('category', filters.category);
+    }
+
+
+    if(filters.price.since && filters.price.until){
+      params = params.set('price', `min:${filters.price.since},max:${filters.price.until}`);
+    }else if (filters.price.since) {
+      params = params.set('price',`min:${filters.price.since}`);
+    }else if (filters.price.until) {
+      params = params.set('price', `max:${filters.price.until}`);
+    }
+
+    console.log("page:"+ page);
+    console.log("params: " + params);
+
+
+    return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?page=${page}`, {params});
+  } 
 }
+
