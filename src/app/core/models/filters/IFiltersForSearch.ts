@@ -6,6 +6,11 @@ export interface IFiltersForSearch {
     },
     category : string | null,
     brand : string | null
+    text : string | null
+    order : {
+      name: string | null
+      direction : string | null
+    }
   }
   
   

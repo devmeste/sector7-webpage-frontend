@@ -127,6 +127,12 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    cursor: pointer;
+
+                    &:hover{
+                        background-color: $primary-l1;
+                    }
+
                     mat-icon{
                         font-size: 1.3rem;
                     }
@@ -250,5 +256,88 @@
 
     p{  
         margin: 0;
+    }
+}
+
+
+
+.select-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.select-label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    appearance: none; /* Elimina el estilo predeterminado del navegador */
+    transition: border-color 0.3s ease;
+    outline: none;
+}
+
+.custom-select:hover {
+    border-color: #888;
+}
+
+.custom-select:focus {
+    border-color: $primary-main;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.custom-select:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+}
+
+.select-container::after {
+    content: '▼'; /* Flecha personalizada */
+    font-size: 12px;
+    color: $primary-main;
+    position: absolute;
+    right: 15px;
+    pointer-events: none;
+}
+
+.select-container {
+    position: relative; /* Necesario para la flecha */
+}
+
+.custom-select {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding-right: 30px; /* Espacio para la flecha */
+}
+
+::ng-deep{
+    .order_by_form{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        width: 200px;
+        border-radius: 0;
+
+        &:focus{
+            outline: none;
+        }
+
+        li{
+            padding: 0.3rem;
+        }
+        
+        .p-dropdown {
+            width: 100%;
+            height: 100%;
+            padding: 0.5rem;
+
+        }
     }
 }

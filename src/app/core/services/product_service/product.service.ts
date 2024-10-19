@@ -166,6 +166,17 @@ export class ProductService {
       params = params.set('category', filters.category);
     }
 
+    // alert("text: " + filters.text);
+    if(filters.text){
+      params = params.set('title', filters.text);
+    }
+
+
+
+    if(filters.order.name && filters.order.direction) {
+      params = params.set('sort', filters.order.name);
+      params = params.set('order', filters.order.direction);
+    }
 
     if(filters.price.since && filters.price.until){
       params = params.set('price', `min:${filters.price.since},max:${filters.price.until}`);

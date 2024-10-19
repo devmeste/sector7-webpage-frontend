@@ -7,7 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import IFeature from '../../../core/models/IFeature';
 import { WideProductCardComponent } from "../../../shared/components/cards/wide-product-card/wide-product-card.component";
 import { MatIcon } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { BreadcrumbComponent } from "../../../shared/components/breadcrumb/breadcrumb.component";
 import BKProduct from 'app/core/models/BKProduct';
@@ -18,6 +18,7 @@ import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { ICategory } from 'app/core/models/ICategory';
 import { IFiltersForSearch } from 'app/core/models/filters/IFiltersForSearch';
 import { InputDangerTextComponent } from "../../../shared/components/inputs/input-danger-text/input-danger-text.component";
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-search',
@@ -31,7 +32,11 @@ import { InputDangerTextComponent } from "../../../shared/components/inputs/inpu
     FormsModule,
     NgClass,
     RouterLink, BreadcrumbComponent,
-    InfiniteScrollModule, SpinnerS7Component, SpinnerS7SmallComponent, InputDangerTextComponent]
+    InfiniteScrollModule, SpinnerS7Component, SpinnerS7SmallComponent, 
+    InputDangerTextComponent,
+    ReactiveFormsModule,
+    DropdownModule
+  ]
 })
 
 
@@ -55,18 +60,27 @@ export class SearchComponent {
   loading: boolean = false;
 
 
+  formGroup!: FormGroup;
+  private fb : FormBuilder = inject(FormBuilder);
+  waysToOrder = [
+    { name: "Mas relevante" },
+    { name: "Menor precio" },
+    { name: "Mayor precio" },
+  ];
 
     // for filters
     brands: string[] = [];
     categories : ICategory[] = [];
-    textToSearch: string = "";
-    selectedFilters: { [key: string]: string[] } = {};
+    textToSearch = signal <string> ('');
+
     brandSelected = signal<string | null>(null);
-
     categorySelected = signal<string | null>(null);
-
     sincePrice = signal<number | null>(null);
     untilPrice = signal<number | null>(null);
+
+    order = '' ;
+    direction = '';
+  
 
     filters : IFiltersForSearch ={
       price :{
@@ -74,20 +88,43 @@ export class SearchComponent {
         until: this.untilPrice()
       },
       category : this.categorySelected(),
-      brand : this.brandSelected()
+      brand : this.brandSelected(),
+      text: this.textToSearch(),
+      order : {
+        name : null,
+        direction : null
+      }
     }
 
 
 
   // TODO: Mejorar esta logica
   ngOnInit(): void {
+    this.formGroup = this.fb.group({
+      order_by: [''] 
+    })
+
+          // Escucha cambios en el select de ordenación
+  this.formGroup.get('order_by')?.valueChanges.subscribe(value => {
+    const valueString = JSON.stringify(value);
+    this.applyOrderFilter(valueString);
+  });
+
+
+
     this._activatedRoute.params.subscribe(params => {
       if (params['textToSearch']){
-        this.textToSearch = params['textToSearch'];
+        this.products = [];
+        this.page = 1;
+        this.textToSearch.set(params['textToSearch']);
         window.scrollTo(0, 0); 
+        this.updateProductsInfo();
+      }
+      else{
+        this.updateProductsInfo();
       }
       
-      this.updateProductsInfo();
+     
     })
 
     this._productService.getAllBrands().subscribe(response => {
@@ -111,7 +148,13 @@ export class SearchComponent {
     this.filters.price.since = this.sincePrice();
     this.filters.price.until = this.untilPrice();
     this.filters.category = this.categorySelected();
+    this.filters.text = this.textToSearch();
+    this.filters.order = { name: this.order, direction: this.direction}; 
 
+    console.log(this.order);
+    console.log(this.direction);
+
+    console.log(this.filters);
     this._productService
     .getAllProducts2(this.page, this.filters)
     .subscribe((productResponse) => {
@@ -154,6 +197,7 @@ export class SearchComponent {
     this.categorySelected.set(null);
     this.sincePrice.set(null);
     this.untilPrice.set(null);
+    this.textToSearch.set('');
     this.updateProductsInfo();
     
   }
@@ -198,6 +242,31 @@ export class SearchComponent {
   
   }
   
+
+
+  applyOrderFilter(value: string): void {
+    console.log(value);
+    console.log("---------------Boolean -------------------");
+    console.log(value.includes('Menor precio'));
+
+    if (value.includes('Menor precio')) {
+      // this.filters.order = { name: 'price', direction: 'asc' };
+      this.order = 'price'
+      this.direction = 'asc';
+    } else if (value.includes('Mayor precio')) {
+      this.order = 'price'
+      this.direction = 'desc';
+    } else {
+      // Si el valor es otro, resetea la ordenación
+      this.order = '';
+      this.direction = '';
+    }
+  
+    // Reinicia los productos y la paginación cuando se aplica un nuevo filtro
+    this.page = 1;
+    this.products = [];
+    this.updateProductsInfo();
+  }
 
 
 

@@ -1,13 +1,23 @@
 <main class="search_main_container">
 
     <div class="search_title_container">
-        <h2>Resultados de la busqueda</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center ;">
+            <h2>Resultados de la busqueda</h2>
+            <form [formGroup]="formGroup" class="order_by_form">
+                <p-dropdown 
+                    formControlName="order_by" 
+                    [options]="waysToOrder"
+                    optionLabel="name"
+                    placeholder="Ordenar por" />
+            </form>
+        </div>
+
         <div class="title_divider"></div>
     </div>
     <aside class="product_features_filters_container">
         <div class="product_features_filters_content">
             <div class="clear_filters_button_container">
-                <button (click)="clearFilters()"> <mat-icon>autorenew</mat-icon> </button>
+                <button class="clear_filters_button" (click)="clearFilters()" title="Limpiar filtros"> <mat-icon>autorenew</mat-icon> </button>
             </div>
             <div class="each_feature_container">
                 <h4 class="feature_title">Precio</h4>
