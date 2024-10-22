@@ -1,4 +1,5 @@
 @import 'styles.scss';
+@import '@shared/styles/admin_form.scss';
 
 .get_all_bills_main_container {
 
@@ -36,6 +37,9 @@
         }
 
 
+          
+
+
 
     }
 
@@ -43,4 +47,47 @@
         margin: 1rem 0;
         padding: 0.2rem 0.8rem;
     }
+
+
+
+    .form_container{
+
+        .form{
+            margin: 0;
+            padding: 0;
+            .custom-input{
+                width: 40%;
+                display: inline;
+                .form-control::placeholder{
+                    color: rgb(214, 214, 214);
+                    display: inline;
+                }
+            }
+            
+        }
+
+        .send_button{
+            width: 40px;
+            background-color: $primary-main;
+            color: white;
+        }
+
+    }
+    
+    /* Oculta los círculos del radio button */
+input[type="radio"] {
+    display: none; /* Oculta el radio button */
+}
+
+label {
+    cursor: pointer;
+}
+/* Estilo para el label cuando el radio está seleccionado */
+input[type="radio"]:checked + label {
+    font-weight: 500;
+    color: #ff6a00;
+    text-decoration: underline;
+}
+
+   
 }

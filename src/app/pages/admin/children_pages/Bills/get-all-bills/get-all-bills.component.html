@@ -6,8 +6,10 @@
 
 
         <!-- Campos de entrada de fecha -->
-        <form [formGroup]="form" class="date_inputs_form">
-            <div class="date_inputs_container" (change)="verifyDates()">
+        <h4 class="me-4 mb-1">Filtrar por fecha: </h4>
+        <form [formGroup]="formDate" class="date_inputs_form">
+
+            <div class="date_inputs_container me-4" (change)="verifyDates()">
                 <input type="date" class="date_input" formControlName="startDate">
             </div>
 
@@ -16,13 +18,56 @@
             </div>
         </form>
 
-        <div >
-            <div>
-                <input type="radio" formControlName="shipment" value="true">
-                Pagadas
+        <div>
+            <form [formGroup]="this.formPaymentStatus">
+
+                <div class="pt-4">
+                <h4 class="me-4 mb-1">Filtrar por estado de pago: </h4>
+                <div>
+                    <input type="radio" id="payed_and_delivered" 
+                    formControlName="payment_status" value="payed_and_delivered"
+                    class="me-2">
+                    <label for="payed_and_delivered" class="me-4">Pagadas y entregadas</label>
+                
+                    <input type="radio" id="payed_and_not_delivered" 
+                    formControlName="payment_status" value="payed_and_not_delivered"
+                    class="me-2">
+                    <label for="payed_and_not_delivered" class="me-4">Pagadas y no entregadas</label>
+                    
+                    <input type="radio" id="pending" 
+                    formControlName="payment_status" value="pending"
+                    class="me-2">
+                    <label for="pending" class="me-4">Pendientes</label>
+                </div>
             </div>
+         </form> 
         </div>
-        <button type="button" class="primary_button" (click)="clearFilters()">Limpiar filtros</button>
+
+        
+        <div class="mb-0 mt-3 pt-2">
+            <section class="form_container">
+                <form (ngSubmit)="search_by_order_id()" [formGroup]="this.formOrderId" class="form">        
+                    <div class="custom-input d-flex flex-row mb-4 ">
+                        <input 
+                            style="display: inline; "
+                            type="text"  
+                            formControlName="order_id" 
+                            class="form-control mb-0" 
+                            placeholder="Buscar por orden de compra">
+                        <button style="display: inline;"
+                            type="submit" 
+                            class="send_button d-flex justify-content-center align-items-center">
+                            <mat-icon>send</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+
+        <button type="button" class="primary_button mt-1" (click)="clearFilters()">Limpiar filtros</button>
+
+        
 
         @if(this.purchases$ && this.purchases$.length > 0){
         <table>
@@ -90,7 +135,7 @@
         <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
             </mat-paginator> -->
         }
-        @else if (this.form.get('startDate')?.value && this.form.get('endDate')?.value) {
+        @else if (this.formDate.get('startDate')?.value && this.formDate.get('endDate')?.value) {
         <app-input-danger-text text="No hay compras entre esas fechas"></app-input-danger-text>
         }
         @else {

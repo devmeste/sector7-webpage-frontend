@@ -221,6 +221,10 @@ export class AdminService {
         return this._httpClient.get<IPurchasesBetweenDatesResponse>(this.baseUrl + 'purchase/bill?since=' + startDate + '&until=' + endDate);
     }
 
+    getPurchasetById(orderId: any) {
+        return this._httpClient.get<IPurchase>(this.baseUrl + 'purchase/id/' + orderId);
+    }
+
 
     // sockets
 

@@ -6,7 +6,7 @@ import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 // import { PurchaseDetailsPopUpComponent } from "../purchase-details-pop-up/purchase-details-pop-up.component";
 import { IPurchase } from 'app/core/models/IPurchase';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
 
 
@@ -18,8 +18,11 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
   styleUrls: ['./get-all-bills.component.scss', "../../../../../shared/styles/admin_table.scss"],
   })
   export class GetAllBillsComponent {
+
     clearFilters() {
-      this.form.reset();
+      this.formDate.reset();
+      this.formOrderId.reset();
+      this.formPaymentStatus.reset();
       this.updateDataView();
     }
 
@@ -28,14 +31,22 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
     _formBuilder = inject(FormBuilder);
     purchases$ !: IPurchase[];
 
-    form: FormGroup = this._formBuilder.group({
+    formDate: FormGroup = this._formBuilder.group({
       startDate: [''],
       endDate: ['']
     });
 
+    formOrderId: FormGroup = this._formBuilder.group({
+      order_id: ['', Validators.required]
+    })
+
+    formPaymentStatus: FormGroup = this._formBuilder.group({
+      payment_status: ['', Validators.required]
+    })
+
     verifyDates() {
-      const startDate = this.form.get('startDate')?.value;
-      const endDate = this.form.get('endDate')?.value;
+      const startDate = this.formDate.get('startDate')?.value;
+      const endDate = this.formDate.get('endDate')?.value;
   
       const formattedStartDate = this.formatDate(startDate);
       const formattedEndDate = this.formatDate(endDate);
@@ -72,7 +83,18 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
     this._router.navigate(['/admin-dashboard/billing', id]);
   }
 
-
+  search_by_order_id() {
+    const orderId = this.formOrderId.get('order_id')?.value;
+    if(orderId) {
+      this._adminService.getPurchasetById(orderId).subscribe({
+        next: (purchase) => {
+          this.purchases$ = [];
+          this.purchases$.push(purchase);
+        }
+      })
+    }
+    
+  }
 
 }
 
