@@ -62,6 +62,7 @@
 
         h2 {
             margin-bottom: 0.5rem;
+            font-size: clamp(1.4rem, 0.4rem + 5.333vw, 1.5rem);
         }
 
         .title_divider {
@@ -98,7 +99,7 @@
         }
 
         .product_features_filters_content {
-            display: none;
+            // display: none;
             background-color: $gray_85;
             padding: 1rem 2rem;
             border-radius: 7px;
@@ -114,9 +115,7 @@
             }
 
             .clear_filters_button_container{
-                display: flex;
-                justify-content: flex-end;
-                margin-top: 1rem;
+                
 
                 button{
                     background-color: $danger_500;
@@ -259,85 +258,78 @@
     }
 }
 
-
-
-.select-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.select-label {
-    margin-right: 10px;
-    font-weight: bold;
-    color: #333;
-}
-
-.custom-select {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
+select {
+    background-color: #707070; /* Fondo del select */
+    background-color: #f9f9f9;; /* Fondo del select */
+    color: #4f4f4f; 
+    border: 1px solid #4f4f4f; /* Borde del select */
     border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    appearance: none; /* Elimina el estilo predeterminado del navegador */
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    border-radius: 5px; /* Bordes redondeados */
     transition: border-color 0.3s ease;
     outline: none;
 }
 
-.custom-select:hover {
-    border-color: #888;
+select option {
+    color: #707070; /* Fondo de las opciones */
+    background-color: #f9f9f9; /* Color del texto de las opciones */
 }
 
-.custom-select:focus {
-    border-color: $primary-main;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
 
-.custom-select:disabled {
-    background-color: #e9ecef;
-    color: #6c757d;
-}
 
-.select-container::after {
-    content: '▼'; /* Flecha personalizada */
-    font-size: 12px;
-    color: $primary-main;
-    position: absolute;
-    right: 15px;
-    pointer-events: none;
-}
+.product_features_filters_container{
+    position:absolute;
+    top: 100px;
+    transform: translate(-400px, 0)  ;
+    transition: all 0.5s ease-in-out;
+    z-index: 500;
+    width: 300px;
+    opacity: 0;
 
-.select-container {
-    position: relative; /* Necesario para la flecha */
-}
-
-.custom-select {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    padding-right: 30px; /* Espacio para la flecha */
-}
-
-::ng-deep{
-    .order_by_form{
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        padding: 0.5rem;
-        width: 200px;
-        border-radius: 0;
-
-        &:focus{
-            outline: none;
-        }
-
-        li{
-            padding: 0.3rem;
-        }
-        
-        .p-dropdown {
-            width: 100%;
-            height: 100%;
-            padding: 0.5rem;
-
-        }
+    @include laptop{
+        transform: translate(0, 0)  ;
+        opacity: 1;
+        position: static;
+        width: 100%;
     }
+}
+
+.showFiltersAside{
+    transform: translate(0, 0);
+    opacity: 1;
+    @include tablet{
+        transform: translate(-25px, 0);
+    }
+
+}
+
+.overlay{
+
+}
+
+.overlay.showFiltersAside{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 499;
+    transition: all 0.3s ease;
+}
+
+.select-and-filter-button-container{
+    width: 100%;
+
+    @media screen and (min-width: 780px) {
+        width: fit-content;
+    }
+}
+
+.close_filters_button{
+    color: $primary-main;
+    top: 1rem;
+    right: 1rem;
+    font-size: large;
 }

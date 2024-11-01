@@ -24,3 +24,41 @@ h1 , h2{
         font-weight: 500;
     }
 }
+
+.admin_panel_table_main_container{
+
+    select {
+        background-color: #707070; /* Fondo del select */
+        color: #fffdfd; /* Color del texto */
+        border: 1px solid #4f4f4f; /* Borde del select */
+        padding: 5px; /* Espaciado interno */
+        font-size: 16px; /* Tamaño de la fuente */
+        border-radius: 5px; /* Bordes redondeados */
+    }
+    
+    select option {
+        background-color: #707070; /* Fondo de las opciones */
+        color: #fff; /* Color del texto de las opciones */
+    }
+
+    .update_shipment_button{
+        height: 30px;
+        width: 30px;
+        margin-left: 10px;
+        border-radius: 5px;
+        background-color: $success_400;
+        transition: transform 0.2s ease;
+        &:hover{
+            background-color: $success_600;
+            box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.365);
+            transform: translate(-1px, -1px);
+
+        }
+    }
+
+    .truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

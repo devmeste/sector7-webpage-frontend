@@ -1,0 +1,21 @@
+<!-- Hidden Native Select -->
+<select formControlName="order_by" style="display: none;">
+    <option *ngFor="let item of items" [value]="item">
+        {{ item }}
+    </option>
+</select>
+
+<!-- Custom Dropdown -->
+<div class="custom-select" (click)="toggleDropdown()">
+    <div class="selected-option">{{ itemSelected || 'Ordenar por' }}</div>
+    <div *ngIf="isDropdownOpen" class="dropdown-options">
+        <div 
+            *ngFor="let item of items" 
+            (click)="selectOption(item)"
+            class="dropdown-option"
+        >
+            {{ item }}
+        </div>
+    </div>
+    <span class="caret-icon" [class.open]="isDropdownOpen"></span>
+</div>

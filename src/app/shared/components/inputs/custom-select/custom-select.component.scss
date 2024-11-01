@@ -1,0 +1,60 @@
+.custom-select {
+    position: relative;
+    border: 1px solid #4f4f4f;
+    padding: 5px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #707070;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected-option {
+    color: #fff;
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 100%; // 100% means that the element will be at the bottom of it's parent 
+    left: 0;
+    width: 100%;
+    background-color: #707070;
+    border-radius: 5px;
+    overflow: hidden;
+    max-height: 150px;
+    z-index: 10;
+    // padding: 5px 15px;
+
+}
+
+.dropdown-option {
+    padding: 8px 15px;
+    border-bottom: 1px solid #4f4f4f;
+    color: #fff;
+    cursor: pointer;
+}
+
+.dropdown-option:hover {
+    background-color: #505050;
+}
+
+
+.caret-icon {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 8px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff; /* Change color as needed */
+    transition: transform 0.3s ease;
+  }
+  
+  /* Rotate the caret icon when dropdown is open */
+  .caret-icon.open {
+    transform: rotate(180deg);
+  }

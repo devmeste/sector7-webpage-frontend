@@ -5,10 +5,12 @@ import { IPurchase } from 'app/core/models/IPurchase';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 import { CustomCurrencyPipe } from "../../../../../core/pipes/custom_currency/custom-currency.pipe";
+import { MatIcon } from '@angular/material/icon';
+
 @Component({
   selector: 'app-purchase-details',
   standalone: true,
-  imports: [JsonPipe, InputDangerTextComponent, CurrencyPipe, CustomCurrencyPipe],
+  imports: [JsonPipe, InputDangerTextComponent, CurrencyPipe, CustomCurrencyPipe, MatIcon],
   templateUrl: './purchase-details.component.html',
   styleUrls: ['./purchase-details.component.scss', '../../../../../shared/styles/admin_table.scss']
 })
@@ -43,6 +45,11 @@ export class PurchaseDetailsComponent {
       }
     })
   }
+
+  finalizePurchase() {
+    alert('Este metodo se disparara cuando tenga el endpoint');
+  }
+    
 }
 
 

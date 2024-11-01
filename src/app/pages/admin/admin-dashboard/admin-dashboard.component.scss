@@ -54,11 +54,11 @@
 
     .side_panel_menu_container_desktop{
         border-radius: 10px 10px 0 0 ; // border-radius to the side panel
-        width: 270px;
-        margin: 0 2rem;
+        // width: 270px; // aca
+        // margin: 0 2rem;
         background-color: $gray_10;
         @include laptop{
-            width: 300px;
+            // width: 300px; //aca 
         }
     }
 

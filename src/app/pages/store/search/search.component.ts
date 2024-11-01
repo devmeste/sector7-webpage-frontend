@@ -1,4 +1,4 @@
-import {  Component, ElementRef, ViewChild, inject, signal } from '@angular/core';
+import {  Component, ElementRef, HostListener, ViewChild, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { IProduct } from '../../../core/models/product';
@@ -19,6 +19,7 @@ import { ICategory } from 'app/core/models/ICategory';
 import { IFiltersForSearch } from 'app/core/models/filters/IFiltersForSearch';
 import { InputDangerTextComponent } from "../../../shared/components/inputs/input-danger-text/input-danger-text.component";
 import { DropdownModule } from 'primeng/dropdown';
+import { CustomSelectComponent } from "../../../shared/components/inputs/custom-select/custom-select.component";
 
 @Component({
   selector: 'app-search',
@@ -32,11 +33,10 @@ import { DropdownModule } from 'primeng/dropdown';
     FormsModule,
     NgClass,
     RouterLink, BreadcrumbComponent,
-    InfiniteScrollModule, SpinnerS7Component, SpinnerS7SmallComponent, 
+    InfiniteScrollModule, SpinnerS7Component, SpinnerS7SmallComponent,
     InputDangerTextComponent,
     ReactiveFormsModule,
-    DropdownModule
-  ]
+    DropdownModule, CustomSelectComponent]
 })
 
 
@@ -45,10 +45,12 @@ import { DropdownModule } from 'primeng/dropdown';
 export class SearchComponent {
 
 
-  @ViewChild('searchInput') searchInput!: ElementRef;
 
+  @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('product_features_filters_content') product_features_filters_content!: ElementRef;
+  
   private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
-  private _router: Router = inject(Router);
+  // private _router: Router = inject(Router);
   private _productService = inject(ProductService);
   private _adminService = inject(AdminService);
   
@@ -60,13 +62,9 @@ export class SearchComponent {
   loading: boolean = false;
 
 
-  formGroup!: FormGroup;
   private fb : FormBuilder = inject(FormBuilder);
-  waysToOrder = [
-    { name: "Mas relevante" },
-    { name: "Menor precio" },
-    { name: "Mayor precio" },
-  ];
+  waysToOrder = [  "Mas relevante", "Menor precio", "Mayor precio"  ];
+
 
     // for filters
     brands: string[] = [];
@@ -95,23 +93,14 @@ export class SearchComponent {
         direction : null
       }
     }
+  
+    showFiltersInMobile: boolean = false;
 
 
 
   // TODO: Mejorar esta logica
   ngOnInit(): void {
-    this.formGroup = this.fb.group({
-      order_by: [''] 
-    })
-
-          // Escucha cambios en el select de ordenación
-  this.formGroup.get('order_by')?.valueChanges.subscribe(value => {
-    const valueString = JSON.stringify(value);
-    this.applyOrderFilter(valueString);
-  });
-
-
-
+ 
     this._activatedRoute.params.subscribe(params => {
       if (params['textToSearch']){
         this.products = [];
@@ -144,6 +133,10 @@ export class SearchComponent {
 
     this.loading = true;
 
+    // if(this.showFiltersInMobile){ 
+    //   this.showFiltersInMobile = false;
+    // }
+
     this.filters.brand = this.brandSelected();
     this.filters.price.since = this.sincePrice();
     this.filters.price.until = this.untilPrice();
@@ -151,10 +144,6 @@ export class SearchComponent {
     this.filters.text = this.textToSearch();
     this.filters.order = { name: this.order, direction: this.direction}; 
 
-    console.log(this.order);
-    console.log(this.direction);
-
-    console.log(this.filters);
     this._productService
     .getAllProducts2(this.page, this.filters)
     .subscribe((productResponse) => {
@@ -167,7 +156,12 @@ export class SearchComponent {
     
   }
    
-  
+  // if window is small, close the filters 
+  @HostListener('window:resize', ['$event']) onResize(event: Event) {
+    if(window.innerWidth < 768 ){
+      this.showFiltersInMobile = false;
+    } ;
+  }
 
 
   // Métodos para manejar los cambios en los filtros
@@ -178,6 +172,9 @@ export class SearchComponent {
     this.page = 1; // Reiniciar la paginación al aplicar un nuevo filtro
     this.products = []; // Reiniciar productos al aplicar un nuevo filtro
     this.updateProductsInfo();
+    if(this.showFiltersInMobile){
+      this.showFiltersInMobile = false;
+    }
   }
 
   onScroll() {
@@ -245,10 +242,7 @@ export class SearchComponent {
 
 
   applyOrderFilter(value: string): void {
-    console.log(value);
-    console.log("---------------Boolean -------------------");
-    console.log(value.includes('Menor precio'));
-
+   
     if (value.includes('Menor precio')) {
       // this.filters.order = { name: 'price', direction: 'asc' };
       this.order = 'price'
@@ -268,7 +262,9 @@ export class SearchComponent {
     this.updateProductsInfo();
   }
 
-
+  toggleFiltersInMobile() {
+    this.product_features_filters_content.nativeElement.classList.toggle('showFiltersAside');
+  }
 
 }
 

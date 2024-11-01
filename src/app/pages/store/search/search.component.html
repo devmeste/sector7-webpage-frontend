@@ -1,25 +1,31 @@
 <main class="search_main_container">
 
     <div class="search_title_container">
-        <div style="display: flex; justify-content: space-between; align-items: center ;">
-            <h2>Resultados de la busqueda</h2>
-            <form [formGroup]="formGroup" class="order_by_form">
-                <p-dropdown 
-                    formControlName="order_by" 
-                    [options]="waysToOrder"
-                    optionLabel="name"
-                    placeholder="Ordenar por" />
-            </form>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center" >
+            <h2 class="text-left w-100">Resultados de la busqueda</h2>
+
+            <div class="d-flex justify-content-between select-and-filter-button-container">
+                <button class=" me-2 rounded px-2 d-md-none" (click)="showFiltersInMobile = !showFiltersInMobile">Filtrar</button>
+                <div class="custom-select-container" style="width: 150px;">
+                    <app-custom-select [items]="waysToOrder" (selectedOption)="applyOrderFilter($event)"  ></app-custom-select>
+                </div>
+            </div>
         </div>
 
-        <div class="title_divider"></div>
+        <div class="title_divider mt-3 mt-lg-0"></div>
     </div>
-    <aside class="product_features_filters_container">
-        <div class="product_features_filters_content">
-            <div class="clear_filters_button_container">
+    
+    <div [class.showFiltersAside]="showFiltersInMobile" class="overlay" (click)="showFiltersInMobile = false"></div>
+    <aside class="product_features_filters_container" [class.showFiltersAside]="showFiltersInMobile"  >
+        <div class="product_features_filters_content position-relative ">
+            <button type="button" class="close_filters_button d-md-none position-absolute  bg-transparent" (click)="showFiltersInMobile = false">
+                <mat-icon style="font-size: 1.3rem;">close</mat-icon>
+            </button>
+            <div class="clear_filters_button_container d-flex justify-content-start justify-content-md-end mb-3 mb-lg-0 mt-4 mt-lg-1">
                 <button class="clear_filters_button" (click)="clearFilters()" title="Limpiar filtros"> Limpiar filtros </button>
             </div>
             <div class="each_feature_container">
+                
                 <h4 class="feature_title">Precio</h4>
                 <div class="input_price_container">
                     <div class="since_and_until_price_inputs_container">
@@ -40,7 +46,6 @@
                         [ngClass]="brand == this.brandSelected() ? 'active' : ''"
                         >{{brand}}</small>
                 }
-                
             </div>
 
             <div class="each_feature_container">

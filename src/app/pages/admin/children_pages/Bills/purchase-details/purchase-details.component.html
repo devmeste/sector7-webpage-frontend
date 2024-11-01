@@ -4,22 +4,22 @@
     <div class="admin_panel_table_main_container" >
         <h1>Detalles de la compra</h1> 
 
-        <table>
+        <table class="w-100">
             <thead>
                 <tr>
-                    <td>
+                    <td class="col-4" >
                         Comprador
                     </td>
-                    <td>
+                    <td class="col-2" >
                         Total de la venta
                     </td>
-                    <td>
+                    <td class="col-2" >
                         Envío
                     </td>
-                    <td>
-                        Nro de Orden / Codigo de Envio
+                    <td class="col-2" >
+                        Nro de Orden 
                     </td>
-                    <td>
+                    <td class="col-2" >
                         Estado del Envío
                     </td>
                 </tr>
@@ -27,8 +27,8 @@
             <tbody>
                
                 <tr>
-                    <td>
-                        <span> {{ this.purchase.fullname }}</span>
+                    <td class="truncate">
+                        <span > {{ this.purchase.fullname }}</span>
                     </td>
                     <td>
                         <span> {{ this.purchase.totalAmount | customCurrency }}</span>
@@ -40,34 +40,48 @@
                         @if(this.purchase.merchantOrder){
                             {{this.purchase.merchantOrder}}}@else{<span>"No tiene"</span>}
                     </td>
-                    <td>
-                        @if(this.purchase.paymentStatus){ {{this.purchase.paymentStatus}}}@else{<span>"No
-                            tiene"</span>}
+                    <td class="d-flex align-items-center align-self-center ">
+                        <select name="" id="">
+                            @if(this.purchase.paymentStatus){
+                                <option value="this.purchase.paymentStatus">{{this.purchase.paymentStatus}}</option>
+                            }@else {
+                                <option value="">No tiene</option>    
+                            }
+                            <option value="">Pendiente</option>
+                            <option value="">Completado</option>
+                        </select>
+                        <div >
+                            <button class="update_shipment_button d-flex justify-content-center align-items-center"> <mat-icon>send</mat-icon> </button>
+                        </div>
+                        <!-- @if(this.purchase.paymentStatus){ {{this.purchase.paymentStatus}}}
+                        @else{<span>"No tiene"</span>} -->
                     </td>
                 </tr>
                 
             </tbody>
         </table>
 
-        <pre>{{this.purchase.shipment | json}}</pre>
+        
+
+        <!-- <pre>{{this.purchase.shipment | json}}</pre> -->
 
         <h2 class="products_title">Productos comprados:</h2>
         <table>
             <thead>
                 <tr>
-                    <td>
+                    <td class="col-2 ">
                         Marca
                     </td>
-                    <td>
+                    <td class="col-2 ">
                         Modelo
                     </td>
-                    <td>
+                    <td class="col-2 ">
                         precio unitario
                     </td>
-                    <td>
+                    <td class="col-1 ">
                         cantidad
                     </td>
-                    <td>
+                    <td class="col-1 ">
                         subtotal
                     </td>
                 </tr>
@@ -100,8 +114,25 @@
             </tbody>
         </table>
 
+        <!-- <table class="table w-100">
+            <thead>
+                <tr>
+                    <td class="col-4">Marca</td>
+                    <td class="col-1">Modelo</td>
+                    <td class="col-1">Precio Unitario</td>
+                    <td class="col-1">Cantidad</td>
+                    <td class="col-2">Subtotal</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table> -->
 
-
+        @if(true){
+            <div class="button_container d-flex justify-content-end mt-4">
+                <button type="button" class="primary_button" (click)="finalizePurchase()">Finalizar compra</button>
+            </div>
+        }
 
     </div>
 

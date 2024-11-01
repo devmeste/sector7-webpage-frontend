@@ -18,11 +18,11 @@
     <!-- dashboard content  -->
     <section class="dashboard_content">
 
-      <div class="side_panel_menu_container_desktop">
+      <div class="side_panel_menu_container_desktop col-md-3 mx-3 mx-lg-4  col-lg-2">
         <app-admin-side-panel></app-admin-side-panel>
       </div>
 
-      <section class="admin_dashboard_content">
+      <section class="admin_dashboard_content ">
         <div class="metrics_container">
           @for( metric of metrics ; track $index){
             <app-top-metric class="top_metric_outside_class" [text]="metric.text" [value]="metric.value" [icon]="metric.icon" [color]="metric.color" [currency]="metric.currency"></app-top-metric>
