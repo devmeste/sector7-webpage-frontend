@@ -4,7 +4,7 @@
 
     @if (purchase$) {
 
-        <div class="container">
+        <div class="purchase_user_datail_container w-100">
             <!-- Productos -->
             <!-- Detalles de la compra --> 
             <div class="card mt-4 text-white ">
@@ -73,22 +73,34 @@
         <div class="divider-secondary mb-3"></div>
 
         @for(product of purchase$.products ; track $index ){
-        <div class="product-card mb-3 border-info text-white  ">
-            <div class="card-body d-flex">
-                <picture class="img-container  mx-lg-5">
+        <div class="product-card mb-3  text-white me-lg-5  ">
+            <div class="card-body d-flex ">
+                <picture class="img-container mx-3 me-lg-5 ">
                     <img src="{{product.photoUrl}}" alt="product image">
                 </picture>
-                <div class="row d-flex w-75">
-                    <p class="w-75 ">Marca: {{ product.brand }}</p>
-                    <p class="w-25 text-lg-end ">Cantidad: {{ product.quantity }}</p>
-                    <p class="w-75 ">Modelo: {{ product.model }}</p>
-                    <p class="w-25 text-lg-end ">Precio: {{ product.price | customCurrency }}</p>
-                    <p class="aulixiar w-50"></p>
-                    <p class="w-50 align-self-end text-lg-end ">Subtotal: {{ product.subtotal | customCurrency }}</p>
+                <div class="row d-flex w-100">
+                    <div class="col-12 col-sm-6 ">
+                        <p>Marca: {{ product.brand }}</p>
+                        <p>Modelo: {{ product.model }}</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <p class="text-sm-end">Cantidad: {{ product.quantity }}</p>
+                        <p class="text-sm-end">Precio: {{ product.price | customCurrency }}</p>
+                    </div>
+                    <div class="col-12 ">
+                        <p class="align-self-end text-sm-end">Subtotal: {{ product.subtotal | customCurrency }}</p>
+                    </div>
                 </div>
             </div>
         </div>
         }
+
+        <div class="me-5 border border-primary rounded ">
+            <h2 class="d-flex justify-content-between my-2 ">
+                <span class="ps-3">Total: </span>
+                <span class="pe-3" >{{ purchase$.totalAmount | customCurrency }}</span>
+            </h2>
+        </div>
     }
     </div>
     

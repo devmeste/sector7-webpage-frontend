@@ -118,6 +118,8 @@ $gray_85:#d9d9d9;
 
 
 
+
+
 $warning-50: #fdf5e8;
 $warning-100: #f8deb8;
 $warning-200: #f4cf96;
@@ -220,12 +222,21 @@ $info-900: #104165;
 
 $shadow_1_3 : 1px 3px 10px 4px rgba($primary_main, 0.50);
 
+// borders
+
+.border-primary{
+  border: 1px solid $primary-main !important;
+}
+
+
+
 .text-danger {
   color: $danger-400;
 }
 .text-primary{
   color: $primary_main !important;
 }
+
 
 h1 {
   font: $mobile-h1;
