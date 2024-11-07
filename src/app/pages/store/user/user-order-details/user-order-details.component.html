@@ -1,0 +1,95 @@
+<section class="user_order_details_container ">
+    <div class="card-container  color-white"> <!-- bg_gray_15 -->
+        <!-- <pre>{{ purchase$ | json }}</pre> -->
+
+    @if (purchase$) {
+
+        <div class="container">
+            <!-- Productos -->
+            <!-- Detalles de la compra --> 
+            <div class="card mt-4 text-white ">
+                <div class="card-body">
+                    <h2 class="card-title ">Detalles de la Compra</h2>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <p class=" mt-2 d-inline col-lg-6 "><span class="fw-bold">Total:</span> {{ purchase$.totalAmount | customCurrency }}
+                        </p>
+                        <p class="mt-lg-2 d-inline col-lg-6 "><span class="fw-bold ">Fecha de compra:</span> {{ purchase$.purchaseDate }}</p>
+                        <p class="d-inline col-lg-6 "><span class="fw-bold ">Método de pago:</span> {{ purchase$.paymentMethod }}</p>
+                        <p class="d-inline col-lg-6 "><span class="fw-bold ">Estado:</span> {{ purchase$.paymentStatus }}</p>
+                    </div>
+
+                    <!-- Información de envío o retiro -->
+                    @if(purchase$.shipment){
+
+                    <div class="row">
+                        <h3 class="fw-bold text-gradient-1 mt-4 mb-2">Envío</h3>
+                        <p class="col-lg-6">Identificador del envío: <span class="fw-bold"> {{ purchase$.shipment.trackId}}</span>
+                        </p>
+                        <p class="col-lg-6">Envío a cargo de: <span class="fw-bold"> {{ purchase$.shipment.expeditor }}</span>
+                        </p>
+                        <p class=" mb-0">Estado del envío: <span class="fw-bold"> {{ purchase$.shipment.status }}</span>
+                        </p>
+                    </div>
+                    }
+                    @else{
+                    <div class="mt-3">
+                        <p class="text-info">Retiro en el local</p>
+                    </div>
+
+                    }
+                </div>
+            </div>
+
+            <!-- Dirección de envío -->
+            @if(purchase$.shipment && purchase$.shipment.address){
+            <div class="card  border-success text-white">
+                <div class="card-body ">
+                    <h3 class="fw-bold text-gradient-1  mt-4 mb-2">Dirección de Envío</h3>
+                    <div class="d-flex flex-wrap">
+                        <p class=" me-2">Provincia:  <span class="me-3 fw-bold"> {{ purchase$.shipment.address.province}}</span></p> 
+                           
+                        <p class="me-2">Ciudad: <span class="me-3 fw-bold"> {{ purchase$.shipment.address.city }}</span></p>
+                            
+                        <p class="me-2">Código postal: <span class="me-3 fw-bold"> {{ purchase$.shipment.address.zipCode}}</span></p>
+                            
+                        <p class="me-2">Calle: <span class="me-3 fw-bold"> {{ purchase$.shipment.address.streetName}}</span></p> 
+                        
+                        <p class="me-2">Nº: <span class="me-3 fw-bold"> {{ purchase$.shipment.address.streetNumber}}</span></p> 
+                            
+                        @if(purchase$.shipment.address.floor){
+                            <span class="">Piso: </span> <span class="fw-bold">{{ purchase$.shipment.address.floor }}</span> 
+                        }
+                        @if(purchase$.shipment.address.door){
+                            <span class="fw-bold">Puerta:</span> {{ purchase$.shipment.address.door }}
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <h2 class="fw-bold text-gradient-1 mt-lg-4 mb-2">Tus productos</h2>
+        <div class="divider-secondary mb-3"></div>
+
+        @for(product of purchase$.products ; track $index ){
+        <div class="product-card mb-3 border-info text-white  ">
+            <div class="card-body d-flex">
+                <picture class="img-container  mx-lg-5">
+                    <img src="{{product.photoUrl}}" alt="product image">
+                </picture>
+                <div class="row d-flex w-75">
+                    <p class="w-75 ">Marca: {{ product.brand }}</p>
+                    <p class="w-25 text-lg-end ">Cantidad: {{ product.quantity }}</p>
+                    <p class="w-75 ">Modelo: {{ product.model }}</p>
+                    <p class="w-25 text-lg-end ">Precio: {{ product.price | customCurrency }}</p>
+                    <p class="aulixiar w-50"></p>
+                    <p class="w-50 align-self-end text-lg-end ">Subtotal: {{ product.subtotal | customCurrency }}</p>
+                </div>
+            </div>
+        </div>
+        }
+    }
+    </div>
+    
+</section>

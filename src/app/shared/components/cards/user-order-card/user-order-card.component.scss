@@ -1,0 +1,14 @@
+@import 'styles.scss';
+
+.user_order_card_container{
+    background-color: $gray_10;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    // padding-left: 2rem;
+}
+
+.primary-font{
+    font-family: 'Klavika' , sans-serif;
+    font-size: 18px;
+}

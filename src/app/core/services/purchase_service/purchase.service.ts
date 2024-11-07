@@ -5,11 +5,13 @@ import { MercadoPagoJS } from 'assets/js/MercadoPagoJS.js';
 import { CartService } from '../cart_service/cart-service.service';
 import { map, Observable, of, switchMap, tap } from 'rxjs';
 import { environment } from 'app/core/environments/environment';
+import { IPurchase } from 'app/core/models/IPurchase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PurchaseService {
+
 
   shipment: IMakePurchase | null = null;
   mercadoPago !: MercadoPagoJS;
@@ -34,6 +36,14 @@ export class PurchaseService {
     this.shipment = shipment;
   }
 
+  getAllPurchasesByUser() : Observable<IPurchase[]> {
+    return this._httpClient.get<IPurchase[]>(this.baseUrl + "purchase/user");
+  }
+
+  getPurchaseById( id : string) : Observable <IPurchase> {
+    return this._httpClient.get<IPurchase>(this.baseUrl +`purchase/${id}`);
+  }
+
 
 
   makePurchaseInService( address : Address | null , paymentMethodNumber : number , products : Product_QuantityRequested): Observable<any> {
@@ -41,6 +51,8 @@ export class PurchaseService {
         // 1 . mercado pago 
         // 2 . en el local
         let localPickUp = address === null ? true : false; 
+
+        console.log("paymentMethodNumber: " + paymentMethodNumber);
 
         let jsonResponse = {
           "products": products,
@@ -61,6 +73,9 @@ export class PurchaseService {
         return this._httpClient.post(this.baseUrl + "purchase/make", body,  { headers, responseType: 'text' });
       
   }
+
+
+
 
   // return this._CartService.getAllProducts().pipe(
   //   map(products => {

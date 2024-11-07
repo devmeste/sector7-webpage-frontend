@@ -84,6 +84,8 @@ body {
   font-size: 100%;
 }
 
+
+
 // fonts and color variables 
 $gradient-orange-yellow-1: linear-gradient(78deg, #ff4d00 9.86%, #ff9900 100%);
 $filter_background_for_products: drop-shadow(0 4px 8px #ff4d00f0);
@@ -100,6 +102,21 @@ $gray_70: #b3b3b3;
 $gray_75: #bfbfbf;
 $gray_80: #cccccc;
 $gray_85:#d9d9d9;
+
+.bg_gray_5 {background-color: $gray_5};
+.bg_gray_10{background-color: $gray_10};
+.bg_gray_15{background-color: $gray_15};
+.bg_gray_20{background-color: $gray_20};
+.bg_gray_30{background-color: $gray_30};
+.bg_gray_55{background-color: $gray_55};
+.bg_gray_60{background-color: $gray_60};
+.bg_gray_65{background-color: $gray_65};
+.bg_gray_70{background-color: $gray_70};
+.bg_gray_75{background-color: $gray_75};
+.bg_gray_80{background-color: $gray_80};
+.bg_gray_85{background-color: $gray_85};
+
+
 
 $warning-50: #fdf5e8;
 $warning-100: #f8deb8;
@@ -206,7 +223,9 @@ $shadow_1_3 : 1px 3px 10px 4px rgba($primary_main, 0.50);
 .text-danger {
   color: $danger-400;
 }
-
+.text-primary{
+  color: $primary_main !important;
+}
 
 h1 {
   font: $mobile-h1;
@@ -449,7 +468,9 @@ $height_helper : $height_for_toolbar_no_fixed;
   background: linear-gradient(120deg , $primary-main 0%, rgb(255, 187, 0) 140%);
 }
 
-
+.text-gradient-1{
+  @include gradient-text;
+}
 
 // divider
 

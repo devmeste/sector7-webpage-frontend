@@ -1,7 +1,7 @@
 <main class="purchase-details-main-container" style="color: white;">
     @if(this.purchase){
     
-    <div class="admin_panel_table_main_container" >
+    <section class="admin_panel_table_main_container" >
         <h1>Detalles de la compra</h1> 
 
         <table class="w-100">
@@ -134,12 +134,12 @@
             </div>
         }
 
-    </div>
+    </section>
 
     }@else {
-    <div>
+    <section>
         <app-input-danger-text text="Producto no encontrado"></app-input-danger-text>
-    </div>
+    </section>
     }
 
 </main>

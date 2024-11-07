@@ -13,7 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from "../../../../shared/components/footer/footer.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { of, switchMap } from 'rxjs';
-import { AnErrorHasOcurredComponent } from "../../../../shared/components/an-error-has-ocurred/an-error-has-ocurred.component";
+import { AnErrorHasOcurredComponent } from '@shared/components/messages/an-error-has-ocurred/an-error-has-ocurred.component';
 
 @Component({
   selector: 'app-confirm-purchase',
@@ -129,10 +129,11 @@ export class ConfirmPurchaseComponent {
     }else if (paymentMethod === 'in_local'){
       paymentMethodNumber = 2;
     }else{
-
       throw new Error('Mandar al ups en el confirm purchase');
-
     }
+
+    console.log("paymentMethod: " + paymentMethod);
+    console.log("paymentMethodNumber: " + paymentMethodNumber);
 
    // Usamos pipe y switchMap para encadenar los observables
   this._cartService.getAllProducts().pipe(
@@ -149,20 +150,28 @@ export class ConfirmPurchaseComponent {
     })
   ).subscribe({
     next: (response) => {
-      if(response) {
         this._cartService.getAllProducts().subscribe();
-        this.createMpButton(response);
 
-      }else{
-        this._cartService.getAllProducts().subscribe();
-        this._router.navigate(['purchase-success'])
-      }
+        if(this.paymentMethod === 'mercado_pago'){
+          this.createMpButton(response);
+        }
+        else{
+          this._router.navigate(['purchase-success'], {
+            state: { message: response } 
+          });
+        }
+
     },
     error: (error) => {
-      
+      this.showErrorPopUp = true;
+    
+      console.log({error});
+
+      console.log(error.error);
+      console.log(error.error.message);
     }
   });
- 
+  
 
    
   }

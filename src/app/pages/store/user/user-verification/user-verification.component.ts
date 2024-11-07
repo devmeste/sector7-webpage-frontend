@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AnErrorHasOcurredComponent } from '@shared/components/messages/an-error-has-ocurred/an-error-has-ocurred.component';
 import { AuthService } from 'app/core/services/auth_service/auth.service';
-import { AnErrorHasOcurredComponent } from "../../../../shared/components/an-error-has-ocurred/an-error-has-ocurred.component";
 
 @Component({
   selector: 'app-user-verification',

@@ -1,0 +1,25 @@
+<div class="user_order_card_container d-flex justify-content-between px-4 py-4 ">
+        <div>
+                <div>
+                        <p><span class="primary-font">Orden:</span> {{purchase.id}}</p>
+                        <!-- <p>Estado: <span class="fw-bold">{{purchase.paymentStatus}}</span></p> -->
+                        @if (purchase.shipment) {
+                                <p>Envío mediante: {{purchase.shipment.expeditor}}</p>
+                        }@else {
+                                <p>Retiro en el local</p>
+                        }
+                </div>
+
+                <p>Subtotal: {{purchase.totalAmount| customCurrency}}</p>
+        </div>
+        <div>
+              <div class="d-flex flex-column justify-content-between">
+                        <p class="mb-2">Fecha: {{purchase.purchaseDate}}</p>
+
+                        <button class="primary_button mb-2 w-100" (click)="navigateToOrder()">Ver detalles</button>
+                        @if(!purchase.isConfirmed){
+                                <button class="tertiary_button" (click)="changePaymentMethod()">Cambiar Metodo de pago</button>
+                        }
+                </div>
+        </div>
+</div>

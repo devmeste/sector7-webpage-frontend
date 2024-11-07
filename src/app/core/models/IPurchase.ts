@@ -12,7 +12,10 @@ export interface IPurchase {
     shipment:      IShipment | null;
     merchantOrder: string | null;
     paymentStatus: string | null;
+    paymentMethod: string ;
     purchaseDate: Date;
+    isConfirmed: boolean;
+    
 }
 
 export interface IShipment {

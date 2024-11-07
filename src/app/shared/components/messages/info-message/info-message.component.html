@@ -1,0 +1,11 @@
+<div class="card mb-3  w-75 mx-auto" >
+    <div class="card-body py-3 d-flex flex-column justify-content-center align-items-center">
+        @if (title) {
+            <h4 class="card-title text-primary">{{ title }} </h4>
+        }
+        <p class="card-text">{{ text }}</p>
+        @if (link) {
+            <a class="card-link text-info" [routerLink]="[link]">{{ linkText }}</a>
+        }
+    </div>
+</div>

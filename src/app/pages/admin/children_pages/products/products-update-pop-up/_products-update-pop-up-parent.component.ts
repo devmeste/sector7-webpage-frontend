@@ -59,6 +59,7 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
     if (this.product_id) {
       this._adminService.getProductById(this.product_id).subscribe(p => {
         this.product$ = p;
+        console.log(p);
         this.form = this.formBuilder.group({
           id: [this.product$.id, [Validators.required]],
           categoryId: [this.product$.categoryId, [Validators.required]],
@@ -95,6 +96,7 @@ export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopU
             this.getMemoryTypes();
           }
         })
+
       });
     }
   }

@@ -70,6 +70,10 @@ export const STORE_ROUTES: Routes = [
                 loadComponent: () => import("./user/user-orders/user-orders.component").then(c => c.UserOrdersComponent)
             },
             {
+                path: 'orders/:id',
+                loadComponent: () => import("./user/user-order-details/user-order-details.component").then(c => c.UserOrderDetailsComponent)    
+            },
+            {
                 path: 'change-password',
                 loadComponent: () => import("./user/user-password/user-password.component").then(c => c.UserPasswordComponent)
             },
@@ -82,7 +86,7 @@ export const STORE_ROUTES: Routes = [
     {
         path: 'error',
         loadComponent: () =>
-            import("../../shared/components/an-error-has-ocurred/an-error-has-ocurred.component").then(c => c.AnErrorHasOcurredComponent)   
+            import("../../shared/components/messages/an-error-has-ocurred/an-error-has-ocurred.component").then(c => c.AnErrorHasOcurredComponent)   
     },
     {
         path: 'search',

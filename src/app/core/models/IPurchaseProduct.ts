@@ -4,4 +4,5 @@ export interface IPurchaseProduct {
     price:    number;
     quantity: number;
     subtotal: number;
+    photoUrl:string;
 }

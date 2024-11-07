@@ -34,6 +34,7 @@
     color: white;
   }
 
+  // aca 
   .form-control {
     width: 100%;
     padding: 10px;
@@ -156,20 +157,8 @@
     margin-bottom: 1.5rem;
   }
 
-  .is_component_checkbox,
-  .is_component_checkbox_label,
-  .checkbox_label,
-  .checkbox {
-    display: inline;
-  }
+  
 
-
-  .is_component_checkbox,
-  .checkbox {
-    width: 20px;
-    height: 20px;
-    margin: 0 0 0 2rem;
-  }
 
   .primary_button {
     margin-top: 2rem;
@@ -314,4 +303,67 @@
 
   }
 
+}
+
+
+
+.is_component_checkbox,
+  .is_component_checkbox_label,
+  .checkbox_label,
+  .checkbox {
+    display: inline;
+  }
+
+
+  .is_component_checkbox,
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    // margin: 0 0 0 2rem;
+  }
+
+  .checkbox {
+    appearance: none; /* Oculta el estilo predeterminado del checkbox */
+    width: 20px;
+    height: 20px;
+    background-color: white; 
+    cursor: pointer;
+    position: relative;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  .checkbox:checked {
+    border-color: $primary-main; 
+    background-color: $primary-main; 
+  }
+
+  .checkbox:checked::after {
+    content: '✔'; /* Ícono de check */
+    color: white; /* Color del check */
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  // border: 1px solid white;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #404040 inset;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: white;
 }

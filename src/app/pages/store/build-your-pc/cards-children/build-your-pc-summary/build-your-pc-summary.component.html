@@ -22,11 +22,11 @@
     <div class="checks_container">
         <p>Servicios adicionales: </p>
         <div class="custom-checkbox">
-            <input  id="assembled" type="checkbox" [(ngModel)]="assembled" (change)="addCost('assembled', this.assembled)">
+            <input  id="assembled" type="checkbox" class="checkbox" [(ngModel)]="assembled" (change)="addCost('assembled', this.assembled)">
             <label for="assembled" >Ensamblado ({{assembledPrice  | customCurrency}}) </label>
         </div>
         <div class="custom-checkbox">
-            <input  id="installed" type="checkbox" [(ngModel)]="installed" (change)="addCost('installed', this.installed)">
+            <input  id="installed" type="checkbox" class="checkbox" [(ngModel)]="installed" (change)="addCost('installed', this.installed)">
             <label for="installed"  >Instalación ({{installedPrice | customCurrency}})</label>
         </div>
       </div>

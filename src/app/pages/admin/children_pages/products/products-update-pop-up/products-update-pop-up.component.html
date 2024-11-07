@@ -23,7 +23,7 @@
                         <!-- Descipcion -->
                         <div class="custom-input">
                             <label class="form-label">Descripción: </label>
-                            <textarea name="description" formControlName="description" required class="form-control"
+                            <textarea rows="5" name="description" formControlName="description" required class="form-control"
                                 [ngClass]="{ 'is-invalid': hasErrors(this.form,'title', 'required') }">
                             </textarea>
                             @if( hasErrors(this.form,'title', 'required') ){ <app-input-danger-text
@@ -95,13 +95,13 @@
                             <!-- Habilitado -->
                             <div class="custom-input row input_checkbox_container">
                                 <label class="form-label checkbox_label ">Visible: </label>
-                                <input type="checkbox" formControlName="isEnabled" class="form-control checkbox">
+                                <input type="checkbox" formControlName="isEnabled" class=" checkbox">
                             </div>
 
                             <!-- Aprovado -->
                             <div class="custom-input row input_checkbox_container">
                                 <label class="form-label checkbox_label ">Aprobado: </label>
-                                <input type="checkbox" formControlName="isApproved" class="form-control checkbox">
+                                <input type="checkbox" formControlName="isApproved" class="checkbox">
                             </div>
 
                         </div>

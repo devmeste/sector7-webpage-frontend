@@ -1,0 +1,49 @@
+@import 'styles.scss';
+
+.user_order_container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card-container{
+    background-image: linear-gradient(to left bottom, rgb(0, 0, 0) 0%, rgb(41, 41, 41) 100%);
+}
+.card{
+    background-color: transparent;
+}
+.card-container {
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.card-title{
+    @include gradient-text;
+    width: 100%;
+}
+
+.product-card{
+
+}
+
+.divider{
+    height: 2px;
+    @include gradient_orange_yellow_top_L_to_botom_R;
+}
+
+.divider-secondary {
+    height: 2px;
+    background-color: $gray_30;
+    background-image: linear-gradient(to right , $gray_30 20% , transparent 50% );
+}
+
+.img-container{
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

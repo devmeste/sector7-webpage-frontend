@@ -13,7 +13,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from "../../../../shared/components/footer/footer.component";
-import { AnErrorHasOcurredComponent } from "../../../../shared/components/an-error-has-ocurred/an-error-has-ocurred.component";
+import { AnErrorHasOcurredComponent } from '@shared/components/messages/an-error-has-ocurred/an-error-has-ocurred.component';
 
 @Component({
   selector: 'app-payment-method',
