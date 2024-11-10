@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import BKProduct from 'app/core/models/BKProduct';
 import { AdminService } from 'app/core/services/admin_service/admin.service';
 import { InputDangerTextComponent } from "../../../../../shared/components/inputs/input-danger-text/input-danger-text.component";
-import { NgClass, NgFor } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { MatIcon } from '@angular/material/icon';
 import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.pop.up';
@@ -14,7 +14,15 @@ import { SpinnerS7Component } from '@shared/components/spinners/spinner-s7/spinn
 @Component({
   standalone: true,
   template: '',
-  imports: [InputDangerTextComponent, NgClass, MessagePopUpComponent, ReactiveFormsModule, NgFor, MatIcon, ImageUploaderComponent, SpinnerS7Component]
+  imports: [
+    InputDangerTextComponent, 
+    NgClass, 
+    MessagePopUpComponent, 
+    ReactiveFormsModule, 
+    CommonModule, 
+    MatIcon, 
+    ImageUploaderComponent, 
+    SpinnerS7Component]
 })
 export abstract class _ProductsUpdatePopUpParentComponent extends CustomFormPopUp {
 

@@ -22,4 +22,10 @@
                         }
                 </div>
         </div>
+
+
 </div>
+
+@if(this.showChangePaymentMethodPopUp()){
+        <app-change-payment-method-pop-up [id]="purchase.id" (close)="this.showChangePaymentMethodPopUp.set(false)" ></app-change-payment-method-pop-up>
+}

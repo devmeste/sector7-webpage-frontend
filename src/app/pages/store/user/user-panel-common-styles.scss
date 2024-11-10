@@ -1,0 +1,61 @@
+.user_account_children_main_container {
+    padding: 1rem 1rem 0;
+
+    @include laptop{
+        padding: 0 1rem;
+
+    }
+    .top_button_return{
+        @include laptop{
+            display: none;
+        }
+    }
+
+    .title {
+        margin: 0.5rem 1rem;
+        @include gradient-text;
+    }
+
+    .user_account_data_section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        margin: 1rem;
+        border: 2px solid $primary-main;
+        max-width: 800px;
+        
+
+
+        @include tablet {
+            margin: 1rem 3rem;
+        }
+
+        @include laptop {
+            padding: 2rem;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin: 1rem auto;
+            
+        }
+    }
+
+    .primary_button_container{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        // background-color: aqua;
+        width: 100%;
+        .primary_button {
+            align-self: self-end;
+            
+            @include tablet {
+                margin-right: 2rem;
+            }
+            @include laptop {
+                margin-right: 4rem;
+            }
+        }
+    }
+}

@@ -42,7 +42,7 @@
                                 <label for="streetNumber" class="form-label">
                                     Número<span class="required_symbol"> *</span>
                                 </label>
-                                <input type="number" formControlName="streetNumber" class="form-control"
+                                <input type="number" min="0" max="50000" formControlName="streetNumber" class="form-control"
                                     [ngClass]="{ 'is-invalid': hasErrors(this.form,'streetNumber', 'required') }">
                                 @if( hasErrors(this.form,'streetNumber', 'required') ){ <app-input-danger-text
                                     text="Campo requerido"></app-input-danger-text>
@@ -51,7 +51,7 @@
 
                             <div class="custom-input">
                                 <label for="floor" class="form-label">Piso</label>
-                                <input type="number" formControlName="floor" class="form-control">
+                                <input type="number" formControlName="floor" min="0" max="999" class="form-control">
                             </div>
 
                             <div class="custom-input">

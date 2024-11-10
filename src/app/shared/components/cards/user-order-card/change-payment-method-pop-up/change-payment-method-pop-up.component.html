@@ -1,0 +1,37 @@
+<div class="overlay">
+    @if(this.typesOfPaymentMethods){
+            <div class="modal_container update_pop_up modal_form">
+                <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+                <div class="modal_info">
+
+                    <!-- Form -->
+                    <section class="form_container">
+                        <form (ngSubmit)="send()" [formGroup]="this.form" class="form form_pop_up">
+                            <h2>Elige un metodo de pago</h2>
+                            <select formControlName="payment_method" class="custom-select" >
+                                @for( payment_method of typesOfPaymentMethods ; track $index) {
+                                    <option value="{{payment_method.value}}" > {{payment_method.name}} </option>
+                                }
+                            </select>
+
+                           
+
+                            <div class="button_container">
+                                <button type="submit" class="primary_button">Actualizar</button>
+                            </div>
+                        </form>
+                    </section>
+
+                </div>
+            </div>
+
+    }@else{
+        <div class="modal_container update_pop_up modal_form">
+            <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+            <div class="modal_info">
+                <p>No se encontraron metodos de pago</p>
+            </div>
+        </div>
+    }
+
+</div>

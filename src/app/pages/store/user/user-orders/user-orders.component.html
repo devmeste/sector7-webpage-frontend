@@ -1,10 +1,17 @@
+<main class="user_account_children_main_container">
 
-@if(this.purchases$ && this.purchases$.length > 0){
+    <app-top-button-return class="top_button_return" path="user-account"></app-top-button-return>
+
+    <h1 class="title">Pedidos</h1>
+
+    @if(this.purchases$ && this.purchases$.length > 0){
     @for (purchase of purchases$; track $index) {
         <div class="user_order_container w-100">
             <app-user-order-card [purchase]=purchase></app-user-order-card>
         </div>
     }
-}@else {
-    <app-info-message text="Parece que no hay pedidos en tu cuenta"></app-info-message>
-}
+    }@else {
+        <app-info-message text="Parece que no hay pedidos en tu cuenta"></app-info-message>
+    }
+
+</main>

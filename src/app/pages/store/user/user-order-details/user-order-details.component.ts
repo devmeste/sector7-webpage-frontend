@@ -5,13 +5,15 @@ import { IPurchase } from 'app/core/models/IPurchase';
 import { PurchaseService } from 'app/core/services/purchase_service/purchase.service';
 import { EMPTY, switchMap } from 'rxjs';
 import { CustomCurrencyPipe } from "../../../../core/pipes/custom_currency/custom-currency.pipe";
+import { TopButtonReturnComponent } from "../../../../shared/components/top-button-return/top-button-return.component";
 
 @Component({
   selector: 'app-user-order-details',
   standalone: true,
   imports: [
     JsonPipe,
-    CustomCurrencyPipe
+    CustomCurrencyPipe,
+    TopButtonReturnComponent
 ],
   templateUrl: './user-order-details.component.html',
   styleUrl: './user-order-details.component.scss',

@@ -1,8 +1,8 @@
 <main class="user_account_main_container">
 
-    <div class="user_account_dashboard_container" [ngClass]="{'isDashboardView': isDashboardView}">
+    <div class="user_account_dashboard_container "  [ngClass]="{'isDashboardView': isDashboardView}">
         
-        <!-- top section -->
+        <!-- Side Bar Left top section -->
         <section class="user_account_top_section">
             <picture class="image_container">
                 @if(user){
@@ -15,23 +15,23 @@
             </div>
         </section>
 
-        <!-- actions section -->
+        <!-- Side Bar Left Links section  -->
         <section class="user_account_actions_section">
             <ul>
-                <li>
-                    <a routerLink="profile" routerLinkActive="active" >Mi Perfil</a>
+                <li routerLink="profile" routerLinkActive="active">
+                    <a>Mi Perfil</a>
                 </li>
-                <li>
-                    <a routerLink="orders" routerLinkActive="active">Pedidos</a>
+                <li routerLink="orders" routerLinkActive="active">
+                    <a >Pedidos</a>
                 </li>
-                <li>
-                    <a routerLink="change-password" routerLinkActive="active">Cambiar contraseña</a>
+                <li routerLink="change-password" routerLinkActive="active">
+                    <a >Cambiar contraseña</a>
                 </li>
                 <!-- <li>
                     <a routerLink="favorites" routerLinkActive="active" >Favoritos(idea)</a>
                 </li> -->
-                <li>
-                    <a (click)="logout()">Salir</a>
+                <li (click)="logout()">
+                    <a >Salir</a>
                 </li>
             </ul>
         </section>
@@ -39,10 +39,11 @@
 
     @if(isDashboardView){
         <app-user-profile class="user_profile_just_high_screens"></app-user-profile>
+    }@else {
+        <div class="router_oulet">
+            <router-outlet ></router-outlet>
+        </div>
     }
 
-    <div class="router_oulet">
-        <router-outlet ></router-outlet>
-    </div>
 
 </main>

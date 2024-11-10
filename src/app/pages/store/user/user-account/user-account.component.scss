@@ -18,10 +18,11 @@
     .user_account_dashboard_container {
         display: none;
         flex-direction: column;
-
+        // background-color: aqua;
         @include laptop {
             display: flex;
-            flex: 1;
+            // flex: 1;
+            width:300px;
         }
     }
 
@@ -34,12 +35,13 @@
     }
 
     .router_oulet{
-        flex: 3;
+        flex: 1;
     }
 
     .user_profile_just_high_screens {
         display: none;
-
+        flex: 1;
+        width: 100%;
         @include laptop {
             display: block;
         }
@@ -89,8 +91,8 @@
 
             li {
                 padding: 1rem;
-                color: white;
-
+                color: white;   
+                cursor: pointer;
                 &:hover {
                     background-color: $primary-main;
                 }

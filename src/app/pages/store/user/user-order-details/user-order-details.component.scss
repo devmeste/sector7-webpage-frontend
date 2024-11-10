@@ -1,4 +1,5 @@
 @import 'styles.scss';
+@import '../user-panel-common-styles.scss';
 
 .user_order_container {
     display: flex;
@@ -7,7 +8,7 @@
 }
 
 .card-container{
-    background-image: linear-gradient(to left bottom, rgb(0, 0, 0) 0%, rgb(41, 41, 41) 100%);
+    background-image: linear-gradient(to left bottom, rgb(12, 12, 12) 0%, rgb(41, 41, 41) 100%);
 }
 .card{
     background-color: transparent;
