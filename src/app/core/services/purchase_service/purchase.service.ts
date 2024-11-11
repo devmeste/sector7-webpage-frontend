@@ -61,57 +61,20 @@ export class PurchaseService {
           "paymentMethod": paymentMethodNumber
         };
 
-        let body = JSON.stringify(jsonResponse);
-
-        const headers = new HttpHeaders({
-          "Accept": "application/json",
-          'Content-Type': 'application/json',
-        });
-
-        console.log("Se ejecuto el servicio de Purchase");
         
-        return this._httpClient.post(this.baseUrl + "purchase/make", body,  { headers, responseType: 'text' });
+        return this._httpClient.post(this.baseUrl + "purchase/make", jsonResponse,  { responseType: 'text' });
       
   }
 
 
+  changePaymentMethod(id: string, paymentMethod: number) {
+    let body = {
+      id,
+      paymentMethod
+    }
+    return this._httpClient.put(this.baseUrl + `purchase/change-payment-method`, body);
+  }
 
-
-  // return this._CartService.getAllProducts().pipe(
-  //   map(products => {
-  //     console.log("service: primer control");
-  //     console.log(products);
-
-  //     let jsonProducts: { [key: string]: number } = {};
-  //     products.forEach(element => {
-  //       jsonProducts[element.productId] = element.quantity;
-  //     });
-
-  //     let localPickUp = address === null;
-  //     let jsonResponse = {
-  //       "products": jsonProducts,
-  //       "address": address,
-  //       "localPickUp": localPickUp,
-  //       "paymentMethod": paymentMethodNumber
-  //     };
-
-  //     console.log(jsonResponse);
-  //     let body = JSON.stringify(jsonResponse);
-
-  //     const headers = new HttpHeaders({
-  //       "Accept": "application/json",
-  //       'Content-Type': 'application/json',
-  //     });
-
-  //     // Retorna la llamada HTTP como observable
-  //     return this._httpClient.post(this.baseUrl + "purchase/make", body, { headers, responseType: 'text' });
-  //   }),
-  //   switchMap(httpResponse => {
-  //     // Procesa la respuesta HTTP si es necesario
-  //     console.log(httpResponse);
-  //     return of(httpResponse);  // Retorna la respuesta envuelta en un observable
-  //   })
-  // );
   
 }
 
