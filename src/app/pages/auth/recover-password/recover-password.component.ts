@@ -5,7 +5,7 @@ import { InputDangerTextComponent } from '@shared/components/inputs/input-danger
 import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { CustomForm } from 'app/core/utils/custom-form/custom.form';
 import { MessagePopUpComponent } from "../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
-import { OneMessageResponse } from 'app/core/models/OneMessageResponse';
+import { StringMessageResponse } from 'app/core/models/StringMessageResponse';
 import { SpinnerS7Component } from "../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 
 @Component({
@@ -40,7 +40,7 @@ export class RecoverPasswordComponent  extends CustomForm{
       const username= this.form.get('user')?.value;
       const email = this.form.get('email')?.value;
       this._authService.recoverPassword(username,email).subscribe({
-        next: (response: OneMessageResponse) => {
+        next: (response: StringMessageResponse) => {
           this.isLoading = false;
 
           this.successMessage = response.message;

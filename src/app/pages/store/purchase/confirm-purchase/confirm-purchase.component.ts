@@ -12,7 +12,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from "../../../../shared/components/footer/footer.component";
 import { ReactiveFormsModule } from '@angular/forms';
-import { of, switchMap } from 'rxjs';
+import {  switchMap } from 'rxjs';
 import { AnErrorHasOcurredComponent } from '@shared/components/messages/an-error-has-ocurred/an-error-has-ocurred.component';
 
 @Component({
@@ -153,11 +153,11 @@ export class ConfirmPurchaseComponent {
         this._cartService.getAllProducts().subscribe();
 
         if(this.paymentMethod === 'mercado_pago'){
-          this.createMpButton(response);
+          this.createMpButton(response.message);
         }
         else{
           this._router.navigate(['purchase-success'], {
-            state: { message: response } 
+            state: { message: response.message } 
           });
         }
 
@@ -182,14 +182,12 @@ export class ConfirmPurchaseComponent {
     this.mercadoPago.createButton(mpCode).then((message) => {
       this.isLoadingRequest = false;
       this.showMPButton = true;
-      // this.form.disable();
     }).catch((e) => {
       this.showErrorPopUp = true;
       this.errorMessage = "Lo sentimos, ha ocurrido un error. Por favor, vuelva a intentarlo mas tarde o comuniquese con el servicio de atención al cliente.";
       this.isLoadingRequest = false;
       this.showMPButton = false;
       this.showPrimaryButtonFn();
-      // this.form.enable();
     });
   }
 

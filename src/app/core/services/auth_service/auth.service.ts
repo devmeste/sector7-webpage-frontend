@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { IUser, UserData } from 'app/core/models/IUser';
 import { environment } from 'app/core/environments/environment';
 import {IUserResponse} from '../../models/IUserResponse';
-import { OneMessageResponse } from 'app/core/models/OneMessageResponse';
+import { StringMessageResponse } from 'app/core/models/StringMessageResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -155,9 +155,9 @@ export class AuthService {
 
   }
 
-  recoverPassword(username: string, email: string) : Observable<OneMessageResponse> {
+  recoverPassword(username: string, email: string) : Observable<StringMessageResponse> {
     let body = { username, email };
-    return this._http.post<OneMessageResponse>(this.baseUrl + 'user/recover-password', body);
+    return this._http.post<StringMessageResponse>(this.baseUrl + 'user/recover-password', body);
 
     // .pipe(
     //   catchError(error => this.transformTextResponseToJson(error))
@@ -185,8 +185,8 @@ export class AuthService {
     return this._http.get<IUserResponse>(this.baseUrl + 'user/data');
   }
 
-  updateUser( userData: UserData): Observable<OneMessageResponse> {
-    return this._http.put<OneMessageResponse>(this.baseUrl + 'user/edit', userData);
+  updateUser( userData: UserData): Observable<StringMessageResponse> {
+    return this._http.put<StringMessageResponse>(this.baseUrl + 'user/edit', userData);
    
   }
 

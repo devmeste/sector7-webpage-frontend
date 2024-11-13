@@ -3,3 +3,78 @@
 @import '@shared/styles/admin_form.scss';
 @import '@shared/styles/pop-up-styles.scss';
 
+
+.confirm_button_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+
+    .delivery_method_title_alternative {
+        cursor: pointer;
+        color: $gray_80;
+
+        &:hover {
+            color: $primary-l1;
+        }
+    }
+
+    .divider {
+        height: 2px;
+        background-color: $gray_20;
+        width: 100%;
+        margin: 1rem 0rem;
+    }
+
+    .choice_container , .final_purchase_summary_container{
+        border: 2px solid $gray_20;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        background-color: $gray_10;
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        @include tablet{
+
+            padding: 2rem;
+        }
+        h3{
+            margin-bottom: 0;
+        }
+
+    }
+
+    .submit_button_container {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+    }
+    .primary_button_container{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    .wallet_displayed{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include laptop{
+            justify-content: end;
+            align-items: center;
+        }
+    }
+    
+    .wallet_not_displayed{
+        display: none;
+    }
+}

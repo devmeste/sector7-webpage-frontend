@@ -1,8 +1,8 @@
 <div class="overlay">
-    @if(this.typesOfPaymentMethods){
-            <div class="modal_container update_pop_up modal_form">
-                <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
-                <div class="modal_info">
+    <div class="modal_container update_pop_up modal_form">
+        <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+        <div class="modal_info">
+                    @if(this.typesOfPaymentMethods && !showSuccessMessageCommon()){
 
                     <!-- Form -->
                     <section class="form_container">
@@ -21,17 +21,61 @@
                             </div>
                         </form>
                     </section>
+                }@else if (false){
+                    <div class="confirm_button_container">
+                        <div class="submit_button_container">
+                            <!-- <div class="primary_button_container" [ngStyle]="{'display' : this.showMPButton ? 'none' : 'flex'}" >
+            
+                                <button  class="primary_button" #primaryButton
+                                    [ngClass]="{'primary_button_disabled' :  this.isDisabledButton}"
+                                    [disabled]="this.isDisabledButton"
+                                    type="submit"
+                                    >Confirmar</button>
+                            </div> -->
+            
+                            @if(this.isLoadingRequest){
+                                <div class="spinner_container">
+                                    <mat-spinner [diameter]="40"  strokeWidth="7"></mat-spinner>
+                                </div>
+                            }
+                            
+                            <div [ngClass]="[isLoadingRequest ? 'wallet_not_displayed' : '' , 
+                                            this.showMPButton  ? 'wallet_displayed' : 'wallet_not_displayed'] " >
+                                <div id="wallet-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                        
+                @else if(showSuccessMessageCommon()){
+           
 
+                    <div class="success_message">
+                        <p>Metodo de pago actualizado con exito</p>
+                    </div>
+    
+                    <div class="button_container">
+                        <button class="primary_button" (click)="closeUpdateModal()">Cerrar</button>
+                    </div>
+                }
+                @else{
+                    <div class="modal_container update_pop_up modal_form">
+                        <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+                        <div class="modal_info">
+                            <p>No se encontraron metodos de pago</p>
+                        </div>
+                    </div>
+                }
+            
                 </div>
             </div>
 
-    }@else{
-        <div class="modal_container update_pop_up modal_form">
-            <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
-            <div class="modal_info">
-                <p>No se encontraron metodos de pago</p>
-            </div>
-        </div>
-    }
+       
+    
+    
+   
+
+    
+    
 
 </div>

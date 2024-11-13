@@ -91,43 +91,6 @@ export class ChoiceDeliveryMethodComponent extends CustomForm {
 
 
 
-  // makePurchase(address: Address | null) {
-  //   // Aca yo deberia recibir un atributo 
-
-  //   // paymentMethod es el atributo que recbe el meste
-  //   this._PurchaseService.makePurchase(address).subscribe({
-  //     next: mpCode => {
-  //       if(mpCode != null){
-  //         this.createMpButton(mpCode);
-  //       }
-  //       else{
-  //         // Mostrar pop up de exito de compra, y avisarle que le mandamos el 
-  //         // comprobante al email.
-  //       }
-  //     },
-  //     error: error => {
-  //       console.error('Error making purchase', error);
-  //     }
-  //   }
-  //   );
-  // }
-
-  // createMpButton(mpCode: string) {
-  //   this.mercadoPago = new MercadoPagoJS();
-  //   this.hidePrimaryButtonFn();
-  //   this.mercadoPago.createButton(mpCode).then((message) => {
-  //     this.isLoadingRequest = false;
-  //     this.showMPButton = true;
-  //     this.form.disable();
-  //   }).catch((e) => {
-  //     this.showErrorPopUp = true;
-  //     this.errorMessage = "Lo sentimos, ha ocurrido un error. Por favor, vuelva a intentarlo mas tarde o comuniquese con el servicio de atención al cliente.";
-  //     this.isLoadingRequest = false;
-  //     this.showMPButton = false;
-  //     this.showPrimaryButtonFn();
-  //     this.form.enable();
-  //   });
-  // }
 
   onDeliveryMethodChange(choiceShippingRadioButton: string) {
     choiceShippingRadioButton === 'home_delivery' ?

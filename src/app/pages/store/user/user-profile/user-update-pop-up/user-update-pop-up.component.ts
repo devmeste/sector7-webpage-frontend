@@ -11,7 +11,7 @@ import { convertImageUrlToByteArray, convertNumberArrayToImage } from 'app/core/
 import { ImageUploaderComponent } from "../../../../../shared/components/image-uploader/image-uploader.component";
 import { IUser, UserData } from 'app/core/models/IUser';
 import { HttpErrorResponse } from '@angular/common/http';
-import { OneMessageResponse } from 'app/core/models/OneMessageResponse';
+import { StringMessageResponse } from 'app/core/models/StringMessageResponse';
 import { SpinnerS7Component } from "../../../../../shared/components/spinners/spinner-s7/spinner-s7.component";
 
 @Component({
@@ -89,8 +89,8 @@ export class UserUpdatePopUpComponent extends UpdateForm {
     }
 
     this._authService.updateUser(updatedUser).subscribe(
-          {
-          next: ( response : OneMessageResponse ) => {
+        {
+          next: ( response : StringMessageResponse ) => {
             this.elementUpdatedSuccessfully = true;
             this.successMessage = response.message;
             this.isLoading = false;

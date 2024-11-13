@@ -6,6 +6,7 @@ import { CartService } from '../cart_service/cart-service.service';
 import { map, Observable, of, switchMap, tap } from 'rxjs';
 import { environment } from 'app/core/environments/environment';
 import { IPurchase } from 'app/core/models/IPurchase';
+import { StringMessageResponse } from 'app/core/models/StringMessageResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class PurchaseService {
 
 
 
-  makePurchaseInService( address : Address | null , paymentMethodNumber : number , products : Product_QuantityRequested): Observable<any> {
+  makePurchaseInService( address : Address | null , paymentMethodNumber : number , products : Product_QuantityRequested): Observable<StringMessageResponse> {
 
         // 1 . mercado pago 
         // 2 . en el local
@@ -62,17 +63,17 @@ export class PurchaseService {
         };
 
         
-        return this._httpClient.post(this.baseUrl + "purchase/make", jsonResponse,  { responseType: 'text' });
+        return this._httpClient.post<StringMessageResponse>(this.baseUrl + "purchase/make", jsonResponse);
       
   }
 
 
-  changePaymentMethod(id: string, paymentMethod: number) {
+  changePaymentMethod(id: string, paymentMethod: number) : Observable <StringMessageResponse> {
     let body = {
       id,
       paymentMethod
     }
-    return this._httpClient.put(this.baseUrl + `purchase/change-payment-method`, body);
+    return this._httpClient.put<StringMessageResponse>(this.baseUrl + `purchase/change-payment-method`, body);
   }
 
   
