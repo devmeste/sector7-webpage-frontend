@@ -28,11 +28,15 @@ export class ChangePaymentMethodPopUpComponent  extends CustomFormPopUp{
   paymentMethodSelected !: number;
 
   showSuccessMessageCommon = signal<boolean>(false);
+  showSuccessMessageMercadoPago = signal<boolean>(false);
+
+  updateButtonIsDisabled = false;
   
   typesOfPaymentMethods : PaymentMethod[] = [
     { name: 'Mercado Pago', value : PaymentMethods.mercado_pago },
     { name: 'En el local', value : PaymentMethods.in_local },
   ]
+  isLoadingMP = false;
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({
@@ -41,15 +45,20 @@ export class ChangePaymentMethodPopUpComponent  extends CustomFormPopUp{
   }
 
   override send(): void {
+    this.updateButtonIsDisabled = true;
+    
+
     if(this.form.valid){
       this.paymentMethodSelected = <number> this.form.get('payment_method')?.value;
       this._purchaseService.changePaymentMethod( this.id, this.paymentMethodSelected).subscribe({
         next: (response) => {
           if(this.paymentMethodSelected == PaymentMethods.mercado_pago){
             // genero el boton 
-            this.createMpButton(response.message);
+            this.showSuccessMessageMercadoPago.set(true);
+
+              this.createMpButton(response.message);
           }
-          else{
+          else if (this.paymentMethodSelected == PaymentMethods.in_local){ 
             this.showSuccessMessageCommon.set(true);
           }
         },
@@ -75,33 +84,19 @@ export class ChangePaymentMethodPopUpComponent  extends CustomFormPopUp{
 
   
   createMpButton(mpCode: string) {
+    this.isLoadingMP = true;
     this.mercadoPago = new MercadoPagoJS();
-    this.hidePrimaryButtonFn();
     this.mercadoPago.createButton(mpCode).then((message) => {
-      this.isLoadingRequest = false;
-      this.showMPButton = true;
+      this.isLoadingMP = false;
     }).catch((e) => {
       this.showErrorPopUp = true;
       this.errorMessage = "Lo sentimos, ha ocurrido un error. Por favor, vuelva a intentarlo mas tarde o comuniquese con el servicio de atención al cliente.";
       this.isLoadingRequest = false;
       this.showMPButton = false;
-      this.showPrimaryButtonFn();
     });
   }
 
-  hidePrimaryButtonFn() {
-    if (this.primaryButton) {
-      this.primaryButton.nativeElement.style.display = 'none';
-    }
-    this.isLoadingRequest = true;
-  }
-  showPrimaryButtonFn() {
-    if (this.primaryButton) {
-      this.primaryButton.nativeElement.style.display = 'flex';
-      this.isDisabledButton = false;
-    }
-    this.isLoadingRequest = false;
-  }
+  
 
 }
 

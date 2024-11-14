@@ -2,7 +2,7 @@
     <div class="modal_container update_pop_up modal_form">
         <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
         <div class="modal_info">
-                    @if(this.typesOfPaymentMethods && !showSuccessMessageCommon()){
+                    @if(  !showSuccessMessageCommon() && !showSuccessMessageMercadoPago()){
 
                     <!-- Form -->
                     <section class="form_container">
@@ -14,41 +14,28 @@
                                 }
                             </select>
 
-                           
-
+                        
                             <div class="button_container">
-                                <button type="submit" class="primary_button">Actualizar</button>
+                                <button type="submit" class="primary_button" 
+                                [ngClass]="{ 'primary_button_disabled': updateButtonIsDisabled }"
+                                [disabled]="this.updateButtonIsDisabled" >Actualizar</button>
                             </div>
                         </form>
                     </section>
-                }@else if (false){
+                }@else if (this.showSuccessMessageMercadoPago()){
                     <div class="confirm_button_container">
-                        <div class="submit_button_container">
-                            <!-- <div class="primary_button_container" [ngStyle]="{'display' : this.showMPButton ? 'none' : 'flex'}" >
-            
-                                <button  class="primary_button" #primaryButton
-                                    [ngClass]="{'primary_button_disabled' :  this.isDisabledButton}"
-                                    [disabled]="this.isDisabledButton"
-                                    type="submit"
-                                    >Confirmar</button>
-                            </div> -->
-            
-                            @if(this.isLoadingRequest){
-                                <div class="spinner_container">
-                                    <mat-spinner [diameter]="40"  strokeWidth="7"></mat-spinner>
-                                </div>
-                            }
-                            
-                            <div [ngClass]="[isLoadingRequest ? 'wallet_not_displayed' : '' , 
-                                            this.showMPButton  ? 'wallet_displayed' : 'wallet_not_displayed'] " >
-                                <div id="wallet-container"></div>
+                        <div class="submit_button_container d-flex justify-content-center flex-column ">
+                                <h3 >Hacé click en el siguiente botón para continuar</h3>
+                                @if(isLoadingMP){
+                                    <mat-spinner>
+                                    </mat-spinner>
+                                }
+                                <div id="wallet-container" ngClass="{{ isLoadingMP ? 'hidden' : ''}}"></div>
                             </div>
-                        </div>
                     </div>
                 }
                         
-                @else if(showSuccessMessageCommon()){
-           
+                @else if(this.showSuccessMessageCommon()){
 
                     <div class="success_message">
                         <p>Metodo de pago actualizado con exito</p>
