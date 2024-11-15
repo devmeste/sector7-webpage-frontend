@@ -82,3 +82,16 @@
 .hidden{
     display:none ;
 }
+
+button.svelte-h6o0kp.svelte-h6o0kp{
+    min-width: 170px !important;
+    width: 170px !important;
+}
+
+.modal_container{
+    @media screen and (max-width: 480px) {
+        padding: 0 0 2rem 0 ;
+        width: 95%;
+    }
+}
+
