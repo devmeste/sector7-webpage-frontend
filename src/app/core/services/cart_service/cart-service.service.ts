@@ -132,13 +132,14 @@ export class CartService {
     this.$cartTotal.next(0);
   }
 
-  public clearCart(): void {
-    this._httpClient.delete<void>(`${this.baseUrl}cart`).subscribe(() => {
+  public clearCart(): Observable<null>{
+    return this._httpClient.delete<null>(`${this.baseUrl}cart/empty`).pipe(
+      tap(() => {
       this.cart = [];
       this.$cart.next(this.cart);
       this.$cartQuantity.next(0);
       this.$cartTotal.next(0);
-    })
+    }))
   }
 
   public getCartTotal(): Observable<number> {

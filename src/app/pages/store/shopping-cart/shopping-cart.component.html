@@ -56,10 +56,17 @@
                 <b class="total_price ">Total: </b>
                 <b class="total_price ">{{ (totalPrice + shippingValue) |customCurrency }}</b>
             </div>
-            <button class="primary_button" (click)="sendToChoiceDeliveryMethod()">Continuar compra</button>
+            <div class="d-flex flex-md-column">
+                <button class="primary_button" (click)="sendToChoiceDeliveryMethod()">Continuar compra</button>
+                <button class="tertiary_button mt-md-3 "  (click)="showPopUpConfirmClearCart.set(true)">Vaciar carrito</button>
+            </div>
         </div>
     }
     @if (showMustLoginPopUp) {
         <app-confirm-pop-up [custom_message]="'Necesita estar logueado para realizar esta acción'" [buttonConfirmText]="'Iniciar Sesión'" (close)="closePopUp('showMustLoginPopUp')" (confirm)="sendToLogin()"></app-confirm-pop-up>
+    }
+
+    @if(showPopUpConfirmClearCart()){
+        <app-confirm-pop-up class="aaa" custom_message="¿Deseas vaciar el carrito?" buttonConfirmText="Vaciar Carrito" (close)="showPopUpConfirmClearCart.set(false)" (confirm)="clearCart()"></app-confirm-pop-up>
     }
 </main>

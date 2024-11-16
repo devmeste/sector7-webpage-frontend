@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { CartService } from '../../../core/services/cart_service/cart-service.service';
 import { IProduct_Cart } from '../../../core/models/product_cart';
@@ -18,6 +18,7 @@ import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
 })
 export class ShoppingCartComponent implements OnInit {
 
+
   shipping!: boolean;
   shippingValue !: number;
   totalPrice !: number;
@@ -28,6 +29,7 @@ export class ShoppingCartComponent implements OnInit {
 
 
   showMustLoginPopUp: boolean = false;
+  showPopUpConfirmClearCart= signal<boolean>(false);
 
 
   constructor() {
@@ -107,5 +109,12 @@ export class ShoppingCartComponent implements OnInit {
   sendToLogin() {
     this.closePopUp('showMustLoginPopUp');
     this._router.navigate(['auth']);
+  }
+
+  clearCart() {
+    this._cartService.clearCart().subscribe(() => {
+      console.log("Cart cleared");
+      window.location.reload();
+    });
   }
 }
