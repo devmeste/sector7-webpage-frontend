@@ -1,67 +1,59 @@
 <main class="purchase-details-main-container" style="color: white;">
     @if(this.purchase){
-    
-    <section class="admin_panel_table_main_container" >
-        <h1>Detalles de la compra</h1> 
+
+    <section class="admin_panel_table_main_container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Detalles de la compra</h1>
+            <button (click)="this.showPopUpEditPurchase.set(true)" type="button"
+                class="actions_button update_button px-2" style="width: fit-content; ">
+                <mat-icon class="me-2">edit</mat-icon>Editar</button>
+        </div>
 
         <table class="w-100">
             <thead>
                 <tr>
-                    <td class="col-4" >
-                        Comprador
+                    <td class="col-4">
+                        Cliente
                     </td>
-                    <td class="col-2" >
-                        Total de la venta
+                    <td class="col-2">
+                        Nro de Orden
                     </td>
-                    <td class="col-2" >
-                        Envío
-                    </td>
-                    <td class="col-2" >
-                        Nro de Orden 
-                    </td>
-                    <td class="col-2" >
+                    <td class="col-2">
                         Estado del Envío
+                    </td>
+                    <td class="col-2">
+                        Track ID
                     </td>
                 </tr>
             </thead>
             <tbody>
-               
+
                 <tr>
                     <td class="truncate">
-                        <span > {{ this.purchase.fullname }}</span>
+                        <span> {{ this.purchase.fullname }}</span>
                     </td>
                     <td>
-                        <span> {{ this.purchase.totalAmount | customCurrency }}</span>
+                        {{this.purchase.id}}
+                    </td>
+
+
+                    <td class="d-flex align-items-center align-self-center truncate ">
+                        @if(this.purchase.shipment != null){
+                        <div title="{{this.purchase.shipment.status}}">{{this.purchase.shipment.status}}</div>
+                        }@else {
+                        <div>No tiene</div>
+                        }
                     </td>
                     <td>
-                        @if(this.purchase.shipment){ {{this.purchase.shipment}}}@else{<span>"No tiene"</span>}
-                    </td>
-                    <td>
-                        @if(this.purchase.merchantOrder){
-                            {{this.purchase.merchantOrder}}}@else{<span>"No tiene"</span>}
-                    </td>
-                    <td class="d-flex align-items-center align-self-center ">
-                        <select name="" id="">
-                            @if(this.purchase.paymentStatus){
-                                <option value="this.purchase.paymentStatus">{{this.purchase.paymentStatus}}</option>
-                            }@else {
-                                <option value="">No tiene</option>    
-                            }
-                            <option value="">Pendiente</option>
-                            <option value="">Completado</option>
-                        </select>
-                        <div >
-                            <button class="update_shipment_button d-flex justify-content-center align-items-center"> <mat-icon>send</mat-icon> </button>
-                        </div>
-                        <!-- @if(this.purchase.paymentStatus){ {{this.purchase.paymentStatus}}}
-                        @else{<span>"No tiene"</span>} -->
+                        @if(this.purchase.shipment && this.purchase.shipment.trackId){
+                        {{this.purchase.shipment.trackId}}}@else{<span>"No tiene"</span>}
                     </td>
                 </tr>
-                
+
             </tbody>
         </table>
 
-        
+
 
         <!-- <pre>{{this.purchase.shipment | json}}</pre> -->
 
@@ -108,38 +100,59 @@
                 }
 
                 <tr class="total_row">
-                    <td  colspan="4">Total de la venta: </td>
-                    <td colspan="1">{{this.purchase.totalAmount |  customCurrency}}</td>
+                    <td colspan="4">Total de la venta: </td>
+                    <td colspan="1">{{this.purchase.totalAmount | customCurrency}}</td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- <table class="table w-100">
-            <thead>
-                <tr>
-                    <td class="col-4">Marca</td>
-                    <td class="col-1">Modelo</td>
-                    <td class="col-1">Precio Unitario</td>
-                    <td class="col-1">Cantidad</td>
-                    <td class="col-2">Subtotal</td>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table> -->
 
-        @if(true){
-            <div class="button_container d-flex justify-content-end mt-4">
-                <button type="button" class="primary_button" (click)="finalizePurchase()">Finalizar compra</button>
-            </div>
+
+        @if(!this.purchase.isConfirmed){
+        <div class="button_container d-flex justify-content-end mt-4">
+            <button type="button" class="tertiary_button me-3"
+                (click)="this.showConfirmPopUpPurchaseCancel.set(true)">Cancelar compra</button>
+            <button type="button" class="primary_button" (click)="this.showPopUpFinalizePurchase.set(true)">Finalizar
+                compra</button>
+        </div>
+        }
+        @else {
+        <div class="button_container d-flex justify-content-end mt-4">
+            <h3 class="fw-bold text-primary" >la compra esta finalizada</h3>   
+        </div>
         }
 
     </section>
 
-    }@else {
-    <section>
-        <app-input-danger-text text="Producto no encontrado"></app-input-danger-text>
-    </section>
+
+        <!-- finalize purchase -->
+        @if(showPopUpFinalizePurchase()){
+            <app-pop-up-finalize-purchase [purchase_id]="this.purchase.id" (close)="this.showPopUpFinalizePurchase.set(false)" ></app-pop-up-finalize-purchase>
+        }
+
+        <!-- edit purchase -->
+        @if (showPopUpEditPurchase()) {
+            <app-pop-up-edit-purchase [purchaseId]="this.purchase.id"></app-pop-up-edit-purchase>
+        }
+
+
+        <!-- cancel purchase-->
+        @if(showConfirmPopUpPurchaseCancel()){
+        <app-confirm-pop-up custom_message="¿Desea cancelar la compra?" (confirm)="confirmCancelAction()"
+            (close)="showConfirmPopUpPurchaseCancel.set(false)"></app-confirm-pop-up>
+        }
+        @if (purchaseWasCancelled()) {
+            <app-message-pop-up custom_message='Compra cancelada exitosamente' (close)="this._router.navigate(['/admin-dashboard/billing'])">
+            </app-message-pop-up>
+        }
+
     }
+    @else {
+        <section>
+            <app-input-danger-text text="Producto no encontrado"></app-input-danger-text>
+        </section>
+    }
+
+
 
 </main>

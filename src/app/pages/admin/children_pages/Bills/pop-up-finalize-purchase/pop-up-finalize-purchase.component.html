@@ -1,0 +1,55 @@
+<div class="overlay">
+        <ng-container>
+            <div class="modal_container update_pop_up modal_form" >
+                <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+                <div class="modal_info">
+                    
+                    <!-- Form -->
+                    <section class="form_container">
+                    @if(!this.purchaseWasUpdatedSuccesfully){ 
+                        <form (ngSubmit)="send()" [formGroup]="this.form" class="form form_pop_up">
+    
+                            <!-- expeditor -->
+                            <div class="custom-input">
+                                <label class="form-label">Track ID: </label>
+                                <input type="text" formControlName="expeditor" required class="form-control">
+                                <!-- [ngClass]="{ 'is-invalid': hasErrors(this.form,'expeditor', 'required') }" -->
+                                <!-- @if( hasErrors(this.form,'expeditor', 'required') ){ 
+                                  <app-input-danger-text text="El nombre del producto es requerido"></app-input-danger-text>
+                                } -->
+                            </div>
+    
+                            <!-- track id -->
+                            <div class="custom-input">
+                                <label class="form-label">Track ID: </label>
+                                <input type="text" formControlName="trackId" required class="form-control"
+                                    
+                                    >
+                                <!-- [ngClass]="{ 'is-invalid': hasErrors(this.form,'trackId', 'required') }" -->
+                                <!-- @if( hasErrors(this.form,'trackId', 'required') ){ 
+                                  <app-input-danger-text text="El nombre del producto es requerido"></app-input-danger-text>
+                                } -->
+                            </div>
+                        
+                        
+                            <!-- [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}" -->
+                             <!-- [disabled]="disabledFormButton(this.form)"  -->
+                            <button class="primary_button"
+                            type="submit">Enviar</button>
+                            
+                    </form>
+                } @else {
+                    <h3 >Compra finalizada exitosamente</h3>
+                    <button type="button" class="primary_button" (click)="closeUpdateModal()" >Cerrar</button>
+                }
+                
+                </section>
+    
+                @if(loading){
+                    <app-spinner-s7></app-spinner-s7>
+                }
+    
+            </div>
+        </div>
+        </ng-container>
+

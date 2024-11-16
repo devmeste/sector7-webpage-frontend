@@ -25,6 +25,7 @@ export class AdminService {
 
 
 
+
     // baseUrl: string = 'http://localhost:8001/api/v1/es/';
     private baseUrl: string = environment.apiUrl;
 
@@ -224,6 +225,19 @@ export class AdminService {
     getPurchasetById(orderId: any) {
         return this._httpClient.get<IPurchase>(this.baseUrl + 'purchase/id/' + orderId);
     }
+
+    cancelPurchase(purchase_id: string) : Observable<null> {
+        return this._httpClient.delete<null>(this.baseUrl + 'purchase/' + purchase_id);
+    }
+    
+    finalizePurchase(purchase_id: string, trackId?: string, expeditor?: string) {
+        let body = {
+            trackId,
+            expeditor
+        }
+        return this._httpClient.post<any>(this.baseUrl + 'purchase/finalize/' + purchase_id, body);
+    }
+  
 
 
     // sockets

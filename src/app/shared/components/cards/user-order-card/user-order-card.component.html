@@ -1,4 +1,4 @@
-<div class="user_order_card_container d-flex justify-content-between px-4 py-4 ">
+<div class="user_order_card_container d-flex justify-content-between px-4 py-4 flex-wrap " >
         <div>
                 <div>
                         <p><span class="primary-font">Orden:</span> {{purchase.id}}</p>
@@ -9,10 +9,10 @@
                                 <p>Retiro en el local</p>
                         }
                 </div>
-
+                
                 <p>Subtotal: {{purchase.totalAmount| customCurrency}}</p>
         </div>
-        <div>
+        <div >
               <div class="d-flex flex-column justify-content-between">
                         <p class="mb-2">Fecha: {{purchase.purchaseDate}}</p>
 

@@ -1,0 +1,31 @@
+@import 'styles.scss';
+@import '_media-queries.scss';
+@import '@shared/styles/admin_form.scss';
+@import '@shared/styles/pop-up-styles.scss';
+
+.modal_container.update_pop_up {
+
+    @include tablet {
+        width: 90%;
+    }
+
+    @include laptop {
+        width: calc(100% - 300px);
+    }
+
+    @include desktop {
+        width: 500px;
+    }
+    
+    top: 55%;
+
+    .form {
+        max-width: 100% !important;
+        max-height: 70vh;
+        // overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+}
