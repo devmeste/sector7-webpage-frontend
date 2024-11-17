@@ -1,1 +1,66 @@
-<p>pop-up-edit-purchase works!</p>,
+<div class="overlay">
+    <ng-container>
+        <div class="modal_container update_pop_up modal_form">
+            <span class="modal_close_button" (click)="closeUpdateModal()">&times;</span>
+            <div class="modal_info">
+
+                <!-- Form -->
+                <section class="form_container">
+                    @if(!this.purchaseWasEditedSuccesfully()){
+                    <form (ngSubmit)="send()" [formGroup]="this.form" class="form form_pop_up">
+
+                        <!-- expeditor -->
+                        <div class="custom-input">
+                            <label class="form-label">Empresa de envío: </label>
+                            <input type="text" formControlName="expeditor" required class="form-control">
+
+                        </div>
+
+                        <!-- track id -->
+                        <div class="custom-input">
+                            <label class="form-label">Track ID: </label>
+                            <input type="text" formControlName="trackId" required class="form-control">
+                        </div>
+
+                        <div class="d-flex ">
+                            <!-- makePaymentAccredited -->
+                            <div class="custom-input row input_checkbox_container d-flex col-6">
+                                <label class="form-label checkbox_label col-8 ">Pago Acreditado: </label>
+                                <input type="checkbox" formControlName="makePaymentAccredited" class=" checkbox">
+                            </div>
+    
+                            <!-- makeLocalPayment -->
+                            <div class="custom-input row input_checkbox_container d-flex col-6 ">
+                                <label class="form-label checkbox_label d-inline col-8">Pago en el local: </label>
+                                <input type="checkbox" formControlName="makeLocalPayment" class="d-inline checkbox">
+                            </div>
+                        </div>
+
+                        <label>Estado del envío:</label>
+                        <select formControlName="shipmentStatus" class="custom-select">
+                            @for (shipmentStatus of shipmentStatusArray ; track $index) {
+                                <option value="{{shipmentStatus}}"> {{shipmentStatus}} </option>                                
+                            }
+                        </select>
+
+                        <!-- [ngClass]="{'primary_button_disabled' : disabledFormButton(this.form)}" -->
+                        <!-- [disabled]="disabledFormButton(this.form)"  -->
+                        <button class="primary_button" type="submit">Enviar</button>
+
+                    </form>
+                    } @else {
+                        <div class="d-flex flex-column align-items-center justify-content-end w-100">
+                            <h3 class="text-purchase-edited-succesfully" >Compra finalizada exitosamente</h3>
+                            <button type="button" class="primary_button" (click)="closeUpdateModal()">Cerrar</button>
+                        </div>
+                    }
+
+                </section>
+
+                @if(loading){
+                <app-spinner-s7></app-spinner-s7>
+                }
+
+            </div>
+        </div>
+    </ng-container>

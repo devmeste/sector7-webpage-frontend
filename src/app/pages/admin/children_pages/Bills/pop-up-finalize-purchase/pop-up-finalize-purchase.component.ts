@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomFormPopUp } from 'app/core/utils/custom-form-pop-up/custom.form.pop.up';
 import { InputDangerTextComponent } from '@shared/components/inputs/input-danger-text/input-danger-text.component';
@@ -22,7 +22,7 @@ export class PopUpFinalizePurchaseComponent extends CustomFormPopUp {
   @Input({required: true}) purchase_id!: string ;
   
   private _adminService = inject(AdminService);
-purchaseWasUpdatedSuccesfully: any;
+  purchaseWasUpdatedSuccesfully = signal<boolean>(false);
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -42,9 +42,10 @@ purchaseWasUpdatedSuccesfully: any;
     this.loading = true;
     const {trackId , expeditor} = this.form.value;
 
-    this._adminService.finalizePurchase(this.purchase_id, trackId, expeditor).subscribe(() => {
+    this._adminService.finalizePurchase(this.purchase_id, trackId, expeditor).subscribe((response) => {
       this.loading = false;
-      
+      console.log(response);
+      this.purchaseWasUpdatedSuccesfully.set(true); 
     })
   }
 

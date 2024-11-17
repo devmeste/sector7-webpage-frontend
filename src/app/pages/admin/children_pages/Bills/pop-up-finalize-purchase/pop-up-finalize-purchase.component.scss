@@ -6,15 +6,17 @@
 .modal_container.update_pop_up {
 
     @include tablet {
-        width: 90%;
+        width: fit-content;
     }
 
     @include laptop {
-        width: calc(100% - 300px);
+        // width: min( 500px ,calc(100% - 300px)) ;
+        width: fit-content;
     }
 
     @include desktop {
-        width: 500px;
+        // width: 500px;
+        width: fit-content;
     }
     
     top: 55%;
@@ -28,4 +30,12 @@
         gap: 1rem;
     }
 
+}
+
+.text-purchase-edited-succesfully{
+    @media screen and (max-width: 480px) {
+        font-size: 1rem;
+        
+    }
+    min-width: 255px;
 }

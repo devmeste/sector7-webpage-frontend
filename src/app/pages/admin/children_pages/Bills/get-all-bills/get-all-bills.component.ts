@@ -86,7 +86,7 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
   search_by_order_id() {
     const orderId = this.formOrderId.get('order_id')?.value;
     if(orderId) {
-      this._adminService.getPurchasetById(orderId).subscribe({
+      this._adminService.getPurchaseById(orderId).subscribe({
         next: (purchase) => {
           this.purchases$ = [];
           this.purchases$.push(purchase);

@@ -126,13 +126,14 @@
 
 
         <!-- finalize purchase -->
+         
         @if(showPopUpFinalizePurchase()){
             <app-pop-up-finalize-purchase [purchase_id]="this.purchase.id" (close)="this.showPopUpFinalizePurchase.set(false)" ></app-pop-up-finalize-purchase>
         }
 
         <!-- edit purchase -->
         @if (showPopUpEditPurchase()) {
-            <app-pop-up-edit-purchase [purchaseId]="this.purchase.id"></app-pop-up-edit-purchase>
+            <app-pop-up-edit-purchase [purchaseId]="this.purchase.id " (close)="this.showPopUpEditPurchase.set(false)"></app-pop-up-edit-purchase>
         }
 
 
