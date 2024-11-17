@@ -76,21 +76,24 @@
                     <td class="col-3">
                         Orden de compra
                     </td>
-                    <td class="col-4">
+                    <td class="col-3">
                         Cliente
                     </td>
 
-                    <td>
+                    <td class="col-2">
                         Fecha
-                    </td>
-                    <td>
+                    </td >
+                    <td class="col-2 text-center">
                         Total
                     </td>
-                    <td>
+                    <td class="col-1 text-center">
                         Envío
                     </td>
+                    <td class="col-1 text-center">
+                        finalizada
+                    </td>
                     <td class="text-center">
-                        Ver detalles
+                        Detalles
                     </td>
 
                 </tr>
@@ -104,18 +107,27 @@
                     <td>
                         {{purchase.fullname}}
                     </td>
+
                     <td>
                         {{purchase.purchaseDate | customDatePipe}}
                     </td>
 
-                    <td>
+                    <td class="text-center">
                         {{purchase.totalAmount}}
                     </td>
-                    <td>
+                    <td class="text-center">
                         @if(purchase.shipment){
                         Si
                         }@else{
                         No 
+                        }
+                    </td>
+                    <td class="text-center">
+                        @if(purchase.isConfirmed){
+                            Si ✔
+                        }
+                        @else {
+                            No
                         }
                     </td>
 

@@ -18,7 +18,6 @@ h1 , h2{
 
 .purchase-details-main-container .admin_panel_table_main_container{
     padding-top: 2rem;
-    
     .total_row{
         background: $gray_15;
         font-weight: 500;
@@ -26,6 +25,7 @@ h1 , h2{
 }
 
 .admin_panel_table_main_container{
+    position: relative;
 
     select {
         background-color: #707070; /* Fondo del select */
@@ -60,5 +60,19 @@ h1 , h2{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+
+.return_button{
+    margin-bottom: 0.5rem;
+    position: absolute;
+    top: 0.3rem;
+    left: 0.3rem;
+    cursor: pointer;
+    color: gray;
+    font-size: 1.5rem;
+    &:hover{
+        font-weight: bold;
+        color: $primary-main;
     }
 }

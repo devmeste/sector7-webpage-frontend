@@ -112,9 +112,7 @@ export class SearchComponent {
       else{
         this.updateProductsInfo();
       }
-      
-     
-    })
+    });
 
     this._productService.getAllBrands().subscribe(response => {
       this.brands = response.brands;

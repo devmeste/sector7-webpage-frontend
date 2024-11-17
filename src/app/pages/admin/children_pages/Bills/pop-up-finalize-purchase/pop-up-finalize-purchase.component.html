@@ -6,7 +6,7 @@
 
                 <!-- Form -->
                 <section class="form_container">
-                    @if(!this.purchaseWasUpdatedSuccesfully){
+                    @if(!this.purchaseWasUpdatedSuccesfully() && !this.thereWasAnError() ){
                     <form (ngSubmit)="send()" [formGroup]="this.form" class="form form_pop_up">
 
                         <!-- expeditor -->
@@ -35,11 +35,17 @@
                         <button class="primary_button" type="submit">Enviar</button>
 
                     </form>
-                    } @else {
+                    } @else if(this.purchaseWasUpdatedSuccesfully()) {
                     <div class="d-flex flex-column align-items-center justify-content-end w-100">
                         <h3>Compra finalizada exitosamente</h3>
                         <button type="button" class="primary_button" (click)="closeUpdateModal()">Cerrar</button>
                         
+                    </div>
+                    }
+                    @else if (thereWasAnError()){
+                    <div class="d-flex flex-column align-items-center justify-content-end w-100">
+                        <h3>{{this.errorMessage()}}</h3>
+                        <button type="button" class="primary_button" (click)="closeUpdateModal()">Cerrar</button>
                     </div>
                     }
 

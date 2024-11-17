@@ -1,7 +1,14 @@
 <main class="purchase-details-main-container" style="color: white;">
+    
+    
+    
     @if(this.purchase){
+        <section class="admin_panel_table_main_container">
 
-    <section class="admin_panel_table_main_container">
+        <div class="return_button" (click)="this._router.navigate(['admin-dashboard/billing'])" >
+            <mat-icon> arrow_back</mat-icon>
+        </div>
+
         <div class="d-flex justify-content-between align-items-center">
             <h1>Detalles de la compra</h1>
             <button (click)="this.showPopUpEditPurchase.set(true)" type="button"
@@ -128,12 +135,12 @@
         <!-- finalize purchase -->
          
         @if(showPopUpFinalizePurchase()){
-            <app-pop-up-finalize-purchase [purchase_id]="this.purchase.id" (close)="this.showPopUpFinalizePurchase.set(false)" ></app-pop-up-finalize-purchase>
+            <app-pop-up-finalize-purchase [purchase_id]="this.purchase.id" (close)="this.showPopUpFinalizePurchase.set(false) ; this.loadPurchaseDetails()" ></app-pop-up-finalize-purchase>
         }
 
         <!-- edit purchase -->
         @if (showPopUpEditPurchase()) {
-            <app-pop-up-edit-purchase [purchaseId]="this.purchase.id " (close)="this.showPopUpEditPurchase.set(false)"></app-pop-up-edit-purchase>
+            <app-pop-up-edit-purchase [purchaseId]="this.purchase.id " (close)="this.showPopUpEditPurchase.set(false) ; this.loadPurchaseDetails()"></app-pop-up-edit-purchase>
         }
 
 

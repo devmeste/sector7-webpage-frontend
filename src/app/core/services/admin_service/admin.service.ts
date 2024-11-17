@@ -16,6 +16,7 @@ import { ISocket } from 'app/core/models/ISocket';
 import { IGeneration } from 'app/core/models/IGeneration';
 import { IMemoryType } from 'app/core/models/IMemoryType';
 import { IBanner, IBannerRequest } from 'app/core/models/IBanner';
+import { IFinalizePurchaseDTO } from 'app/pages/admin/children_pages/Bills/pop-up-finalize-purchase/pop-up-finalize-purchase.component';
 
 @Injectable({
     providedIn: 'root'
@@ -231,13 +232,14 @@ export class AdminService {
         return this._httpClient.delete<null>(this.baseUrl + 'purchase/' + purchase_id);
     }
     
-    finalizePurchase(purchase_id: string, trackId: string = ''	, expeditor: string = ''): Observable<any> {
-        console.log(purchase_id, trackId, expeditor);
+    finalizePurchase(finalizePurchaseDTO : IFinalizePurchaseDTO): Observable<any> {
         let body = {
-            trackId,
-            expeditor
+            trackId: finalizePurchaseDTO.trackId,
+            expeditor: finalizePurchaseDTO.expeditor,
         }
-        return this._httpClient.post<any>(this.baseUrl + 'purchase/finalize/' + purchase_id, body);
+        console.log("finalizePurchaseDTO" , finalizePurchaseDTO);
+        // console.log("body ", body);
+        return this._httpClient.post<any>(this.baseUrl + 'purchase/finalize/' + finalizePurchaseDTO.id , body );
     }
   
     getAllShipmentStatus(): Observable<IShipmentStatusResponse> {

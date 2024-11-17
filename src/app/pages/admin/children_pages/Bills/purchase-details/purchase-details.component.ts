@@ -14,7 +14,7 @@ import { MessagePopUpComponent } from "../../../../../shared/components/pop_up/m
 @Component({
   selector: 'app-purchase-details',
   standalone: true,
-  imports: [JsonPipe, InputDangerTextComponent, CurrencyPipe, CustomCurrencyPipe, MatIcon, PopUpFinalizePurchaseComponent, PopUpEditPurchaseComponent, ConfirmPopUpComponent, MessagePopUpComponent],
+  imports: [MatIcon,JsonPipe, InputDangerTextComponent, CurrencyPipe, CustomCurrencyPipe, MatIcon, PopUpFinalizePurchaseComponent, PopUpEditPurchaseComponent, ConfirmPopUpComponent, MessagePopUpComponent],
   templateUrl: './purchase-details.component.html',
   styleUrls: ['./purchase-details.component.scss', '../../../../../shared/styles/admin_table.scss']
 })
@@ -24,7 +24,6 @@ export class PurchaseDetailsComponent {
   _adminService = inject(AdminService);
   _router = inject(Router);
   _activatedRoute = inject(ActivatedRoute);
-  purchases$ !: IPurchase[];
 
 
   purchase!: IPurchase | undefined;
@@ -38,6 +37,8 @@ export class PurchaseDetailsComponent {
 
   ngOnInit(): void {
 
+    window.scrollTo(0, 0);
+
     this._activatedRoute.params.subscribe(params => {
       this.purchase_id = params['id'];
     });
@@ -47,12 +48,12 @@ export class PurchaseDetailsComponent {
 
   }
   loadPurchaseDetails() {
-    this._adminService.getAllPurchases().subscribe(c => {
-      this.purchases$ = c;      
-      this.purchase = this.purchases$.find(purchase => purchase.id === this.purchase_id);
-      if (this.purchase == undefined) {
-        this._router.navigate(['/admin-dashboard/billing']);
-      }
+
+    this._adminService.getPurchaseById(this.purchase_id).subscribe(purchase => {
+      this.purchase = purchase;      
+    },
+    error=>{
+      this._router.navigate(['/admin-dashboard/billing']);
     })
   }
 
