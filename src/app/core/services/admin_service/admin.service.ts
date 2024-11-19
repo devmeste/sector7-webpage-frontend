@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, map, of, take, tap, throwError } from 'rxjs';
@@ -17,6 +17,7 @@ import { IGeneration } from 'app/core/models/IGeneration';
 import { IMemoryType } from 'app/core/models/IMemoryType';
 import { IBanner, IBannerRequest } from 'app/core/models/IBanner';
 import { IFinalizePurchaseDTO } from 'app/pages/admin/children_pages/Bills/pop-up-finalize-purchase/pop-up-finalize-purchase.component';
+import { IPurchaseFilteredRequestDTO } from 'app/pages/admin/children_pages/Bills/get-all-bills/get-all-bills.component';
 
 @Injectable({
     providedIn: 'root'
@@ -216,12 +217,30 @@ export class AdminService {
     }
 
     // purchases
-    getAllPurchases() {
-        return this._httpClient.get<IPurchase[]>(this.baseUrl + 'purchase');
-    }
+    getAllPurchases( filters : IPurchaseFilteredRequestDTO): Observable<IPurchase[]> {
 
-    getAllPurchasesBetweenDates(startDate: string, endDate: string): Observable<IPurchasesBetweenDatesResponse> {
-        return this._httpClient.get<IPurchasesBetweenDatesResponse>(this.baseUrl + 'purchase/bill?since=' + startDate + '&until=' + endDate);
+        let params = new HttpParams();
+
+        if(filters.since) {
+            params = params.set('since', filters.since); // Reassign params
+        }
+
+        if(filters.until) {
+            params = params.set('until', filters.until); // Reassign params
+        }
+
+        if(filters.paymentAccredited==false){
+            params = params.set('payment-accredited', filters.paymentAccredited); // Reassign params
+        }
+        else if(filters.paymentAccredited == true && filters.confirmed == false){
+            params = params.set('payment-accredited', filters.paymentAccredited); // Reassign params
+            params = params.set('confirmed', filters.confirmed); // Reassign params
+        }
+
+        console.log(' params',params);
+
+        return this._httpClient.get<IPurchase[]>(this.baseUrl + 'purchase', {params});
+
     }
 
     getPurchaseById(purchaseId: any) {

@@ -143,7 +143,7 @@ export class SearchComponent {
     this.filters.order = { name: this.order, direction: this.direction}; 
 
     this._productService
-    .getAllProducts2(this.page, this.filters)
+    .getAllProductsWithFilters(this.page, this.filters)
     .subscribe((productResponse) => {
       this.products = [...this.products, ...productResponse.products];
       this.totalPages = productResponse.pagination.totalPages;
@@ -161,14 +161,13 @@ export class SearchComponent {
     } ;
   }
 
-
-  // Métodos para manejar los cambios en los filtros
+  // Methods to handle filter changes
   applyPriceFilter() {
     // console.log(this.filters.price);
     this.filters.price.since = this.sincePrice();
     this.filters.price.until = this.untilPrice();
-    this.page = 1; // Reiniciar la paginación al aplicar un nuevo filtro
-    this.products = []; // Reiniciar productos al aplicar un nuevo filtro
+    this.page = 1; //Reset pagination when applying a new filter
+    this.products = []; // Reset products after applying a new filter 
     this.updateProductsInfo();
     if(this.showFiltersInMobile){
       this.showFiltersInMobile = false;
@@ -240,21 +239,19 @@ export class SearchComponent {
 
 
   applyOrderFilter(value: string): void {
-   
+
+    this.order = '';
+    this.direction = '';
+
     if (value.includes('Menor precio')) {
-      // this.filters.order = { name: 'price', direction: 'asc' };
       this.order = 'price'
       this.direction = 'asc';
     } else if (value.includes('Mayor precio')) {
       this.order = 'price'
       this.direction = 'desc';
-    } else {
-      // Si el valor es otro, resetea la ordenación
-      this.order = '';
-      this.direction = '';
     }
-  
-    // Reinicia los productos y la paginación cuando se aplica un nuevo filtro
+
+    // Reset pagination when applying a new filter
     this.page = 1;
     this.products = [];
     this.updateProductsInfo();

@@ -7,7 +7,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "backend": "cd C:/Jebu/2_FACULTAD/Sector7/Backend/sector7-webpage-backend && bash ./compile-then-run-local.sh"
   },
   "private": true,
   "dependencies": {

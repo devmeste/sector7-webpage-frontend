@@ -19,12 +19,6 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
   })
   export class GetAllBillsComponent {
 
-    clearFilters() {
-      this.formDate.reset();
-      this.formOrderId.reset();
-      this.formPaymentStatus.reset();
-      this.updateDataView();
-    }
 
     _adminService = inject(AdminService);
     _router = inject(Router);
@@ -44,19 +38,53 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
       payment_status: ['', Validators.required]
     })
 
-    verifyDates() {
-      const startDate = this.formDate.get('startDate')?.value;
-      const endDate = this.formDate.get('endDate')?.value;
+    // verifyDates() {
+    //   const startDate = this.formDate.get('startDate')?.value;
+    //   const endDate = this.formDate.get('endDate')?.value;
   
-      const formattedStartDate = this.formatDate(startDate);
-      const formattedEndDate = this.formatDate(endDate);
-    
-      if (formattedStartDate && formattedEndDate) {
-        this.updateDataViewWithDates( formattedStartDate, formattedEndDate);
+    //   const formattedStartDate = this.setFormatToDate(startDate);
+    //   const formattedEndDate = this.setFormatToDate(endDate);
+    //   console.log("verify Dates");
+    //   console.log(formattedStartDate);
+    //   console.log(formattedEndDate);
+
+    //   if (formattedStartDate && formattedEndDate) {
+    //     console.log("entro en el if del verify dates");
+    //     this.updateDataView();
+    //   }
+    // }
+
+    filterConfirmed : boolean | null = null;
+    filterPaymentAccredited : boolean | null = null;
+
+    filterByPaymentStatus() {
+      // const posibilities = ['paid_and_delivered', 'paid_and_not_delivered', 'pending'];
+      if(!this.formPaymentStatus.get('payment_status')?.value ) {
+        console.log("aaa");
+        return;
       }
+
+      if (this.formPaymentStatus.get('payment_status')?.value == 'pending') {
+        this.filterPaymentAccredited = false; // the payment is not accredited yet.. 
+        this.filterConfirmed = null;
+      }
+      else if (this.formPaymentStatus.get('payment_status')?.value == 'paid_and_not_delivered') {
+        this.filterPaymentAccredited = true; // the payment was accredited but it is not delivered
+        this.filterConfirmed = false;
+      }
+      else if (this.formPaymentStatus.get('payment_status')?.value == 'paid_and_delivered') { 
+        this.filterPaymentAccredited = true; // the payment was accredited and it was delivered
+        this.filterConfirmed = true;
+      }
+
+
+
+      this.updateDataView();
+      
     }
 
-    formatDate(dateString: string | null): string | null {
+      
+    setFormatToDate(dateString: string | null): string | null {
       if (!dateString) return null;
   
       const [year, month, day] = dateString.split('-');
@@ -68,16 +96,31 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
   }
 
   updateDataView() {
-    this._adminService.getAllPurchases().subscribe(c => {
+
+    const filters : IPurchaseFilteredRequestDTO = {
+      since: this.setFormatToDate(this.formDate.get('startDate')?.value) || '', // this.formDate.get('startDate')?.value,
+      until: this.setFormatToDate(this.formDate.get('endDate')?.value) || '', // this.formDate.get('endDate')?.value,
+      paymentAccredited: this.filterPaymentAccredited,
+      confirmed: this.filterConfirmed,
+    }
+
+    console.log('updateDataView', filters);
+
+    this._adminService.getAllPurchases(filters).subscribe(c => {
+      console.log(c);
       this.purchases$ = c;
+
     })
   }
 
-  updateDataViewWithDates(startDate: string, endDate: string) {
-    this._adminService.getAllPurchasesBetweenDates(startDate,endDate).subscribe(c => {
-      this.purchases$ = c.purchases;
-    })
+  clearFilters() {
+    this.formDate.reset();
+    this.formOrderId.reset();
+    this.formPaymentStatus.reset();
+    this.updateDataView();
   }
+
+
 
   showDetails(id: string) {
     this._router.navigate(['/admin-dashboard/billing', id]);
@@ -96,5 +139,14 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
     
   }
 
+
 }
 
+
+
+export interface IPurchaseFilteredRequestDTO  {
+  since?: string;
+  until?: string;
+  paymentAccredited?: boolean | null;
+  confirmed?: boolean | null;
+}

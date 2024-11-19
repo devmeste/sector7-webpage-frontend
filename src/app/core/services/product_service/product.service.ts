@@ -144,17 +144,7 @@ export class ProductService {
 
   }
 
-
-  // Filters
-
-  getAllBrands() : Observable<IGetAllBrandsResponse> {
-    return this._httpClient.get<IGetAllBrandsResponse>(`${this.baseUrl}products/brands`);
-  }
-
-
-
-  // TODO: Refactor this method to have just one getAll Products
-  getAllProducts2(page: number, filters: IFiltersForSearch) {
+  getAllProductsWithFilters(page: number, filters: IFiltersForSearch) {
 
     let params = new HttpParams().set('page', page.toString())
 
@@ -166,12 +156,9 @@ export class ProductService {
       params = params.set('category', filters.category);
     }
 
-    // alert("text: " + filters.text);
     if(filters.text){
       params = params.set('title', filters.text);
     }
-
-
 
     if(filters.order.name && filters.order.direction) {
       params = params.set('sort', filters.order.name);
@@ -186,11 +173,11 @@ export class ProductService {
       params = params.set('price', `max:${filters.price.until}`);
     }
 
-    console.log("page:"+ page);
-    console.log("params: " + params);
-
-
     return this._httpClient.get<ProductResponse>(`${this.baseUrl}products?page=${page}`, {params});
   } 
+
+  getAllBrands() : Observable<IGetAllBrandsResponse> {
+    return this._httpClient.get<IGetAllBrandsResponse>(`${this.baseUrl}products/brands`);
+  }
 }
 
