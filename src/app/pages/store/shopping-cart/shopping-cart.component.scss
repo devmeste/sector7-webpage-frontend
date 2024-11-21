@@ -259,3 +259,22 @@ main.shopping_cart_container {
     }
 }
 
+.print_report_button{
+    position : absolute;
+    right : 10px;
+    top : 5px;
+    padding: 7px;
+    font-size: 1.5rem;
+    color:white;
+    background-color:  $primary_main;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover{
+        cursor: pointer;
+        filter: brightness(1.1) ;
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+    }
+}

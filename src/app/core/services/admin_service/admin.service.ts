@@ -93,7 +93,7 @@ export class AdminService {
         return this._httpClient.get<ProductResponse>(this.baseUrl + 'products');
     }
 
-    getAllProductsForAdmin(currentPage: number,  text?: string): Observable<ProductResponse> {
+    getAllProductsForAdmin(currentPage: number, text?: string): Observable<ProductResponse> {
 
         let url = `${this.baseUrl}products/actual?page=${currentPage}`
 
@@ -129,7 +129,7 @@ export class AdminService {
         );
     }
 
-    getAllEnabledProducts(option: string , page : number = 1 , text?: string): Observable<ProductResponse> {
+    getAllEnabledProducts(option: string, page: number = 1, text?: string): Observable<ProductResponse> {
         if (option === 'enabled') {
             option = '1';
         }
@@ -212,34 +212,34 @@ export class AdminService {
         return this._httpClient.patch(this.baseUrl + 'admin/change-status', body);
     }
 
-    deleteAccount(username: string){
+    deleteAccount(username: string) {
         return this._httpClient.delete(this.baseUrl + `admin/${username}`);
     }
 
     // purchases
-    getAllPurchases( filters : IPurchaseFilteredRequestDTO): Observable<IPurchase[]> {
+    getAllPurchases(filters: IPurchaseFilteredRequestDTO): Observable<IPurchase[]> {
 
         let params = new HttpParams();
 
-        if(filters.since) {
+        if (filters.since) {
             params = params.set('since', filters.since); // Reassign params
         }
 
-        if(filters.until) {
+        if (filters.until) {
             params = params.set('until', filters.until); // Reassign params
         }
 
-        if(filters.paymentAccredited==false){
+        if (filters.paymentAccredited == false) {
             params = params.set('payment-accredited', filters.paymentAccredited); // Reassign params
         }
-        else if(filters.paymentAccredited == true && filters.confirmed == false){
+        else if (filters.paymentAccredited == true && filters.confirmed == false) {
             params = params.set('payment-accredited', filters.paymentAccredited); // Reassign params
             params = params.set('confirmed', filters.confirmed); // Reassign params
         }
 
-        console.log(' params',params);
+        console.log(' params', params);
 
-        return this._httpClient.get<IPurchase[]>(this.baseUrl + 'purchase', {params});
+        return this._httpClient.get<IPurchase[]>(this.baseUrl + 'purchase', { params });
 
     }
 
@@ -247,26 +247,26 @@ export class AdminService {
         return this._httpClient.get<IPurchase>(this.baseUrl + 'purchase/' + purchaseId);
     }
 
-    cancelPurchase(purchase_id: string) : Observable<null> {
+    cancelPurchase(purchase_id: string): Observable<null> {
         return this._httpClient.delete<null>(this.baseUrl + 'purchase/' + purchase_id);
     }
-    
-    finalizePurchase(finalizePurchaseDTO : IFinalizePurchaseDTO): Observable<any> {
+
+    finalizePurchase(finalizePurchaseDTO: IFinalizePurchaseDTO): Observable<any> {
         let body = {
             trackId: finalizePurchaseDTO.trackId,
             expeditor: finalizePurchaseDTO.expeditor,
         }
-        console.log("finalizePurchaseDTO" , finalizePurchaseDTO);
+        console.log("finalizePurchaseDTO", finalizePurchaseDTO);
         // console.log("body ", body);
-        return this._httpClient.post<any>(this.baseUrl + 'purchase/finalize/' + finalizePurchaseDTO.id , body );
+        return this._httpClient.post<any>(this.baseUrl + 'purchase/finalize/' + finalizePurchaseDTO.id, body);
     }
-  
+
     getAllShipmentStatus(): Observable<IShipmentStatusResponse> {
         return this._httpClient.get<IShipmentStatusResponse>(this.baseUrl + 'purchase/status');
     }
 
-    editPurchase(purchaseId: string, formValue  : any) {
-        
+    editPurchase(purchaseId: string, formValue: any) {
+
         const { shipmentStatus, trackId, expeditor, makePaymentAccredited, makeLocalPayment } = formValue;
 
         const body = {
@@ -360,6 +360,22 @@ export class AdminService {
     updateBanner(banner: IBannerRequest, element_id: string) {
         return this._httpClient.put<IBannerRequest>(this.baseUrl + 'banners/' + element_id, banner);
     }
+
+    // reports
+
+    getProductsReport(body: { client: string, cuit: string }) {
+
+        let params = new HttpParams();
+        params = params.set('client', body.client);
+        params = params.set('cuit', body.cuit);
+
+        return this._httpClient.get(this.baseUrl + 'reports/estimate', {
+            params,
+            responseType: 'blob', // This avoids JSON parsing errors
+            observe: 'response', // Allows you to access headers along with the response
+        });
+    }
+
 }
 
 

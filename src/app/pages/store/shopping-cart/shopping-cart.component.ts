@@ -9,10 +9,11 @@ import { AuthService } from 'app/core/services/auth_service/auth.service';
 import { ConfirmPopUpComponent } from "../../../shared/components/pop_up/confirm-pop-up/confirm-pop-up.component";
 import { MessagePopUpComponent } from "../../../shared/components/pop_up/message-pop-up/message-pop-up.component";
 import { IProduct_Cart_Entry_BK } from 'app/core/models/IProduct_Cart_Entry_BK';
+import { ProductReportComponent } from "../../../shared/components/reports/product-report/product-report.component";
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CurrencyPipe, MatIcon, RouterLink, CustomCurrencyPipe, ConfirmPopUpComponent, MessagePopUpComponent],
+  imports: [CurrencyPipe, MatIcon, RouterLink, CustomCurrencyPipe, ConfirmPopUpComponent, MessagePopUpComponent, ProductReportComponent],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })
@@ -116,5 +117,11 @@ export class ShoppingCartComponent implements OnInit {
       console.log("Cart cleared");
       window.location.reload();
     });
+  }
+
+  showPrintReportPopUp = signal<boolean>(false);
+
+  isAdminLoggedIn() {
+    return this._authService.isAdminLoggedIn();
   }
 }

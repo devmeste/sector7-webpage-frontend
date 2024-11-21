@@ -40,6 +40,9 @@
 
     @if (products && products.length > 0) {
         <div class="cart_summary_container">
+            @if(isAdminLoggedIn()) {
+                <button title="impimir comprobante" class="print_report_button" (click)="showPrintReportPopUp.set(true)"> <mat-icon>print</mat-icon> </button>
+            }
             <h3>Resumen de compra</h3>
             <div class="divider"></div>
             <div class="cart_summary_item">
@@ -69,4 +72,10 @@
     @if(showPopUpConfirmClearCart()){
         <app-confirm-pop-up class="aaa" custom_message="¿Deseas vaciar el carrito?" buttonConfirmText="Vaciar Carrito" (close)="showPopUpConfirmClearCart.set(false)" (confirm)="clearCart()"></app-confirm-pop-up>
     }
+
+    @if(this.showPrintReportPopUp()){
+       <app-product-report (close)="showPrintReportPopUp.set(false)"></app-product-report>
+    }
+
+
 </main>

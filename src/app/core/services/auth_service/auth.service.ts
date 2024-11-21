@@ -193,6 +193,16 @@ export class AuthService {
   verifyAccount( code : string ){
     return this._http.get(this.baseUrl + 'user/verify?code=' + code );
   }
+
+
+  userLoggedIsAdmin(){
+    return  this.isAdminLoggedIn() && (localStorage.getItem("admin_token")) ? true: false;
+  }
+
+  isAdminCategory(){
+    return (localStorage.getItem("admin_category") === 'admin') ? true: false;
+  }
+  
 }
 
 
