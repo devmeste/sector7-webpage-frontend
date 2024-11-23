@@ -18,14 +18,14 @@
 
                         <!-- track id -->
                         <div class="custom-input">
-                            <label class="form-label">Track ID: </label>
+                            <label class="form-label">Codigo de envío: </label>
                             <input type="text" formControlName="trackId" required class="form-control">
                         </div>
 
                         <div class="d-flex ">
                             <!-- makePaymentAccredited -->
                             <div class="custom-input row input_checkbox_container d-flex col-6">
-                                <label class="form-label checkbox_label col-8 ">Pago Acreditado: </label>
+                                <label class="form-label checkbox_label col-8 ">Pago acreditado: </label>
                                 <input type="checkbox" formControlName="makePaymentAccredited" class=" checkbox">
                             </div>
     
@@ -50,7 +50,7 @@
                     </form>
                     } @else {
                         <div class="d-flex flex-column align-items-center justify-content-end w-100">
-                            <h3 class="text-purchase-edited-succesfully" >Compra Editada exitosamente</h3>
+                            <h3 class="text-purchase-edited-succesfully" >Compra editada exitosamente</h3>
                             <button type="button" class="primary_button" (click)="closeUpdateModal()">Cerrar</button>
                         </div>
                     }

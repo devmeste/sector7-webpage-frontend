@@ -8,12 +8,14 @@ import { InputDangerTextComponent } from "../../../../../shared/components/input
 import { IPurchase } from 'app/core/models/IPurchase';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
+import { CurrencyPipe, JsonPipe } from '@angular/common';
+import { CustomCurrencyPipe } from "../../../../../core/pipes/custom_currency/custom-currency.pipe";
 
 
 @Component({
   selector: 'app-get-all-bills',
   standalone: true,
-  imports: [MatIcon, InputDangerTextComponent, ReactiveFormsModule, CustomDatePipe],
+  imports: [MatIcon, InputDangerTextComponent, ReactiveFormsModule, CustomDatePipe,JsonPipe, CurrencyPipe, CustomCurrencyPipe],
   templateUrl: './get-all-bills.component.html',
   styleUrls: ['./get-all-bills.component.scss', "../../../../../shared/styles/admin_table.scss"],
   })
@@ -133,6 +135,9 @@ import { CustomDatePipe } from 'app/core/pipes/custom-date-pipe.pipe';
         next: (purchase) => {
           this.purchases$ = [];
           this.purchases$.push(purchase);
+        },
+        error: () => {
+          this.purchases$ = [];
         }
       })
     }

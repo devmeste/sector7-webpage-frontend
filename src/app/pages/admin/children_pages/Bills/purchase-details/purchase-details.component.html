@@ -19,31 +19,41 @@
         <table class="w-100">
             <thead>
                 <tr>
-                    <td class="col-4">
+                    <td class="col-2">
+                        Orden de compra
+                    </td>
+                    <td class="col-2">
                         Cliente
                     </td>
                     <td class="col-2">
-                        Nro de Orden
+                        Pago
                     </td>
                     <td class="col-2">
-                        Estado del Envío
+                        Metodo de pago
                     </td>
                     <td class="col-2">
-                        Track ID
+                        Estado del envío
+                    </td>
+                    <td class="col-2">
+                        Codigo de envío
                     </td>
                 </tr>
             </thead>
             <tbody>
 
                 <tr>
-                    <td class="truncate">
-                        <span> {{ this.purchase.fullname }}</span>
-                    </td>
                     <td>
                         {{this.purchase.id}}
                     </td>
-
-
+                    <td class="truncate">
+                        <span> {{ this.purchase.fullname }}</span>
+                    </td>
+                    <td class="truncate">
+                        <span> {{ this.purchase.paymentStatus }}</span>
+                    </td>
+                    <td class="truncate">
+                        <span> {{ this.purchase.paymentMethod }}</span>
+                    </td>
                     <td class="d-flex align-items-center align-self-center truncate ">
                         @if(this.purchase.shipment != null){
                         <div title="{{this.purchase.shipment.status}}">{{this.purchase.shipment.status}}</div>
@@ -75,13 +85,13 @@
                         Modelo
                     </td>
                     <td class="col-2 ">
-                        precio unitario
+                        Precio unitario
                     </td>
                     <td class="col-1 ">
-                        cantidad
+                        Cantidad
                     </td>
                     <td class="col-1 ">
-                        subtotal
+                        Subtotal
                     </td>
                 </tr>
             </thead>
@@ -107,7 +117,7 @@
                 }
 
                 <tr class="total_row">
-                    <td colspan="4">Total de la venta: </td>
+                    <td colspan="4">Monto total: </td>
                     <td colspan="1">{{this.purchase.totalAmount | customCurrency}}</td>
                 </tr>
             </tbody>
@@ -125,7 +135,7 @@
         }
         @else {
         <div class="button_container d-flex justify-content-end mt-4">
-            <h3 class="fw-bold text-primary" >la compra esta finalizada</h3>   
+            <h3 class="fw-bold text-primary" >Compra finalizada</h3>   
         </div>
         }
 

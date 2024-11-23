@@ -39,11 +39,11 @@ export class PopUpEditPurchaseComponent extends CustomFormPopUp {
 
   override initializeForm(): void {
     this.form = this.formBuilder.group({
-      shipmentStatus: [''],
-      trackId: [''],
-      expeditor: [''],
-      makePaymentAccredited: [false],
-      makeLocalPayment: [false]
+      shipmentStatus: null,
+      trackId: null,
+      expeditor: null,
+      makePaymentAccredited: false,
+      makeLocalPayment: false
     //   {
     //     "status": "Tu compra está lista para despachar",
     //     "trackId": "dfasrtf-gdfsg15-12",

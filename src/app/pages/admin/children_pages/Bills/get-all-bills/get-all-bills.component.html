@@ -76,21 +76,24 @@
                     <td class="col-3">
                         Orden de compra
                     </td>
-                    <td class="col-3">
+                    <td class="col-2">
                         Cliente
                     </td>
 
-                    <td class="col-2">
+                    <td class="col-1">
                         Fecha
                     </td >
                     <td class="col-2 text-center">
-                        Total
+                        Monto total
                     </td>
                     <td class="col-1 text-center">
                         Envío
                     </td>
                     <td class="col-1 text-center">
-                        finalizada
+                        Pago
+                    </td>
+                    <td class="col-1 text-center">
+                        Finalizada
                     </td>
                     <td class="text-center">
                         Detalles
@@ -107,30 +110,21 @@
                     <td>
                         {{purchase.fullname}}
                     </td>
-
                     <td>
                         {{purchase.purchaseDate | customDatePipe}}
                     </td>
-
                     <td class="text-center">
-                        {{purchase.totalAmount}}
+                        {{purchase.totalAmount | customCurrency}}
                     </td>
                     <td class="text-center">
-                        @if(purchase.shipment){
-                        Si
-                        }@else{
-                        No 
-                        }
+                        {{(purchase.shipment) ? 'Si': 'No'}}
                     </td>
                     <td class="text-center">
-                        @if(purchase.isConfirmed){
-                            Si ✔
-                        }
-                        @else {
-                            No
-                        }
+                        {{purchase.paymentStatus}}
                     </td>
-
+                    <td class="text-center">
+                        {{(purchase.isConfirmed) ? 'Si' : 'No'}}
+                    </td>
                     <td class="actions_buttons_container">
                         <div class="flex_container">
                             <button type="button" (click)="showDetails(purchase.id)" class="actions_button update_button">
