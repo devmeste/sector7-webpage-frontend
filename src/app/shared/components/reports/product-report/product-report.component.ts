@@ -35,13 +35,18 @@ export class ProductReportComponent extends CustomFormPopUp{
       client,
       cuit,
     };
+
+    this.loading = true;
+
     this._adminService.getProductsReport(body).subscribe(
       (response) => {
+        
         const contentType = response.headers.get('Content-Type');
     
         if (response.body) {
           if (contentType?.includes('application/pdf')) {
-            console.log("PDF");
+            this.loading = false;
+            this.dataWasSendedSuccesfully = signal(true);
             // Manejar PDF
             const blob = new Blob([response.body], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -51,6 +56,7 @@ export class ProductReportComponent extends CustomFormPopUp{
       },
       (error) => {
         console.error('Error al obtener el informe:', error);
+        this.loading = false;
       }
     );
   } 
