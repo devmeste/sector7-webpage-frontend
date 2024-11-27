@@ -13,7 +13,7 @@
 
         @for( product of products ; track $index){
 
-            @if(product.id !== this.selectedProduct.id){
+            @if(product.id !== this.selectedProduct.id && product.viewStock > 0){
                 <app-two-colors-card class="cards"
                 [selected]="product.id === this.idProductSelected" 
                 (removeFromCart)="removeProductFromCart($event)"
@@ -28,16 +28,18 @@
         }
     }@else {  <!-- if there is no selected product -->
         @for( product of products ; track $index){
-           <app-two-colors-card class="cards"
-           [selected]="product.id === this.idProductSelected" 
-           (removeFromCart)="removeProductFromCart($event)"
-           [title]="product.title"
-           [price]="product.price"
-           [photo]="product.photos[0]"
-           [id]="product.id" 
-           (addToCart)="addToCart($event)"
-           >
-       </app-two-colors-card>
+            @if(product.viewStock > 0){
+                <app-two-colors-card class="cards"
+                [selected]="product.id === this.idProductSelected" 
+                (removeFromCart)="removeProductFromCart($event)"
+                [title]="product.title"
+                [price]="product.price"
+                [photo]="product.photos[0]"
+                [id]="product.id" 
+                (addToCart)="addToCart($event)"
+                >
+                 </app-two-colors-card>
+            }
        }  
    }
 

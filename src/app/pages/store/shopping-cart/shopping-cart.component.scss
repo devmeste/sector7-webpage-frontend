@@ -78,6 +78,7 @@ main.shopping_cart_container {
             .side_text_container {
                 flex: 1;
                 width: 70%;
+                padding-left: 10px;
 
                 @include laptop {
                     width: 70%;
