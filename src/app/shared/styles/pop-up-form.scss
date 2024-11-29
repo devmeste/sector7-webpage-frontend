@@ -1,29 +1,47 @@
 @import './pop-up-styles.scss';
 
-.modal_container.modal_form {
+// .modal_container.modal_form {
 
-    max-height: 70vh;
-    overflow: hidden;
-    padding: 0;
+//     max-height: 70vh;
+//     overflow: hidden;
+//     padding: 0;
+
+//     @include tablet {
+//         padding: 2rem;
+//     }
+
+//     .form {
+//         overflow: auto;
+//         padding: 2rem 0;
+//         width: 90%;
+
+//          /* Ocultar la barra de scroll sin deshabilitar el scroll */
+//          scrollbar-width: none; /* Firefox */
+//          -ms-overflow-style: none;  /* Internet Explorer 10+ */
+ 
+//          &::-webkit-scrollbar {
+//              display: none; /* WebKit-based browsers (Chrome, Safari, etc.) */
+//          }
+//     }
+
+
+// }
+
+
+
+.modal_container.modal_form {
+    max-height: 75vh;
+    overflow: auto; /* Agrega scroll aquí */
+    padding: 0 !important;
+    transform: translate(-50%, -45%) ;
 
     @include tablet {
         padding: 2rem;
     }
 
     .form {
-        overflow: auto;
+        overflow: unset; /* Elimina el scroll del formulario */
         padding: 2rem 0;
         width: 90%;
-
-         /* Ocultar la barra de scroll sin deshabilitar el scroll */
-         scrollbar-width: none; /* Firefox */
-         -ms-overflow-style: none;  /* Internet Explorer 10+ */
- 
-         &::-webkit-scrollbar {
-             display: none; /* WebKit-based browsers (Chrome, Safari, etc.) */
-         }
     }
-
-
 }
-
