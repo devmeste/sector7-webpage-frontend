@@ -39,8 +39,16 @@
             </div>
 
             <div class="each_feature_container">
+                <h4 class="feature_title">Categoría</h4>
+                @for( category of categories; track $index){
+                    <small class="feature_element" (click)="setElementToFilter('category' , category.name)" 
+                    [ngClass]="category.name == this.categorySelected() ? 'active' : ''"
+                    >{{category.name}}</small>
+                }
+            </div>
+            
+            <div class="each_feature_container">
                 <h4 class="feature_title">Marca</h4>
-
                 @for( brand of brands; track $index){
                         <small (click)="setElementToFilter('brand' ,brand)" class="feature_element" 
                         [ngClass]="brand == this.brandSelected() ? 'active' : ''"
@@ -48,15 +56,6 @@
                 }
             </div>
 
-            <div class="each_feature_container">
-                <h4 class="feature_title">Categoría</h4>
-                @for( category of categories; track $index){
-                    <small class="feature_element" (click)="setElementToFilter('category' , category.name)" 
-                    [ngClass]="category.name == this.categorySelected() ? 'active' : ''"
-                    >{{category.name}}</small>
-                }
-                
-            </div>
            
         </div>
     </aside>
